@@ -186,3 +186,16 @@ Append-only progress log. Each work session must reread
 - Ops lesson: a detached agent's leftover monitor double-launched the ladder
   run (killed; CSV unaffected). Policy: agents implement, the main session
   launches runs.
+
+## 2026-06-12 (transfer controls: the matcher earns its keep)
+
+- BGL->Spirit[seed42] controls: WL-kernel 0.6239, Hybrid+Rerank 0.5947,
+  Hybrid-RRF 0.5171 — vs SMA 0.9200 on the identical index/query sets.
+- Decomposition settled: the Tier-0 ontology representation is necessary
+  (v1 collapse without it) but not sufficient (WL on the SAME representation
+  trails SME by ~31 F1 pts cross-system); SME alignment is the active
+  ingredient for transfer. Within-system the order inverts (WL 0.9799 >
+  SME 0.9549 on HDFS at ~1ms) -> tiered retrieval design implication:
+  WL prefilter within-system, SME for cross-system + provenance/inference.
+- Production-RAG question closed: the deployed stack (hybrid+rerank) does
+  not transfer (0.59 vs 0.94).

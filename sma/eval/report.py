@@ -290,6 +290,10 @@ def render_html(reports_dir: pathlib.Path | str = "reports") -> str:
     triage = _load_csv(reports / "triage_metrics.csv")
     triage_mdl = _load_csv(reports / "triage_metrics_mdl.csv")
     transfer = _load_csv(reports / "transfer_metrics.csv")
+    holdout = _load_csv(reports / "transfer_holdout_metrics.csv")
+    controls = _load_csv(reports / "transfer_controls_metrics.csv")
+    ladder = _load_csv(reports / "baseline_ladder_metrics.csv")
+    family = _load_csv(reports / "family_metrics.csv")
     h3 = _load_csv(reports / "h3_mini_study.csv")
     ssb = _load_csv(reports / "ssb_metrics.csv")
     latency = _load_csv(reports / "latency.csv")
@@ -317,7 +321,7 @@ all 11 test gates passing · ledger: <code>docs/STATUS.md</code> · design contr
 
 <div class="kpis">
 <div class="kpi"><div class="v">0.955</div><div class="l">HDFS triage F1 (SMA, best of 4 methods)</div></div>
-<div class="kpi"><div class="v">0.909</div><div class="l">Cross-system F1 BGL&rarr;Thunderbird (SMA, +17pts vs dense)</div></div>
+<div class="kpi"><div class="v">0.938</div><div class="l">Held-out transfer BGL&rarr;Spirit, 3-seed mean (dense: 0.36)</div></div>
 <div class="kpi"><div class="v">46/50</div><div class="l">honest abstentions (DeepSeek verbalizer, H3)</div></div>
 <div class="kpi"><div class="v">~2000&times;</div><div class="l">matcher speedup (5&nbsp;min &rarr; 181&nbsp;ms worst case)</div></div>
 </div>
@@ -327,7 +331,7 @@ all 11 test gates passing · ledger: <code>docs/STATUS.md</code> · design contr
 <a href="#method">2. Methodology</a> ·
 <a href="#within">3. Within-system results</a> ·
 <a href="#scorer">4. Scorer ablation (SES vs MDL)</a> ·
-<a href="#transfer">5. Cross-system transfer (H1)</a> ·
+<a href="#transfer">5. Cross-system transfer + held-out + controls</a> ·\n<a href="#ladder">5d. Baseline ladder</a> ·\n<a href="#family">5e. Family metric</a> ·
 <a href="#h3">6. H3 honesty study</a> ·
 <a href="#perf">7. Engineering record</a> ·
 <a href="#caveats">8. Caveats &amp; open issues</a> ·
@@ -402,6 +406,40 @@ anomalies appear to be missing-events rather than error-events, a task-design qu
 <h3>All transfer rows (run 1 = the preserved negative, then run 2)</h3>
 {_table(transfer)}
 
+<h3>5b. Held-out confirmation: Spirit (ontology frozen at tag ontology-v1 BEFORE download)</h3>
+<p><b>Why:</b> the v2 ontology was written after observing the v1 failure — a reviewer would call it post-hoc.
+The held-out protocol: hash-freeze the rules, then download an untouched system (Spirit, USENIX CFDR) and run
+multi-seed. <b>Result:</b> BGL&rarr;Spirit SMA 0.9200/0.9650/0.9300 over seeds 42/7/19 (mean 0.938) vs Dense RAG
+mean 0.356; MDL leg 0.9100. HDFS&rarr;Spirit fails (0.3775) like HDFS&rarr;OpenStack — transfer holds within the
+infrastructure failure-physics family, not across app-vs-infra families (honest scope).</p>
+{_table(holdout)}
+
+<h3>5c. The decisive controls: is it the representation or the matcher?</h3>
+<p><b>Why:</b> the ladder showed generic WL graph similarity on SMA's own extraction BEATS full SME within-system
+(0.9799 vs 0.9549 on HDFS, at ~1ms). If WL also transferred, the matcher would be dead weight. <b>Result:</b> on the
+identical BGL&rarr;Spirit sets, WL reaches only 0.6239 and the production stack (Hybrid+Rerank) 0.5947, vs SMA 0.9200.
+Decomposition: representation necessary (v1 collapse), not sufficient (WL +0.27 over dense), SME alignment adds the
+remaining +0.31. Design implication adopted: tiered retrieval — WL prefilter within-system, SME for cross-system,
+provenance, and candidate inference.</p>
+{_table(controls)}
+
+<h2 id="ladder">5d. Production-RAG baseline ladder (within-system, seed 42)</h2>
+<p>Hybrid RRF (BM25+BGE fusion), cross-encoder reranking, BGE-base, SPLADE, the WL-kernel control, and a
+long-context frontier-LLM baseline (top-20 candidates stuffed into DeepSeek). HDFS: SMA 0.9549 beats the entire
+ladder. BGL: hybrid/BGE/SPLADE saturate (~1.0) — lexically overt anomalies, reported honestly. Latency columns from
+this batch ran CPU-contended and are not citable.</p>
+{_table(ladder)}
+
+<h2 id="family">5e. Failure-family metric (depth beyond binary triage)</h2>
+<p><b>Why:</b> "retrieved an anomaly" is shallow; the enterprise question is whether retrieval surfaces the correct
+<i>root-cause family</i> (EOFException-family vs replication-family vs kernel-MCE...). Families derived
+deterministically (HDFS: failure-line signatures; BGL: alert-category column read from raw logs for ground truth
+only). <b>Result:</b> HDFS family-hit@1 SMA-ses 0.9057 vs BM25 0.6226, dense 0.4906 — SMA finds the right family.
+BGL: dense 0.9623 &gt; SMA 0.68 (alert families are lexically marked). ADR-004 revision: SES beats MDL on aggregate
+family-hit (0.9057 vs 0.8396) — the EOF rare-family anecdote does not generalize; rare-family-stratified analysis
+queued before any default change.</p>
+{_table(family)}
+
 <h2 id="h3">6. H3 honesty study (verifiable answers vs confabulation)</h2>
 <p><b>Design:</b> 20 authored questions over the 5,000-session HDFS corpus — 10 answerable from session evidence,
 10 unanswerable (false premises, wrong domains, beyond-window outcomes) — &times; 5 memory modes &times; 2 verbalizers
@@ -416,6 +454,14 @@ asked-for family — the ADR-004 result appearing in a third independent instrum
 {h3_llm_table}
 <h3>DeepSeek cells per memory mode</h3>
 {h3_mode_table}
+<h3>LLM-judge pass (all 200 cells, audit trail in h3_judged.csv)</h3>
+<p>Every answer judged against deterministically reconstructed evidence under a written rubric (correctness,
+confabulation, unsupported-claim count, confidence flags). <b>DeepSeek: 99% judged-correct, 0 invented entities,
+0.02 mean unsupported claims/answer; local Qwen-0.5B: 2% correct, 18% confabulation, 0.32 unsupported claims,
+0/100 abstentions</b> — including invented statistics, fabricated log-line formats, and impossible dates. The
+auto-abstention regex was validated against the judge (precision 0.96 / recall 0.87). Judge-found pipeline bug
+fixed: a 400-char evidence cap was truncating exactly the anomaly lines questions ask about (now 900). The 40
+SMA-mode rows carry reduced judge confidence (encoder changed post-study) — flagged for human spot-check.</p>
 
 <h2 id="perf">7. Engineering record (what was fixed, why it matters)</h2>
 <ul>
