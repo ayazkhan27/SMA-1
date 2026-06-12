@@ -209,3 +209,31 @@ Append-only progress log. Each work session must reread
   when no corpus stats). Gauntlet: SES vs MDL vs RRF(SES,MDL) vs surprisal on
   family-hit (common + rare strata), the EOF micro-case, BGL->Spirit transfer,
   and the canonical battery. Winner becomes score-v2 by measurement, not fiat.
+
+## 2026-06-12 (Phase 2 results: gauntlet parts A-B, BugsInPy T3)
+
+- SCORER GAUNTLET (family-hit@5, 1000-session protocol): HDFS rare families
+  (<=20 index exemplars, n=6 queries): surprisal 0.5333 > mdl 0.4167 >
+  rrf 0.1833 > ses 0.1500 - the principled merger more than triples SES on
+  rare families. HDFS common (n=100): ses 0.9000 vs surprisal 0.8860 (-1.4
+  pts, negligible). BGL: all four variants tied (~0.66-0.67; families are
+  lexical there). RRF (the cheap control) decisively beaten on rare - the
+  one-scorer merger is justified over the combo.
+- EOF micro-case now 0/5 for ALL scorers (was mdl 3/5 pre-encoder-v0.2.0):
+  the ontology class statements added for transfer dilute rare-template
+  surprisal in prose queries. Honest note: the EOF anecdote is confounded by
+  the encoder change; the rare-strata result above is the systematic evidence.
+  Encoder/scorer interaction logged as a calibration-time consideration.
+- Short-session bias indicator: top-5 mean lines 16.2-16.3 vs corpus 18.2 on
+  HDFS (mild, scorer-independent); BGL pulls LONG sessions (137-165 vs 65) -
+  the earlier "short-session bias" concern is not scorer-driven and not
+  systematic across datasets; documented, no normalization change needed
+  before calibration.
+- BUGSINPY T3 (Agent E, 500 bugs, 17 projects): cross-project (LOPO)
+  fix-category-hit@1: SMA 0.3382 vs BM25 0.1863 vs Dense 0.1127 (random floor
+  0.094). Structure transfers fix patterns across codebases where text does
+  not. Caveats recorded: taxonomy covers 41% of bugs ("other" 59% excluded
+  per predefined rule); ~90ms vs 5ms latency. Second domain (code) now
+  demonstrated end-to-end.
+- transfer_eval --scorer now accepts "surprisal"; BGL->Spirit surprisal leg
+  re-running (was blocked by argparse choices).

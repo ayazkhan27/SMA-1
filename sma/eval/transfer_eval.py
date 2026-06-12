@@ -710,7 +710,7 @@ def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path):
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Cross-system transfer evaluation (T2-b)")
-    parser.add_argument("--scorer", choices=["ses", "mdl"], default="ses")
+    parser.add_argument("--scorer", choices=["ses", "mdl", "surprisal"], default="ses")
     parser.add_argument("--index-size", type=int, default=800,
                         help="stratified sessions to index from system A")
     parser.add_argument("--query-size", type=int, default=200,
