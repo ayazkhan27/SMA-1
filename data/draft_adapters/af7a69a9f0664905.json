@@ -1,0 +1,32 @@
+{
+  "blake3": "af7a69a9f0664905aab2f51d67497699912b2824d1b6029203c499a0ef5d2bf2",
+  "created": "2026-06-12T15:19:35.663102+00:00",
+  "generated_by": "deepseek:deepseek-chat via sma.agent.adapter_draft",
+  "note": "parsed 2 class(es), 7 masking(s)",
+  "rules": {
+    "classes": [
+      {
+        "keywords": [
+          "grain-drift"
+        ],
+        "name": "grainDriftEvent"
+      },
+      {
+        "keywords": [
+          "fence.state"
+        ],
+        "name": "fenceStateEvent"
+      }
+    ],
+    "maskings": [
+      "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z",
+      "zone=[A-Z0-9]+",
+      "unit=[a-z0-9-]+",
+      "code=[a-z0-9-]+",
+      "corrected=\\d+",
+      "routed=\\d+",
+      "terminal=\\d+"
+    ]
+  },
+  "status": "LLM-proposed, unreviewed"
+}

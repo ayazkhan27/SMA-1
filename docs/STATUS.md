@@ -250,3 +250,25 @@ Append-only progress log. Each work session must reread
 - Phase 2 of the ledger is COMPLETE (scorer resolution + bias study + T3).
   Next: Phase 3 freeze train - SSB de-circularization, calibration on
   validation splits, prereg tag, statistics runs.
+
+## 2026-06-12 (production loop: coverage indicator, draft adapter, fused mode)
+
+- Coverage indicator (blueprint 12-R3): per-query structural-coverage chip in
+  the UI; below 40% the verbalizer receives an explicit low-confidence caveat.
+  Motivated by a live test where an invented-vocabulary incident degenerated
+  SMA retrieval to shape-matching silently.
+- LLM-drafted adapters (rules-not-facts discipline): DraftAdapter composes the
+  frozen base encoder with extra keyword classes supplied as a content-
+  addressed, determinism-checked JSON artifact; cases/receipts carry
+  "draft-adapter (LLM-proposed, unreviewed) hash=..." forever. Real DeepSeek
+  draft for the watcher/grain-drift system produced exactly two minimal
+  classes (grainDriftEvent, fenceStateEvent). Guards: residual-only drafting
+  (LLM sees only lines that fire no frozen rule) + keyword-level dedup against
+  the frozen ontology (redundant rules double-count and dilute surprisal -
+  the measured EOF regression is the precedent). Agent-found trap pinned by
+  regression test: LLM-proposed maskings can erase the substrings their own
+  class keywords need; maskings are stored but not applied before matching.
+- Hybrid (fused) mode: RRF over bm25+dense+sma top-20s, with SME alignment
+  receipts computed for every fused candidate - retrieval as a committee,
+  accountability via alignment regardless of which retriever found the case.
+- 30/30 tests; frozen paths untouched (logs_drain.py, sma/match, sma/index).

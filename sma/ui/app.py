@@ -12,8 +12,16 @@ import html
 import json
 import pathlib
 
+from sma.agent.adapter_draft import draft_rules
 from sma.agent.comparison import MODES, ComparisonFramework, challenge_corpus, demo_corpus
 from sma.agent.llm import DEFAULT_MODEL_FILE, DEFAULT_MODEL_REPO, DEEPSEEK_MODEL
+from sma.encoders.draft_adapter import (
+    DraftAdapter,
+    check_determinism,
+    rules_from_json,
+    rules_hash,
+    rules_to_json,
+)
 from sma.eval.arn import DEFAULT_ARN_PATH, arn_choice_corpus
 
 UI_CORPORA = {
@@ -31,6 +39,7 @@ MODE_ACCENTS = {
     "bm25": "#b45309",
     "dense rag": "#7c3aed",
     "knowledge graph": "#047857",
+    "hybrid (fused)": "#0e7490",
     "context only": "#64748b",
 }
 
@@ -84,6 +93,8 @@ CSS = """
               font-size: 11px; max-height: 130px; overflow-y: auto; color: #1f2933;}
 .sma-inference {color: #1d4ed8; font-family: ui-monospace, Menlo, monospace; font-size: 11px;
                 margin-top: 4px;}
+.sma-ev-warning {margin: 8px 0; padding: 9px; background: #fff7ed; border: 1px solid #fed7aa;
+                 border-radius: 8px; color: #9a3412; font-size: 12px; font-weight: 600;}
 .sma-detail {color: #64748b; font-size: 11px; padding: 4px 15px 11px;}
 .sma-empty {color: inherit; font-size: 14px;}
 .sma-chips {display: flex; gap: 8px; flex-wrap: wrap; margin: 2px 0 6px;}
@@ -114,9 +125,28 @@ CSS = """
 """
 
 
+def coverage_chip(evidence: list[dict]) -> str:
+    """Structural-coverage chip (blueprint 12-R3): amber below threshold, green otherwise."""
+    coverage = next((row.get("coverage") for row in evidence if row.get("coverage")), None)
+    if not coverage:
+        return ""
+    cls = "warn" if coverage.get("low") else "ok"
+    return (
+        f'<span class="sma-chip {cls}">structural coverage: '
+        f'{coverage.get("percent", 0)}%</span>'
+    )
+
+
 def evidence_items_html(evidence: list[dict]) -> str:
     items = []
     for row in evidence:
+        if row.get("warning"):
+            items.append(
+                '<div class="sma-ev-warning">&#9888; '
+                f'{html.escape(row["warning"])}<br>'
+                f'<span class="sma-ev-meta">{html.escape(row.get("provenance", ""))}</span></div>'
+            )
+            continue
         inferences = "".join(
             f'<div class="sma-inference">&#8627; {html.escape(s)}</div>'
             for s in row.get("inferences", [])
@@ -144,14 +174,20 @@ def render_cards(results: dict, llm_label: str) -> str:
     cards = []
     for mode, result in results.items():
         accent = MODE_ACCENTS.get(mode, "#334155")
-        detail = result.evidence[0].get("mode_detail", "") if result.evidence else "no evidence retrieved"
+        detail = next(
+            (row["mode_detail"] for row in result.evidence
+             if row.get("mode_detail") and not row.get("warning")),
+            "no evidence retrieved",
+        )
+        chip = coverage_chip(result.evidence)
+        chip_html = f'<div class="sma-chips">{chip}</div>' if chip else ""
         cards.append(
             '<div class="sma-card">'
             f'<div class="sma-card-head" style="background:{accent}">'
             f"<span>{html.escape(mode)}</span>"
             f'<span class="sma-llm-badge">{html.escape(llm_label)}</span></div>'
             f'<div class="sma-card-body">{html.escape(result.answer)}</div>'
-            f'<div class="sma-detail">{html.escape(detail)}{label_vote_line(result.evidence)}</div>'
+            f'<div class="sma-detail">{chip_html}{html.escape(detail)}{label_vote_line(result.evidence)}</div>'
             '<details class="sma-evidence"><summary>'
             f"Evidence ({len(result.evidence)})</summary>{evidence_items_html(result.evidence)}</details>"
             "</div>"
@@ -174,11 +210,14 @@ def label_vote_line(evidence: list[dict]) -> str:
 
 def render_evidence_panel(mode: str, evidence: list[dict]) -> str:
     accent = MODE_ACCENTS.get(mode, "#334155")
+    chip = coverage_chip(evidence)
+    chip_html = f'<div class="sma-chips">{chip}</div>' if chip else ""
+    n_items = sum(1 for row in evidence if not row.get("warning"))
     return (
         '<div class="sma-panel">'
         f'<div class="sma-panel-head" style="background:{accent}">'
-        f"evidence · {html.escape(mode)} · {len(evidence)} item(s)</div>"
-        f'<div class="sma-panel-body">{label_vote_line(evidence)}'
+        f"evidence · {html.escape(mode)} · {n_items} item(s)</div>"
+        f'<div class="sma-panel-body">{chip_html}{label_vote_line(evidence)}'
         f'{evidence_items_html(evidence) or "<p class=sma-empty>none retrieved</p>"}</div>'
         "</div>"
     )
@@ -221,11 +260,16 @@ def render_chips(framework: ComparisonFramework) -> str:
         ("ok", "DeepSeek key present") if deepseek.get("key_present")
         else ("warn", "DeepSeek key missing")
     )
+    draft_chip = (
+        f'<span class="sma-chip warn">{html.escape(framework.draft_note)}</span>'
+        if framework.draft_note else ""
+    )
     return (
         '<div class="sma-chips">'
         f'<span class="sma-chip">{len(framework.items)} corpus items</span>'
         f'<span class="sma-chip {local_cls}">{local_text}</span>'
         f'<span class="sma-chip {ds_cls}">{ds_text}</span>'
+        f"{draft_chip}"
         "</div>"
     )
 
@@ -358,6 +402,53 @@ def build_demo(framework: ComparisonFramework | None = None):
             render_chips(framework),
         )
 
+    def draft_adapter_from_corpus(llm_label):
+        if not framework.items:
+            return "", "", json.dumps({"error": "corpus is empty - load one first"}, indent=2)
+        llm = LLM_CHOICES.get(llm_label, "deepseek")
+        rules, note = draft_rules([item.text for item in framework.items], llm=llm)
+        if not rules.classes:
+            return "", "", json.dumps({"error": note, "backend": llm}, indent=2)
+        status = {
+            "note": note,
+            "backend": llm,
+            "discipline": "LLM proposed RULES (data); encoding stays deterministic. Review before trusting.",
+        }
+        return rules_to_json(rules), rules_hash(rules), json.dumps(status, indent=2)
+
+    def apply_draft_adapter(rules_json):
+        try:
+            rules = rules_from_json(rules_json or "")
+            adapter = DraftAdapter(rules)
+            probe = framework.items[0].text if framework.items else "probe timeout error line"
+            check_determinism(adapter, probe)
+            count = framework.apply_draft_adapter(adapter)
+        except Exception as exc:
+            status = {"error": f"{type(exc).__name__}: {exc}"}
+            return (
+                render_corpus_table(framework),
+                gr.skip(),
+                json.dumps(status, indent=2),
+                render_chips(framework),
+            )
+        status = {
+            "applied": framework.draft_note,
+            "reencoded_items": count,
+            "draft_hash": adapter.draft_hash,
+            "case_metadata": {"adapter": "draft", "draft_hash": adapter.draft_hash},
+        }
+        return (
+            render_corpus_table(framework),
+            adapter.draft_hash,
+            json.dumps(status, indent=2),
+            render_chips(framework),
+        )
+
+    def revert_draft_adapter():
+        count = framework.revert_draft_adapter()
+        status = {"reverted_to": "base adapters", "reencoded_items": count}
+        return render_corpus_table(framework), json.dumps(status, indent=2), render_chips(framework)
+
     def backend_status():
         return json.dumps(
             {name: orch.status for name, orch in framework.orchestrators.items()}, indent=2
@@ -471,6 +562,37 @@ def build_demo(framework: ComparisonFramework | None = None):
                     load_arn_sample,
                     [max_items, clear],
                     [corpus, adapter, corpus_table, load_status, chips],
+                )
+                gr.Markdown(
+                    "### Draft adapter (LLM proposes rules; encoding stays deterministic)\n"
+                    "The LLM drafts extra keyword class rules as data for the frozen logs "
+                    "encoder - it never writes facts. Drafts are content-addressed (blake3) "
+                    "and remain flagged *LLM-proposed, unreviewed* until reverted or promoted."
+                )
+                with gr.Row():
+                    draft_llm = gr.Radio(
+                        list(LLM_CHOICES), value=list(LLM_CHOICES)[1], label="Drafting model", scale=2
+                    )
+                    draft_btn = gr.Button("Draft adapter from corpus (LLM)", scale=1)
+                    apply_draft_btn = gr.Button("Apply draft adapter", variant="primary", scale=1)
+                    revert_draft_btn = gr.Button("Revert to base adapter", scale=1)
+                draft_json = gr.Textbox(
+                    lines=12,
+                    label="Proposed rules (editable JSON: classes + maskings)",
+                    placeholder='{"classes": [{"name": "...Event", "keywords": ["..."]}], "maskings": []}',
+                )
+                draft_hash_box = gr.Textbox(label="Draft blake3 hash", interactive=False)
+                draft_status = gr.Code(language="json", label="Draft status")
+                draft_btn.click(
+                    draft_adapter_from_corpus, [draft_llm], [draft_json, draft_hash_box, draft_status]
+                )
+                apply_draft_btn.click(
+                    apply_draft_adapter,
+                    [draft_json],
+                    [corpus_table, draft_hash_box, draft_status, chips],
+                )
+                revert_draft_btn.click(
+                    revert_draft_adapter, None, [corpus_table, draft_status, chips]
                 )
             with gr.Tab("System"):
                 gr.Markdown(

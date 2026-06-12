@@ -54,17 +54,22 @@ def build_messages(
         head = f"[{i + 1}]" + (f" (why retrieved: {why})" if why else "")
         return f"{head} {row.get('text', '')[:900]}"
 
-    evidence_text = "\n".join(_item(i, row) for i, row in enumerate(evidence[:8]))
+    # Coverage warnings (blueprint 12-R3) ride along as pseudo-rows with a
+    # "warning" key and no text; surface them as caveats, not evidence items.
+    warnings = [row["warning"] for row in evidence if row.get("warning")]
+    rows = [row for row in evidence if not row.get("warning")]
+    evidence_text = "\n".join(_item(i, row) for i, row in enumerate(rows[:8]))
+    warning_text = "".join(f"\nCaveat: {w}." for w in warnings)
     window_caveat = (
         "\nCaveat: each evidence item is one bounded session window. Events outside a "
         "window are not recorded in it - the absence of an event in the evidence is NOT "
         "evidence that it did not happen. Never infer outcomes from absence."
-        if evidence
+        if rows
         else ""
     )
     user = (
         f"Evidence retrieved by the '{mode}' memory for the latest question:\n"
-        f"{evidence_text or '(none retrieved)'}{window_caveat}\n\n"
+        f"{evidence_text or '(none retrieved)'}{window_caveat}{warning_text}\n\n"
         f"Question: {question}"
     )
     messages = [{"role": "system", "content": SYSTEM_PROMPT}]
@@ -168,6 +173,24 @@ class LocalOrchestrator:
         text = (response["choices"][0]["message"]["content"] or "").strip()
         return text or fallback_answer(question, mode, evidence, self.status)
 
+    def complete(self, messages: list[dict], max_tokens: int = 600, temperature: float = 0.0) -> str:
+        """Raw chat completion for non-verbalizer callers (e.g. adapter drafting).
+
+        Raises RuntimeError when the local model is unavailable - drafting has
+        no deterministic fallback, by design (rules either come from a model or
+        a human, never from a heuristic pretending to be one).
+        """
+        if not self._ensure_loaded():
+            raise RuntimeError(f"local model unavailable: {self._load_error}")
+        response = self._llm.create_chat_completion(  # type: ignore[union-attr]
+            messages=messages,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            top_p=self.config.top_p,
+            repeat_penalty=self.config.repeat_penalty,
+        )
+        return (response["choices"][0]["message"]["content"] or "").strip()
+
 
 class DeepSeekOrchestrator:
     name = "deepseek"
@@ -214,8 +237,29 @@ class DeepSeekOrchestrator:
             self._last_error = f"{type(exc).__name__}: {exc}"
             return fallback_answer(question, mode, evidence, self.status)
 
+    def complete(self, messages: list[dict], max_tokens: int = 600, temperature: float = 0.0) -> str:
+        """Raw chat completion for non-verbalizer callers (e.g. adapter drafting)."""
+        if not self._api_key:
+            raise RuntimeError(f"{DEEPSEEK_KEY_ENV} not set")
+        import httpx
+
+        response = httpx.post(
+            f"{DEEPSEEK_BASE_URL}/chat/completions",
+            headers={"Authorization": f"Bearer {self._api_key}"},
+            json={
+                "model": self.model,
+                "messages": messages,
+                "temperature": temperature,
+                "max_tokens": max_tokens,
+            },
+            timeout=60.0,
+        )
+        response.raise_for_status()
+        return (response.json()["choices"][0]["message"]["content"] or "").strip()
+
 
 def fallback_answer(question: str, mode: str, evidence: list[dict], status: dict) -> str:
+    evidence = [row for row in evidence if not row.get("warning")]
     if not evidence:
         return (
             f"No evidence was retrieved for `{mode}`. Local LLM status: "

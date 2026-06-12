@@ -18,6 +18,8 @@ from collections import defaultdict
 from dataclasses import dataclass
 
 from sma.encoders import get_encoder
+from sma.encoders.coverage import coverage_warning, rule_coverage
+from sma.encoders.draft_adapter import DraftAdapter
 from sma.index.macfac import MacFacIndex
 from sma.ir.schema import Case
 from sma.match.engine import match_cases
@@ -27,8 +29,15 @@ from sma.match.types import MatchConfig
 
 from .llm import LocalOrchestrator, default_deepseek, default_orchestrator
 
-MODES = ("sma", "bm25", "dense rag", "knowledge graph", "context only")
-MODE_ALIASES = {"rag": "dense rag", "kg": "knowledge graph", "context": "context only"}
+MODES = ("sma", "bm25", "dense rag", "knowledge graph", "hybrid (fused)", "context only")
+MODE_ALIASES = {
+    "rag": "dense rag",
+    "kg": "knowledge graph",
+    "context": "context only",
+    "hybrid": "hybrid (fused)",
+    "rrf": "hybrid (fused)",
+    "fused": "hybrid (fused)",
+}
 LLM_BACKENDS = ("local", "deepseek")
 
 DENSE_MODEL_NAME = "all-MiniLM-L6-v2"
@@ -73,6 +82,10 @@ class ComparisonFramework:
         self.index = MacFacIndex()
         self.orchestrator = orchestrator or default_orchestrator
         self.orchestrators = {"local": self.orchestrator, "deepseek": default_deepseek}
+        # Session flag: when set, logs-adapter encoding (corpus AND queries)
+        # goes through the LLM-proposed draft adapter and every SMA evidence
+        # row is provenance-stamped as unreviewed.
+        self.draft_adapter: DraftAdapter | None = None
         # Per-corpus caches, rebuilt when _version changes.
         self._version = 0
         self._bm25 = None
@@ -97,8 +110,38 @@ class ComparisonFramework:
             raise ValueError(f"unknown scorer: {scorer!r}; expected 'ses', 'mdl' or 'surprisal'")
         self.index.config = MatchConfig(scorer=scorer)
 
+    @property
+    def draft_note(self) -> str | None:
+        """Provenance stamp shown on every SMA evidence row and the chips strip."""
+        if self.draft_adapter is None:
+            return None
+        return f"draft-adapter (LLM-proposed, unreviewed) hash={self.draft_adapter.draft_hash[:8]}"
+
+    def apply_draft_adapter(self, adapter: DraftAdapter) -> int:
+        """Re-encode the whole corpus through the draft adapter (texts/labels kept)."""
+        self.draft_adapter = adapter
+        return self._reencode_all()
+
+    def revert_draft_adapter(self) -> int:
+        """Restore base adapters: re-encode every item with its original encoder."""
+        self.draft_adapter = None
+        return self._reencode_all()
+
+    def _reencode_all(self) -> int:
+        self.index = MacFacIndex(config=self.index.config)
+        for item in self.items:
+            item.case = self._encode(item.text, item.adapter_id)
+            self.index.add(item.case)
+        self._version += 1
+        return len(self.items)
+
+    def _encode(self, text: str, adapter_id: str) -> Case:
+        if self.draft_adapter is not None and adapter_id == "logs":
+            return self.draft_adapter.encode(text).case
+        return get_encoder(adapter_id).encode(text).case
+
     def add_document(self, text: str, adapter_id: str = "logs", label: str = "") -> CorpusItem:
-        case = get_encoder(adapter_id).encode(text).case
+        case = self._encode(text, adapter_id)
         item = CorpusItem(
             item_id=f"doc_{len(self.items)}",
             text=text,
@@ -129,6 +172,8 @@ class ComparisonFramework:
             return mode, self.dense_evidence(question, k)
         if mode == "knowledge graph":
             return mode, self.kg_evidence(question, k)
+        if mode == "hybrid (fused)":
+            return mode, self.hybrid_evidence(question, adapter_id, k)
         if mode == "context only":
             return mode, self.context_evidence(k)
         raise ValueError(f"unknown mode: {mode!r}; expected one of {MODES}")
@@ -156,7 +201,13 @@ class ComparisonFramework:
     # --- mode implementations -------------------------------------------------
 
     def sma_evidence(self, question: str, adapter_id: str, k: int) -> list[dict]:
-        query_case = get_encoder(adapter_id).encode(question).case
+        query_case = self._encode(question, adapter_id)
+        # Lattice-miss tripwire (blueprint 12-R3): how much of the query's
+        # vocabulary the frozen class rules actually cover.
+        coverage = rule_coverage(question)
+        mode_detail = "SME mapping + MAC/FAC retrieval"
+        if self.draft_note:
+            mode_detail += f"; {self.draft_note}"
         # MAC/FAC budgets keep large corpora interactive: the MAC stage screens
         # everything, full SME mapping runs only on the budgeted shortlist.
         shortlist = min(max(k, len(self.items)), 200)
@@ -175,11 +226,129 @@ class ComparisonFramework:
                     "score": f"{result.ses_n:.4f}",
                     "text": item.text,
                     "provenance": f"case={item.case.case_id}; ses_n={result.ses_n:.4f}; certified={result.certified}",
-                    "mode_detail": "SME mapping + MAC/FAC retrieval",
+                    "mode_detail": mode_detail,
                     "alignment": alignment_summary(gmap),
                     "inferences": [inf.inference_sexpr for inf in inferences[:3]],
+                    "coverage": coverage,
                 }
             )
+        warning = coverage_warning(coverage)
+        if warning:
+            evidence.insert(0, self._coverage_warning_row(coverage, warning))
+        return evidence
+
+    def _coverage_warning_row(self, coverage: dict, warning: str) -> dict:
+        """Pseudo-row prepended to SMA evidence when coverage trips 12-R3."""
+        return {
+            "source_id": "coverage-tripwire",
+            "label": "",
+            "score": f"{coverage['fraction']:.2f}",
+            "text": "",
+            "provenance": (
+                f"rule_coverage={coverage['covered_lines']}/{coverage['total_lines']} "
+                "non-empty lines fired EVENT_CLASS_RULES (blueprint 12-R3)"
+            ),
+            "mode_detail": "structural coverage tripwire",
+            "warning": warning,
+            "coverage": coverage,
+        }
+
+    # --- candidate rankings shared by hybrid fusion ---------------------------
+
+    def _bm25_ranking(self, question: str, n: int) -> list[tuple[str, float]]:
+        if self._bm25_version != self._version:
+            from rank_bm25 import BM25Okapi
+
+            self._bm25 = BM25Okapi([item.text.lower().split() for item in self.items])
+            self._bm25_version = self._version
+        scores = self._bm25.get_scores(question.lower().split())
+        ranked = sorted(zip(self.items, scores), key=lambda row: (-row[1], row[0].item_id))
+        return [(item.item_id, float(score)) for item, score in ranked[:n]]
+
+    def _dense_ranking(self, question: str, n: int) -> list[tuple[str, float]]:
+        model = dense_model()
+        if model is None:
+            from sma.eval.baselines.dense import rank_tfidf_dense
+
+            return rank_tfidf_dense(
+                question, [(item.item_id, item.text) for item in self.items], k=n
+            )
+        if self._dense_version != self._version:
+            self._dense_embeddings = model.encode(
+                [item.text for item in self.items], convert_to_tensor=True, show_progress_bar=False
+            )
+            self._dense_version = self._version
+        from sentence_transformers import util
+
+        query_embedding = model.encode(question, convert_to_tensor=True, show_progress_bar=False)
+        sims = util.cos_sim(query_embedding, self._dense_embeddings)[0].cpu().tolist()
+        ranked = sorted(zip(self.items, sims), key=lambda row: (-row[1], row[0].item_id))
+        return [(item.item_id, float(score)) for item, score in ranked[:n]]
+
+    def _sma_ranking(self, query_case: Case, n: int) -> list[tuple[str, float]]:
+        shortlist = min(max(n, len(self.items)), 200)
+        fac_budget = 30 if len(self.items) > 100 else None
+        results = self.index.retrieve(query_case, k=n, shortlist=shortlist, fac_budget=fac_budget)
+        case_to_item = {item.case.case_id: item for item in self.items}
+        return [
+            (case_to_item[result.case_id].item_id, result.ses_n)
+            for result in results
+            if result.case_id in case_to_item
+        ]
+
+    def hybrid_evidence(self, question: str, adapter_id: str, k: int) -> list[dict]:
+        """RRF-fused bm25+dense+sma candidates, SME alignment receipts on each.
+
+        Candidate generation is the union of the top-20 from each retriever,
+        fused with reciprocal-rank fusion; the fused top-k then get full SME
+        receipts (match_cases + alignment_summary) so accountability rides on
+        every candidate regardless of which retriever found it.
+        """
+        if not self.items:
+            return []
+        from sma.eval.baselines.hybrid_rrf import rrf_fuse
+
+        query_case = self._encode(question, adapter_id)
+        coverage = rule_coverage(question)
+        n = 20
+        rankings = {
+            "bm25": self._bm25_ranking(question, n),
+            "dense": self._dense_ranking(question, n),
+            "sma": self._sma_ranking(query_case, n),
+        }
+        fused = rrf_fuse(list(rankings.values()), top_k=k)
+        rank_of = {
+            name: {doc_id: rank for rank, (doc_id, _score) in enumerate(ranking, start=1)}
+            for name, ranking in rankings.items()
+        }
+        mode_detail = "RRF(bm25+dense+sma) candidates, SME alignment receipts"
+        if self.draft_note:
+            mode_detail += f"; {self.draft_note}"
+        by_id = {item.item_id: item for item in self.items}
+        evidence = []
+        for doc_id, fused_score in fused:
+            item = by_id[doc_id]
+            gmap = match_cases(item.case, query_case, config=self.index.config)
+            inferences = candidate_inferences(gmap)
+            ranks = ", ".join(
+                f"{name}={rank_of[name].get(doc_id, '-')}" for name in ("bm25", "dense", "sma")
+            )
+            evidence.append(
+                {
+                    "source_id": item.item_id,
+                    "label": item.label,
+                    "score": f"{fused_score:.4f}",
+                    "text": item.text,
+                    "provenance": f"rrf={fused_score:.4f}; ranks({ranks}); case={item.case.case_id}",
+                    "mode_detail": mode_detail,
+                    "alignment": alignment_summary(gmap),
+                    "inferences": [inf.inference_sexpr for inf in inferences[:3]],
+                    "coverage": coverage,
+                }
+            )
+        warning = coverage_warning(coverage)
+        if warning:
+            evidence.insert(0, self._coverage_warning_row(coverage, warning))
         return evidence
 
     def bm25_evidence(self, question: str, k: int) -> list[dict]:
