@@ -463,3 +463,19 @@ Append-only progress log. Each work session must reread
   list. Baseline additions post-tag are explicitly permitted (prereg
   section 4); SMA dials untouched. T1 smoke re-verified with 7 methods.
 - Battery relaunched from scratch on the registered seeds.
+
+## 2026-06-12 (confirmatory battery OOM at T2 - logged restart #2)
+
+- The single-process `--task all` run was OOM-killed mid-T2 (seed 202, BGL
+  triage leg, 140/200 retrieval runs) after ~5h. Silent termination, no
+  Python traceback; box is 14 GB RAM (blueprint assumed 64), swap 3.8 GB
+  deep - cumulative RSS from ~25 transformer index builds (SMA+BM25+dense+
+  HippoRAG+cross-encoder reranker held simultaneously per leg) tipped it over.
+- T1 (transfer, all 5 seeds) had already COMPLETED and its outputs are intact
+  (t1_rows/stats/summary). T2/T3/T4/SSB wrote nothing - clean resume, no
+  partial outputs, single-shot guard untouched.
+- Restart strategy: scripts/run_battery_sequential.sh runs each remaining task
+  (t2,t3,t4,ssb) in its OWN python process so RSS is reclaimed between tasks;
+  T1's existing outputs make the guard skip it. Same registered seeds, same
+  frozen score - this is purely an execution-environment fix, not a protocol
+  change.
