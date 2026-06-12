@@ -32,7 +32,7 @@ FIGS = PAPER / "figures"
 TABLES = PAPER / "tables"
 DIAGRAMS = PAPER / "diagrams"
 
-SEMANTICS = "matcher-semantics v3 (constants + bound-ordered MAC)"
+SEMANTICS = "matcher-semantics v4 (ADR-006: constants, parallel-connectivity, bound-MAC, max-norm)"
 
 
 def git_rev() -> str:
@@ -71,7 +71,7 @@ def save(fig, name: str):
 def fig_transfer_headline():
     """Cross-system transfer: the H1 figure. v3-verified Spirit leg solid;
     pre-v3 pairs hatched pending re-verification."""
-    v3 = {r["method"]: float(r["macro_f1"]) for r in load("transfer_verify_v3.csv")
+    v3 = {r["method"]: float(r["macro_f1"]) for r in load("transfer_verify_v4final.csv")
           if "spirit" in r["split"]}
     pre = load("transfer_metrics.csv")
     tbird = {r["method"]: float(r["macro_f1"]) for r in pre
@@ -110,7 +110,7 @@ def fig_transfer_headline():
 def fig_decomposition():
     """Representation vs alignment: controls on the identical BGL->Spirit sets."""
     controls = {r["method"]: float(r["macro_f1"]) for r in load("transfer_controls_metrics.csv")}
-    v3_sma = next((float(r["macro_f1"]) for r in load("transfer_verify_v3.csv")
+    v3_sma = next((float(r["macro_f1"]) for r in load("transfer_verify_v4final.csv")
                    if r["method"] == "SMA"), None)
     steps = [
         ("Dense RAG\n(embeddings)", 0.3144, True),
@@ -137,7 +137,7 @@ def fig_decomposition():
 
 
 def fig_family():
-    rows = load("scorer_gauntlet_v3.csv")
+    rows = load("scorer_gauntlet_v4final.csv")
     variants = ["ses", "surprisal", "mdl", "rrf"]
     groups = [("HDFS", "family_hit5_common"), ("HDFS", "family_hit5_rare"),
               ("BGL", "family_hit5_common")]
@@ -241,7 +241,7 @@ def tex_table(name: str, caption: str, label: str, headers: list[str], rows: lis
 
 
 def make_tables():
-    v3 = [r for r in load("transfer_verify_v3.csv") if "spirit" in r["split"]]
+    v3 = [r for r in load("transfer_verify_v4final.csv") if "spirit" in r["split"]]
     tex_table(
         "tab_transfer_v3",
         "Held-out cross-system transfer (BGL$\\rightarrow$Spirit, frozen ontology, v3 semantics).",
@@ -250,7 +250,7 @@ def make_tables():
         [[r["method"], r["macro_f1"], r["label_hit_rate@1"], r["label_hit_rate@5"],
           r["p50_ms"]] for r in v3],
     )
-    g = load("scorer_gauntlet_v3.csv")
+    g = load("scorer_gauntlet_v4final.csv")
     tex_table(
         "tab_family_v3",
         "Failure-family retrieval (family-hit@5) by scorer under v3 semantics.",

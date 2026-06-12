@@ -373,3 +373,12 @@ Append-only progress log. Each work session must reread
   mode (5/5 with SME receipts) and optionally per-deployment target-norm.
 - Final citable battery under v4 defaults launched (prior batteries mixed
   semantics; discipline requires one clean set).
+
+## 2026-06-13 (semantics v4 FINAL: citable battery green, ADR-006)
+
+- BGL->Spirit transfer survives the full forensic arc STRONGER: macro-F1
+  0.8994, hit@1 0.9050 (was 0.8942 at v3). HDFS rare-family best-ever 0.850
+  (surprisal); BGL common 0.8705; size bias eliminated. ADR-006 consolidates
+  the four defects/fixes. Paper assets regenerated from v4final CSVs.
+- Phase 3 queue resumes: SSB de-circularization next, then calibration
+  (inherits scorer-default + normalization selection), prereg tag, statistics.
