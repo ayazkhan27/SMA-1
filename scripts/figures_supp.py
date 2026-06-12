@@ -293,7 +293,49 @@ def f13_radar():
     finish(fig, "fig13_radar")
 
 
+# ========================================================= F10 certified MAC =
+def f10_certified():
+    import cmasher as cmr
+    cpath = ROOT / "reports" / "macfac_certification.csv"
+    rs = list(csv.DictReader(cpath.open()))
+    ses = np.array([float(r["ses_raw"]) for r in rs])
+    bnd = np.array([float(r["u_bound"]) for r in rs])
+    viol = int(np.sum(bnd < ses - 1e-9))
+    fig, (axl, axr) = plt.subplots(1, 2, figsize=(5.4, 2.5),
+                                   gridspec_kw=dict(width_ratios=[1.2, 1], wspace=0.36))
+    # scatter: bound (y) vs true raw SES (x); admissible iff every point on/above y=x
+    hb = axl.hexbin(ses, bnd, gridsize=34, cmap=cmr.get_sub_cmap("cmr.ocean", 0.12, 0.92),
+                    mincnt=1, linewidths=0)
+    lim = max(ses.max(), bnd.max()) * 1.05
+    axl.plot([0, lim], [0, lim], color="#b3403a", lw=1.0, ls="--", zorder=3)
+    axl.fill_between([0, lim], [0, lim], [lim, lim], color="#2e8aa6", alpha=0.05, zorder=0)
+    axl.text(lim * 0.30, lim * 0.78, "admissible region\nU ≥ SES (every point)", fontsize=4.8,
+             color="0.3", ha="center")
+    axl.text(lim * 0.04, lim * 0.04, "y = x", fontsize=4.6, color="#b3403a", rotation=33)
+    axl.text(lim * 0.30, lim * 0.96, f"bound violations: {viol} / {len(rs)}", fontsize=5.4,
+             color="#b3403a", weight="bold", ha="center")
+    axl.set_xlim(0, lim); axl.set_ylim(0, lim)
+    axl.set_xlabel("true structural score (raw SES)", fontsize=6.5)
+    axl.set_ylabel("MAC content-vector bound  U", fontsize=6.5)
+    soften_spines(axl)
+    axis_title(axl, "", "Lemma 2: the screening bound is admissible")
+    cb = fig.colorbar(hb, ax=axl, fraction=0.045, pad=0.02); cb.ax.tick_params(labelsize=4.5)
+    cb.set_label("pairs", fontsize=5)
+    # slack distribution (honest: valid upper bound, conservative in magnitude)
+    slack = bnd - ses
+    axr.hist(slack, bins=30, color=SMA_C, alpha=0.85, edgecolor="white", linewidth=0.3)
+    axr.axvline(0, color="#b3403a", lw=1.0, ls="--")
+    axr.set_xlabel("slack  U − SES   (≥ 0 always)", fontsize=6.5)
+    axr.set_ylabel("candidate pairs", fontsize=6.5)
+    axr.set_xlim(left=-20)
+    axr.text(0.97, 0.95, "guarantees correct\nearly-stop; conservative\nin magnitude",
+             transform=axr.transAxes, fontsize=4.8, color="0.35", ha="right", va="top")
+    soften_spines(axr)
+    axis_title(axr, "", "Bound never underestimates the true score")
+    finish(fig, "fig10_certified")
+
+
 if __name__ == "__main__":
-    f5_transfer(); f6_ssb(); f7_family(); f8_triage(); f9_code()
+    f5_transfer(); f6_ssb(); f7_family(); f8_triage(); f9_code(); f10_certified()
     f11_calibration(); f12_haystack(); f13_radar()
     print("data figures done")

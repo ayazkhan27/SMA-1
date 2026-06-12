@@ -42,3 +42,5 @@ paper/reference_papers/
 # tikz build artifacts
 paper/figures/tikz/*.aux
 paper/figures/tikz/*.log
+paper/figures/individual/*.aux
+paper/figures/individual/*.log
