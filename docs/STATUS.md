@@ -449,3 +449,17 @@ Append-only progress log. Each work session must reread
   uniqueness guards added to make_paper_assets.py; GRAPHICS_STACK.md saved.
 - NEXT (launching now): python3 -u scripts/confirmatory_battery.py --task all
   - the single shot. Estimated 3.5-5.5 h.
+
+## 2026-06-12 (confirmatory battery RESTART - logged per single-shot protocol)
+
+- First launch of the battery was stopped 25 minutes in (mid T1 seed 201,
+  partial t1_transfer_metrics.csv deleted, NO results read or summarized)
+  after the operator caught a protocol omission: the transfer legs ran
+  without the registered "hybrid RRF (+rerank)" baseline (prereg section 4
+  names it; T4 had it, T1/T2-triage did not). Added Hybrid-RRF
+  (RRF of BM25+dense top-20) and Hybrid+Rerank (cross-encoder
+  ms-marco-MiniLM-L-6-v2 over the fused pool) to the transfer_eval
+  retrievers dict - the seven-method roster now matches the prereg baseline
+  list. Baseline additions post-tag are explicitly permitted (prereg
+  section 4); SMA dials untouched. T1 smoke re-verified with 7 methods.
+- Battery relaunched from scratch on the registered seeds.

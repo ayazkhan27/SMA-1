@@ -482,6 +482,14 @@ def run_transfer(
     hipporag_index = HippoRAGRetriever()
     hipporag_index.build(index_docs)
 
+    # 6. Enterprise hybrid stack (B6): RRF(BM25 + dense) and a cross-encoder
+    # rerank over the fused top-20 pool - the production RAG posture.
+    print("Loading cross-encoder reranker (Hybrid+Rerank)...")
+    from sma.eval.baselines.hybrid_rrf import rrf_fuse
+    from sma.eval.baselines.rerank import CrossEncoderReranker
+    reranker = CrossEncoderReranker()
+    index_text_by_id = dict(index_docs)
+
     # Per-query ranked retrieval for each method, as (case_id, score) pairs.
     def retrieve_sma(q_case, q_text):
         # shortlist=40, fac_budget=20 keeps CPU latency bounded
@@ -513,6 +521,23 @@ def run_transfer(
     def retrieve_hipporag(q_case, q_text):
         return hipporag_index.retrieve(q_text, k=10)
 
+    def _bm25_ranked(q_text, k):
+        scores = bm25_index.get_scores(q_text.lower().split())
+        return sorted(zip(doc_ids, scores), key=lambda row: (-row[1], row[0]))[:k]
+
+    def _dense_ranked(q_text, k):
+        query_embedding = dense_model.encode(q_text, convert_to_tensor=True, show_progress_bar=False)
+        scores = util.cos_sim(query_embedding, index_embeddings)[0].cpu().tolist()
+        return sorted(zip(doc_ids, scores), key=lambda row: (-row[1], row[0]))[:k]
+
+    def retrieve_hybrid_rrf(q_case, q_text):
+        return rrf_fuse([_bm25_ranked(q_text, 20), _dense_ranked(q_text, 20)], top_k=10)
+
+    def retrieve_hybrid_rerank(q_case, q_text):
+        pool = rrf_fuse([_bm25_ranked(q_text, 20), _dense_ranked(q_text, 20)], top_k=20)
+        candidates = [(cid, index_text_by_id[cid]) for cid, _ in pool]
+        return reranker.rerank(q_text, candidates, top_k=10)
+
     def weighted_vote(ranked, top=5):
         voting = {"Anomaly": 0.0, "Normal": 0.0}
         for case_id, score in ranked[:top]:
@@ -525,6 +550,8 @@ def run_transfer(
         "Dense RAG": retrieve_dense,
         "KG-PPR Proxy": retrieve_kg,
         "HippoRAG": retrieve_hipporag,
+        "Hybrid-RRF": retrieve_hybrid_rrf,
+        "Hybrid+Rerank": retrieve_hybrid_rerank,
     }
     methods = list(retrievers)
     metrics_by_method = {m: {"recalls": [], "preds": [], "latencies": []} for m in methods}
