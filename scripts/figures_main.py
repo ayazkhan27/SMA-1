@@ -19,29 +19,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.patches import Ellipse, FancyArrowPatch, FancyBboxPatch
 
+import sys
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 FIGS = ROOT / "paper" / "figures"
 CONF = ROOT / "reports" / "confirmatory"
 
-plt.rcParams.update({
-    "font.family": "sans-serif",
-    "font.sans-serif": ["Arial", "Liberation Sans", "DejaVu Sans"],
-    "font.size": 7, "axes.linewidth": 0.6, "xtick.major.width": 0.6,
-    "ytick.major.width": 0.6, "xtick.major.size": 3, "ytick.major.size": 3,
-    "figure.dpi": 300, "savefig.dpi": 600,
-})
-
-# Role palette (paper/figure_specs/README.md)
-ENT = "#5a6472"      # entities / constants
-FO = "#3a87ad"       # first-order relations
-HO = "#16425b"       # higher-order relations (boldest)
-INF = "#D55E00"      # candidate inference (Okabe vermilion), dashed
-VIO = "#7b5ea7"      # lattice ascension
-SMA_C = "#0f6e84"    # SMA method
-KG_C = "#E69F00"     # KG family
-GRAYS = {"BM25": "#b9b9b9", "Dense RAG": "#979797", "Hybrid-RRF": "#6e6e6e",
-         "Hybrid+Rerank": "#4a4a4a"}
-METHOD_C = {"SMA": SMA_C, "KG-PPR Proxy": KG_C, "HippoRAG": "#b97c0a", **GRAYS}
+from figstyle import (ENT, FO, HO, INF, VIO, SMA_C, KG_C, METHOD_C, RIBBON,
+                      FILL_TEAL, FILL_GREEN, FILL_LAV, FILL_AMBER, FILL_GREY,
+                      TITLE_GRAY, panel_title as _ptitle, axis_title, soften_spines)
 
 
 def rev() -> str:
@@ -77,8 +63,8 @@ def node(ax, x, y, text, fc, r=0.022, fs=4.6, tc="white", ec=None, ls="-", z=4,
 
 
 def panel_label(ax, letter):
-    ax.text(0.005, 0.985, letter, transform=ax.transAxes, fontsize=11,
-            weight="bold", va="top", ha="left")
+    ax.text(0.005, 0.992, letter, transform=ax.transAxes, fontsize=12,
+            weight="bold", color=TITLE_GRAY, va="top", ha="left")
 
 
 def blank(ax):
@@ -91,8 +77,8 @@ def blank(ax):
 def panel_a(ax):
     blank(ax)
     panel_label(ax, "A")
-    ax.text(0.5, 0.995, "Representation: structure, not text", fontsize=6.5,
-            ha="center", va="top", weight="bold", color="0.2")
+    ax.text(0.54, 0.992, "Representation: structure, not text", fontsize=7.0,
+            ha="center", va="top", weight="bold", color=TITLE_GRAY)
     # raw log excerpt (depicted data), top-left
     ax.add_patch(FancyBboxPatch((0.03, 0.70), 0.45, 0.20, boxstyle="round,pad=0.012",
                                 fc="#f4f6f8", ec="0.6", lw=0.6))
@@ -144,24 +130,24 @@ def panel_a(ax):
 def panel_b(ax):
     blank(ax)
     panel_label(ax, "B")
-    ax.text(0.5, 0.985, "Architecture: deterministic write path, certified read path, one gated LLM",
-            fontsize=6.5, ha="center", va="top", weight="bold", color="0.2")
+    ax.text(0.54, 0.992, "Architecture: write path, certified read path, one gated LLM",
+            fontsize=7.0, ha="center", va="top", weight="bold", color=TITLE_GRAY)
     # WRITE lane
     ax.text(0.015, 0.80, "WRITE", fontsize=5, color="0.45", rotation=90, va="center")
     box(ax, 0.04, 0.70, 0.13, 0.20, "artifacts\nlogs · code\ntraces · obs", "white", "0.4", fs=4.4)
-    box(ax, 0.21, 0.70, 0.15, 0.20, "encoders\n(rules; versioned;\nbyte-deterministic)", "#dfe9ee", FO, fs=4.4)
+    box(ax, 0.21, 0.70, 0.15, 0.20, "encoders\n(rules; versioned;\nbyte-deterministic)", FILL_TEAL, FO, fs=4.4)
     # store cylinder
     ax.add_patch(FancyBboxPatch((0.41, 0.70), 0.16, 0.17, boxstyle="round,pad=0.012",
                                 fc="#eef3f5", ec=SMA_C, lw=0.8))
     ax.add_patch(Ellipse((0.49, 0.875), 0.16, 0.045, fc="#eef3f5", ec=SMA_C, lw=0.8))
     ax.text(0.49, 0.785, "case store\nBLAKE3 ids + WAL", fontsize=4.4, ha="center", va="center")
-    box(ax, 0.62, 0.70, 0.16, 0.20, "index\nfunctor postings\n+ WL-1 vectors", "#dfe9ee", FO, fs=4.4)
+    box(ax, 0.62, 0.70, 0.16, 0.20, "index\nfunctor postings\n+ WL-1 vectors", FILL_TEAL, FO, fs=4.4)
     for x0, x1 in ((0.17, 0.21), (0.36, 0.41), (0.575, 0.62)):
         arrow(ax, x0, 0.80, x1, 0.80)
     # READ lane
     ax.text(0.015, 0.38, "READ", fontsize=5, color="0.45", rotation=90, va="center")
     box(ax, 0.04, 0.28, 0.11, 0.20, "query\nartifact", "white", "0.4", fs=4.4)
-    box(ax, 0.19, 0.28, 0.17, 0.20, "MAC: admissible\nbound orders\ncandidates", "#dfe9ee", FO, fs=4.4)
+    box(ax, 0.19, 0.28, 0.17, 0.20, "MAC: admissible\nbound orders\ncandidates", FILL_TEAL, FO, fs=4.4)
     box(ax, 0.40, 0.28, 0.17, 0.20, "FAC: SME align,\nbest-first,\ncertified top-k", "#d3e2e8", HO, fs=4.4, tc="black")
     box(ax, 0.61, 0.28, 0.15, 0.20, "receipts:\nmaps · scores ·\ninferences", "white", INF, fs=4.4)
     for x0, x1 in ((0.15, 0.19), (0.36, 0.40), (0.57, 0.61)):
@@ -174,7 +160,7 @@ def panel_b(ax):
     # LLM gate
     ax.add_patch(FancyBboxPatch((0.80, 0.24), 0.185, 0.30, boxstyle="round,pad=0.012",
                                 fc="none", ec="0.35", lw=0.7, linestyle="--"))
-    box(ax, 0.815, 0.30, 0.155, 0.18, "LLM verbalizes\nreceipts only:\nCITE or ABSTAIN", "#fff6ef", INF, fs=4.4)
+    box(ax, 0.815, 0.30, 0.155, 0.18, "LLM verbalizes\nreceipts only:\nCITE or ABSTAIN", FILL_AMBER, INF, fs=4.4)
     ax.text(0.8925, 0.56, "the only LLM — never writes facts", fontsize=4.2,
             ha="center", color="0.35", style="italic")
     arrow(ax, 0.76, 0.38, 0.815, 0.38)
@@ -211,8 +197,8 @@ def _mini_dag(ax, cx, cy, col, s=0.023):
 def panel_c(ax):
     blank(ax)
     panel_label(ax, "C")
-    ax.text(0.5, 0.97, "Inside the matcher: exact-anytime structure mapping (SME core)",
-            fontsize=6.5, ha="center", va="top", weight="bold", color="0.2")
+    ax.text(0.54, 0.99, "Inside the matcher: exact-anytime structure mapping (SME core)",
+            fontsize=7.0, ha="center", va="top", weight="bold", color=TITLE_GRAY)
     y = 0.56
     stages = [0.115, 0.30, 0.50, 0.70, 0.885]
     # 1 seeding
@@ -287,8 +273,8 @@ COVER = {  # which methods run per task (battery design)
 def panel_d(ax):
     blank(ax)
     panel_label(ax, "D")
-    ax.text(0.5, 0.985, "Pre-registered battery: tasks × methods", fontsize=6.5,
-            ha="center", va="top", weight="bold", color="0.2")
+    ax.text(0.56, 0.992, "Pre-registered battery: tasks × methods", fontsize=7.0,
+            ha="center", va="top", weight="bold", color=TITLE_GRAY)
     from matplotlib.patches import Wedge
 
     x0, y0, dx, dy = 0.30, 0.745, 0.082, 0.082
@@ -303,8 +289,21 @@ def panel_d(ax):
         else:
             ax.add_patch(Ellipse((xx, yy), r * 2, r * 2.6, fc="white", ec="0.55", lw=0.7))
 
-    ax.add_patch(plt.Rectangle((x0 - dx * 0.5, y0 - dy * 7.45), dx, dy * 8.2,
-                               fc=SMA_C, alpha=0.10, zorder=0))
+    # MAMMAL-style colored stage ribbon over the method groups
+    groups = [("structural", [0], RIBBON[0]), ("lexical", [1, 2], RIBBON[1]),
+              ("hybrid", [3, 4], RIBBON[2]), ("graph", [5, 6], RIBBON[3])]
+    rib_y = y0 + 0.115
+    for name, cols, col in groups:
+        xa = x0 + (min(cols) - 0.42) * dx
+        xb = x0 + (max(cols) + 0.42) * dx
+        ax.add_patch(FancyBboxPatch((xa, rib_y), xb - xa, 0.038,
+                                    boxstyle="round,pad=0.004", fc=col, ec="none",
+                                    zorder=2))
+        ax.text((xa + xb) / 2, rib_y + 0.019, name, fontsize=3.9, ha="center",
+                va="center", color="#3d4751", zorder=3)
+        # faint group column tint down the matrix
+        ax.add_patch(plt.Rectangle((xa, y0 - dy * 7.45), xb - xa, dy * 7.95,
+                                   fc=col, alpha=0.18, zorder=0))
     for j, m in enumerate(METHODS):
         ax.text(x0 + j * dx, y0 + 0.055, m, fontsize=4.2, ha="left", rotation=38,
                 color=SMA_C if m == "SMA" else "0.3", rotation_mode="anchor",
@@ -352,7 +351,7 @@ SHORT = {"SMA": "SMA", "Hybrid+Rerank": "Hyb+RR", "Hybrid-RRF": "Hyb-RRF",
 def panel_e(ax):
     rows, stats = load_t1()
     ax.set_title("Confirmatory cross-system transfer (T1): label-hit@1, 5 seeds",
-                 fontsize=6.5, weight="bold", color="0.2", pad=3)
+                 fontsize=6.8, weight="bold", color=TITLE_GRAY, pad=3)
     width = 0.105
     for li, (leg, leg_lbl) in enumerate(LEGS):
         for mi, m in enumerate(ORDER):
@@ -446,8 +445,8 @@ def figure_s1():
     ax1.legend(handles, [SHORT[m] for m in ORDER], fontsize=4.4, ncol=4,
                frameon=False, loc="upper right", bbox_to_anchor=(1.0, 1.17),
                handlelength=1.0, columnspacing=0.8, handletextpad=0.4)
-    ax1.set_title("a  Transfer macro-F1\n(5 seeds, mean ± s.d.)", fontsize=6.5,
-                  weight="bold", loc="left", pad=3)
+    ax1.set_title("a  Transfer macro-F1\n(5 seeds, mean ± s.d.)", fontsize=6.8,
+                  weight="bold", loc="left", pad=3, color=TITLE_GRAY)
 
     # forest of per-query paired-bootstrap deltas (SMA - baseline, hit@1)
     yy = 0
@@ -473,8 +472,8 @@ def figure_s1():
     ax2.tick_params(labelsize=5)
     ax2.set_xlabel("Δ label-hit@1 (SMA − baseline), 95% CI", fontsize=5.5)
     ax2.spines[["top", "right"]].set_visible(False)
-    ax2.set_title("b  Paired-bootstrap deltas (Holm-corrected)", fontsize=6.5,
-                  weight="bold", loc="left", pad=4)
+    ax2.set_title("b  Paired-bootstrap deltas (Holm-corrected)", fontsize=6.8,
+                  weight="bold", loc="left", pad=4, color=TITLE_GRAY)
     fig.text(0.995, 0.002, f"{datetime.date.today()} · {rev()} · prereg-v1",
              fontsize=3.5, ha="right", color="0.65")
     for ext in ("pdf", "png"):
