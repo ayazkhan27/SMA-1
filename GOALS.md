@@ -21,7 +21,7 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
 - [x] Phase 1  Credibility batch: held-out Spirit transfer (3 seeds, frozen
       ontology, SMA 0.938 vs dense 0.356), production-RAG ladder (+B6, WL
       control; ColBERT skipped as stretch), family-hit@k metric, H3 LLM-judge.
-- [ ] Phase 2  Scoring resolution: surprisal-SES scorer gauntlet (vs SES, MDL,
+- [x] Phase 2  Scoring resolution: surprisal-SES scorer gauntlet (vs SES, MDL,
       RRF combo) on family strata + EOF case + transfer; ses_n bias study;
       BugsInPy T3 fix-retrieval.
 - [ ] Phase 3  Freeze train: SSB de-circularization; calibration on validation;

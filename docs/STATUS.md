@@ -237,3 +237,16 @@ Append-only progress log. Each work session must reread
   demonstrated end-to-end.
 - transfer_eval --scorer now accepts "surprisal"; BGL->Spirit surprisal leg
   re-running (was blocked by argparse choices).
+
+## 2026-06-12 (score-v2 decided: surprisal-SES, ADR-005)
+
+- Transfer leg completed the gauntlet sweep: BGL->Spirit[seed42] surprisal
+  0.9300 (> ses 0.9200, mdl 0.9100), p50 279ms (< ses 577ms; weighted bound
+  tightens early-stop). Surprisal wins/ties every gauntlet column; only loss
+  is -1.4pts on HDFS common families.
+- Default scorer is now "surprisal" (MatchConfig); UI toggle offers
+  surprisal/ses/mdl; set_scorer accepts all three. ADR-005 records the
+  decision table. 15/15 tests green (incl. new BugsInPy unit tests).
+- Phase 2 of the ledger is COMPLETE (scorer resolution + bias study + T3).
+  Next: Phase 3 freeze train - SSB de-circularization, calibration on
+  validation splits, prereg tag, statistics runs.

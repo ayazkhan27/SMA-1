@@ -395,7 +395,7 @@ def build_demo(framework: ComparisonFramework | None = None):
                             list(LLM_CHOICES), value=list(LLM_CHOICES)[0], label="Answer model"
                         )
                         chat_scorer = gr.Radio(
-                            ["ses", "mdl"], value="ses",
+                            ["surprisal", "ses", "mdl"], value="surprisal",
                             label="SMA scorer (ses: systematicity; mdl: surprisal-weighted, finds rare failure families)",
                         )
                         with gr.Row():
@@ -432,7 +432,7 @@ def build_demo(framework: ComparisonFramework | None = None):
                         scale=2,
                     )
                     compare_scorer = gr.Radio(
-                        ["ses", "mdl"], value="ses", label="SMA scorer", scale=1
+                        ["surprisal", "ses", "mdl"], value="surprisal", label="SMA scorer", scale=1
                     )
                 run = gr.Button("Run comparison", variant="primary")
                 cards = gr.HTML()

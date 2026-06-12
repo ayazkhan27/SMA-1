@@ -94,7 +94,7 @@ class MatchConfig:
     gamma: float = 0.25
     rho: float = 0.5
     delta: int = 0
-    scorer: str = "ses"  # "ses" | "mdl" | "surprisal"
+    scorer: str = "surprisal"  # "ses" | "mdl" | "surprisal" (score-v2, ADR-005)
     # Corpus surprisal per canonical functor (-log2 p), supplied by the index
     # for scorer="surprisal"; None means unit weights (identical to "ses").
     functor_costs: dict | None = None

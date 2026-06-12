@@ -93,8 +93,8 @@ class ComparisonFramework:
         The MAC index structures are scorer-independent; only the FAC scoring
         step reads config, and its cache key already includes the scorer.
         """
-        if scorer not in ("ses", "mdl"):
-            raise ValueError(f"unknown scorer: {scorer!r}; expected 'ses' or 'mdl'")
+        if scorer not in ("ses", "mdl", "surprisal"):
+            raise ValueError(f"unknown scorer: {scorer!r}; expected 'ses', 'mdl' or 'surprisal'")
         self.index.config = MatchConfig(scorer=scorer)
 
     def add_document(self, text: str, adapter_id: str = "logs", label: str = "") -> CorpusItem:
