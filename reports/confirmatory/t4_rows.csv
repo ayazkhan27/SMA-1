@@ -1,0 +1,801 @@
+seed,leg,method,query_id,needle_hit@5,hit@1
+201,liberty_haystack,BM25,liberty_ln12_18818549,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln12_18818549,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln12_18818549,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln12_18818549,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln177_18818622,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln177_18818622,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln177_18818622,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln177_18818622,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln177_18819417,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln177_18819417,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln177_18819417,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln177_18819417,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln177_18819496,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln177_18819496,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln177_18819496,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln177_18819496,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln177_18820157,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln177_18820157,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln177_18820157,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln177_18820157,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln177_18820684,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln177_18820684,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln177_18820684,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln177_18820684,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln177_18821358,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln177_18821358,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln177_18821358,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln177_18821358,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln177_18821490,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln177_18821490,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln177_18821490,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln177_18821490,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18818752,0.6,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18818752,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18818752,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18818752,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18818991,0.6,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18818991,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18818991,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18818991,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18819154,0.8,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18819154,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18819154,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18819154,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18819601,0.6,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18819601,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18819601,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18819601,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18819664,0.6,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18819664,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18819664,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18819664,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18819862,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18819862,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18819862,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18819862,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18820136,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18820136,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18820136,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18820136,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18820563,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18820563,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18820563,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18820563,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln17_18820573,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln17_18820573,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln17_18820573,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln17_18820573,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18818886,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18818886,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18818886,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18818886,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18819389,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18819389,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18819389,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18819389,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18819698,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18819698,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18819698,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18819698,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18819768,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18819768,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18819768,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18819768,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18819811,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18819811,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18819811,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18819811,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18819900,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18819900,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18819900,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18819900,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18820778,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18820778,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18820778,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18820778,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18821150,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18821150,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18821150,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18821150,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18821161,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18821161,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18821161,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18821161,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln6_18821285,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln6_18821285,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln6_18821285,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln6_18821285,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18818769,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18818769,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18818769,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18818769,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18818944,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18818944,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18818944,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18818944,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18819495,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18819495,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18819495,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18819495,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18819679,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18819679,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18819679,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18819679,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18819952,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18819952,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18819952,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18819952,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18820143,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18820143,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18820143,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18820143,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18820166,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18820166,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18820166,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18820166,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18820235,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18820235,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18820235,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18820235,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18820478,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18820478,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18820478,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18820478,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18821107,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18821107,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18821107,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18821107,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18821114,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18821114,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18821114,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18821114,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18821123,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18821123,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18821123,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18821123,1.0,1.0
+201,liberty_haystack,BM25,liberty_ln81_18821551,1.0,1.0
+201,liberty_haystack,Dense RAG,liberty_ln81_18821551,1.0,1.0
+201,liberty_haystack,SMA,liberty_ln81_18821551,1.0,1.0
+201,liberty_haystack,Hybrid-RRF,liberty_ln81_18821551,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln177_18818988,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln177_18818988,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln177_18818988,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln177_18818988,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln177_18818999,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln177_18818999,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln177_18818999,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln177_18818999,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln177_18819317,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln177_18819317,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln177_18819317,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln177_18819317,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln177_18820500,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln177_18820500,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln177_18820500,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln177_18820500,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln177_18821546,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln177_18821546,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln177_18821546,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln177_18821546,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln177_18821607,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln177_18821607,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln177_18821607,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln177_18821607,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln177_18821642,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln177_18821642,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln177_18821642,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln177_18821642,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln177_18821699,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln177_18821699,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln177_18821699,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln177_18821699,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln17_18819119,0.8,1.0
+202,liberty_haystack,Dense RAG,liberty_ln17_18819119,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln17_18819119,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln17_18819119,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln17_18819301,0.6,1.0
+202,liberty_haystack,Dense RAG,liberty_ln17_18819301,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln17_18819301,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln17_18819301,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln17_18819396,0.6,1.0
+202,liberty_haystack,Dense RAG,liberty_ln17_18819396,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln17_18819396,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln17_18819396,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln17_18820570,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln17_18820570,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln17_18820570,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln17_18820570,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln17_18820582,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln17_18820582,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln17_18820582,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln17_18820582,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln17_18821545,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln17_18821545,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln17_18821545,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln17_18821545,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18818520,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18818520,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18818520,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18818520,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18818590,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18818590,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18818590,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18818590,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18818708,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18818708,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18818708,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18818708,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18818974,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18818974,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18818974,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18818974,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18819008,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18819008,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18819008,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18819008,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18819252,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18819252,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18819252,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18819252,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18819393,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18819393,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18819393,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18819393,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18819617,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18819617,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18819617,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18819617,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18819683,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18819683,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18819683,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18819683,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18819800,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18819800,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18819800,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18819800,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18820098,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18820098,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18820098,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18820098,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18820558,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18820558,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18820558,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18820558,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18820568,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18820568,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18820568,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18820568,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln6_18820647,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln6_18820647,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln6_18820647,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln6_18820647,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18818789,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18818789,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18818789,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18818789,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18819092,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18819092,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18819092,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18819092,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18819305,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18819305,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18819305,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18819305,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18819339,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18819339,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18819339,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18819339,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18819538,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18819538,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18819538,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18819538,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18819862,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18819862,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18819862,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18819862,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18820373,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18820373,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18820373,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18820373,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18820493,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18820493,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18820493,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18820493,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18820987,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18820987,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18820987,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18820987,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18821109,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18821109,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18821109,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18821109,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18821139,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18821139,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18821139,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18821139,1.0,1.0
+202,liberty_haystack,BM25,liberty_ln81_18821290,1.0,1.0
+202,liberty_haystack,Dense RAG,liberty_ln81_18821290,1.0,1.0
+202,liberty_haystack,SMA,liberty_ln81_18821290,1.0,1.0
+202,liberty_haystack,Hybrid-RRF,liberty_ln81_18821290,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18818760,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18818760,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18818760,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18818760,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18818869,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18818869,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18818869,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18818869,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18819090,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18819090,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18819090,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18819090,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18819596,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18819596,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18819596,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18819596,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18819883,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18819883,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18819883,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18819883,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18819968,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18819968,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18819968,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18819968,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18820068,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18820068,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18820068,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18820068,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18820120,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18820120,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18820120,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18820120,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18820321,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18820321,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18820321,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18820321,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18820555,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18820555,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18820555,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18820555,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln177_18821709,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln177_18821709,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln177_18821709,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln177_18821709,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18818712,0.6,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18818712,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18818712,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18818712,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18819106,0.6,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18819106,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18819106,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18819106,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18819298,0.6,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18819298,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18819298,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18819298,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18819475,0.6,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18819475,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18819475,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18819475,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18819512,0.6,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18819512,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18819512,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18819512,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18819513,0.6,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18819513,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18819513,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18819513,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18820113,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18820113,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18820113,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18820113,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18820866,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18820866,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18820866,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18820866,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18820971,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18820971,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18820971,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18820971,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln17_18821495,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln17_18821495,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln17_18821495,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln17_18821495,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln6_18819271,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln6_18819271,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln6_18819271,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln6_18819271,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln6_18819426,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln6_18819426,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln6_18819426,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln6_18819426,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln6_18819444,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln6_18819444,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln6_18819444,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln6_18819444,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln6_18820062,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln6_18820062,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln6_18820062,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln6_18820062,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln6_18820074,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln6_18820074,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln6_18820074,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln6_18820074,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln6_18821122,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln6_18821122,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln6_18821122,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln6_18821122,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln6_18821372,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln6_18821372,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln6_18821372,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln6_18821372,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln6_18821613,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln6_18821613,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln6_18821613,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln6_18821613,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18818517,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18818517,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18818517,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18818517,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18818530,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18818530,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18818530,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18818530,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18818612,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18818612,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18818612,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18818612,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18818798,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18818798,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18818798,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18818798,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18819305,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18819305,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18819305,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18819305,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18820624,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18820624,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18820624,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18820624,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18820899,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18820899,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18820899,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18820899,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18821024,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18821024,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18821024,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18821024,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18821060,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18821060,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18821060,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18821060,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18821473,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18821473,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18821473,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18821473,1.0,1.0
+203,liberty_haystack,BM25,liberty_ln81_18821549,1.0,1.0
+203,liberty_haystack,Dense RAG,liberty_ln81_18821549,1.0,1.0
+203,liberty_haystack,SMA,liberty_ln81_18821549,1.0,1.0
+203,liberty_haystack,Hybrid-RRF,liberty_ln81_18821549,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18819508,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18819508,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18819508,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18819508,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18819583,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18819583,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18819583,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18819583,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18819797,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18819797,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18819797,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18819797,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18820142,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18820142,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18820142,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18820142,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18820571,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18820571,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18820571,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18820571,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18820597,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18820597,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18820597,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18820597,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18820875,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18820875,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18820875,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18820875,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18820984,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18820984,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18820984,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18820984,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18821189,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18821189,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18821189,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18821189,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln177_18821643,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln177_18821643,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln177_18821643,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln177_18821643,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18818584,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18818584,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18818584,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18818584,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18818595,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18818595,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18818595,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18818595,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18818660,0.6,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18818660,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18818660,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18818660,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18818958,0.8,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18818958,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18818958,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18818958,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18819113,0.6,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18819113,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18819113,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18819113,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18819613,0.6,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18819613,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18819613,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18819613,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18820046,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18820046,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18820046,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18820046,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18820218,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18820218,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18820218,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18820218,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18820527,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18820527,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18820527,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18820527,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18820592,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18820592,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18820592,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18820592,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18820671,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18820671,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18820671,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18820671,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18821104,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18821104,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18821104,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18821104,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln17_18821411,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln17_18821411,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln17_18821411,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln17_18821411,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18818502,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18818502,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18818502,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18818502,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18818652,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18818652,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18818652,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18818652,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18818743,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18818743,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18818743,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18818743,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18818767,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18818767,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18818767,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18818767,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18819187,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18819187,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18819187,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18819187,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18819368,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18819368,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18819368,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18819368,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18819548,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18819548,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18819548,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18819548,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18819898,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18819898,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18819898,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18819898,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18820548,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18820548,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18820548,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18820548,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18820592,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18820592,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18820592,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18820592,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18821258,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18821258,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18821258,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18821258,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln6_18821566,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln6_18821566,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln6_18821566,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln6_18821566,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln81_18818666,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln81_18818666,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln81_18818666,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln81_18818666,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln81_18819823,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln81_18819823,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln81_18819823,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln81_18819823,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln81_18820183,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln81_18820183,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln81_18820183,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln81_18820183,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln81_18820732,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln81_18820732,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln81_18820732,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln81_18820732,1.0,1.0
+204,liberty_haystack,BM25,liberty_ln81_18820997,1.0,1.0
+204,liberty_haystack,Dense RAG,liberty_ln81_18820997,1.0,1.0
+204,liberty_haystack,SMA,liberty_ln81_18820997,1.0,1.0
+204,liberty_haystack,Hybrid-RRF,liberty_ln81_18820997,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln16_18820190,0.0,0.0
+205,liberty_haystack,Dense RAG,liberty_ln16_18820190,0.0,0.0
+205,liberty_haystack,SMA,liberty_ln16_18820190,0.0,0.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln16_18820190,0.0,0.0
+205,liberty_haystack,BM25,liberty_ln177_18818742,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18818742,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18818742,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18818742,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln177_18819740,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18819740,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18819740,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18819740,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln177_18819806,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18819806,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18819806,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18819806,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln177_18820011,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18820011,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18820011,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18820011,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln177_18820016,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18820016,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18820016,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18820016,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln177_18820101,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18820101,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18820101,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18820101,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln177_18820472,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18820472,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18820472,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18820472,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln177_18821371,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18821371,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18821371,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18821371,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln177_18821622,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln177_18821622,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln177_18821622,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln177_18821622,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18818556,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18818556,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18818556,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18818556,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18818880,0.6,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18818880,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18818880,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18818880,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18818915,0.6,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18818915,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18818915,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18818915,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18818970,0.6,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18818970,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18818970,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18818970,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18819767,0.6,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18819767,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18819767,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18819767,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18820023,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18820023,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18820023,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18820023,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18820111,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18820111,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18820111,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18820111,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18820223,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18820223,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18820223,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18820223,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18820503,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18820503,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18820503,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18820503,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18820530,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18820530,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18820530,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18820530,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln17_18820718,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln17_18820718,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln17_18820718,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln17_18820718,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln6_18819117,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln6_18819117,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln6_18819117,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln6_18819117,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln6_18819675,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln6_18819675,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln6_18819675,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln6_18819675,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln6_18819893,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln6_18819893,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln6_18819893,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln6_18819893,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln6_18820141,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln6_18820141,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln6_18820141,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln6_18820141,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln6_18820340,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln6_18820340,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln6_18820340,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln6_18820340,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln6_18820488,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln6_18820488,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln6_18820488,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln6_18820488,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln6_18820785,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln6_18820785,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln6_18820785,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln6_18820785,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln6_18821566,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln6_18821566,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln6_18821566,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln6_18821566,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18818697,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18818697,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18818697,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18818697,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18819040,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18819040,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18819040,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18819040,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18819050,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18819050,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18819050,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18819050,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18819974,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18819974,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18819974,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18819974,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18820319,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18820319,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18820319,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18820319,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18820645,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18820645,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18820645,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18820645,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18820705,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18820705,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18820705,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18820705,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18820721,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18820721,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18820721,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18820721,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18820865,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18820865,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18820865,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18820865,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18821132,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18821132,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18821132,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18821132,1.0,1.0
+205,liberty_haystack,BM25,liberty_ln81_18821225,1.0,1.0
+205,liberty_haystack,Dense RAG,liberty_ln81_18821225,1.0,1.0
+205,liberty_haystack,SMA,liberty_ln81_18821225,1.0,1.0
+205,liberty_haystack,Hybrid-RRF,liberty_ln81_18821225,1.0,1.0

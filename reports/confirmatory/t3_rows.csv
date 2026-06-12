@@ -1,0 +1,1501 @@
+leg,fold,method,query_id,category,available,excluded,hit@1,hit@5
+bugsinpy_lopo,PySnooper,SMA,PySnooper/1,other,293,True,,
+bugsinpy_lopo,PySnooper,BM25,PySnooper/1,other,293,True,,
+bugsinpy_lopo,PySnooper,Dense RAG,PySnooper/1,other,293,True,,
+bugsinpy_lopo,PySnooper,SMA,PySnooper/2,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,PySnooper,BM25,PySnooper/2,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,PySnooper,Dense RAG,PySnooper/2,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,PySnooper,SMA,PySnooper/3,other,293,True,,
+bugsinpy_lopo,PySnooper,BM25,PySnooper/3,other,293,True,,
+bugsinpy_lopo,PySnooper,Dense RAG,PySnooper/3,other,293,True,,
+bugsinpy_lopo,ansible,SMA,ansible/1,add-null-check,77,False,1.0,0.6
+bugsinpy_lopo,ansible,BM25,ansible/1,add-null-check,77,False,1.0,0.4
+bugsinpy_lopo,ansible,Dense RAG,ansible/1,add-null-check,77,False,0.0,0.2
+bugsinpy_lopo,ansible,SMA,ansible/2,api-substitution,25,False,0.0,0.0
+bugsinpy_lopo,ansible,BM25,ansible/2,api-substitution,25,False,0.0,0.2
+bugsinpy_lopo,ansible,Dense RAG,ansible/2,api-substitution,25,False,0.0,0.0
+bugsinpy_lopo,ansible,SMA,ansible/3,other,287,True,,
+bugsinpy_lopo,ansible,BM25,ansible/3,other,287,True,,
+bugsinpy_lopo,ansible,Dense RAG,ansible/3,other,287,True,,
+bugsinpy_lopo,ansible,SMA,ansible/4,other,287,True,,
+bugsinpy_lopo,ansible,BM25,ansible/4,other,287,True,,
+bugsinpy_lopo,ansible,Dense RAG,ansible/4,other,287,True,,
+bugsinpy_lopo,ansible,SMA,ansible/5,api-substitution,25,False,0.0,0.4
+bugsinpy_lopo,ansible,BM25,ansible/5,api-substitution,25,False,0.0,0.2
+bugsinpy_lopo,ansible,Dense RAG,ansible/5,api-substitution,25,False,0.0,0.0
+bugsinpy_lopo,ansible,SMA,ansible/6,add-null-check,77,False,0.0,0.0
+bugsinpy_lopo,ansible,BM25,ansible/6,add-null-check,77,False,1.0,0.4
+bugsinpy_lopo,ansible,Dense RAG,ansible/6,add-null-check,77,False,0.0,0.2
+bugsinpy_lopo,ansible,SMA,ansible/7,other,287,True,,
+bugsinpy_lopo,ansible,BM25,ansible/7,other,287,True,,
+bugsinpy_lopo,ansible,Dense RAG,ansible/7,other,287,True,,
+bugsinpy_lopo,ansible,SMA,ansible/8,other,287,True,,
+bugsinpy_lopo,ansible,BM25,ansible/8,other,287,True,,
+bugsinpy_lopo,ansible,Dense RAG,ansible/8,other,287,True,,
+bugsinpy_lopo,ansible,SMA,ansible/9,add-null-check,77,False,1.0,0.4
+bugsinpy_lopo,ansible,BM25,ansible/9,add-null-check,77,False,0.0,0.4
+bugsinpy_lopo,ansible,Dense RAG,ansible/9,add-null-check,77,False,0.0,0.2
+bugsinpy_lopo,ansible,SMA,ansible/10,add-null-check,77,False,1.0,0.6
+bugsinpy_lopo,ansible,BM25,ansible/10,add-null-check,77,False,0.0,0.4
+bugsinpy_lopo,ansible,Dense RAG,ansible/10,add-null-check,77,False,1.0,0.2
+bugsinpy_lopo,ansible,SMA,ansible/11,other,287,True,,
+bugsinpy_lopo,ansible,BM25,ansible/11,other,287,True,,
+bugsinpy_lopo,ansible,Dense RAG,ansible/11,other,287,True,,
+bugsinpy_lopo,ansible,SMA,ansible/12,api-substitution,25,False,0.0,0.6
+bugsinpy_lopo,ansible,BM25,ansible/12,api-substitution,25,False,0.0,0.0
+bugsinpy_lopo,ansible,Dense RAG,ansible/12,api-substitution,25,False,0.0,0.0
+bugsinpy_lopo,ansible,SMA,ansible/13,exception-handling,33,False,1.0,0.4
+bugsinpy_lopo,ansible,BM25,ansible/13,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,ansible,Dense RAG,ansible/13,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,ansible,SMA,ansible/14,exception-handling,33,False,1.0,0.8
+bugsinpy_lopo,ansible,BM25,ansible/14,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,ansible,Dense RAG,ansible/14,exception-handling,33,False,1.0,0.2
+bugsinpy_lopo,ansible,SMA,ansible/15,other,287,True,,
+bugsinpy_lopo,ansible,BM25,ansible/15,other,287,True,,
+bugsinpy_lopo,ansible,Dense RAG,ansible/15,other,287,True,,
+bugsinpy_lopo,ansible,SMA,ansible/16,other,287,True,,
+bugsinpy_lopo,ansible,BM25,ansible/16,other,287,True,,
+bugsinpy_lopo,ansible,Dense RAG,ansible/16,other,287,True,,
+bugsinpy_lopo,ansible,SMA,ansible/17,type-coercion,25,False,1.0,0.2
+bugsinpy_lopo,ansible,BM25,ansible/17,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,ansible,Dense RAG,ansible/17,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,ansible,SMA,ansible/18,other,287,True,,
+bugsinpy_lopo,ansible,BM25,ansible/18,other,287,True,,
+bugsinpy_lopo,ansible,Dense RAG,ansible/18,other,287,True,,
+bugsinpy_lopo,black,SMA,black/1,add-null-check,77,False,1.0,0.2
+bugsinpy_lopo,black,BM25,black/1,add-null-check,77,False,0.0,0.4
+bugsinpy_lopo,black,Dense RAG,black/1,add-null-check,77,False,0.0,0.2
+bugsinpy_lopo,black,SMA,black/2,other,282,True,,
+bugsinpy_lopo,black,BM25,black/2,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/2,other,282,True,,
+bugsinpy_lopo,black,SMA,black/3,other,282,True,,
+bugsinpy_lopo,black,BM25,black/3,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/3,other,282,True,,
+bugsinpy_lopo,black,SMA,black/4,add-null-check,77,False,1.0,0.8
+bugsinpy_lopo,black,BM25,black/4,add-null-check,77,False,0.0,0.4
+bugsinpy_lopo,black,Dense RAG,black/4,add-null-check,77,False,0.0,0.2
+bugsinpy_lopo,black,SMA,black/5,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,black,BM25,black/5,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,black,Dense RAG,black/5,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,black,SMA,black/6,add-null-check,77,False,1.0,0.6
+bugsinpy_lopo,black,BM25,black/6,add-null-check,77,False,1.0,0.4
+bugsinpy_lopo,black,Dense RAG,black/6,add-null-check,77,False,0.0,0.0
+bugsinpy_lopo,black,SMA,black/7,other,282,True,,
+bugsinpy_lopo,black,BM25,black/7,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/7,other,282,True,,
+bugsinpy_lopo,black,SMA,black/8,other,282,True,,
+bugsinpy_lopo,black,BM25,black/8,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/8,other,282,True,,
+bugsinpy_lopo,black,SMA,black/9,other,282,True,,
+bugsinpy_lopo,black,BM25,black/9,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/9,other,282,True,,
+bugsinpy_lopo,black,SMA,black/10,other,282,True,,
+bugsinpy_lopo,black,BM25,black/10,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/10,other,282,True,,
+bugsinpy_lopo,black,SMA,black/11,type-coercion,24,False,0.0,0.0
+bugsinpy_lopo,black,BM25,black/11,type-coercion,24,False,0.0,0.0
+bugsinpy_lopo,black,Dense RAG,black/11,type-coercion,24,False,0.0,0.0
+bugsinpy_lopo,black,SMA,black/12,other,282,True,,
+bugsinpy_lopo,black,BM25,black/12,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/12,other,282,True,,
+bugsinpy_lopo,black,SMA,black/13,other,282,True,,
+bugsinpy_lopo,black,BM25,black/13,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/13,other,282,True,,
+bugsinpy_lopo,black,SMA,black/14,type-coercion,24,False,0.0,0.0
+bugsinpy_lopo,black,BM25,black/14,type-coercion,24,False,1.0,0.2
+bugsinpy_lopo,black,Dense RAG,black/14,type-coercion,24,False,0.0,0.0
+bugsinpy_lopo,black,SMA,black/15,default-arg-change,12,False,0.0,0.6
+bugsinpy_lopo,black,BM25,black/15,default-arg-change,12,False,1.0,0.6
+bugsinpy_lopo,black,Dense RAG,black/15,default-arg-change,12,False,0.0,0.0
+bugsinpy_lopo,black,SMA,black/16,exception-handling,33,False,0.0,0.4
+bugsinpy_lopo,black,BM25,black/16,exception-handling,33,False,0.0,0.6
+bugsinpy_lopo,black,Dense RAG,black/16,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,black,SMA,black/17,add-null-check,77,False,1.0,0.4
+bugsinpy_lopo,black,BM25,black/17,add-null-check,77,False,0.0,0.4
+bugsinpy_lopo,black,Dense RAG,black/17,add-null-check,77,False,0.0,0.2
+bugsinpy_lopo,black,SMA,black/18,other,282,True,,
+bugsinpy_lopo,black,BM25,black/18,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/18,other,282,True,,
+bugsinpy_lopo,black,SMA,black/19,other,282,True,,
+bugsinpy_lopo,black,BM25,black/19,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/19,other,282,True,,
+bugsinpy_lopo,black,SMA,black/20,other,282,True,,
+bugsinpy_lopo,black,BM25,black/20,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/20,other,282,True,,
+bugsinpy_lopo,black,SMA,black/21,other,282,True,,
+bugsinpy_lopo,black,BM25,black/21,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/21,other,282,True,,
+bugsinpy_lopo,black,SMA,black/22,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,black,BM25,black/22,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,black,Dense RAG,black/22,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,black,SMA,black/23,other,282,True,,
+bugsinpy_lopo,black,BM25,black/23,other,282,True,,
+bugsinpy_lopo,black,Dense RAG,black/23,other,282,True,,
+bugsinpy_lopo,cookiecutter,SMA,cookiecutter/1,other,292,True,,
+bugsinpy_lopo,cookiecutter,BM25,cookiecutter/1,other,292,True,,
+bugsinpy_lopo,cookiecutter,Dense RAG,cookiecutter/1,other,292,True,,
+bugsinpy_lopo,cookiecutter,SMA,cookiecutter/2,other,292,True,,
+bugsinpy_lopo,cookiecutter,BM25,cookiecutter/2,other,292,True,,
+bugsinpy_lopo,cookiecutter,Dense RAG,cookiecutter/2,other,292,True,,
+bugsinpy_lopo,cookiecutter,SMA,cookiecutter/3,other,292,True,,
+bugsinpy_lopo,cookiecutter,BM25,cookiecutter/3,other,292,True,,
+bugsinpy_lopo,cookiecutter,Dense RAG,cookiecutter/3,other,292,True,,
+bugsinpy_lopo,cookiecutter,SMA,cookiecutter/4,exception-handling,34,False,0.0,0.0
+bugsinpy_lopo,cookiecutter,BM25,cookiecutter/4,exception-handling,34,False,0.0,0.2
+bugsinpy_lopo,cookiecutter,Dense RAG,cookiecutter/4,exception-handling,34,False,0.0,0.0
+bugsinpy_lopo,fastapi,SMA,fastapi/1,exception-handling,34,False,0.0,0.0
+bugsinpy_lopo,fastapi,BM25,fastapi/1,exception-handling,34,False,0.0,0.2
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/1,exception-handling,34,False,0.0,0.2
+bugsinpy_lopo,fastapi,SMA,fastapi/2,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/2,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/2,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/3,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/3,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/3,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/4,type-coercion,24,False,0.0,0.4
+bugsinpy_lopo,fastapi,BM25,fastapi/4,type-coercion,24,False,0.0,0.2
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/4,type-coercion,24,False,0.0,0.0
+bugsinpy_lopo,fastapi,SMA,fastapi/5,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/5,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/5,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/6,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/6,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/6,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/7,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/7,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/7,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/8,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/8,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/8,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/9,type-coercion,24,False,0.0,0.4
+bugsinpy_lopo,fastapi,BM25,fastapi/9,type-coercion,24,False,0.0,0.0
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/9,type-coercion,24,False,0.0,0.0
+bugsinpy_lopo,fastapi,SMA,fastapi/10,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/10,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/10,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/11,add-null-check,80,False,1.0,0.4
+bugsinpy_lopo,fastapi,BM25,fastapi/11,add-null-check,80,False,0.0,0.2
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/11,add-null-check,80,False,1.0,0.4
+bugsinpy_lopo,fastapi,SMA,fastapi/12,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/12,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/12,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/13,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/13,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/13,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/14,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/14,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/14,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/15,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/15,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/15,other,283,True,,
+bugsinpy_lopo,fastapi,SMA,fastapi/16,other,283,True,,
+bugsinpy_lopo,fastapi,BM25,fastapi/16,other,283,True,,
+bugsinpy_lopo,fastapi,Dense RAG,fastapi/16,other,283,True,,
+bugsinpy_lopo,httpie,SMA,httpie/1,exception-handling,34,False,0.0,0.2
+bugsinpy_lopo,httpie,BM25,httpie/1,exception-handling,34,False,0.0,0.4
+bugsinpy_lopo,httpie,Dense RAG,httpie/1,exception-handling,34,False,0.0,0.2
+bugsinpy_lopo,httpie,SMA,httpie/2,other,293,True,,
+bugsinpy_lopo,httpie,BM25,httpie/2,other,293,True,,
+bugsinpy_lopo,httpie,Dense RAG,httpie/2,other,293,True,,
+bugsinpy_lopo,httpie,SMA,httpie/3,add-null-check,79,False,0.0,0.6
+bugsinpy_lopo,httpie,BM25,httpie/3,add-null-check,79,False,1.0,0.4
+bugsinpy_lopo,httpie,Dense RAG,httpie/3,add-null-check,79,False,0.0,0.0
+bugsinpy_lopo,httpie,SMA,httpie/4,other,293,True,,
+bugsinpy_lopo,httpie,BM25,httpie/4,other,293,True,,
+bugsinpy_lopo,httpie,Dense RAG,httpie/4,other,293,True,,
+bugsinpy_lopo,httpie,SMA,httpie/5,add-null-check,79,False,1.0,0.6
+bugsinpy_lopo,httpie,BM25,httpie/5,add-null-check,79,False,0.0,0.4
+bugsinpy_lopo,httpie,Dense RAG,httpie/5,add-null-check,79,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/1,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,BM25,keras/1,add-null-check,70,False,0.0,0.4
+bugsinpy_lopo,keras,Dense RAG,keras/1,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/2,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/2,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/2,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/3,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/3,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/3,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/4,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/4,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/4,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/5,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/5,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/5,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/6,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/6,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/6,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/7,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/7,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/7,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/8,exception-handling,32,False,0.0,0.4
+bugsinpy_lopo,keras,BM25,keras/8,exception-handling,32,False,0.0,0.0
+bugsinpy_lopo,keras,Dense RAG,keras/8,exception-handling,32,False,1.0,0.2
+bugsinpy_lopo,keras,SMA,keras/9,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/9,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/9,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/10,add-null-check,70,False,1.0,0.6
+bugsinpy_lopo,keras,BM25,keras/10,add-null-check,70,False,0.0,0.0
+bugsinpy_lopo,keras,Dense RAG,keras/10,add-null-check,70,False,1.0,0.4
+bugsinpy_lopo,keras,SMA,keras/11,type-coercion,22,False,0.0,0.2
+bugsinpy_lopo,keras,BM25,keras/11,type-coercion,22,False,0.0,0.2
+bugsinpy_lopo,keras,Dense RAG,keras/11,type-coercion,22,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/13,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/13,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/13,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/14,api-substitution,26,False,0.0,0.0
+bugsinpy_lopo,keras,BM25,keras/14,api-substitution,26,False,0.0,0.4
+bugsinpy_lopo,keras,Dense RAG,keras/14,api-substitution,26,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/15,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/15,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/15,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/16,add-null-check,70,False,0.0,0.4
+bugsinpy_lopo,keras,BM25,keras/16,add-null-check,70,False,1.0,0.2
+bugsinpy_lopo,keras,Dense RAG,keras/16,add-null-check,70,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/17,api-substitution,26,False,0.0,0.2
+bugsinpy_lopo,keras,BM25,keras/17,api-substitution,26,False,0.0,0.0
+bugsinpy_lopo,keras,Dense RAG,keras/17,api-substitution,26,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/18,exception-handling,32,False,0.0,0.4
+bugsinpy_lopo,keras,BM25,keras/18,exception-handling,32,False,0.0,0.4
+bugsinpy_lopo,keras,Dense RAG,keras/18,exception-handling,32,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/19,add-null-check,70,False,0.0,0.4
+bugsinpy_lopo,keras,BM25,keras/19,add-null-check,70,False,1.0,0.2
+bugsinpy_lopo,keras,Dense RAG,keras/19,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/20,default-arg-change,12,False,0.0,0.0
+bugsinpy_lopo,keras,BM25,keras/20,default-arg-change,12,False,1.0,0.4
+bugsinpy_lopo,keras,Dense RAG,keras/20,default-arg-change,12,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/21,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/21,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/21,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/22,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/22,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/22,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/23,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/23,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/23,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/24,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/24,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/24,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/25,type-coercion,22,False,0.0,0.2
+bugsinpy_lopo,keras,BM25,keras/25,type-coercion,22,False,1.0,0.4
+bugsinpy_lopo,keras,Dense RAG,keras/25,type-coercion,22,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/26,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/26,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/26,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/27,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/27,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/27,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/28,exception-handling,32,False,0.0,0.4
+bugsinpy_lopo,keras,BM25,keras/28,exception-handling,32,False,0.0,0.0
+bugsinpy_lopo,keras,Dense RAG,keras/28,exception-handling,32,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/29,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/29,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/29,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/30,add-null-check,70,False,1.0,0.4
+bugsinpy_lopo,keras,BM25,keras/30,add-null-check,70,False,0.0,0.0
+bugsinpy_lopo,keras,Dense RAG,keras/30,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/31,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/31,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/31,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/32,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/32,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/32,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/33,type-coercion,22,False,0.0,0.2
+bugsinpy_lopo,keras,BM25,keras/33,type-coercion,22,False,0.0,0.0
+bugsinpy_lopo,keras,Dense RAG,keras/33,type-coercion,22,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/34,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/34,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/34,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/35,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,BM25,keras/35,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,Dense RAG,keras/35,add-null-check,70,False,1.0,0.4
+bugsinpy_lopo,keras,SMA,keras/36,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/36,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/36,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/37,add-null-check,70,False,0.0,0.6
+bugsinpy_lopo,keras,BM25,keras/37,add-null-check,70,False,1.0,0.2
+bugsinpy_lopo,keras,Dense RAG,keras/37,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/38,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/38,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/38,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/39,add-null-check,70,False,1.0,0.8
+bugsinpy_lopo,keras,BM25,keras/39,add-null-check,70,False,1.0,0.2
+bugsinpy_lopo,keras,Dense RAG,keras/39,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/40,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/40,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/40,other,272,True,,
+bugsinpy_lopo,keras,SMA,keras/41,add-null-check,70,False,0.0,0.6
+bugsinpy_lopo,keras,BM25,keras/41,add-null-check,70,False,0.0,0.4
+bugsinpy_lopo,keras,Dense RAG,keras/41,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/42,add-null-check,70,False,0.0,0.0
+bugsinpy_lopo,keras,BM25,keras/42,add-null-check,70,False,1.0,0.4
+bugsinpy_lopo,keras,Dense RAG,keras/42,add-null-check,70,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/43,type-coercion,22,False,0.0,0.0
+bugsinpy_lopo,keras,BM25,keras/43,type-coercion,22,False,0.0,0.2
+bugsinpy_lopo,keras,Dense RAG,keras/43,type-coercion,22,False,0.0,0.0
+bugsinpy_lopo,keras,SMA,keras/44,add-null-check,70,False,0.0,0.6
+bugsinpy_lopo,keras,BM25,keras/44,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,Dense RAG,keras/44,add-null-check,70,False,0.0,0.2
+bugsinpy_lopo,keras,SMA,keras/45,other,272,True,,
+bugsinpy_lopo,keras,BM25,keras/45,other,272,True,,
+bugsinpy_lopo,keras,Dense RAG,keras/45,other,272,True,,
+bugsinpy_lopo,luigi,SMA,luigi/1,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/1,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/1,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/2,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/2,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/2,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/3,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,luigi,BM25,luigi/3,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,luigi,Dense RAG,luigi/3,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,luigi,SMA,luigi/4,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,BM25,luigi/4,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,Dense RAG,luigi/4,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,SMA,luigi/5,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/5,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/5,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/6,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,BM25,luigi/6,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,Dense RAG,luigi/6,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,SMA,luigi/7,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,BM25,luigi/7,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,Dense RAG,luigi/7,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,SMA,luigi/8,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/8,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/8,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/9,add-null-check,78,False,1.0,0.6
+bugsinpy_lopo,luigi,BM25,luigi/9,add-null-check,78,False,0.0,0.2
+bugsinpy_lopo,luigi,Dense RAG,luigi/9,add-null-check,78,False,0.0,0.2
+bugsinpy_lopo,luigi,SMA,luigi/10,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/10,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/10,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/11,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/11,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/11,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/12,exception-handling,34,False,0.0,0.4
+bugsinpy_lopo,luigi,BM25,luigi/12,exception-handling,34,False,0.0,0.2
+bugsinpy_lopo,luigi,Dense RAG,luigi/12,exception-handling,34,False,0.0,0.4
+bugsinpy_lopo,luigi,SMA,luigi/13,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/13,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/13,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/14,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/14,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/14,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/15,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/15,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/15,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/16,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/16,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/16,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/17,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/17,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/17,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/18,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,BM25,luigi/18,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,Dense RAG,luigi/18,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,SMA,luigi/19,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,BM25,luigi/19,condition-strengthening,16,False,0.0,0.2
+bugsinpy_lopo,luigi,Dense RAG,luigi/19,condition-strengthening,16,False,0.0,0.0
+bugsinpy_lopo,luigi,SMA,luigi/20,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/20,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/20,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/21,add-null-check,78,False,0.0,0.6
+bugsinpy_lopo,luigi,BM25,luigi/21,add-null-check,78,False,0.0,0.0
+bugsinpy_lopo,luigi,Dense RAG,luigi/21,add-null-check,78,False,0.0,0.0
+bugsinpy_lopo,luigi,SMA,luigi/22,default-arg-change,11,False,0.0,0.4
+bugsinpy_lopo,luigi,BM25,luigi/22,default-arg-change,11,False,0.0,0.0
+bugsinpy_lopo,luigi,Dense RAG,luigi/22,default-arg-change,11,False,0.0,0.2
+bugsinpy_lopo,luigi,SMA,luigi/23,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/23,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/23,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/24,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/24,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/24,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/25,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/25,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/25,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/26,add-null-check,78,False,1.0,0.6
+bugsinpy_lopo,luigi,BM25,luigi/26,add-null-check,78,False,1.0,0.6
+bugsinpy_lopo,luigi,Dense RAG,luigi/26,add-null-check,78,False,1.0,0.4
+bugsinpy_lopo,luigi,SMA,luigi/27,default-arg-change,11,False,0.0,0.2
+bugsinpy_lopo,luigi,BM25,luigi/27,default-arg-change,11,False,0.0,0.4
+bugsinpy_lopo,luigi,Dense RAG,luigi/27,default-arg-change,11,False,0.0,0.0
+bugsinpy_lopo,luigi,SMA,luigi/28,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/28,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/28,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/29,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/29,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/29,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/30,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/30,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/30,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/31,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/31,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/31,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/32,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/32,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/32,other,274,True,,
+bugsinpy_lopo,luigi,SMA,luigi/33,other,274,True,,
+bugsinpy_lopo,luigi,BM25,luigi/33,other,274,True,,
+bugsinpy_lopo,luigi,Dense RAG,luigi/33,other,274,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/1,default-arg-change,11,False,0.0,0.0
+bugsinpy_lopo,matplotlib,BM25,matplotlib/1,default-arg-change,11,False,0.0,0.0
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/1,default-arg-change,11,False,0.0,0.0
+bugsinpy_lopo,matplotlib,SMA,matplotlib/2,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/2,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/2,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/3,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/3,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/3,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/4,default-arg-change,11,False,0.0,0.2
+bugsinpy_lopo,matplotlib,BM25,matplotlib/4,default-arg-change,11,False,1.0,0.2
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/4,default-arg-change,11,False,0.0,0.0
+bugsinpy_lopo,matplotlib,SMA,matplotlib/5,add-null-check,76,False,0.0,0.2
+bugsinpy_lopo,matplotlib,BM25,matplotlib/5,add-null-check,76,False,0.0,0.6
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/5,add-null-check,76,False,1.0,0.2
+bugsinpy_lopo,matplotlib,SMA,matplotlib/6,boundary,0,False,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/6,boundary,0,False,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/6,boundary,0,False,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/7,api-substitution,27,False,1.0,0.6
+bugsinpy_lopo,matplotlib,BM25,matplotlib/7,api-substitution,27,False,0.0,0.2
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/7,api-substitution,27,False,0.0,0.0
+bugsinpy_lopo,matplotlib,SMA,matplotlib/8,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/8,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/8,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/9,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/9,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/9,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/10,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/10,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/10,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/11,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/11,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/11,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/12,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/12,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/12,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/13,add-null-check,76,False,1.0,0.6
+bugsinpy_lopo,matplotlib,BM25,matplotlib/13,add-null-check,76,False,0.0,0.2
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/13,add-null-check,76,False,1.0,0.2
+bugsinpy_lopo,matplotlib,SMA,matplotlib/14,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/14,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/14,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/15,add-null-check,76,False,0.0,0.2
+bugsinpy_lopo,matplotlib,BM25,matplotlib/15,add-null-check,76,False,1.0,0.4
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/15,add-null-check,76,False,1.0,0.4
+bugsinpy_lopo,matplotlib,SMA,matplotlib/16,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/16,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/16,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/17,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/17,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/17,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/18,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/18,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/18,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/19,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/19,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/19,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/20,condition-strengthening,19,False,0.0,0.0
+bugsinpy_lopo,matplotlib,BM25,matplotlib/20,condition-strengthening,19,False,0.0,0.0
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/20,condition-strengthening,19,False,0.0,0.0
+bugsinpy_lopo,matplotlib,SMA,matplotlib/21,add-null-check,76,False,0.0,0.0
+bugsinpy_lopo,matplotlib,BM25,matplotlib/21,add-null-check,76,False,0.0,0.4
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/21,add-null-check,76,False,1.0,0.2
+bugsinpy_lopo,matplotlib,SMA,matplotlib/22,add-null-check,76,False,0.0,0.4
+bugsinpy_lopo,matplotlib,BM25,matplotlib/22,add-null-check,76,False,1.0,0.4
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/22,add-null-check,76,False,0.0,0.2
+bugsinpy_lopo,matplotlib,SMA,matplotlib/23,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/23,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/23,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/24,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/24,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/24,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/25,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,matplotlib,BM25,matplotlib/25,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/25,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,matplotlib,SMA,matplotlib/26,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/26,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/26,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/27,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/27,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/27,other,278,True,,
+bugsinpy_lopo,matplotlib,SMA,matplotlib/28,condition-strengthening,19,False,0.0,0.0
+bugsinpy_lopo,matplotlib,BM25,matplotlib/28,condition-strengthening,19,False,0.0,0.0
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/28,condition-strengthening,19,False,0.0,0.0
+bugsinpy_lopo,matplotlib,SMA,matplotlib/29,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,matplotlib,BM25,matplotlib/29,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/29,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,matplotlib,SMA,matplotlib/30,other,278,True,,
+bugsinpy_lopo,matplotlib,BM25,matplotlib/30,other,278,True,,
+bugsinpy_lopo,matplotlib,Dense RAG,matplotlib/30,other,278,True,,
+bugsinpy_lopo,pandas,SMA,pandas/1,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/1,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/1,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/2,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/2,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/2,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/3,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/3,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/3,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/4,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/4,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/4,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/5,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/5,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/5,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/6,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/6,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/6,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/7,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/7,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/7,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/8,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/8,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/8,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/9,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/9,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/9,api-substitution,17,False,0.0,0.4
+bugsinpy_lopo,pandas,SMA,pandas/10,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/10,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/10,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/11,add-null-check,55,False,1.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/11,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/11,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,SMA,pandas/12,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/12,type-coercion,17,False,1.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/12,type-coercion,17,False,0.0,0.4
+bugsinpy_lopo,pandas,SMA,pandas/13,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/13,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/13,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/14,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/14,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/14,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/15,default-arg-change,6,False,1.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/15,default-arg-change,6,False,0.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/15,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/16,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/16,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/16,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/17,default-arg-change,6,False,1.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/17,default-arg-change,6,False,0.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/17,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/18,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/18,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/18,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/19,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/19,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/19,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/20,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/20,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/20,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/21,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/21,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/21,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/22,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/22,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/22,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/23,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/23,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/23,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/24,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/24,add-null-check,55,False,1.0,0.8
+bugsinpy_lopo,pandas,Dense RAG,pandas/24,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,SMA,pandas/25,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/25,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/25,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/26,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/26,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/26,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/27,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/27,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/27,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/28,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/28,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/28,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/29,exception-handling,22,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/29,exception-handling,22,False,0.0,0.6
+bugsinpy_lopo,pandas,Dense RAG,pandas/29,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/30,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/30,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/30,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/31,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/31,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/31,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/32,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/32,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/32,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/33,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/33,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/33,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/34,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/34,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/34,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/35,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/35,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/35,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/36,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/36,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/36,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/37,type-coercion,17,False,1.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/37,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/37,type-coercion,17,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/38,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/38,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/38,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/39,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/39,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/39,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/40,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/40,default-arg-change,6,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/40,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/41,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/41,default-arg-change,6,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/41,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/42,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/42,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/42,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/43,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/43,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/43,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/44,add-null-check,55,False,1.0,1.0
+bugsinpy_lopo,pandas,BM25,pandas/44,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/44,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,SMA,pandas/45,exception-handling,22,False,0.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/45,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/45,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/46,type-coercion,17,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/46,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/46,type-coercion,17,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/47,exception-handling,22,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/47,exception-handling,22,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/47,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/48,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/48,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/48,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/49,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/49,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/49,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/50,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/50,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/50,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/51,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/51,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/51,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/52,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/52,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/52,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/53,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/53,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/53,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/54,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/54,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/54,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/55,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/55,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/55,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/56,api-substitution,17,False,0.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/56,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/56,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/57,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/57,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/57,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/58,exception-handling,22,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/58,exception-handling,22,False,0.0,0.6
+bugsinpy_lopo,pandas,Dense RAG,pandas/58,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/59,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/59,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/59,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/60,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/60,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/60,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/61,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/61,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/61,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/62,exception-handling,22,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/62,exception-handling,22,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/62,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/63,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/63,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/63,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/64,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/64,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/64,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/65,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/65,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/65,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/66,exception-handling,22,False,1.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/66,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/66,exception-handling,22,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/67,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/67,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/67,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/68,add-null-check,55,False,0.0,0.8
+bugsinpy_lopo,pandas,BM25,pandas/68,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/68,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/69,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/69,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/69,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/70,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/70,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/70,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/71,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/71,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/71,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/72,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/72,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/72,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/73,default-arg-change,6,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/73,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/73,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/74,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/74,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/74,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/75,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/75,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/75,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/76,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/76,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/76,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/77,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/77,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/77,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/78,api-substitution,17,False,1.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/78,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/78,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/79,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/79,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/79,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/80,add-null-check,55,False,1.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/80,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/80,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/81,type-coercion,17,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/81,type-coercion,17,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/81,type-coercion,17,False,1.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/82,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/82,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/82,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/83,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/83,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/83,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/84,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/84,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/84,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/85,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/85,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/85,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/86,add-null-check,55,False,0.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/86,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/86,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,SMA,pandas/87,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/87,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/87,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,SMA,pandas/88,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/88,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/88,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/89,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/89,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/89,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/90,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/90,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/90,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/91,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/91,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/91,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/92,add-null-check,55,False,0.0,0.8
+bugsinpy_lopo,pandas,BM25,pandas/92,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/92,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/93,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/93,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/93,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/94,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/94,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/94,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,SMA,pandas/95,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/95,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/95,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/96,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/96,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/96,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/97,default-arg-change,6,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/97,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/97,default-arg-change,6,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/98,type-coercion,17,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/98,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/98,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/99,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/99,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/99,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/100,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/100,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/100,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/101,exception-handling,22,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/101,exception-handling,22,False,1.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/101,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/102,type-coercion,17,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/102,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/102,type-coercion,17,False,1.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/103,add-null-check,55,False,1.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/103,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/103,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/104,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/104,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/104,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/105,default-arg-change,6,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/105,default-arg-change,6,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/105,default-arg-change,6,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/106,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/106,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/106,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/107,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/107,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/107,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/108,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/108,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/108,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/109,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/109,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/109,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/110,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/110,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/110,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/111,exception-handling,22,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/111,exception-handling,22,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/111,exception-handling,22,False,1.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/112,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/112,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/112,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/113,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/113,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/113,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/114,exception-handling,22,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/114,exception-handling,22,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/114,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/115,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/115,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/115,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/116,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/116,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/116,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/117,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/117,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/117,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/118,api-substitution,17,False,1.0,0.8
+bugsinpy_lopo,pandas,BM25,pandas/118,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/118,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/119,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/119,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/119,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/120,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/120,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/120,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/121,condition-strengthening,10,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/121,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/121,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/122,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/122,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/122,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/123,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/123,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/123,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/124,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/124,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/124,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/125,add-null-check,55,False,0.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/125,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/125,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/126,add-null-check,55,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/126,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/126,add-null-check,55,False,1.0,0.6
+bugsinpy_lopo,pandas,SMA,pandas/127,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/127,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/127,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/128,add-null-check,55,False,0.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/128,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/128,add-null-check,55,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/129,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/129,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/129,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/130,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/130,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/130,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/131,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/131,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/131,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/132,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/132,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/132,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/133,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/133,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/133,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/134,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/134,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/134,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/135,exception-handling,22,False,1.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/135,exception-handling,22,False,1.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/135,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/136,api-substitution,17,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/136,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/136,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/137,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/137,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/137,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/138,type-coercion,17,False,1.0,0.6
+bugsinpy_lopo,pandas,BM25,pandas/138,type-coercion,17,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/138,type-coercion,17,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/139,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/139,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/139,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/140,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/140,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/140,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/141,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/141,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/141,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/142,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/142,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/142,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/143,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/143,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/143,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/144,add-null-check,55,False,1.0,0.8
+bugsinpy_lopo,pandas,BM25,pandas/144,add-null-check,55,False,1.0,0.4
+bugsinpy_lopo,pandas,Dense RAG,pandas/144,add-null-check,55,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/145,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/145,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/145,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/146,exception-handling,22,False,0.0,0.4
+bugsinpy_lopo,pandas,BM25,pandas/146,exception-handling,22,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/146,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/147,exception-handling,22,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/147,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/147,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/148,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/148,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/148,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/149,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/149,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/149,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/150,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/150,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/150,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/151,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/151,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/151,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/152,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/152,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/152,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/153,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/153,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/153,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/154,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/154,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/154,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/155,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/155,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/155,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/156,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/156,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/156,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/157,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,BM25,pandas/157,api-substitution,17,False,1.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/157,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/158,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/158,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/158,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/159,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/159,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/159,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/160,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/160,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/160,condition-strengthening,10,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/161,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/161,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/161,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/162,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/162,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,Dense RAG,pandas/162,exception-handling,22,False,0.0,0.0
+bugsinpy_lopo,pandas,SMA,pandas/163,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/163,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/163,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/164,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/164,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/164,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/165,api-substitution,17,False,0.0,0.0
+bugsinpy_lopo,pandas,BM25,pandas/165,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,Dense RAG,pandas/165,api-substitution,17,False,0.0,0.2
+bugsinpy_lopo,pandas,SMA,pandas/166,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/166,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/166,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/167,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/167,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/167,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/168,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/168,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/168,other,203,True,,
+bugsinpy_lopo,pandas,SMA,pandas/169,other,203,True,,
+bugsinpy_lopo,pandas,BM25,pandas/169,other,203,True,,
+bugsinpy_lopo,pandas,Dense RAG,pandas/169,other,203,True,,
+bugsinpy_lopo,sanic,SMA,sanic/1,api-substitution,27,False,1.0,0.6
+bugsinpy_lopo,sanic,BM25,sanic/1,api-substitution,27,False,0.0,0.2
+bugsinpy_lopo,sanic,Dense RAG,sanic/1,api-substitution,27,False,0.0,0.0
+bugsinpy_lopo,sanic,SMA,sanic/2,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,sanic,BM25,sanic/2,exception-handling,33,False,0.0,0.4
+bugsinpy_lopo,sanic,Dense RAG,sanic/2,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,sanic,SMA,sanic/3,other,293,True,,
+bugsinpy_lopo,sanic,BM25,sanic/3,other,293,True,,
+bugsinpy_lopo,sanic,Dense RAG,sanic/3,other,293,True,,
+bugsinpy_lopo,sanic,SMA,sanic/4,exception-handling,33,False,0.0,0.4
+bugsinpy_lopo,sanic,BM25,sanic/4,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,sanic,Dense RAG,sanic/4,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,sanic,SMA,sanic/5,other,293,True,,
+bugsinpy_lopo,sanic,BM25,sanic/5,other,293,True,,
+bugsinpy_lopo,sanic,Dense RAG,sanic/5,other,293,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/1,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/1,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/1,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/2,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/2,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/2,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/3,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/3,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/3,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/4,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/4,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/4,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/5,add-null-check,73,False,0.0,0.4
+bugsinpy_lopo,scrapy,BM25,scrapy/5,add-null-check,73,False,0.0,0.2
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/5,add-null-check,73,False,0.0,0.2
+bugsinpy_lopo,scrapy,SMA,scrapy/6,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/6,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/6,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/7,add-null-check,73,False,1.0,0.6
+bugsinpy_lopo,scrapy,BM25,scrapy/7,add-null-check,73,False,0.0,0.4
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/7,add-null-check,73,False,0.0,0.2
+bugsinpy_lopo,scrapy,SMA,scrapy/8,add-null-check,73,False,1.0,0.4
+bugsinpy_lopo,scrapy,BM25,scrapy/8,add-null-check,73,False,0.0,0.2
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/8,add-null-check,73,False,0.0,0.4
+bugsinpy_lopo,scrapy,SMA,scrapy/9,type-coercion,23,False,0.0,0.2
+bugsinpy_lopo,scrapy,BM25,scrapy/9,type-coercion,23,False,0.0,0.0
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/9,type-coercion,23,False,0.0,0.2
+bugsinpy_lopo,scrapy,SMA,scrapy/10,api-substitution,26,False,1.0,0.6
+bugsinpy_lopo,scrapy,BM25,scrapy/10,api-substitution,26,False,0.0,0.0
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/10,api-substitution,26,False,0.0,0.0
+bugsinpy_lopo,scrapy,SMA,scrapy/11,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/11,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/11,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/12,add-null-check,73,False,1.0,0.6
+bugsinpy_lopo,scrapy,BM25,scrapy/12,add-null-check,73,False,1.0,1.0
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/12,add-null-check,73,False,1.0,0.4
+bugsinpy_lopo,scrapy,SMA,scrapy/13,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/13,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/13,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/14,add-null-check,73,False,0.0,0.0
+bugsinpy_lopo,scrapy,BM25,scrapy/14,add-null-check,73,False,0.0,0.4
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/14,add-null-check,73,False,0.0,0.2
+bugsinpy_lopo,scrapy,SMA,scrapy/15,exception-handling,34,False,0.0,0.6
+bugsinpy_lopo,scrapy,BM25,scrapy/15,exception-handling,34,False,0.0,0.2
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/15,exception-handling,34,False,0.0,0.4
+bugsinpy_lopo,scrapy,SMA,scrapy/16,add-null-check,73,False,1.0,1.0
+bugsinpy_lopo,scrapy,BM25,scrapy/16,add-null-check,73,False,0.0,0.4
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/16,add-null-check,73,False,0.0,0.0
+bugsinpy_lopo,scrapy,SMA,scrapy/17,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/17,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/17,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/18,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/18,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/18,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/19,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/19,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/19,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/20,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/20,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/20,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/21,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/21,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/21,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/22,type-coercion,23,False,0.0,0.2
+bugsinpy_lopo,scrapy,BM25,scrapy/22,type-coercion,23,False,0.0,0.0
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/22,type-coercion,23,False,0.0,0.0
+bugsinpy_lopo,scrapy,SMA,scrapy/23,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/23,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/23,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/24,type-coercion,23,False,0.0,0.2
+bugsinpy_lopo,scrapy,BM25,scrapy/24,type-coercion,23,False,0.0,0.0
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/24,type-coercion,23,False,0.0,0.0
+bugsinpy_lopo,scrapy,SMA,scrapy/25,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/25,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/25,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/26,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/26,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/26,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/27,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/27,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/27,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/28,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/28,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/28,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/29,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/29,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/29,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/30,api-substitution,26,False,0.0,0.2
+bugsinpy_lopo,scrapy,BM25,scrapy/30,api-substitution,26,False,0.0,0.2
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/30,api-substitution,26,False,0.0,0.0
+bugsinpy_lopo,scrapy,SMA,scrapy/31,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/31,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/31,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/32,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/32,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/32,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/33,add-null-check,73,False,0.0,0.6
+bugsinpy_lopo,scrapy,BM25,scrapy/33,add-null-check,73,False,1.0,0.4
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/33,add-null-check,73,False,0.0,0.2
+bugsinpy_lopo,scrapy,SMA,scrapy/34,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/34,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/34,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/35,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/35,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/35,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/36,add-null-check,73,False,1.0,0.4
+bugsinpy_lopo,scrapy,BM25,scrapy/36,add-null-check,73,False,1.0,0.4
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/36,add-null-check,73,False,1.0,0.2
+bugsinpy_lopo,scrapy,SMA,scrapy/37,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,scrapy,BM25,scrapy/37,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/37,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,scrapy,SMA,scrapy/38,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/38,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/38,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/39,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/39,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/39,other,270,True,,
+bugsinpy_lopo,scrapy,SMA,scrapy/40,other,270,True,,
+bugsinpy_lopo,scrapy,BM25,scrapy/40,other,270,True,,
+bugsinpy_lopo,scrapy,Dense RAG,scrapy/40,other,270,True,,
+bugsinpy_lopo,spacy,SMA,spacy/1,add-null-check,80,False,0.0,0.2
+bugsinpy_lopo,spacy,BM25,spacy/1,add-null-check,80,False,0.0,0.4
+bugsinpy_lopo,spacy,Dense RAG,spacy/1,add-null-check,80,False,0.0,0.4
+bugsinpy_lopo,spacy,SMA,spacy/2,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/2,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/2,other,286,True,,
+bugsinpy_lopo,spacy,SMA,spacy/3,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/3,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/3,other,286,True,,
+bugsinpy_lopo,spacy,SMA,spacy/4,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/4,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/4,other,286,True,,
+bugsinpy_lopo,spacy,SMA,spacy/5,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/5,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/5,other,286,True,,
+bugsinpy_lopo,spacy,SMA,spacy/6,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/6,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/6,other,286,True,,
+bugsinpy_lopo,spacy,SMA,spacy/7,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/7,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/7,other,286,True,,
+bugsinpy_lopo,spacy,SMA,spacy/8,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/8,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/8,other,286,True,,
+bugsinpy_lopo,spacy,SMA,spacy/9,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/9,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/9,other,286,True,,
+bugsinpy_lopo,spacy,SMA,spacy/10,other,286,True,,
+bugsinpy_lopo,spacy,BM25,spacy/10,other,286,True,,
+bugsinpy_lopo,spacy,Dense RAG,spacy/10,other,286,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/1,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/1,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/1,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/2,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/2,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/2,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/3,api-substitution,25,False,1.0,0.6
+bugsinpy_lopo,thefuck,BM25,thefuck/3,api-substitution,25,False,1.0,0.2
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/3,api-substitution,25,False,0.0,0.0
+bugsinpy_lopo,thefuck,SMA,thefuck/4,add-null-check,79,False,1.0,0.4
+bugsinpy_lopo,thefuck,BM25,thefuck/4,add-null-check,79,False,0.0,0.2
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/4,add-null-check,79,False,0.0,0.0
+bugsinpy_lopo,thefuck,SMA,thefuck/5,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/5,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/5,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/6,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/6,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/6,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/7,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/7,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/7,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/8,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/8,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/8,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/9,exception-handling,33,False,0.0,0.6
+bugsinpy_lopo,thefuck,BM25,thefuck/9,exception-handling,33,False,1.0,0.2
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/9,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,thefuck,SMA,thefuck/10,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/10,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/10,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/11,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,thefuck,BM25,thefuck/11,exception-handling,33,False,1.0,0.4
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/11,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,thefuck,SMA,thefuck/12,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/12,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/12,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/13,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/13,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/13,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/14,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/14,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/14,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/15,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/15,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/15,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/16,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/16,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/16,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/17,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/17,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/17,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/18,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/18,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/18,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/19,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/19,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/19,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/20,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/20,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/20,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/21,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/21,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/21,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/22,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/22,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/22,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/23,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/23,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/23,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/24,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/24,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/24,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/25,api-substitution,25,False,1.0,0.4
+bugsinpy_lopo,thefuck,BM25,thefuck/25,api-substitution,25,False,0.0,0.4
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/25,api-substitution,25,False,0.0,0.0
+bugsinpy_lopo,thefuck,SMA,thefuck/26,add-null-check,79,False,1.0,0.6
+bugsinpy_lopo,thefuck,BM25,thefuck/26,add-null-check,79,False,0.0,0.4
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/26,add-null-check,79,False,0.0,0.0
+bugsinpy_lopo,thefuck,SMA,thefuck/27,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/27,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/27,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/28,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/28,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/28,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/29,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/29,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/29,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/30,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/30,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/30,other,270,True,,
+bugsinpy_lopo,thefuck,SMA,thefuck/31,api-substitution,25,False,1.0,0.4
+bugsinpy_lopo,thefuck,BM25,thefuck/31,api-substitution,25,False,0.0,0.4
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/31,api-substitution,25,False,0.0,0.0
+bugsinpy_lopo,thefuck,SMA,thefuck/32,other,270,True,,
+bugsinpy_lopo,thefuck,BM25,thefuck/32,other,270,True,,
+bugsinpy_lopo,thefuck,Dense RAG,thefuck/32,other,270,True,,
+bugsinpy_lopo,tornado,SMA,tornado/1,exception-handling,33,False,1.0,0.4
+bugsinpy_lopo,tornado,BM25,tornado/1,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,tornado,Dense RAG,tornado/1,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,tornado,SMA,tornado/2,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/2,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/2,other,286,True,,
+bugsinpy_lopo,tornado,SMA,tornado/3,add-null-check,78,False,0.0,0.4
+bugsinpy_lopo,tornado,BM25,tornado/3,add-null-check,78,False,1.0,0.2
+bugsinpy_lopo,tornado,Dense RAG,tornado/3,add-null-check,78,False,0.0,0.0
+bugsinpy_lopo,tornado,SMA,tornado/4,add-null-check,78,False,1.0,0.2
+bugsinpy_lopo,tornado,BM25,tornado/4,add-null-check,78,False,1.0,0.8
+bugsinpy_lopo,tornado,Dense RAG,tornado/4,add-null-check,78,False,0.0,0.0
+bugsinpy_lopo,tornado,SMA,tornado/5,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/5,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/5,other,286,True,,
+bugsinpy_lopo,tornado,SMA,tornado/6,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,tornado,BM25,tornado/6,type-coercion,25,False,0.0,0.2
+bugsinpy_lopo,tornado,Dense RAG,tornado/6,type-coercion,25,False,0.0,0.2
+bugsinpy_lopo,tornado,SMA,tornado/7,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/7,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/7,other,286,True,,
+bugsinpy_lopo,tornado,SMA,tornado/8,exception-handling,33,False,0.0,0.4
+bugsinpy_lopo,tornado,BM25,tornado/8,exception-handling,33,False,1.0,0.6
+bugsinpy_lopo,tornado,Dense RAG,tornado/8,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,tornado,SMA,tornado/9,add-null-check,78,False,1.0,0.8
+bugsinpy_lopo,tornado,BM25,tornado/9,add-null-check,78,False,0.0,0.4
+bugsinpy_lopo,tornado,Dense RAG,tornado/9,add-null-check,78,False,0.0,0.2
+bugsinpy_lopo,tornado,SMA,tornado/10,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/10,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/10,other,286,True,,
+bugsinpy_lopo,tornado,SMA,tornado/11,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/11,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/11,other,286,True,,
+bugsinpy_lopo,tornado,SMA,tornado/12,api-substitution,27,False,0.0,0.2
+bugsinpy_lopo,tornado,BM25,tornado/12,api-substitution,27,False,0.0,0.0
+bugsinpy_lopo,tornado,Dense RAG,tornado/12,api-substitution,27,False,0.0,0.0
+bugsinpy_lopo,tornado,SMA,tornado/13,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/13,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/13,other,286,True,,
+bugsinpy_lopo,tornado,SMA,tornado/14,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/14,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/14,other,286,True,,
+bugsinpy_lopo,tornado,SMA,tornado/15,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/15,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/15,other,286,True,,
+bugsinpy_lopo,tornado,SMA,tornado/16,other,286,True,,
+bugsinpy_lopo,tornado,BM25,tornado/16,other,286,True,,
+bugsinpy_lopo,tornado,Dense RAG,tornado/16,other,286,True,,
+bugsinpy_lopo,tqdm,SMA,tqdm/1,other,288,True,,
+bugsinpy_lopo,tqdm,BM25,tqdm/1,other,288,True,,
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/1,other,288,True,,
+bugsinpy_lopo,tqdm,SMA,tqdm/2,type-coercion,25,False,0.0,0.2
+bugsinpy_lopo,tqdm,BM25,tqdm/2,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/2,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,tqdm,SMA,tqdm/3,add-null-check,80,False,0.0,0.0
+bugsinpy_lopo,tqdm,BM25,tqdm/3,add-null-check,80,False,0.0,0.4
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/3,add-null-check,80,False,0.0,0.0
+bugsinpy_lopo,tqdm,SMA,tqdm/4,other,288,True,,
+bugsinpy_lopo,tqdm,BM25,tqdm/4,other,288,True,,
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/4,other,288,True,,
+bugsinpy_lopo,tqdm,SMA,tqdm/5,other,288,True,,
+bugsinpy_lopo,tqdm,BM25,tqdm/5,other,288,True,,
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/5,other,288,True,,
+bugsinpy_lopo,tqdm,SMA,tqdm/6,other,288,True,,
+bugsinpy_lopo,tqdm,BM25,tqdm/6,other,288,True,,
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/6,other,288,True,,
+bugsinpy_lopo,tqdm,SMA,tqdm/7,other,288,True,,
+bugsinpy_lopo,tqdm,BM25,tqdm/7,other,288,True,,
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/7,other,288,True,,
+bugsinpy_lopo,tqdm,SMA,tqdm/8,other,288,True,,
+bugsinpy_lopo,tqdm,BM25,tqdm/8,other,288,True,,
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/8,other,288,True,,
+bugsinpy_lopo,tqdm,SMA,tqdm/9,other,288,True,,
+bugsinpy_lopo,tqdm,BM25,tqdm/9,other,288,True,,
+bugsinpy_lopo,tqdm,Dense RAG,tqdm/9,other,288,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/1,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/1,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/1,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/2,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/2,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/2,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/3,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/3,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/3,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/4,type-coercion,25,False,1.0,0.2
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/4,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/4,type-coercion,25,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/5,api-substitution,24,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/5,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/5,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/6,add-null-check,71,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/6,add-null-check,71,False,0.0,0.6
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/6,add-null-check,71,False,1.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/7,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/7,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/7,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/8,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/8,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/8,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/9,add-null-check,71,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/9,add-null-check,71,False,0.0,0.4
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/9,add-null-check,71,False,1.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/10,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/10,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/10,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/11,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/11,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/11,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/12,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/12,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/12,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/13,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/13,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/13,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/14,add-null-check,71,False,1.0,0.8
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/14,add-null-check,71,False,1.0,0.8
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/14,add-null-check,71,False,1.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/15,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/15,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/15,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/16,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/16,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/16,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/17,add-null-check,71,False,1.0,0.8
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/17,add-null-check,71,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/17,add-null-check,71,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/18,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/18,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/18,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/19,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/19,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/19,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/20,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/20,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/20,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/21,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/21,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/21,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/22,add-null-check,71,False,0.0,0.6
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/22,add-null-check,71,False,0.0,0.8
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/22,add-null-check,71,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/23,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/23,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/23,condition-strengthening,20,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/24,add-null-check,71,False,1.0,0.8
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/24,add-null-check,71,False,0.0,0.4
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/24,add-null-check,71,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/25,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/25,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/25,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/26,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/26,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/26,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/27,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/27,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/27,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/28,exception-handling,33,False,0.0,0.6
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/28,exception-handling,33,False,1.0,0.8
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/28,exception-handling,33,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/29,add-null-check,71,False,1.0,0.8
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/29,add-null-check,71,False,0.0,0.4
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/29,add-null-check,71,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/30,add-null-check,71,False,1.0,0.4
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/30,add-null-check,71,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/30,add-null-check,71,False,1.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/31,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/31,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/31,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/32,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/32,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/32,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/33,api-substitution,24,False,1.0,0.4
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/33,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/33,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/34,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/34,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/34,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/35,add-null-check,71,False,1.0,0.4
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/35,add-null-check,71,False,0.0,0.4
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/35,add-null-check,71,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/36,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/36,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/36,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/37,api-substitution,24,False,1.0,0.4
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/37,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/37,api-substitution,24,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/38,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/38,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/38,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/39,add-null-check,71,False,0.0,0.2
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/39,add-null-check,71,False,0.0,0.6
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/39,add-null-check,71,False,0.0,0.6
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/40,exception-handling,33,False,1.0,0.2
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/40,exception-handling,33,False,0.0,0.0
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/40,exception-handling,33,False,1.0,0.2
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/41,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/41,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/41,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/42,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/42,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/42,other,270,True,,
+bugsinpy_lopo,youtube-dl,SMA,youtube-dl/43,other,270,True,,
+bugsinpy_lopo,youtube-dl,BM25,youtube-dl/43,other,270,True,,
+bugsinpy_lopo,youtube-dl,Dense RAG,youtube-dl/43,other,270,True,,

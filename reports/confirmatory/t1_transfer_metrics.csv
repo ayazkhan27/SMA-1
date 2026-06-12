@@ -1,0 +1,134 @@
+dataset,split,method,macro_f1,label_hit_rate@1,label_hit_rate@5,label_hit_rate@10,p50_ms,p95_ms
+LogHub,BGL->spirit_first20M[seed201][surprisal],SMA,0.8640,0.8700,0.7630,0.6715,311.299,650.676
+LogHub,BGL->spirit_first20M[seed201][surprisal],BM25,0.3940,0.5600,0.5040,0.5115,9.598,33.118
+LogHub,BGL->spirit_first20M[seed201][surprisal],Dense RAG,0.4875,0.6500,0.4800,0.4430,20.923,28.147
+LogHub,BGL->spirit_first20M[seed201][surprisal],KG-PPR Proxy,0.8843,0.5000,0.8210,0.7780,3.869,7.946
+LogHub,BGL->spirit_first20M[seed201][surprisal],HippoRAG,0.7688,0.5000,0.6490,0.6950,240.090,665.531
+LogHub,BGL->spirit_first20M[seed201][surprisal],Hybrid-RRF,0.4964,0.6100,0.5500,0.4900,34.502,56.673
+LogHub,BGL->spirit_first20M[seed201][surprisal],Hybrid+Rerank,0.5290,0.5100,0.5220,0.5035,963.235,1155.730
+LogHub,BGL->thunderbird_first20M[seed201][surprisal],SMA,0.7150,0.8850,0.7580,0.6975,720.765,1331.309
+LogHub,BGL->thunderbird_first20M[seed201][surprisal],BM25,0.4915,0.5650,0.5030,0.6190,89.999,141.502
+LogHub,BGL->thunderbird_first20M[seed201][surprisal],Dense RAG,0.7630,0.7650,0.7900,0.8105,28.913,38.456
+LogHub,BGL->thunderbird_first20M[seed201][surprisal],KG-PPR Proxy,0.7150,0.5000,0.7260,0.6990,10.521,15.116
+LogHub,BGL->thunderbird_first20M[seed201][surprisal],HippoRAG,0.8412,0.8500,0.5820,0.4800,239.319,711.578
+LogHub,BGL->thunderbird_first20M[seed201][surprisal],Hybrid-RRF,0.6800,0.7350,0.6480,0.6585,117.884,179.347
+LogHub,BGL->thunderbird_first20M[seed201][surprisal],Hybrid+Rerank,0.5625,0.5050,0.6440,0.7415,1024.054,1114.217
+LogHub,HDFS->OpenStack[seed201][surprisal],SMA,0.3333,0.5000,0.5000,0.5000,401.341,693.193
+DIAGNOSTIC,HDFS->OpenStack[seed201][surprisal],SMA_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed201][surprisal],BM25,0.3333,0.5000,0.5000,0.5000,38.785,43.585
+DIAGNOSTIC,HDFS->OpenStack[seed201][surprisal],BM25_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed201][surprisal],Dense RAG,0.3837,0.4950,0.4980,0.4955,27.202,31.963
+LogHub,HDFS->OpenStack[seed201][surprisal],KG-PPR Proxy,0.3333,0.5000,0.4980,0.5000,8.745,10.111
+DIAGNOSTIC,HDFS->OpenStack[seed201][surprisal],KG-PPR Proxy_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed201][surprisal],HippoRAG,0.3333,0.5000,0.5000,0.5000,66.735,355.366
+DIAGNOSTIC,HDFS->OpenStack[seed201][surprisal],HippoRAG_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed201][surprisal],Hybrid-RRF,0.3333,0.4950,0.5030,0.4990,65.553,72.446
+DIAGNOSTIC,HDFS->OpenStack[seed201][surprisal],Hybrid-RRF_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed201][surprisal],Hybrid+Rerank,0.3537,0.5150,0.4760,0.4835,984.464,1111.458
+LogHub,BGL->spirit_first20M[seed202][surprisal],SMA,0.5290,0.5600,0.6240,0.5930,263.305,824.074
+LogHub,BGL->spirit_first20M[seed202][surprisal],BM25,0.3959,0.4900,0.5050,0.4720,16.026,29.750
+LogHub,BGL->spirit_first20M[seed202][surprisal],Dense RAG,0.5513,0.7100,0.5440,0.4850,20.575,27.604
+LogHub,BGL->spirit_first20M[seed202][surprisal],KG-PPR Proxy,0.3333,0.5350,0.6340,0.6065,4.362,6.823
+DIAGNOSTIC,BGL->spirit_first20M[seed202][surprisal],KG-PPR Proxy_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,BGL->spirit_first20M[seed202][surprisal],HippoRAG,0.3597,0.3750,0.4100,0.4225,224.620,724.485
+LogHub,BGL->spirit_first20M[seed202][surprisal],Hybrid-RRF,0.5025,0.7300,0.5690,0.5255,38.752,55.221
+LogHub,BGL->spirit_first20M[seed202][surprisal],Hybrid+Rerank,0.4930,0.6300,0.5360,0.4950,917.934,984.664
+LogHub,BGL->thunderbird_first20M[seed202][surprisal],SMA,0.7453,0.9050,0.7370,0.6795,739.850,1319.085
+LogHub,BGL->thunderbird_first20M[seed202][surprisal],BM25,0.3879,0.5350,0.4620,0.6215,85.318,140.252
+LogHub,BGL->thunderbird_first20M[seed202][surprisal],Dense RAG,0.6997,0.7050,0.7280,0.7845,28.093,39.205
+LogHub,BGL->thunderbird_first20M[seed202][surprisal],KG-PPR Proxy,0.3333,0.6500,0.6780,0.6150,9.424,14.814
+DIAGNOSTIC,BGL->thunderbird_first20M[seed202][surprisal],KG-PPR Proxy_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,BGL->thunderbird_first20M[seed202][surprisal],HippoRAG,0.9045,0.6550,0.6920,0.6000,230.377,689.895
+LogHub,BGL->thunderbird_first20M[seed202][surprisal],Hybrid-RRF,0.6666,0.6200,0.6450,0.6100,116.938,176.810
+LogHub,BGL->thunderbird_first20M[seed202][surprisal],Hybrid+Rerank,0.6153,0.5700,0.6420,0.7085,975.855,1053.255
+LogHub,HDFS->OpenStack[seed202][surprisal],SMA,0.3333,0.5000,0.5000,0.5000,422.625,708.374
+DIAGNOSTIC,HDFS->OpenStack[seed202][surprisal],SMA_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed202][surprisal],BM25,0.3333,0.5000,0.5000,0.5000,39.525,41.768
+DIAGNOSTIC,HDFS->OpenStack[seed202][surprisal],BM25_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed202][surprisal],Dense RAG,0.3333,0.5000,0.5080,0.5045,27.629,30.605
+DIAGNOSTIC,HDFS->OpenStack[seed202][surprisal],Dense RAG_alert,Retrieval collapse: predicted only 'Normal' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed202][surprisal],KG-PPR Proxy,0.3828,0.4950,0.5040,0.5005,8.503,9.590
+LogHub,HDFS->OpenStack[seed202][surprisal],HippoRAG,0.3333,0.5000,0.5000,0.5000,64.572,352.861
+DIAGNOSTIC,HDFS->OpenStack[seed202][surprisal],HippoRAG_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed202][surprisal],Hybrid-RRF,0.3311,0.5000,0.5020,0.5040,65.050,69.510
+LogHub,HDFS->OpenStack[seed202][surprisal],Hybrid+Rerank,0.4595,0.5100,0.4670,0.4815,876.348,916.972
+LogHub,BGL->spirit_first20M[seed203][surprisal],SMA,0.5443,0.6000,0.7130,0.6945,342.572,864.646
+LogHub,BGL->spirit_first20M[seed203][surprisal],BM25,0.3812,0.5500,0.4810,0.4560,17.549,49.115
+LogHub,BGL->spirit_first20M[seed203][surprisal],Dense RAG,0.2688,0.3300,0.3870,0.3780,20.579,28.326
+LogHub,BGL->spirit_first20M[seed203][surprisal],KG-PPR Proxy,0.3443,0.5050,0.6320,0.6105,4.112,8.877
+LogHub,BGL->spirit_first20M[seed203][surprisal],HippoRAG,0.4172,0.5100,0.5600,0.5855,226.064,701.434
+LogHub,BGL->spirit_first20M[seed203][surprisal],Hybrid-RRF,0.4949,0.6050,0.4380,0.4240,39.460,76.234
+LogHub,BGL->spirit_first20M[seed203][surprisal],Hybrid+Rerank,0.4466,0.4750,0.4470,0.4415,931.182,986.565
+LogHub,BGL->thunderbird_first20M[seed203][surprisal],SMA,0.7273,0.8600,0.7340,0.7475,736.632,1357.481
+LogHub,BGL->thunderbird_first20M[seed203][surprisal],BM25,0.6399,0.6650,0.6190,0.7090,92.231,144.377
+LogHub,BGL->thunderbird_first20M[seed203][surprisal],Dense RAG,0.7104,0.6050,0.7310,0.7725,30.785,40.716
+LogHub,BGL->thunderbird_first20M[seed203][surprisal],KG-PPR Proxy,0.3333,0.5050,0.6260,0.6190,10.669,14.962
+DIAGNOSTIC,BGL->thunderbird_first20M[seed203][surprisal],KG-PPR Proxy_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,BGL->thunderbird_first20M[seed203][surprisal],HippoRAG,0.7394,0.7650,0.7350,0.7670,235.098,698.333
+LogHub,BGL->thunderbird_first20M[seed203][surprisal],Hybrid-RRF,0.7756,0.5500,0.6950,0.6850,122.408,179.922
+LogHub,BGL->thunderbird_first20M[seed203][surprisal],Hybrid+Rerank,0.7536,0.6200,0.6950,0.7265,1028.457,1108.077
+LogHub,HDFS->OpenStack[seed203][surprisal],SMA,0.3333,0.5000,0.5000,0.5000,422.819,719.521
+DIAGNOSTIC,HDFS->OpenStack[seed203][surprisal],SMA_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed203][surprisal],BM25,0.3333,0.5000,0.5000,0.5000,41.553,45.836
+DIAGNOSTIC,HDFS->OpenStack[seed203][surprisal],BM25_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed203][surprisal],Dense RAG,0.4851,0.4950,0.5020,0.5055,27.598,33.438
+LogHub,HDFS->OpenStack[seed203][surprisal],KG-PPR Proxy,0.3333,0.5000,0.5000,0.5000,8.779,10.006
+DIAGNOSTIC,HDFS->OpenStack[seed203][surprisal],KG-PPR Proxy_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed203][surprisal],HippoRAG,0.3333,0.5000,0.5000,0.5000,66.462,361.527
+DIAGNOSTIC,HDFS->OpenStack[seed203][surprisal],HippoRAG_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed203][surprisal],Hybrid-RRF,0.3333,0.4950,0.5000,0.5010,67.751,76.754
+DIAGNOSTIC,HDFS->OpenStack[seed203][surprisal],Hybrid-RRF_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed203][surprisal],Hybrid+Rerank,0.3866,0.5800,0.5210,0.5060,980.290,1088.070
+LogHub,BGL->spirit_first20M[seed204][surprisal],SMA,0.8591,0.5850,0.7590,0.6855,332.873,803.223
+LogHub,BGL->spirit_first20M[seed204][surprisal],BM25,0.4302,0.4750,0.4360,0.4500,12.366,41.818
+LogHub,BGL->spirit_first20M[seed204][surprisal],Dense RAG,0.3333,0.4400,0.3950,0.4245,20.103,27.993
+LogHub,BGL->spirit_first20M[seed204][surprisal],KG-PPR Proxy,0.8730,0.3850,0.7870,0.6685,3.983,8.405
+LogHub,BGL->spirit_first20M[seed204][surprisal],HippoRAG,0.8792,0.5000,0.5610,0.5370,230.376,701.307
+LogHub,BGL->spirit_first20M[seed204][surprisal],Hybrid-RRF,0.3242,0.5150,0.4030,0.4155,35.207,63.857
+LogHub,BGL->spirit_first20M[seed204][surprisal],Hybrid+Rerank,0.5225,0.6450,0.5380,0.4985,906.771,1031.779
+LogHub,BGL->thunderbird_first20M[seed204][surprisal],SMA,0.7088,0.8900,0.7930,0.7485,723.549,1331.903
+LogHub,BGL->thunderbird_first20M[seed204][surprisal],BM25,0.6695,0.6350,0.6680,0.7220,99.802,141.026
+LogHub,BGL->thunderbird_first20M[seed204][surprisal],Dense RAG,0.7273,0.7400,0.7530,0.7680,30.647,40.327
+LogHub,BGL->thunderbird_first20M[seed204][surprisal],KG-PPR Proxy,0.7211,0.5050,0.7260,0.6700,10.416,14.462
+LogHub,BGL->thunderbird_first20M[seed204][surprisal],HippoRAG,0.9297,0.7950,0.7260,0.7165,244.688,703.620
+LogHub,BGL->thunderbird_first20M[seed204][surprisal],Hybrid-RRF,0.6968,0.6250,0.6920,0.7155,131.906,176.721
+LogHub,BGL->thunderbird_first20M[seed204][surprisal],Hybrid+Rerank,0.6384,0.5200,0.6640,0.7135,981.815,1130.984
+LogHub,HDFS->OpenStack[seed204][surprisal],SMA,0.3333,0.5000,0.5000,0.5000,411.151,707.688
+DIAGNOSTIC,HDFS->OpenStack[seed204][surprisal],SMA_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed204][surprisal],BM25,0.3333,0.5000,0.5000,0.5000,39.717,43.363
+DIAGNOSTIC,HDFS->OpenStack[seed204][surprisal],BM25_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed204][surprisal],Dense RAG,0.4524,0.5000,0.5110,0.5065,27.812,31.554
+LogHub,HDFS->OpenStack[seed204][surprisal],KG-PPR Proxy,0.3333,0.5000,0.5040,0.5010,8.594,9.985
+DIAGNOSTIC,HDFS->OpenStack[seed204][surprisal],KG-PPR Proxy_alert,Retrieval collapse: predicted only 'Normal' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed204][surprisal],HippoRAG,0.3333,0.5000,0.5000,0.5000,66.951,359.524
+DIAGNOSTIC,HDFS->OpenStack[seed204][surprisal],HippoRAG_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed204][surprisal],Hybrid-RRF,0.3333,0.5000,0.5020,0.5075,65.884,73.521
+DIAGNOSTIC,HDFS->OpenStack[seed204][surprisal],Hybrid-RRF_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed204][surprisal],Hybrid+Rerank,0.5672,0.6450,0.5200,0.4995,971.394,1061.589
+LogHub,BGL->spirit_first20M[seed205][surprisal],SMA,0.5000,0.5650,0.6290,0.6750,345.475,851.558
+LogHub,BGL->spirit_first20M[seed205][surprisal],BM25,0.4253,0.6650,0.5340,0.4865,22.233,51.188
+LogHub,BGL->spirit_first20M[seed205][surprisal],Dense RAG,0.2650,0.4150,0.3640,0.4245,20.530,29.162
+LogHub,BGL->spirit_first20M[seed205][surprisal],KG-PPR Proxy,0.7550,0.7700,0.6780,0.7515,4.438,9.133
+LogHub,BGL->spirit_first20M[seed205][surprisal],HippoRAG,0.8748,0.8750,0.8660,0.6555,226.648,744.195
+LogHub,BGL->spirit_first20M[seed205][surprisal],Hybrid-RRF,0.5078,0.6200,0.4970,0.4470,43.458,76.318
+LogHub,BGL->spirit_first20M[seed205][surprisal],Hybrid+Rerank,0.4956,0.7150,0.5460,0.5085,933.275,1144.367
+LogHub,BGL->thunderbird_first20M[seed205][surprisal],SMA,0.7394,0.8550,0.7500,0.7355,628.114,1246.272
+LogHub,BGL->thunderbird_first20M[seed205][surprisal],BM25,0.5750,0.5900,0.5550,0.6230,79.949,133.938
+LogHub,BGL->thunderbird_first20M[seed205][surprisal],Dense RAG,0.6789,0.7450,0.6960,0.7310,27.080,37.375
+LogHub,BGL->thunderbird_first20M[seed205][surprisal],KG-PPR Proxy,0.7583,0.8450,0.7060,0.7240,9.740,12.531
+LogHub,BGL->thunderbird_first20M[seed205][surprisal],HippoRAG,0.6682,0.6850,0.6970,0.6275,210.037,652.280
+LogHub,BGL->thunderbird_first20M[seed205][surprisal],Hybrid-RRF,0.6236,0.4950,0.5950,0.6350,103.615,166.819
+LogHub,BGL->thunderbird_first20M[seed205][surprisal],Hybrid+Rerank,0.5102,0.4950,0.6130,0.6700,902.838,969.745
+LogHub,HDFS->OpenStack[seed205][surprisal],SMA,0.3333,0.5000,0.5000,0.5000,380.031,658.434
+DIAGNOSTIC,HDFS->OpenStack[seed205][surprisal],SMA_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed205][surprisal],BM25,0.3333,0.5000,0.5000,0.5000,39.210,40.793
+DIAGNOSTIC,HDFS->OpenStack[seed205][surprisal],BM25_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed205][surprisal],Dense RAG,0.3333,0.5400,0.5010,0.4980,24.761,28.705
+DIAGNOSTIC,HDFS->OpenStack[seed205][surprisal],Dense RAG_alert,Retrieval collapse: predicted only 'Normal' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed205][surprisal],KG-PPR Proxy,0.3333,0.5000,0.5010,0.5015,7.132,8.172
+DIAGNOSTIC,HDFS->OpenStack[seed205][surprisal],KG-PPR Proxy_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed205][surprisal],HippoRAG,0.3333,0.5000,0.5000,0.5000,57.920,337.739
+DIAGNOSTIC,HDFS->OpenStack[seed205][surprisal],HippoRAG_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed205][surprisal],Hybrid-RRF,0.3333,0.5000,0.4970,0.5005,62.662,67.189
+DIAGNOSTIC,HDFS->OpenStack[seed205][surprisal],Hybrid-RRF_alert,Retrieval collapse: predicted only 'Anomaly' sessions,ALERT,ALERT,ALERT,0.000,0.000
+LogHub,HDFS->OpenStack[seed205][surprisal],Hybrid+Rerank,0.4302,0.4550,0.4870,0.5065,879.129,901.946

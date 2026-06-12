@@ -479,3 +479,35 @@ Append-only progress log. Each work session must reread
   T1's existing outputs make the guard skip it. Same registered seeds, same
   frozen score - this is purely an execution-environment fix, not a protocol
   change.
+
+## 2026-06-12 (CONFIRMATORY BATTERY COMPLETE — post prereg-v1)
+
+All five tasks executed once on registered test seeds (201-205; SSB 41,43),
+frozen score-v2, no reruns. Per-process sequential run after the OOM restart;
+clean rc=0 throughout. Headline confirmatory numbers (paired bootstrap 10k,
+Holm-Bonferroni, Cliff's δ):
+
+- SSB / H2 (structure vs surface, perfect ground truth): SMA forced-choice
+  r1 = 1.000; library r1 = 0.895 vs BM25 0.000 and TFIDF-Dense 0.000
+  (they share ZERO vocabulary with the analog, so rank it never). δ = 0.895,
+  p_holm = 0.0004. The cleanest proof of the thesis.
+- T2 HDFS family / H4 (rare-event leverage): common-family hit@5 SMA 0.773 vs
+  BM25 0.629 / Dense 0.522 (δ 0.27-0.35); RARE-family hit@5 SMA 0.703 vs
+  BM25 0.148 / Dense 0.044 (δ 0.70-0.83, p_holm 0.0004). ~5x on rare families.
+- T2 BGL triage / H2 (no within-domain tax): SMA hit@1 0.991, macro-F1 0.986 -
+  statistically TIED with Dense 0.992 and Hybrid-RRF 0.992 (CIs include 0),
+  beats HippoRAG/KG/BM25. Parity confirmed: structure costs nothing in-domain.
+- T3 BugsInPy / H5 (cross-domain, code): category@1 SMA 0.304 vs BM25 0.186
+  (p 0.006) / Dense 0.113 (p 0.0004). Same frozen matcher, different domain,
+  clean win.
+- T4 Liberty haystack: SMA / Dense / Hybrid-RRF all tie at needle-hit@5 0.995;
+  BM25 0.954. Honest PARITY - these out-of-corpus needles are lexically
+  findable, so structure gives no edge here (hybrid is the production posture).
+- T1 transfer (recap): BGL->Thunderbird decisive (+0.13 vs HippoRAG, p 0.001,
+  beats all 6 baselines); BGL->Spirit win over classic RAG/KG, parity with
+  hybrids; HDFS->OpenStack null for every method.
+
+Verdict: H2 (both halves) and H4 confirmed decisively; H5 confirmed; H1 mixed
+(one decisive, one qualified, one null); T4 parity. The "structure beats
+surface exactly off-surface and on rare events; parity in-domain" story holds
+under pre-registration. These numbers are now CLAIMS.

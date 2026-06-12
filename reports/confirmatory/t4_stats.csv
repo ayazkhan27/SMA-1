@@ -1,0 +1,7 @@
+task,leg,metric,reference,baseline,n_queries,reference_mean,baseline_mean,delta,ci_low,ci_high,p_raw,p_holm,cliffs_delta
+t4,liberty_haystack,needle_hit@5,Hybrid-RRF,BM25,200,0.9950,0.9540,0.0410,0.0250,0.0580,0.000200,0.000600,0.1095
+t4,liberty_haystack,needle_hit@5,Hybrid-RRF,Dense RAG,200,0.9950,0.9950,0.0000,0.0000,0.0000,1.000000,1.000000,0.0000
+t4,liberty_haystack,needle_hit@5,Hybrid-RRF,SMA,200,0.9950,0.9950,0.0000,0.0000,0.0000,1.000000,1.000000,0.0000
+t4,liberty_haystack,needle_hit@5,SMA,BM25,200,0.9950,0.9540,0.0410,0.0250,0.0580,0.000200,0.000600,0.1095
+t4,liberty_haystack,needle_hit@5,SMA,Dense RAG,200,0.9950,0.9950,0.0000,0.0000,0.0000,1.000000,1.000000,0.0000
+t4,liberty_haystack,needle_hit@5,SMA,Hybrid-RRF,200,0.9950,0.9950,0.0000,0.0000,0.0000,1.000000,1.000000,0.0000

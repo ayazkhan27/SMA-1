@@ -1,0 +1,5 @@
+task,leg,metric,reference,baseline,n_queries,reference_mean,baseline_mean,delta,ci_low,ci_high,p_raw,p_holm,cliffs_delta
+ssb,library,r1,SMA,BM25,200,0.8950,0.0000,0.8950,0.8500,0.9350,0.000200,0.000400,0.8950
+ssb,library,r1,SMA,TFIDF-Dense,200,0.8950,0.0000,0.8950,0.8500,0.9350,0.000200,0.000400,0.8950
+ssb,library,mrr,SMA,BM25,200,0.9475,0.0102,0.9373,0.9129,0.9590,0.000200,0.000400,0.9995
+ssb,library,mrr,SMA,TFIDF-Dense,200,0.9475,0.0102,0.9373,0.9129,0.9590,0.000200,0.000400,0.9995

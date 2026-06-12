@@ -1,0 +1,5 @@
+task,leg,metric,reference,baseline,n_queries,reference_mean,baseline_mean,delta,ci_low,ci_high,p_raw,p_holm,cliffs_delta
+t3,bugsinpy_lopo,category_hit@1,SMA,BM25,204,0.3039,0.1863,0.1176,0.0343,0.2010,0.005799,0.005799,0.1176
+t3,bugsinpy_lopo,category_hit@1,SMA,Dense RAG,204,0.3039,0.1127,0.1912,0.1225,0.2647,0.000200,0.000400,0.1912
+t3,bugsinpy_lopo,category_hit@5,SMA,BM25,204,0.3127,0.2157,0.0971,0.0598,0.1343,0.000200,0.000400,0.2181
+t3,bugsinpy_lopo,category_hit@5,SMA,Dense RAG,204,0.3127,0.1088,0.2039,0.1676,0.2402,0.000200,0.000400,0.4716

@@ -1,0 +1,7 @@
+task,leg,method,metric,mean,sd,n_seeds,per_seed
+t3,bugsinpy_lopo,BM25,hit@1,0.1863,0.0000,1,:0.1863
+t3,bugsinpy_lopo,BM25,hit@5,0.2157,0.0000,1,:0.2157
+t3,bugsinpy_lopo,Dense RAG,hit@1,0.1127,0.0000,1,:0.1127
+t3,bugsinpy_lopo,Dense RAG,hit@5,0.1088,0.0000,1,:0.1088
+t3,bugsinpy_lopo,SMA,hit@1,0.3039,0.0000,1,:0.3039
+t3,bugsinpy_lopo,SMA,hit@5,0.3127,0.0000,1,:0.3127

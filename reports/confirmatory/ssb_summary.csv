@@ -1,0 +1,9 @@
+task,leg,method,metric,mean,sd,n_seeds,per_seed
+ssb,forced_choice,SMA,r1,1.0000,0.0000,2,41:1.0000;43:1.0000
+ssb,forced_choice,SMA,rr,1.0000,0.0000,2,41:1.0000;43:1.0000
+ssb,library,BM25,r1,0.0000,0.0000,2,41:0.0000;43:0.0000
+ssb,library,BM25,rr,0.0102,0.0046,2,41:0.0069;43:0.0134
+ssb,library,SMA,r1,0.8950,0.0071,2,41:0.9000;43:0.8900
+ssb,library,SMA,rr,0.9475,0.0035,2,41:0.9500;43:0.9450
+ssb,library,TFIDF-Dense,r1,0.0000,0.0000,2,41:0.0000;43:0.0000
+ssb,library,TFIDF-Dense,rr,0.0102,0.0046,2,41:0.0069;43:0.0134
