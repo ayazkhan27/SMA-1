@@ -145,3 +145,44 @@ Append-only progress log. Each work session must reread
   rules are generic ops vocabulary but partially informed by knowing the target
   domain family; needs held-out confirmation (new seeds/windows + a third pair)
   in the consolidated pre-freeze batch. MDL leg of v2 queued with that batch.
+
+## 2026-06-12 (pre-freeze evidence batch, agent team)
+
+- HELD-OUT TRANSFER CONFIRMED (frozen ontology-v1, Spirit from USENIX CFDR,
+  downloaded after the freeze tag): BGL->Spirit seeds 42/7/19 SMA macro-F1
+  0.9200/0.9650/0.9300 (mean 0.938) vs Dense RAG 0.3144/0.4137/0.3397 (mean
+  0.356), BM25 ~0.39, KG ~0.36. MDL leg 0.9100 (consistent). The post-hoc
+  ontology objection is answered: multi-seed, held-out, +58 F1 pts.
+- HDFS->Spirit (cross-FAMILY transfer): SMA 0.3775 — fails, as HDFS->OpenStack
+  did. Honest scope: structural transfer holds within the failure-physics
+  family (supercomputer syslogs), not across app-vs-infra families. KG-PPR
+  0.8648 here is anomalous and needs investigation before being believed.
+- BASELINE LADDER (within-system, seed 42): HDFS — SMA 0.9549 still beats the
+  production stack: Hybrid-RRF 0.8350, Hybrid+Rerank 0.7427, BGE 0.6377,
+  SPLADE 0.4039, B6-LongContext-DeepSeek 0.8088. BGL — hybrid/BGE/SPLADE
+  saturate (~1.0), confirming lexical overtness. CAVEAT: ladder latencies ran
+  CPU-contended with the Spirit chain; do not cite them.
+- WL-KERNEL CONTROL FINDING: generic WL graph similarity over SMA's own Tier-0
+  cases scores 0.9799 on HDFS (> SMA 0.9549) at ~11ms. Within-system, cheap
+  graph similarity on good extraction beats full SME. Decisive follow-up
+  running now (scripts/transfer_controls.py): does WL / the hybrid stack
+  transfer BGL->Spirit? Outcome determines whether the matcher's value claim
+  is alignment or representation.
+- FAMILY METRIC (Agent C): HDFS family-hit@1 SMA-ses 0.9057 vs BM25 0.6226,
+  Dense 0.4906 — SMA finds the right failure family, not merely "an anomaly".
+  BGL: Dense 0.9623 > SMA 0.68 (alert families are lexically marked). ADR-004
+  REVISION NOTE: SES beats MDL on aggregate family-hit (HDFS 0.9057 vs
+  0.8396); the EOF rare-family anecdote does not generalize. Rare-family-
+  stratified breakdown queued before any scorer default change.
+- H3 LLM-JUDGE (Agent D, all 200 cells, audit trail in reports/h3_judged.csv):
+  DeepSeek 99% judged-correct, 0 invented entities, 2% confabulation (over-
+  inference only); local Qwen-0.5B 2% correct, 18% confabulation, 0/100
+  abstentions. Abstention regex validated: precision 0.96 / recall 0.87.
+  Pipeline bug found and fixed: 400-char evidence cap truncated the anomaly
+  lines questions ask about (now 900); some "abstentions" were artifacts.
+- Reproducibility fix (Agent C finding): sampler remainder-fill iterated a
+  Python set (hash-seed dependent across processes) -> sorted. Exact samples
+  now process-independent.
+- Ops lesson: a detached agent's leftover monitor double-launched the ladder
+  run (killed; CSV unaffected). Policy: agents implement, the main session
+  launches runs.

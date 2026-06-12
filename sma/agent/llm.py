@@ -41,8 +41,11 @@ def build_messages(
 ) -> list[dict]:
     # Plain numbered texts only: provenance hashes and scores are for the UI
     # and audit trail, not the verbalizer — small models parrot them back.
+    # 900 chars/item: the H3 judge pass showed a 400-char cap truncates exactly
+    # the anomaly lines questions ask about (abstention artifacts); 900 x 5
+    # items stays within the local model's 4k context alongside chat history.
     evidence_text = "\n".join(
-        f"[{i + 1}] {row.get('text', '')[:400]}" for i, row in enumerate(evidence[:8])
+        f"[{i + 1}] {row.get('text', '')[:900]}" for i, row in enumerate(evidence[:8])
     )
     window_caveat = (
         "\nCaveat: each evidence item is one bounded session window. Events outside a "

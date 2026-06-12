@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import gzip
 import hashlib
 import pathlib
 import random
@@ -40,6 +41,18 @@ THUNDERBIRD_MD5 = "0891b048df2919dc78c99c4428686b44"
 # cap both streaming passes at the first 20 million lines; the split name
 # records this cap as "thunderbird_first20M".
 THUNDERBIRD_LINE_CAP = 20_000_000
+
+# Spirit (Sandia supercomputer, Oliner & Stearley 2007) held-out transfer
+# target. Source: USENIX CFDR hpc4/spirit2.gz (NOT in the LogHub Zenodo
+# records; see data/manifests/datasets.json source_note). Same alert-flag
+# format family as BGL/Thunderbird. md5 verified before every evaluation,
+# like Thunderbird.
+SPIRIT_MD5 = "ba6271c4f454bc21634b19c406d9769c"
+
+# Spirit is ~37GB uncompressed (~272M lines). Same tractability cap as
+# Thunderbird: both streaming passes stop at the first 20 million lines;
+# the split name records this cap as "spirit_first20M".
+SPIRIT_LINE_CAP = 20_000_000
 
 OPENSTACK_INSTANCE_RE = re.compile(r"instance: ([0-9a-f-]{36})")
 
@@ -261,6 +274,133 @@ def sample_thunderbird(
     return results
 
 
+def check_spirit(path: pathlib.Path) -> str | None:
+    """Return None if spirit2.gz is present and checksum-verified, otherwise
+    a human-readable reason to skip Spirit pairs (mirrors check_thunderbird)."""
+    if not path.exists():
+        return f"{path} is missing (download may still be in progress)"
+    digest = hashlib.md5()
+    with path.open("rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            digest.update(chunk)
+    actual = digest.hexdigest()
+    if actual != SPIRIT_MD5:
+        return (
+            f"{path} md5 mismatch: expected {SPIRIT_MD5}, got {actual} "
+            "(file incomplete or corrupt)"
+        )
+    return None
+
+
+def sample_spirit(
+    path: pathlib.Path, sample_size: int = 200, seed: int = 42
+) -> list[tuple[str, str, str]]:
+    """Sessionize and sample stratified Spirit logs (BGL/Thunderbird family).
+
+    Modeled exactly on sample_thunderbird: streams the plain gzip in two
+    passes without extracting to disk or holding lines in memory. Sessionizes
+    per node into 60-second windows with a >=3 line minimum; the first
+    whitespace-separated field is the ground-truth alert label column
+    ("-" = normal, anything else = alert category, e.g. R_HDA_NR) and is
+    STRIPPED from extracted text to avoid label leakage. Both passes are
+    capped at the first SPIRIT_LINE_CAP (20M) lines for tractability (the
+    split name "spirit_first20M" records the cap).
+
+    Spirit line format (verified against CFDR hpc4/spirit2.gz):
+        LABEL EPOCH DATE NODE Month Day HH:MM:SS src daemon[pid]: message
+    so parts[0]=label, parts[1]=epoch seconds, parts[3]=node id - identical
+    field positions to Thunderbird.
+    """
+    skip_reason = check_spirit(path)
+    if skip_reason:
+        print(f"Skipping Spirit sampling: {skip_reason}")
+        return []
+
+    def stream_lines(sp_path):
+        """Yield decoded lines of the gzipped log, capped at 20M."""
+        with gzip.open(sp_path, "rb") as fh:
+            for line_no, line_bytes in enumerate(fh, start=1):
+                if line_no > SPIRIT_LINE_CAP:
+                    return
+                yield line_bytes.decode("utf-8", errors="ignore")
+
+    # Pass 1: gather metadata for sessionization and labels
+    session_counts = Counter()
+    labels = defaultdict(bool)
+    timestamps = {}
+    for line in stream_lines(path):
+        parts = line.split(maxsplit=5)
+        if len(parts) < 5:
+            continue
+        label = parts[0]
+        try:
+            timestamp = int(parts[1])
+        except ValueError:
+            continue
+        node_id = parts[3]
+
+        # Group Spirit into 60-second windows per node, like BGL/Thunderbird
+        window = timestamp // 60
+        session_key = f"spirit_{node_id}_{window}"
+        session_counts[session_key] += 1
+        if label != "-":
+            labels[session_key] = True
+        if session_key not in timestamps:
+            timestamps[session_key] = timestamp
+
+    # Filter sessions with length >= 3 to avoid tiny cases
+    filtered_keys = [k for k, count in session_counts.items() if count >= 3]
+    anom_keys = [k for k in filtered_keys if labels[k]]
+    norm_keys = [k for k in filtered_keys if not labels[k]]
+    print(
+        f"Spirit (first {SPIRIT_LINE_CAP // 1_000_000}M lines): "
+        f"{len(session_counts)} sessions, {len(filtered_keys)} with >=3 lines "
+        f"({len(anom_keys)} anomalous / {len(norm_keys)} normal)"
+    )
+
+    rng = random.Random(seed)
+    sampled_anom = get_stratified_subset(
+        anom_keys, sample_size // 2, lambda k: timestamps[k], rng
+    )
+    sampled_norm = get_stratified_subset(
+        norm_keys, sample_size // 2, lambda k: timestamps[k], rng
+    )
+    sampled_set = set(sampled_anom + sampled_norm)
+
+    # Pass 2: extract actual lines for the sampled set
+    sessions_lines = defaultdict(list)
+    for line in stream_lines(path):
+        parts = line.split(maxsplit=5)
+        if len(parts) < 5:
+            continue
+        try:
+            timestamp = int(parts[1])
+        except ValueError:
+            continue
+        node_id = parts[3]
+        window = timestamp // 60
+        session_key = f"spirit_{node_id}_{window}"
+        if session_key in sampled_set:
+            # Drop the leading alert-category column: it is the ground-truth
+            # label, not log content. Keeping it would leak labels to every
+            # retriever (Spirit "-" = normal, anything else = anomaly), the
+            # same leak previously found and fixed in BGL and Thunderbird.
+            sessions_lines[session_key].append(line.partition(" ")[2] or line)
+
+    results = []
+    for k in sampled_anom + sampled_norm:
+        lines = sessions_lines.get(k, [])
+        if lines:
+            results.append((k, "".join(lines), "Anomaly" if labels[k] else "Normal"))
+    sampled_counts = Counter(label for _, _, label in results)
+    print(
+        f"Spirit sample: {len(results)} sessions "
+        f"({sampled_counts.get('Anomaly', 0)} Anomaly / "
+        f"{sampled_counts.get('Normal', 0)} Normal)"
+    )
+    return results
+
+
 def run_transfer(
     index_data: list[tuple[str, str, str]],
     query_data: list[tuple[str, str, str]],
@@ -475,11 +615,15 @@ def run_transfer(
     return transfer_rows
 
 
-def append_transfer_rows(rows: list[dict]) -> None:
-    """Append metric rows to reports/transfer_metrics.csv (triage schema)."""
+def append_transfer_rows(
+    rows: list[dict], out_path: str | pathlib.Path = "reports/transfer_metrics.csv"
+) -> None:
+    """Append metric rows to a transfer metrics CSV (triage schema).
+
+    Defaults to reports/transfer_metrics.csv (the original behavior)."""
     if not rows:
         return
-    out_path = pathlib.Path("reports/transfer_metrics.csv")
+    out_path = pathlib.Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
         "dataset", "split", "method", "macro_f1",
@@ -495,6 +639,75 @@ def append_transfer_rows(rows: list[dict]) -> None:
     print(f"Appended {len(rows)} rows to {out_path}")
 
 
+# Registry of samplable systems for --pairs. Each entry maps the system name
+# (as written in a "A->B" pair spec) to (archive filename, sampler, display
+# name used in the split string, optional integrity-check function).
+SYSTEMS = {
+    "HDFS": ("HDFS_v1.zip", sample_hdfs_stratified, "HDFS", None),
+    "BGL": ("BGL.zip", sample_bgl_stratified, "BGL", None),
+    "OpenStack": ("OpenStack.tar.gz", sample_openstack, "OpenStack", None),
+    "Thunderbird": (
+        "Thunderbird.tar.gz", sample_thunderbird, "thunderbird_first20M",
+        check_thunderbird,
+    ),
+    "Spirit": ("spirit2.gz", sample_spirit, "spirit_first20M", check_spirit),
+}
+
+
+def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path):
+    """Run a comma-separated list of "A->B" transfer pairs (e.g.
+    "BGL->Spirit,HDFS->Spirit") with an explicit seed, appending rows to
+    out_path. Additive entry point used by --pairs; the default (no --pairs)
+    code path in main() is unchanged."""
+    raw_dir = pathlib.Path("data/raw/loghub_raw")
+    all_rows = []
+    sample_cache = {}  # (system, size, seed) -> sampled sessions
+
+    def sample_system(name, size):
+        key = (name, size, seed)
+        if key in sample_cache:
+            return sample_cache[key]
+        filename, sampler, _display, check = SYSTEMS[name]
+        path = raw_dir / filename
+        if not path.exists():
+            print(f"Skipping {name}: {path} is missing. Run fetch_datasets.py first.")
+            data = []
+        else:
+            skip = check(path) if check else None
+            if skip:
+                print(f"Skipping {name}: {skip}")
+                data = []
+            else:
+                print(f"Sampling {name} sessions (size={size}, seed={seed})...")
+                data = sampler(path, sample_size=size, seed=seed)
+                counts = Counter(label for _, _, label in data)
+                print(
+                    f"{name} class counts: {counts.get('Anomaly', 0)} Anomaly / "
+                    f"{counts.get('Normal', 0)} Normal"
+                )
+        sample_cache[key] = data
+        return data
+
+    for pair in [p.strip() for p in pairs_spec.split(",") if p.strip()]:
+        if "->" not in pair:
+            print(f"Skipping malformed pair spec '{pair}' (expected 'A->B').")
+            continue
+        src, dst = (s.strip() for s in pair.split("->", 1))
+        if src not in SYSTEMS or dst not in SYSTEMS:
+            known = ", ".join(SYSTEMS)
+            print(f"Skipping pair '{pair}': unknown system (known: {known}).")
+            continue
+        index_data = sample_system(src, index_size)
+        query_data = sample_system(dst, query_size)
+        if not index_data or not query_data:
+            print(f"Skipping pair '{pair}': empty index or query sample.")
+            continue
+        pair_name = f"{SYSTEMS[src][2]}->{SYSTEMS[dst][2]}[seed{seed}]"
+        all_rows.extend(run_transfer(index_data, query_data, pair_name, scorer=scorer))
+
+    append_transfer_rows(all_rows, out_path)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Cross-system transfer evaluation (T2-b)")
     parser.add_argument("--scorer", choices=["ses", "mdl"], default="ses")
@@ -502,9 +715,25 @@ def main() -> None:
                         help="stratified sessions to index from system A")
     parser.add_argument("--query-size", type=int, default=200,
                         help="stratified sessions to query from system B")
+    parser.add_argument("--pairs", default=None,
+                        help="comma-separated 'A->B' pairs to run instead of the "
+                             "default HDFS->OpenStack and BGL->Thunderbird pairs, "
+                             "e.g. 'BGL->Spirit,HDFS->Spirit'")
+    parser.add_argument("--seed", type=int, default=42,
+                        help="sampling seed threaded into both samplers")
+    parser.add_argument("--out", default="reports/transfer_metrics.csv",
+                        help="CSV path to append metric rows to")
     args = parser.parse_args()
 
-    random.seed(42)
+    random.seed(args.seed)
+
+    if args.pairs:
+        run_named_pairs(
+            args.pairs, args.scorer, args.seed,
+            args.index_size, args.query_size, args.out,
+        )
+        return
+
     raw_dir = pathlib.Path("data/raw/loghub_raw")
     hdfs_zip = raw_dir / "HDFS_v1.zip"
     bgl_zip = raw_dir / "BGL.zip"
@@ -520,9 +749,9 @@ def main() -> None:
         print(f"Skipping HDFS->OpenStack: {openstack_tar} is missing. Run fetch_datasets.py first.")
     else:
         print("Sampling HDFS sessions (index set)...")
-        hdfs_index = sample_hdfs_stratified(hdfs_zip, sample_size=args.index_size, seed=42)
+        hdfs_index = sample_hdfs_stratified(hdfs_zip, sample_size=args.index_size, seed=args.seed)
         print("Sampling OpenStack sessions (query set)...")
-        openstack_query = sample_openstack(openstack_tar, sample_size=args.query_size, seed=42)
+        openstack_query = sample_openstack(openstack_tar, sample_size=args.query_size, seed=args.seed)
         all_rows.extend(
             run_transfer(hdfs_index, openstack_query, "HDFS->OpenStack", scorer=args.scorer)
         )
@@ -535,9 +764,9 @@ def main() -> None:
         print(f"Skipping BGL->Thunderbird: {tbird_skip}")
     else:
         print("Sampling BGL sessions (index set)...")
-        bgl_index = sample_bgl_stratified(bgl_zip, sample_size=args.index_size, seed=42)
+        bgl_index = sample_bgl_stratified(bgl_zip, sample_size=args.index_size, seed=args.seed)
         print("Sampling Thunderbird sessions (query set, first 20M lines)...")
-        tbird_query = sample_thunderbird(thunderbird_tar, sample_size=args.query_size, seed=42)
+        tbird_query = sample_thunderbird(thunderbird_tar, sample_size=args.query_size, seed=args.seed)
         if tbird_query:
             all_rows.extend(
                 run_transfer(bgl_index, tbird_query, "BGL->thunderbird_first20M", scorer=args.scorer)
@@ -545,7 +774,7 @@ def main() -> None:
         else:
             print("Skipping BGL->Thunderbird: no Thunderbird sessions sampled.")
 
-    append_transfer_rows(all_rows)
+    append_transfer_rows(all_rows, args.out)
 
 
 if __name__ == "__main__":

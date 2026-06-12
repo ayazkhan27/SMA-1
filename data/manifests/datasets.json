@@ -18,6 +18,11 @@
       "Thunderbird.tar.gz": {
         "md5": "0891b048df2919dc78c99c4428686b44",
         "url": "https://zenodo.org/api/records/8196385/files/Thunderbird.tar.gz/content"
+      },
+      "spirit2.gz": {
+        "md5": "ba6271c4f454bc21634b19c406d9769c",
+        "url": "http://0b4af6cdc2f0c5998459-c0245c5c937c5dedcca3f1764ecc9b2f.r43.cf2.rackcdn.com/hpc4/spirit2.gz",
+        "source_note": "Spirit (Sandia supercomputer) syslog, Oliner & Stearley 2007. NOT in LogHub Zenodo records 8196385 or 3227177 (verified 2026-06-11 via Zenodo API); canonical source is the USENIX CFDR (https://www.usenix.org/cfdr-data, hpc4/spirit2.gz). md5 taken from the CDN ETag and re-verified locally after download. A truncated 5M-line Zenodo mirror exists at record 7851024 (spirit2_5m.tar.gz) but the full file is used so the first-20M-line cap matches the Thunderbird treatment."
       }
     }
   },

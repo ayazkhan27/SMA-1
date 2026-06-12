@@ -112,7 +112,7 @@ def sample_hdfs_stratified(
             subset.extend(rng.sample(list(b), min(len(b), per_bin)))
         # Fill remainder
         while len(subset) < target_n and sorted_blocks:
-            rem = list(set(sorted_blocks) - set(subset))
+            rem = sorted(set(sorted_blocks) - set(subset))
             if not rem:
                 break
             subset.append(rng.choice(rem))
@@ -182,7 +182,7 @@ def sample_bgl_stratified(
         for b in bins:
             subset.extend(rng.sample(list(b), min(len(b), per_bin)))
         while len(subset) < target_n and sorted_keys:
-            rem = list(set(sorted_keys) - set(subset))
+            rem = sorted(set(sorted_keys) - set(subset))
             if not rem:
                 break
             subset.append(rng.choice(rem))
