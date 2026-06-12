@@ -323,10 +323,12 @@ def build_demo(framework: ComparisonFramework | None = None):
         )
         return render_cards(results, llm_label)
 
-    def load_corpus(corpus_text, adapter_id, max_items, clear_existing):
+    def load_corpus(corpus_text, adapter_id, max_items, clear_existing, single_case):
         if clear_existing:
             framework.clear()
-        added = framework.load_lines(corpus_text, adapter_id=adapter_id, max_items=int(max_items))
+        added = framework.load_lines(
+            corpus_text, adapter_id=adapter_id, max_items=int(max_items), single_case=bool(single_case)
+        )
         status = {"added": len(added), "total": len(framework.items), "adapter": adapter_id}
         return render_corpus_table(framework), json.dumps(status, indent=2), render_chips(framework)
 
@@ -538,6 +540,10 @@ def build_demo(framework: ComparisonFramework | None = None):
                     adapter = gr.Dropdown(adapters, value="logs", label="Deterministic adapter")
                     max_items = gr.Number(value=50, precision=0, label="Max items")
                     clear = gr.Checkbox(value=True, label="Clear existing corpus")
+                    single_case = gr.Checkbox(
+                        value=False,
+                        label="Load as ONE incident (don't split lines/blocks)",
+                    )
                 with gr.Row():
                     loghub_choice = gr.Dropdown(
                         list(UI_CORPORA), value=list(UI_CORPORA)[0], label="Real LogHub sample", scale=2
@@ -552,7 +558,11 @@ def build_demo(framework: ComparisonFramework | None = None):
                     load_arn = gr.Button("Load downloaded ARN sample")
                 corpus_table = gr.HTML(render_corpus_table(framework))
                 load_status = gr.Code(language="json", label="Load status")
-                load.click(load_corpus, [corpus, adapter, max_items, clear], [corpus_table, load_status, chips])
+                load.click(
+                    load_corpus,
+                    [corpus, adapter, max_items, clear, single_case],
+                    [corpus_table, load_status, chips],
+                )
                 load_loghub_btn.click(
                     load_loghub, [loghub_choice, loghub_n, clear], [corpus_table, load_status, chips]
                 )

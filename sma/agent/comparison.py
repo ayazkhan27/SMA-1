@@ -154,7 +154,22 @@ class ComparisonFramework:
         self._version += 1
         return item
 
-    def load_lines(self, corpus_text: str, adapter_id: str = "logs", max_items: int = 50) -> list[CorpusItem]:
+    def load_lines(
+        self,
+        corpus_text: str,
+        adapter_id: str = "logs",
+        max_items: int = 50,
+        single_case: bool = False,
+    ) -> list[CorpusItem]:
+        """Load raw text as corpus items.
+
+        single_case=True keeps the whole text as ONE incident. Otherwise text
+        splits on blank lines into blocks; a single block with no blank lines
+        falls back to one item per line (the legacy behavior that quietly
+        explodes a pasted session - hence the explicit flag).
+        """
+        if single_case and corpus_text.strip():
+            return [self.add_document(corpus_text.strip(), adapter_id=adapter_id)]
         added = []
         blocks = split_corpus(corpus_text)
         for block in blocks[:max_items]:

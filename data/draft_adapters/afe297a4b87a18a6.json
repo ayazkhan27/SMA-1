@@ -1,0 +1,45 @@
+{
+  "blake3": "afe297a4b87a18a6f8212a6bd05e5db2219ae6803dd3670ed52919fbd259ed4e",
+  "created": "2026-06-12T15:38:45.935017+00:00",
+  "generated_by": "deepseek:deepseek-chat via sma.agent.adapter_draft",
+  "note": "parsed 4 class(es), 7 masking(s)",
+  "rules": {
+    "classes": [
+      {
+        "keywords": [
+          "watcher.green",
+          "watcher.amber"
+        ],
+        "name": "watcherEvent"
+      },
+      {
+        "keywords": [
+          "allocator.accept_new"
+        ],
+        "name": "allocationEvent"
+      },
+      {
+        "keywords": [
+          "parcel.p"
+        ],
+        "name": "parcelEvent"
+      },
+      {
+        "keywords": [
+          "fence.state"
+        ],
+        "name": "fenceEvent"
+      }
+    ],
+    "maskings": [
+      "\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z",
+      "zone=[A-Z]\\d+",
+      "unit=q-\\d+",
+      "tick=\\d+",
+      "code=grain-drift-\\d+",
+      "parcel\\.p-\\d+",
+      "move_to=q-\\d+"
+    ]
+  },
+  "status": "LLM-proposed, unreviewed"
+}
