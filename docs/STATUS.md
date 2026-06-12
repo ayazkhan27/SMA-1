@@ -342,3 +342,14 @@ Append-only progress log. Each work session must reread
   surprisal 0/5) - deferred to the calibration phase with full re-gauntlet.
 - Liberty haystack remains 0/5 pending the normalization forensics (raw
   ordering now correct; ses_n>1 min-norm anomaly is the isolated open item).
+
+## 2026-06-12 (paper asset pipeline)
+
+- paper/ subfolder: figures (SciencePlots science+grid, PDF+PNG), tables
+  (auto-generated booktabs LaTeX), diagrams (mermaid sources). Regenerated
+  from reports/*.csv by `make paper`; every asset stamped with date + git rev
+  + semantics version; pre-v3 numbers hatched/labeled until re-verified.
+  Assets: transfer headline, decomposition (repr vs alignment), family-by-
+  scorer, H3 honesty, HDFS ladder; 4 LaTeX tables; 3 architecture diagrams.
+- Incremental discipline: re-run at each phase boundary so the paper
+  assembles itself as evidence lands.

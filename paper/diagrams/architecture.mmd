@@ -1,0 +1,10 @@
+%% SMA-1 architecture (render: mmdc -i architecture.mmd -o architecture.pdf)
+flowchart LR
+    A[Raw artifacts<br/>logs / code / traces] --> B[Tier-0 encoders<br/>deterministic rules]
+    B --> C[(Case store<br/>content-addressed)]
+    C --> D[MAC: certified bound ordering<br/>weighted Lemma-2]
+    D --> E[FAC: SME matching<br/>kernels, merge, surprisal-SES]
+    E --> F[Receipts: alignment,<br/>candidate inferences, ses_n]
+    F --> G[LLM verbalizer<br/>rules: cite or abstain]
+    H[Coverage tripwire] -.low coverage.-> I[LLM drafts adapter rules<br/>human gate, hash-frozen]
+    I -.deterministic re-encode.-> B

@@ -1,6 +1,6 @@
 PYTHON ?= python3
 
-.PHONY: test gates report ui api datasets model
+.PHONY: test gates report ui api datasets model paper
 
 test:
 	$(PYTHON) -m pytest
@@ -22,3 +22,6 @@ datasets:
 
 model:
 	$(PYTHON) scripts/fetch_model.py
+
+paper:
+	$(PYTHON) scripts/make_paper_assets.py

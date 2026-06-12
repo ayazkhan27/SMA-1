@@ -1,0 +1,10 @@
+%% Production retrieval posture
+flowchart TD
+    Q[Query incident] --> T{Coverage / scale}
+    T -->|within-system, hot path| W[WL kernel ~1ms]
+    T -->|cross-system / audit| S[SME alignment]
+    T -->|haystack| H[Hybrid RRF: bm25+dense+sma]
+    W --> R[SME receipts on final candidates]
+    S --> R
+    H --> R
+    R --> V[Verbalizer: cite or abstain]

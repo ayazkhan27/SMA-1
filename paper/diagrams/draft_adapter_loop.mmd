@@ -1,0 +1,13 @@
+%% Draft-adapter loop: rules, never facts
+sequenceDiagram
+    participant U as New corpus
+    participant C as Coverage detector
+    participant L as LLM (drafter)
+    participant H as Human gate
+    participant E as Deterministic encoder
+    U->>C: encode w/ frozen rules
+    C-->>U: coverage 9% (amber)
+    C->>L: residual lines only
+    L->>H: candidate rules (JSON, hashed)
+    H->>E: approve + freeze
+    E->>U: re-encode (coverage 100%, receipts tainted "draft")
