@@ -69,8 +69,8 @@ def save(fig, name: str):
 # ----------------------------------------------------------------- figures --
 
 def fig_transfer_headline():
-    """Cross-system transfer: the H1 figure. v3-verified Spirit leg solid;
-    pre-v3 pairs hatched pending re-verification."""
+    """Cross-system transfer: the H1 figure. v4-verified Spirit leg solid;
+    pre-v4 pairs hatched pending re-verification."""
     v3 = {r["method"]: float(r["macro_f1"]) for r in load("transfer_verify_v4final.csv")
           if "spirit" in r["split"]}
     pre = load("transfer_metrics.csv")
@@ -80,9 +80,9 @@ def fig_transfer_headline():
               if "OpenStack[ses]" in r["split"]}
     methods = ["SMA", "BM25", "Dense RAG", "KG-PPR Proxy"]
     pairs = [
-        ("BGL$\\rightarrow$Spirit\n(held-out, v3)", v3, False),
-        ("BGL$\\rightarrow$Thunderbird\n(pre-v3)", tbird, True),
-        ("HDFS$\\rightarrow$OpenStack\n(pre-v3)", ostack, True),
+        ("BGL$\\rightarrow$Spirit\n(held-out, v4)", v3, False),
+        ("BGL$\\rightarrow$Thunderbird\n(pre-v4)", tbird, True),
+        ("HDFS$\\rightarrow$OpenStack\n(pre-v4)", ostack, True),
     ]
     fig, ax = plt.subplots(figsize=(4.2, 2.6))
     width = 0.2
@@ -110,13 +110,13 @@ def fig_transfer_headline():
 def fig_decomposition():
     """Representation vs alignment: controls on the identical BGL->Spirit sets."""
     controls = {r["method"]: float(r["macro_f1"]) for r in load("transfer_controls_metrics.csv")}
-    v3_sma = next((float(r["macro_f1"]) for r in load("transfer_verify_v4final.csv")
+    v4_sma = next((float(r["macro_f1"]) for r in load("transfer_verify_v4final.csv")
                    if r["method"] == "SMA"), None)
     steps = [
         ("Dense RAG\n(embeddings)", 0.3144, True),
         ("Hybrid+Rerank\n(production RAG)", controls.get("Hybrid+Rerank", 0.5947), True),
         ("WL kernel\n(same Tier-0 repr.)", controls.get("WL-kernel", 0.6239), True),
-        ("SMA\n(SME alignment)", v3_sma or 0.8942, False),
+        ("SMA\n(SME alignment)", v4_sma or 0.8942, False),
     ]
     fig, ax = plt.subplots(figsize=(3.6, 2.4))
     xs = np.arange(len(steps))
@@ -156,7 +156,7 @@ def fig_family():
     ax.set_xticks(x, labels, fontsize=6)
     ax.set_ylabel("family-hit@5")
     ax.legend(fontsize=5, ncol=4)
-    ax.set_title("Failure-family retrieval by scorer (v3 semantics)", fontsize=7)
+    ax.set_title("Failure-family retrieval by scorer (v4 semantics)", fontsize=7)
     stamp(fig)
     save(fig, "fig_family_scorers")
 
