@@ -204,7 +204,10 @@ class ComparisonFramework:
         query_case = self._encode(question, adapter_id)
         # Lattice-miss tripwire (blueprint 12-R3): how much of the query's
         # vocabulary the frozen class rules actually cover.
-        coverage = rule_coverage(question)
+        coverage = rule_coverage(
+            question,
+            extra_classes=self.draft_adapter.rules.classes if self.draft_adapter else None,
+        )
         mode_detail = "SME mapping + MAC/FAC retrieval"
         if self.draft_note:
             mode_detail += f"; {self.draft_note}"
@@ -309,7 +312,10 @@ class ComparisonFramework:
         from sma.eval.baselines.hybrid_rrf import rrf_fuse
 
         query_case = self._encode(question, adapter_id)
-        coverage = rule_coverage(question)
+        coverage = rule_coverage(
+            question,
+            extra_classes=self.draft_adapter.rules.classes if self.draft_adapter else None,
+        )
         n = 20
         rankings = {
             "bm25": self._bm25_ranking(question, n),
