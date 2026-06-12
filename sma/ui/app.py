@@ -27,6 +27,7 @@ from sma.eval.arn import DEFAULT_ARN_PATH, arn_choice_corpus
 UI_CORPORA = {
     "HDFS sample (5,000 labeled sessions)": pathlib.Path("data/processed/ui_corpus_hdfs.jsonl"),
     "BGL sample (2,500 labeled sessions)": pathlib.Path("data/processed/ui_corpus_bgl.jsonl"),
+    "Liberty HAYSTACK (5,000 sessions, ~5% anomalies)": pathlib.Path("data/processed/ui_corpus_liberty.jsonl"),
 }
 
 LLM_CHOICES = {

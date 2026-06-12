@@ -43,7 +43,10 @@ def match_cases(
         normalized = score / max(len(target.expressions()), 1)
     else:
         score = structural_evaluation(hypotheses, gamma=config.gamma, cost_fn=cost_fn)
-        normalized = normalize_score(score, base, target, gamma=config.gamma, cost_fn=cost_fn)
+        normalized = normalize_score(
+            score, base, target, gamma=config.gamma, cost_fn=cost_fn,
+            normalization=config.normalization,
+        )
     return GMap(
         base=base,
         target=target,

@@ -31,7 +31,7 @@ class MacFacIndex:
         self.cases: dict[str, Case] = {}
         self.ann = AnnIndex()
         self.inverted = InvertedIndex()
-        self._score_cache: dict[tuple[str, str, str], tuple[float, float]] = {}
+        self._score_cache: dict[tuple, tuple[float, float]] = {}
 
     def add(self, case: Case) -> None:
         vector = functor_vector(case, canon=self.canon)
@@ -87,7 +87,7 @@ class MacFacIndex:
         # surprisal scorer). The MDL scorer has no such bound, so it never
         # early-stops on bounds (budget only).
         ses_n_denom = None
-        if self.config.scorer in ("ses", "surprisal"):
+        if self.config.scorer in ("ses", "surprisal") and self.config.normalization != "min":
             cost_fn = None
             if bound_costs:
                 costs = bound_costs
@@ -148,7 +148,7 @@ class MacFacIndex:
         return sorted(results, key=lambda row: (-row.ses_n, row.case_id))[:k]
 
     def _score_case(self, case_id: str, query: Case) -> tuple[float, float]:
-        key = (case_id, query.case_id, self.config.scorer)
+        key = (case_id, query.case_id, self.config.scorer, self.config.normalization)
         if key not in self._score_cache:
             gmap = match_cases(self.cases[case_id], query, config=self.config)
             self._score_cache[key] = (gmap.score, gmap.normalized_score)

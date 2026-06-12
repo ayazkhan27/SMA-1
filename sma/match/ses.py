@@ -63,12 +63,15 @@ def self_score(case, gamma: float = 0.25, cost_fn: CostFn | None = None) -> floa
 
 
 def normalize_score(
-    score: float, base, target, gamma: float = 0.25, cost_fn: CostFn | None = None
+    score: float,
+    base,
+    target,
+    gamma: float = 0.25,
+    cost_fn: CostFn | None = None,
+    normalization: str = "max",
 ) -> float:
     # Same weights in numerator and denominators keep ses_n scale-free.
-    denom = max(
-        self_score(base, gamma, cost_fn=cost_fn),
-        self_score(target, gamma, cost_fn=cost_fn),
-        1e-9,
-    )
-    return score / denom
+    self_base = self_score(base, gamma, cost_fn=cost_fn)
+    self_target = self_score(target, gamma, cost_fn=cost_fn)
+    pick = min if normalization == "min" else max
+    return score / max(pick(self_base, self_target), 1e-9)

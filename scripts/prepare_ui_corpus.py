@@ -54,3 +54,85 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+
+def sample_cfdr_haystack(
+    gz_path: pathlib.Path,
+    prefix: str,
+    sample_size: int = 5000,
+    anomaly_rate: float = 0.05,
+    seed: int = 42,
+    line_cap: int = 20_000_000,
+    line_start: int = 0,
+) -> list[tuple[str, str, str]]:
+    """Needle-in-haystack sample from a CFDR-format syslog (Liberty/Spirit).
+
+    Unlike the 50/50 eval samplers, this keeps a realistic class balance:
+    sample_size sessions of which ~anomaly_rate are alert windows. Format is
+    BGL-family: first whitespace field is the admin alert tag ('-' = normal),
+    STRIPPED from stored text (label-leak discipline). Sessions are per-node
+    60-second windows with >= 3 lines, scanned over the first line_cap lines
+    (two-pass stream).
+    """
+    import gzip
+    import random
+    from collections import defaultdict
+
+    counts: dict[str, int] = defaultdict(int)
+    is_alert: dict[str, bool] = defaultdict(bool)
+    with gzip.open(gz_path, "rt", errors="ignore") as fh:
+        for i, line in enumerate(fh):
+            if i < line_start:
+                continue
+            if i >= line_cap:
+                break
+            parts = line.split(maxsplit=4)
+            if len(parts) < 5:
+                continue
+            try:
+                window = int(parts[1]) // 60
+            except ValueError:
+                continue
+            key = f"{prefix}_{parts[3]}_{window}"
+            counts[key] += 1
+            if parts[0] != "-":
+                is_alert[key] = True
+
+    eligible = [k for k, n in counts.items() if n >= 3]
+    anom = sorted(k for k in eligible if is_alert[k])
+    norm = sorted(k for k in eligible if not is_alert[k])
+    rng = random.Random(seed)
+    n_anom = min(len(anom), int(sample_size * anomaly_rate))
+    n_norm = min(len(norm), sample_size - n_anom)
+    chosen_anom = rng.sample(anom, n_anom)
+    chosen_norm = rng.sample(norm, n_norm)
+    chosen = set(chosen_anom) | set(chosen_norm)
+    print(f"{prefix}: {len(eligible)} eligible sessions "
+          f"({len(anom)} alert / {len(norm)} normal) -> sampling {n_anom} + {n_norm}")
+
+    texts: dict[str, list[str]] = defaultdict(list)
+    with gzip.open(gz_path, "rt", errors="ignore") as fh:
+        for i, line in enumerate(fh):
+            if i < line_start:
+                continue
+            if i >= line_cap:
+                break
+            parts = line.split(maxsplit=4)
+            if len(parts) < 5:
+                continue
+            try:
+                window = int(parts[1]) // 60
+            except ValueError:
+                continue
+            key = f"{prefix}_{parts[3]}_{window}"
+            if key in chosen and len(texts[key]) < 60:
+                # Strip the alert-tag column (ground truth, not log content).
+                texts[key].append(line.partition(" ")[2].rstrip())
+
+    rows = []
+    for key in chosen_anom + chosen_norm:
+        lines = texts.get(key, [])
+        if lines:
+            rows.append((key, "\n".join(lines), "Anomaly" if is_alert[key] else "Normal"))
+    rng.shuffle(rows)
+    return rows

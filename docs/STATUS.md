@@ -272,3 +272,28 @@ Append-only progress log. Each work session must reread
   receipts computed for every fused candidate - retrieval as a committee,
   accountability via alignment regardless of which retriever found the case.
 - 30/30 tests; frozen paths untouched (logs_drain.py, sma/match, sma/index).
+
+## 2026-06-12/13 (Liberty needle-in-haystack: a measured solo-SMA failure)
+
+- New held-out corpus: Liberty (CFDR, md5-verified), needle-in-haystack UI
+  sample: 5,000 sessions @ 5.0% admin-alert needles (pbs_mom scheduler
+  failures), sampled from the alert-storm transition region (lines 30M-60M;
+  first 40M lines contain almost no alerts - recon documented).
+- Probe (held-out pbs_mom needle, new node): BM25 5/5, Dense 5/5, hybrid 3/5,
+  SMA 0/5. Diagnosis (two compounding stages): (1) ANN cosine prescreen keeps
+  only 1/250 needles in top-200 while the certified BOUND ordering puts 21
+  needles in its top-30 - the MAC shortlist-recall tripwire (blueprint 10.2)
+  firing on burst-shaped sessions; (2) scoring favors tiny repeated-line
+  normal sessions (needle ses_n 0.06-0.08 vs 0.77), and min-normalization
+  (10.2 tripwire option, now implemented as MatchConfig.normalization,
+  default unchanged "max") produced ses_n>1 on a cross-match - an arithmetic
+  anomaly in the trickle-down x surprisal x burst interaction requiring a
+  focused investigation. BOTH queued as Phase 3 work items (MAC recall fix;
+  scoring forensics) - pre-freeze, exactly where they belong.
+- Production posture meanwhile: hybrid (fused) is the recommended haystack
+  mode - lexical/dense candidates + SMA alignment receipts (by design:
+  retrieval committee, accountability layer).
+- Draft-adapter robustness finding: Liberty needs NO draft adapter - frozen
+  ontology covers stock Linux syslog at ~100% median coverage. The recursion
+  terminates when the rulebook already speaks the dialect; drafting is for
+  genuinely alien vocabularies (the watcher demo).
