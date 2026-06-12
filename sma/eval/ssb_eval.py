@@ -28,6 +28,9 @@ class RetrievalEval:
     rows: list[dict]
     metrics: dict
     latency: dict
+    # Per-query analog ranks (0 = not retrieved), in triple order; additive
+    # field used by scripts/confirmatory_battery.py for paired statistics.
+    ranks: tuple[int, ...] = ()
 
 
 def evaluate_forced_choice(n: int = 12, seed: int = 11) -> RetrievalEval:
@@ -48,6 +51,7 @@ def evaluate_forced_choice(n: int = 12, seed: int = 11) -> RetrievalEval:
         rows=rows,
         metrics=rank_metrics("forced_choice_fixture", ranks, n),
         latency={"operation": "ssb_forced_choice_macfac", "n_cases": n * 2, "p50_ms": elapsed, "p95_ms": elapsed},
+        ranks=tuple(ranks),
     )
 
 
@@ -90,6 +94,14 @@ def evaluate_library(
     elapsed = (time.perf_counter() - start) * 1000
     return {
         "sma_rows": sma_rows,
+        # Additive: per-query analog ranks (0 = miss) in triple order, plus
+        # the matching query ids, for paired SMA-vs-baseline statistics.
+        "query_ids": [triple.query.case_id for triple in triples],
+        "ranks": {
+            "SMA": sma_ranks,
+            "BM25": bm25_ranks,
+            "TFIDF-Dense": dense_ranks,
+        },
         "metrics": [
             rank_metrics(f"ssb_library_{n}_sma", sma_ranks, n),
             rank_metrics(f"ssb_library_{n}_bm25", bm25_ranks, n),

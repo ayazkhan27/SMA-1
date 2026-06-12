@@ -3,8 +3,9 @@
 Indexes incidents from one log system and queries with incidents from a
 DIFFERENT system: HDFS->OpenStack and BGL->Thunderbird. Vocabularies differ
 across systems but failure motifs recur, so this is the unseen-concept test
-on real data. Compares the same four retrieval methods as loghub_eval
-(SMA, BM25, Dense RAG, KG-PPR Proxy) with weighted vote, label_hit_rate@k
+on real data. Compares the four retrieval methods from loghub_eval
+(SMA, BM25, Dense RAG, KG-PPR Proxy) plus HippoRAG (B5, deterministic
+adaptation) with weighted vote, label_hit_rate@k
 and latency metrics, but WITHOUT an 80/20 split: the index set comes
 entirely from system A and the query set entirely from system B.
 
@@ -407,12 +408,18 @@ def run_transfer(
     pair_name: str,
     scorer: str = "ses",
     normalization: str = "max",
+    per_query_rows: list[dict] | None = None,
 ) -> list[dict]:
-    """Execute four-way cross-system transfer comparison.
+    """Execute five-way cross-system transfer comparison.
 
     Adapted from loghub_eval.run_evaluation but WITHOUT the 80/20 split:
     index_data is the full index set (system A), query_data the full query
     set (system B).
+
+    If ``per_query_rows`` is a list, one dict per (query, method) is appended
+    to it -- query_id, true/pred label (the macro-F1 inputs) and per-query
+    hit@{1,5,10} -- so callers such as scripts/confirmatory_battery.py can run
+    paired per-query statistics. Returned summary rows are unchanged.
     """
     split_name = f"{pair_name}[{scorer}]"
     print(
@@ -469,6 +476,12 @@ def run_transfer(
         for ic in index_cases
     }
 
+    # 5. Build HippoRAG index (B5: phrase graph + Personalized PageRank)
+    print("Building HippoRAG Index...")
+    from sma.eval.baselines.hipporag import HippoRAGRetriever
+    hipporag_index = HippoRAGRetriever()
+    hipporag_index.build(index_docs)
+
     # Per-query ranked retrieval for each method, as (case_id, score) pairs.
     def retrieve_sma(q_case, q_text):
         # shortlist=40, fac_budget=20 keeps CPU latency bounded
@@ -497,6 +510,9 @@ def run_transfer(
         )
         return ranked[:10]
 
+    def retrieve_hipporag(q_case, q_text):
+        return hipporag_index.retrieve(q_text, k=10)
+
     def weighted_vote(ranked, top=5):
         voting = {"Anomaly": 0.0, "Normal": 0.0}
         for case_id, score in ranked[:top]:
@@ -508,6 +524,7 @@ def run_transfer(
         "BM25": retrieve_bm25,
         "Dense RAG": retrieve_dense,
         "KG-PPR Proxy": retrieve_kg,
+        "HippoRAG": retrieve_hipporag,
     }
     methods = list(retrievers)
     metrics_by_method = {m: {"recalls": [], "preds": [], "latencies": []} for m in methods}
@@ -561,6 +578,18 @@ def run_transfer(
             r1_list.append(compute_hit_rate_k(1))
             r5_list.append(compute_hit_rate_k(5))
             r10_list.append(compute_hit_rate_k(10))
+
+            if per_query_rows is not None:
+                per_query_rows.append({
+                    "split": split_name,
+                    "method": m,
+                    "query_id": q_case.case_id,
+                    "true_label": q_label,
+                    "pred_label": preds[q_idx],
+                    "hit@1": r1_list[-1],
+                    "hit@5": r5_list[-1],
+                    "hit@10": r10_list[-1],
+                })
 
         r1 = sum(r1_list) / len(r1_list)
         r5 = sum(r5_list) / len(r5_list)
@@ -655,11 +684,13 @@ SYSTEMS = {
 }
 
 
-def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path, normalization="max"):
+def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path,
+                    normalization="max", per_query_rows=None):
     """Run a comma-separated list of "A->B" transfer pairs (e.g.
     "BGL->Spirit,HDFS->Spirit") with an explicit seed, appending rows to
     out_path. Additive entry point used by --pairs; the default (no --pairs)
-    code path in main() is unchanged."""
+    code path in main() is unchanged. ``per_query_rows`` is threaded through
+    to run_transfer (see there); the summary rows are also returned."""
     raw_dir = pathlib.Path("data/raw/loghub_raw")
     all_rows = []
     sample_cache = {}  # (system, size, seed) -> sampled sessions
@@ -704,9 +735,11 @@ def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path, 
             print(f"Skipping pair '{pair}': empty index or query sample.")
             continue
         pair_name = f"{SYSTEMS[src][2]}->{SYSTEMS[dst][2]}[seed{seed}]"
-        all_rows.extend(run_transfer(index_data, query_data, pair_name, scorer=scorer, normalization=normalization))
+        all_rows.extend(run_transfer(index_data, query_data, pair_name, scorer=scorer,
+                                     normalization=normalization, per_query_rows=per_query_rows))
 
     append_transfer_rows(all_rows, out_path)
+    return all_rows
 
 
 def main() -> None:

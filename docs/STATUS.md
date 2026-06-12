@@ -427,3 +427,25 @@ Append-only progress log. Each work session must reread
   fused.
 - Tagged prereg-v1. From this commit on, development numbers are exploratory;
   only post-tag protocol runs are confirmatory. 30/30 tests.
+
+## 2026-06-12 (Phase 3: comparators + confirmatory battery built)
+
+- B5 comparator: sma/eval/baselines/hipporag.py - HippoRAG-2-style phrase
+  graph + personalized PageRank (damping 0.5, synonym edges, document-node
+  scoring as published); LLM OpenIE substituted with deterministic rule-based
+  per-line triple extraction (substitution documented in the module docstring
+  for reviewers). Wired into transfer_eval as the fifth method; 5 unit tests.
+- sma/eval/stats.py: pre-registered statistics - per-query paired bootstrap
+  (10k resamples, 95% percentile CI, two-sided p), Holm-Bonferroni step-down,
+  exact Cliff's delta; 15 unit tests.
+- scripts/confirmatory_battery.py: single-shot runner mapping prereg section
+  4 one-to-one (T1 transfer 3 legs, T2 family+triage, T3 BugsInPy LOPO, T4
+  Liberty out-of-corpus needles from the 60M-80M line region, SSB 41/43
+  n=100). Refuses to rerun existing outputs without --force-rerun-logged;
+  --smoke exercises plumbing on validation seeds 7/29 only. All five tasks
+  smoke-tested green; suite 50/50.
+- Paper: NeurIPS 2025 template vendored (target NeurIPS 2026; Nature MI
+  free-format alternative); manuscript skeleton compiles; figure/table
+  uniqueness guards added to make_paper_assets.py; GRAPHICS_STACK.md saved.
+- NEXT (launching now): python3 -u scripts/confirmatory_battery.py --task all
+  - the single shot. Estimated 3.5-5.5 h.
