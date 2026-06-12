@@ -1,0 +1,84 @@
+\documentclass{article}
+
+% Toggle: [preprint] for arXiv, [final] for camera-ready, bare for anonymous
+% NeurIPS submission (line numbers, no author block).
+\usepackage[preprint]{neurips_2025}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{nicefrac}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{xcolor}
+
+\graphicspath{{../figures/}}
+
+\title{Structure-Mapping Agentic Memory: Analogical Retrieval as an
+Alternative to Lexical and Embedding Search}
+
+\author{%
+  Ayaz Khan\\
+  Columbia University\\
+  \texttt{aak2259@columbia.edu}\\
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  % ~150-250 words. Written last, from the confirmatory numbers only.
+  TODO after confirmatory battery: claims H1--H6 with pre-registered
+  statistics (configs/preregistration.md, tag \texttt{prereg-v1}).
+\end{abstract}
+
+\section{Introduction}
+% Positioning per docs/POSITIONING.md: retrieval by relational structure
+% (SME/MAC-FAC lineage) vs surface similarity; cite-or-abstain agency.
+
+\section{Related work}
+% SME, MAC/FAC, ARN; RAG (BM25/dense/hybrid+rerank), HippoRAG 2 (compared),
+% GraphRAG (related work only), KG retrieval, log anomaly detection.
+
+\section{Method}
+% IR + Tier-0 deterministic encoders; MAC content vectors with certified
+% Lemma-2 bound; SME alignment (kernels, parallel connectivity, MWIS merge,
+% trickle-down SES); surprisal scoring (score-v2); predicate-lattice
+% minimal ascension; LLM-drafted residual adapters with coverage tripwire.
+% Figures: ../diagrams/architecture.mmd, tiered_retrieval.mmd (render to PDF).
+
+\section{Experimental setup}
+% Datasets, leakage discipline, frozen ontology-v1, preregistration
+% (seeds 201-205; paired bootstrap, Holm-Bonferroni, Cliff's delta).
+
+\section{Results}
+% Tables/figures generated ONLY by scripts/make_paper_assets.py from
+% confirmatory CSVs in reports/confirmatory/. No hand-typed numbers.
+
+\section{Analysis}
+% Decomposition (representation vs alignment), rare-family leverage,
+% haystack posture (hybrid fused), honest deflations (HDFS common).
+
+\section{Limitations}
+% Encoder dependence, log-domain breadth, latency at scale (Phase 5).
+
+\section{Conclusion}
+
+\begin{ack}
+TODO.
+\end{ack}
+
+\bibliographystyle{plainnat}
+% \bibliography{references}
+
+\appendix
+
+\section{Reproducibility}
+% Tags: ontology-v1, prereg-v1; single-shot run log from docs/STATUS.md.
+
+\end{document}
