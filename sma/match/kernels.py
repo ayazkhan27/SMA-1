@@ -18,6 +18,7 @@ def build_kernels(
     target: Case,
     config: MatchConfig | None = None,
     canon: Canonicalizer | None = None,
+    cost_fn=None,
 ) -> tuple[Kernel, ...]:
     config = config or MatchConfig()
     canon = canon or default_canonicalizer()
@@ -43,7 +44,7 @@ def build_kernels(
         if key in seen:
             continue
         seen.add(key)
-        weight = structural_evaluation(closure, gamma=config.gamma)
+        weight = structural_evaluation(closure, gamma=config.gamma, cost_fn=cost_fn)
         kernels.append(Kernel(seed, closure, weight=weight))
     return tuple(kernels)
 

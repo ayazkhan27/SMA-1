@@ -199,3 +199,13 @@ Append-only progress log. Each work session must reread
   WL prefilter within-system, SME for cross-system + provenance/inference.
 - Production-RAG question closed: the deployed stack (hybrid+rerank) does
   not transfer (0.59 vs 0.94).
+
+## 2026-06-12 (Phases 2-6 greenlit)
+
+- User approved proceeding through all phases; Phase 1 declared complete.
+- Phase 2 begins: surprisal-weighted trickle-down scorer ("surprisal") joins
+  the codebase as score-v2 candidate - SES geometry with MDL corpus-surprisal
+  weights (sigma_0 = -log2 p(functor) instead of 1; reduces exactly to SES
+  when no corpus stats). Gauntlet: SES vs MDL vs RRF(SES,MDL) vs surprisal on
+  family-hit (common + rare strata), the EOF micro-case, BGL->Spirit transfer,
+  and the canonical battery. Winner becomes score-v2 by measurement, not fiat.

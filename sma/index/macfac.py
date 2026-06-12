@@ -38,31 +38,68 @@ class MacFacIndex:
         self.cases[case.case_id] = case
         self.ann.add(case.case_id, vector)
         self.inverted.add(case.case_id, vector)
+        if self.config.functor_costs is not None:
+            # Corpus changed; surprisal costs and cached scores are stale.
+            self.config.functor_costs = None
+            self._score_cache.clear()
 
     def build(self, cases: list[Case]) -> None:
         for case in cases:
             self.add(case)
 
+    def corpus_costs(self) -> dict[str, float]:
+        """Corpus surprisal (-log2 p, KT-smoothed) per canonical functor."""
+        import math
+        from collections import Counter
+
+        counts: Counter[str] = Counter()
+        for vector in self.inverted.vectors.values():
+            for feature, n in vector.items():
+                if feature.startswith("f:"):
+                    counts[feature[2:]] += n
+        total = sum(counts.values())
+        vocab = max(len(counts), 1)
+        return {
+            functor: -math.log2((count + 0.5) / (total + 0.5 * vocab))
+            for functor, count in counts.items()
+        }
+
     def retrieve(
         self, query: Case, k: int = 10, shortlist: int = 200, fac_budget: int | None = None
     ) -> list[RetrievalResult]:
+        if self.config.scorer == "surprisal" and self.config.functor_costs is None:
+            # Lazily derive costs from the indexed corpus; deterministic given
+            # contents. Stale after add() — cleared there.
+            self.config.functor_costs = self.corpus_costs()
         qvec = functor_vector(query, canon=self.canon)
         ann_ids = [case_id for case_id, _ in self.ann.search(qvec, k=min(shortlist, len(self.cases)))]
         if not ann_ids:
             ann_ids = sorted(self.inverted.candidates(qvec))
+        bound_costs = self.config.functor_costs if self.config.scorer == "surprisal" else None
         bounded = [
-            (case_id, self.inverted.bound(qvec, case_id, max_score_per_mh=4.0)) for case_id in ann_ids
+            (case_id, self.inverted.bound(qvec, case_id, max_score_per_mh=4.0, costs=bound_costs))
+            for case_id in ann_ids
         ]
         bounded.sort(key=lambda row: (-row[1], row[0]))
         # ses_n = score / max(self(base), self(target)) <= U_bound / self(target),
         # so dividing the raw-score bound by the query's self-score gives an
-        # admissible bound in ses_n units. The MDL scorer has no such bound, so
-        # it never early-stops on bounds (budget only).
-        ses_n_denom = (
-            max(self_score(query, gamma=self.config.gamma), 1e-9)
-            if self.config.scorer == "ses"
-            else None
-        )
+        # admissible bound in ses_n units (weighted consistently for the
+        # surprisal scorer). The MDL scorer has no such bound, so it never
+        # early-stops on bounds (budget only).
+        ses_n_denom = None
+        if self.config.scorer in ("ses", "surprisal"):
+            cost_fn = None
+            if bound_costs:
+                costs = bound_costs
+
+                def cost_fn(mh):
+                    from sma.ir.schema import Statement
+
+                    if isinstance(mh.base, Statement):
+                        return costs.get(self.canon.canonical(mh.base.functor), 1.0)
+                    return 1.0
+
+            ses_n_denom = max(self_score(query, gamma=self.config.gamma, cost_fn=cost_fn), 1e-9)
         scored: list[tuple[str, float, float, float]] = []
         kth_ses_n = float("-inf")
         n_examined = 0

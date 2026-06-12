@@ -94,7 +94,10 @@ class MatchConfig:
     gamma: float = 0.25
     rho: float = 0.5
     delta: int = 0
-    scorer: str = "ses"
+    scorer: str = "ses"  # "ses" | "mdl" | "surprisal"
+    # Corpus surprisal per canonical functor (-log2 p), supplied by the index
+    # for scorer="surprisal"; None means unit weights (identical to "ses").
+    functor_costs: dict | None = None
     exact_kernel_limit: int = 60
     cpsat_time_ms: int = 20
     # Tripwire response from blueprint section 10.2: cap MH pairs per functor

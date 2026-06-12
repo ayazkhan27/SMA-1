@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from sma.ir.canon import Canonicalizer, default_canonicalizer
-from sma.ir.schema import Case
+from sma.ir.schema import Case, Statement
 
 from .kernels import build_kernels
 from .mdl import mdl_gain
@@ -20,7 +20,16 @@ def match_cases(
 ) -> GMap:
     config = config or MatchConfig()
     canon = canon or default_canonicalizer()
-    kernels = build_kernels(base, target, config=config, canon=canon)
+    cost_fn = None
+    if config.scorer == "surprisal" and config.functor_costs:
+        costs = config.functor_costs
+
+        def cost_fn(mh):
+            if isinstance(mh.base, Statement):
+                return costs.get(canon.canonical(mh.base.functor), 1.0)
+            return 1.0
+
+    kernels = build_kernels(base, target, config=config, canon=canon, cost_fn=cost_fn)
     selected, gap = exact_or_greedy_merge(
         kernels, exact_limit=config.exact_kernel_limit, time_budget_ms=config.cpsat_time_ms
     )
@@ -33,8 +42,8 @@ def match_cases(
         score = mdl_gain(hypotheses, target)
         normalized = score / max(len(target.expressions()), 1)
     else:
-        score = structural_evaluation(hypotheses, gamma=config.gamma)
-        normalized = normalize_score(score, base, target, gamma=config.gamma)
+        score = structural_evaluation(hypotheses, gamma=config.gamma, cost_fn=cost_fn)
+        normalized = normalize_score(score, base, target, gamma=config.gamma, cost_fn=cost_fn)
     return GMap(
         base=base,
         target=target,

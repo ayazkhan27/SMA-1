@@ -14,8 +14,28 @@ def histogram_intersection(left: Vector, right: Vector) -> int:
     return sum(min(value, right.get(key, 0)) for key, value in left.items())
 
 
-def ses_upper_bound(left: Vector, right: Vector, max_score_per_mh: float = 2.0) -> float:
-    return max_score_per_mh * histogram_intersection(left, right)
+def ses_upper_bound(
+    left: Vector, right: Vector, max_score_per_mh: float = 2.0, costs: dict | None = None
+) -> float:
+    """Admissible bound on the (optionally surprisal-weighted) SES score.
+
+    Unweighted: max_score_per_mh * histogram intersection (Lemma 2). With
+    costs, each shared functor occurrence may carry at most cost * s-bar, so
+    'f:' features are cost-weighted; WL features keep weight 1, which only
+    adds slack (still admissible, blueprint section 2.7 weighted form).
+    """
+    if costs is None:
+        return max_score_per_mh * histogram_intersection(left, right)
+    if len(left) > len(right):
+        left, right = right, left
+    total = 0.0
+    for key, value in left.items():
+        shared = min(value, right.get(key, 0))
+        if not shared:
+            continue
+        weight = costs.get(key[2:], 1.0) if key.startswith("f:") else 1.0
+        total += weight * shared
+    return max_score_per_mh * total
 
 
 @dataclass
@@ -34,6 +54,10 @@ class InvertedIndex:
             out.update(self.postings.get(feature, ()))
         return out
 
-    def bound(self, query: Vector, case_id: str, max_score_per_mh: float = 2.0) -> float:
-        return ses_upper_bound(query, self.vectors[case_id], max_score_per_mh=max_score_per_mh)
+    def bound(
+        self, query: Vector, case_id: str, max_score_per_mh: float = 2.0, costs: dict | None = None
+    ) -> float:
+        return ses_upper_bound(
+            query, self.vectors[case_id], max_score_per_mh=max_score_per_mh, costs=costs
+        )
 
