@@ -126,11 +126,14 @@ def evidence_items_html(evidence: list[dict]) -> str:
             f'<span class="sma-label {"bad" if label == "Anomaly" else "good"}">{html.escape(label)}</span>'
             if label else ""
         )
+        alignment = (
+            f'<br><b>{html.escape(row["alignment"])}</b>' if row.get("alignment") else ""
+        )
         items.append(
             '<div class="sma-ev-item">'
             f'<div class="sma-ev-meta">{html.escape(row.get("source_id", ""))}{label_chip} · '
             f'score={html.escape(str(row.get("score", "")))}<br>'
-            f'{html.escape(row.get("provenance", ""))}</div>'
+            f'{html.escape(row.get("provenance", ""))}{alignment}</div>'
             f'<div class="sma-ev-text">{html.escape(row.get("text", ""))}</div>'
             f"{inferences}</div>"
         )

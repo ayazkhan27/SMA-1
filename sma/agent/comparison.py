@@ -21,6 +21,7 @@ from sma.encoders import get_encoder
 from sma.index.macfac import MacFacIndex
 from sma.ir.schema import Case
 from sma.match.engine import match_cases
+from sma.match.explain import alignment_summary
 from sma.match.infer import candidate_inferences
 from sma.match.types import MatchConfig
 
@@ -175,6 +176,7 @@ class ComparisonFramework:
                     "text": item.text,
                     "provenance": f"case={item.case.case_id}; ses_n={result.ses_n:.4f}; certified={result.certified}",
                     "mode_detail": "SME mapping + MAC/FAC retrieval",
+                    "alignment": alignment_summary(gmap),
                     "inferences": [inf.inference_sexpr for inf in inferences[:3]],
                 }
             )
