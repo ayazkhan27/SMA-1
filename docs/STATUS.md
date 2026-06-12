@@ -405,3 +405,25 @@ Append-only progress log. Each work session must reread
   parameter (8.6) with this as its registered prior. Gate G4 rewritten as
   test_macfac_lattice_bridges_disjoint_vocabularies (asserts ZERO surface
   overlap, lattice-only bridging). 30/30 tests.
+
+## 2026-06-12 (Phase 3: calibration grid + FREEZE at prereg-v1)
+
+- Calibration grid (scripts/calibrate.py): 24 configs (scorer x normalization
+  x gamma x rho) on VALIDATION data only - HDFS seed-7 sample (500 sessions,
+  family-hit common/rare), de-circularized SSB seeds 29/31 (r1), Liberty
+  leave-one-out needle probes. Test seeds untouched. Full table in
+  reports/calibration_grid.csv.
+- Result is decisive and matches the shipped defaults: surprisal beats ses on
+  family-common (0.8491 vs 0.8415, ties elsewhere); max beats target on both
+  family (0.849 vs 0.800) and LOO-haystack (0.92 vs 0.90); gamma flat
+  (0.125/0.25/0.5) - blueprint 0.25 kept; rho=0.95 is the only value with
+  SSB r1 = 1.0 across the board (0.90 drops surprisal/max configs to 0.79).
+- MatchConfig.rho default aligned 0.5 -> 0.95 (inert when delta=0; binding
+  for lattice adapters). configs/preregistration.md rewritten in full:
+  frozen dials + evidence, H1-H6, leakage discipline, single-shot test
+  protocol (seeds 201-205, SSB 41/43, never used in development), statistics
+  (paired bootstrap 10k, Holm-Bonferroni, Cliff's delta). Registered caveat:
+  LOO-haystack favors max-norm, out-of-corpus haystack posture is hybrid
+  fused.
+- Tagged prereg-v1. From this commit on, development numbers are exploratory;
+  only post-tag protocol runs are confirmatory. 30/30 tests.

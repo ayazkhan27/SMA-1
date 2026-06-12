@@ -1,0 +1,26 @@
+loading validation data (seed 7, disjoint from test seed 42)...
+[1/24] {'scorer': 'ses', 'normalization': 'max', 'gamma': 0.125, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8415', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '35'}
+[2/24] {'scorer': 'ses', 'normalization': 'max', 'gamma': 0.125, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8415', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '35'}
+[3/24] {'scorer': 'ses', 'normalization': 'max', 'gamma': 0.25, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8415', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '35'}
+[4/24] {'scorer': 'ses', 'normalization': 'max', 'gamma': 0.25, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8415', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '35'}
+[5/24] {'scorer': 'ses', 'normalization': 'max', 'gamma': 0.5, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8377', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '34'}
+[6/24] {'scorer': 'ses', 'normalization': 'max', 'gamma': 0.5, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8377', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '34'}
+[7/24] {'scorer': 'ses', 'normalization': 'target', 'gamma': 0.125, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.7962', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '35'}
+[8/24] {'scorer': 'ses', 'normalization': 'target', 'gamma': 0.125, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.7962', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '35'}
+[9/24] {'scorer': 'ses', 'normalization': 'target', 'gamma': 0.25, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8000', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '35'}
+[10/24] {'scorer': 'ses', 'normalization': 'target', 'gamma': 0.25, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8000', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '35'}
+[11/24] {'scorer': 'ses', 'normalization': 'target', 'gamma': 0.5, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8000', 'hdfs_family_rare': '0.2000', 'haystack_needles': '0.9000', 'seconds': '34'}
+[12/24] {'scorer': 'ses', 'normalization': 'target', 'gamma': 0.5, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8000', 'hdfs_family_rare': '0.2000', 'haystack_needles': '0.9000', 'seconds': '34'}
+[13/24] {'scorer': 'surprisal', 'normalization': 'max', 'gamma': 0.125, 'rho': 0.9, 'ssb_r1': '0.7917', 'hdfs_family_common': '0.8491', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '38'}
+[14/24] {'scorer': 'surprisal', 'normalization': 'max', 'gamma': 0.125, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8491', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '38'}
+[15/24] {'scorer': 'surprisal', 'normalization': 'max', 'gamma': 0.25, 'rho': 0.9, 'ssb_r1': '0.7917', 'hdfs_family_common': '0.8491', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '38'}
+[16/24] {'scorer': 'surprisal', 'normalization': 'max', 'gamma': 0.25, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8491', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '38'}
+[17/24] {'scorer': 'surprisal', 'normalization': 'max', 'gamma': 0.5, 'rho': 0.9, 'ssb_r1': '0.7917', 'hdfs_family_common': '0.8491', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '38'}
+[18/24] {'scorer': 'surprisal', 'normalization': 'max', 'gamma': 0.5, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8491', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9200', 'seconds': '38'}
+[19/24] {'scorer': 'surprisal', 'normalization': 'target', 'gamma': 0.125, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8000', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '38'}
+[20/24] {'scorer': 'surprisal', 'normalization': 'target', 'gamma': 0.125, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8000', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '38'}
+[21/24] {'scorer': 'surprisal', 'normalization': 'target', 'gamma': 0.25, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.7962', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '38'}
+[22/24] {'scorer': 'surprisal', 'normalization': 'target', 'gamma': 0.25, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.7962', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '38'}
+[23/24] {'scorer': 'surprisal', 'normalization': 'target', 'gamma': 0.5, 'rho': 0.9, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8075', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '38'}
+[24/24] {'scorer': 'surprisal', 'normalization': 'target', 'gamma': 0.5, 'rho': 0.95, 'ssb_r1': '1.0000', 'hdfs_family_common': '0.8075', 'hdfs_family_rare': '0.3000', 'haystack_needles': '0.9000', 'seconds': '38'}
+wrote reports/calibration_grid.csv

@@ -92,14 +92,15 @@ class CandidateInference:
 @dataclass
 class MatchConfig:
     gamma: float = 0.25
-    rho: float = 0.5
+    rho: float = 0.95  # frozen at prereg-v1 (calibration grid; inert when delta=0)
     delta: int = 0
     scorer: str = "surprisal"  # "ses" | "mdl" | "surprisal" (score-v2, ADR-005)
     # Normalization of the structural score: "max" (blueprint 2.3),
     # "min" (10.2 tripwire), "sqrt" (geometric mean, cosine-style symmetric),
     # "target" (query-relative; ranking == raw-score ordering per query).
-    # max wins transfer but fails haystacks; min the reverse - the v4
-    # forensics measure all four before the calibration freeze decides.
+    # Frozen to "max" at prereg-v1 (calibration grid: beats target on family
+    # and LOO-haystack validation). Registered caveat: out-of-corpus haystack
+    # probes use hybrid fused as the production posture.
     normalization: str = "max"
     # Corpus surprisal per canonical functor (-log2 p), supplied by the index
     # for scorer="surprisal"; None means unit weights (identical to "ses").
