@@ -82,6 +82,139 @@ def save(fig, name: str):
     print(f"  fig: {name}.pdf/.png")
 
 
+# ------------------------------------ methodology figures (no result data) --
+
+BOX_KW = dict(boxstyle="round,pad=0.32", linewidth=0.7)
+
+
+def _box(ax, x, y, text, fc, ec, fontsize=5.6, w_pad=0.32):
+    ax.text(x, y, text, ha="center", va="center", fontsize=fontsize, zorder=3,
+            bbox=dict(facecolor=fc, edgecolor=ec, **BOX_KW))
+
+
+def _arrow(ax, x0, y0, x1, y1, color="0.25", style="-", lw=0.8, shrink=14):
+    ax.annotate("", xy=(x1, y1), xytext=(x0, y0), zorder=2,
+                arrowprops=dict(arrowstyle="-|>", color=color, lw=lw,
+                                linestyle=style, shrinkA=shrink, shrinkB=shrink))
+
+
+def fig_pipeline_overview():
+    """Figure 1: the SMA write/read path vs the embedding-RAG shortcut."""
+    import cmasher as cmr
+
+    c_enc, c_mac, c_fac, c_rec, c_llm = cmr.take_cmap_colors(
+        "cmr.ocean", 5, cmap_range=(0.25, 0.8), return_fmt="hex")
+    fig, ax = plt.subplots(figsize=(7.6, 2.9))
+    ax.set_xlim(0, 12.4)
+    ax.set_ylim(0, 6.2)
+    ax.axis("off")
+
+    # Lane labels (top-left of each lane, clear of the boxes)
+    ax.text(0.15, 5.7, "Embedding RAG", fontsize=6.5, color="0.35", style="italic")
+    ax.text(0.15, 3.1, "SMA (this work)", fontsize=6.5, color=c_fac, style="italic")
+    ax.axhline(3.55, color="0.85", lw=0.6, linestyle=":")
+
+    xs = [1.8, 4.0, 6.2, 8.4, 10.7]
+
+    # --- RAG lane (gray): retrieval by what things LOOK like ---
+    rag = [
+        "query\n(text)",
+        "text encoder\n$\\rightarrow$ one vector",
+        "cosine / MIPS\ntop-$k$",
+        "top-$k$ chunks\n(no rationale)",
+        "LLM\nanswer",
+    ]
+    for x, t in zip(xs, rag):
+        _box(ax, x, 4.75, t, fc="0.96", ec="0.55", fontsize=5.4)
+    for x0, x1 in zip(xs, xs[1:]):
+        _arrow(ax, x0 + 0.35, 4.75, x1 - 0.35, 4.75, color="0.55")
+    ax.text(6.2, 3.85, "matches surface vocabulary", fontsize=5.2,
+            color="0.45", ha="center", style="italic")
+
+    # --- SMA lane: retrieval by what things ARE like ---
+    sma = [
+        ("artifact\n(logs $\\cdot$ code $\\cdot$ text)", "white", "0.3"),
+        ("Tier-0 encoder\nrules $\\rightarrow$ predicate\nstructure", c_enc, c_enc),
+        ("MAC shortlist\ncontent vectors,\ncertified bound", c_mac, c_mac),
+        ("FAC: SME alignment\nkernels $\\rightarrow$ merge,\nsystematicity score", c_fac, c_fac),
+        ("LLM answers\nfrom receipts:\ncite or abstain", c_llm, c_llm),
+    ]
+    for x, (t, fc, ec) in zip(xs, sma):
+        _box(ax, x, 2.1, t, fc=fc if fc == "white" else fc + "30", ec=ec, fontsize=5.4)
+    for x0, x1 in zip(xs, xs[1:]):
+        _arrow(ax, x0 + 0.45, 2.1, x1 - 0.45, 2.1, shrink=18)
+    ax.text(8.4, 0.55,
+            "alignment receipts: correspondences $\\cdot$ structural score $\\cdot$ candidate inferences",
+            fontsize=5.2, ha="center", color=c_rec,
+            bbox=dict(facecolor="white", edgecolor=c_rec, boxstyle="round,pad=0.25", lw=0.6))
+    _arrow(ax, 8.4, 1.45, 8.4, 1.0, color=c_rec)
+    ax.text(2.9, 0.55, "matches relational structure", fontsize=5.2,
+            color=c_fac, ha="center", style="italic")
+    ax.set_title("Retrieval by surface similarity (RAG) vs. retrieval by structure (SMA)",
+                 fontsize=7)
+    stamp(fig)
+    save(fig, "fig_pipeline_overview")
+
+
+def fig_structure_mapping():
+    """Figure 2: one SME alignment across systems with zero shared vocabulary,
+    including the projected candidate inference (what RAG cannot emit)."""
+    import cmasher as cmr
+
+    c_base, c_tgt, c_inf = cmr.take_cmap_colors(
+        "cmr.ocean", 3, cmap_range=(0.3, 0.75), return_fmt="hex")
+    c_inf = "#b3403a"
+    fig, ax = plt.subplots(figsize=(7.2, 3.3))
+    ax.set_xlim(0, 10)
+    ax.set_ylim(0, 6.4)
+    ax.axis("off")
+
+    ax.text(2.1, 6.05, "Base: stored BGL incident", fontsize=6.5, ha="center",
+            color=c_base)
+    ax.text(7.9, 6.05, "Target: new Spirit session (query)", fontsize=6.5,
+            ha="center", color=c_tgt)
+
+    base = [(2.1, 4.9, "timeoutEvent(R63-M0, treeLink)"),
+            (2.1, 3.3, "retryEvent(R63-M0, treeLink)"),
+            (2.1, 1.7, "failureEvent(R63-M0)")]
+    tgt = [(7.9, 4.9, "timeoutEvent(sn-a12, fabric)"),
+           (7.9, 3.3, "retryEvent(sn-a12, fabric)")]
+    for x, y, t in base:
+        _box(ax, x, y, t, fc=c_base + "28", ec=c_base, fontsize=5.8)
+    for x, y, t in tgt:
+        _box(ax, x, y, t, fc=c_tgt + "28", ec=c_tgt, fontsize=5.8)
+
+    for x in (2.1, 7.9):
+        _arrow(ax, x, 4.55, x, 3.7)
+        ax.text(x + 0.18, 4.12, "cause", fontsize=5.2, color="0.35")
+    _arrow(ax, 2.1, 2.95, 2.1, 2.1)
+    ax.text(2.28, 2.5, "cause", fontsize=5.2, color="0.35")
+
+    # Candidate inference: structure projected into the target.
+    ax.text(7.9, 1.7, "failureEvent(sn-a12)", ha="center", va="center",
+            fontsize=5.8, color=c_inf,
+            bbox=dict(facecolor="white", edgecolor=c_inf, linestyle="--",
+                      boxstyle="round,pad=0.32", lw=0.9))
+    _arrow(ax, 7.9, 2.95, 7.9, 2.1, color=c_inf, style="--")
+    ax.text(7.9, 1.05, "candidate inference (status: hypothetical; verify or abstain)",
+            fontsize=5.0, color=c_inf, ha="center")
+
+    # Correspondences (the receipts).
+    for y in (4.9, 3.3):
+        ax.annotate("", xy=(6.55, y), xytext=(3.45, y),
+                    arrowprops=dict(arrowstyle="<->", color="0.45", lw=0.7,
+                                    linestyle=":", shrinkA=2, shrinkB=2))
+    ax.text(5.0, 4.45, "match hypotheses\n(legal arg-by-arg)", fontsize=5.0,
+            ha="center", color="0.4")
+    ax.text(5.0, 0.55,
+            "entity mapping: R63-M0 $\\leftrightarrow$ sn-a12 $\\cdot$ treeLink $\\leftrightarrow$ fabric"
+            "  --  zero shared names; deep cause-chains outscore flat word overlap",
+            fontsize=5.2, ha="center", color="0.25")
+    ax.set_title("SME alignment: the match itself is the explanation", fontsize=7)
+    stamp(fig)
+    save(fig, "fig_structure_mapping")
+
+
 # ----------------------------------------------------------------- figures --
 
 def fig_transfer_headline():
@@ -360,6 +493,8 @@ def main() -> int:
     for d in (FIGS, TABLES, DIAGRAMS):
         d.mkdir(parents=True, exist_ok=True)
     print(f"paper assets @ {STAMP}")
+    fig_pipeline_overview()
+    fig_structure_mapping()
     fig_transfer_headline()
     fig_decomposition()
     fig_family()
