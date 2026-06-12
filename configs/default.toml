@@ -1,0 +1,20 @@
+[scoring]
+gamma = 0.25
+rho = 0.5
+delta = 2
+scorer = "ses"
+
+[retrieval]
+shortlist = 200
+top_k = 10
+hash_dim = 8192
+
+[sage]
+assimilation_threshold = 0.25
+probability_cutoff = 0.60
+min_constituents = 3
+
+[paths]
+store = "data/processed/store"
+report = "reports/report.html"
+

@@ -1,0 +1,74 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sma"
+version = "0.1.0"
+description = "SMA-1: Structure-Mapping Agentic Memory MVP"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "SMA-1 contributors"}]
+dependencies = [
+  "blake3>=0.4",
+  "fastapi>=0.110",
+  "gradio>=4.44",
+  "hnswlib>=0.8",
+  "lmdb>=1.4",
+  "numpy>=1.26",
+  "ortools>=9.10",
+  "pydantic>=2",
+  "pytest>=8",
+  "hypothesis>=6",
+  "regex>=2024.5.15",
+  "scikit-learn>=1.5",
+  "typer>=0.12",
+  "zstandard>=0.22"
+]
+
+[project.optional-dependencies]
+encoders = [
+  "drain3>=0.9.11",
+  "tree-sitter>=0.23",
+  "tree-sitter-language-pack>=0.7",
+  "nltk>=3.9",
+  "stanza>=1.8"
+]
+eval = [
+  "langchain>=0.2",
+  "langchain-community>=0.2",
+  "rank-bm25>=0.2.2",
+  "ranx>=0.3.20",
+  "sentence-transformers>=3",
+  "statsmodels>=0.14",
+  "kuzu>=0.6"
+]
+local-llm = [
+  "huggingface-hub>=0.23",
+  "llama-cpp-python>=0.2.90"
+]
+
+[project.scripts]
+sma = "sma.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["sma*"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+markers = [
+  "gate_G0: bootstrap and artifact checks",
+  "gate_G1: IR and store checks",
+  "gate_G2: matcher checks",
+  "gate_G3: encoder checks",
+  "gate_G4: retrieval checks",
+  "gate_G5: API and provenance policy checks",
+  "gate_G6: SAGE checks",
+  "slow: long-running checks"
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

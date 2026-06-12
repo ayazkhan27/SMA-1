@@ -1,0 +1,72 @@
+{
+  "loghub_raw": {
+    "doi": "10.5281/zenodo.8196385",
+    "record_api": "https://zenodo.org/api/records/8196385",
+    "files": {
+      "HDFS_v1.zip": {
+        "md5": "76a24b4d9a6164d543fb275f89773260",
+        "url": "https://zenodo.org/api/records/8196385/files/HDFS_v1.zip/content"
+      },
+      "BGL.zip": {
+        "md5": "4452953c470f2d95fcb32d5f6e733f7a",
+        "url": "https://zenodo.org/api/records/8196385/files/BGL.zip/content"
+      },
+      "OpenStack.tar.gz": {
+        "md5": "66bd42c07837a094d9b0ea2d036b5713",
+        "url": "https://zenodo.org/api/records/8196385/files/OpenStack.tar.gz/content"
+      },
+      "Thunderbird.tar.gz": {
+        "md5": "0891b048df2919dc78c99c4428686b44",
+        "url": "https://zenodo.org/api/records/8196385/files/Thunderbird.tar.gz/content"
+      }
+    }
+  },
+  "loghub_2_oracle": {
+    "doi": "10.5281/zenodo.8275861",
+    "record_api": "https://zenodo.org/api/records/8275861",
+    "github": "https://github.com/logpai/loghub-2.0",
+    "files": {
+      "HDFS.zip": {
+        "md5": "f23880dd4938379a535ab71a8d27a798",
+        "url": "https://zenodo.org/api/records/8275861/files/HDFS.zip/content"
+      },
+      "BGL.zip": {
+        "md5": "521ee643375bb6e9d0dd88636ff7ece1",
+        "url": "https://zenodo.org/api/records/8275861/files/BGL.zip/content"
+      },
+      "OpenStack.zip": {
+        "md5": "707faeedf8b1b9f920c073114139a023",
+        "url": "https://zenodo.org/api/records/8275861/files/OpenStack.zip/content"
+      },
+      "Thunderbird.zip": {
+        "md5": "a8d365d003845c3bef61661375513910",
+        "url": "https://zenodo.org/api/records/8275861/files/Thunderbird.zip/content"
+      }
+    }
+  },
+  "bugsinpy": {
+    "git": "https://github.com/soarsmu/BugsInPy"
+  },
+  "arn": {
+    "doi": "10.5281/zenodo.11044026",
+    "record_api": "https://zenodo.org/api/records/11044026",
+    "files": {
+      "Analogical Reasoning on Narratives (ARN) dataset.xlsx - Sheet1.csv": {
+        "md5": "38484f48176fd0bfa0b569acb55f1176",
+        "url": "https://zenodo.org/api/records/11044026/files/Analogical%20Reasoning%20on%20Narratives%20(ARN)%20dataset.xlsx%20-%20Sheet1.csv/content"
+      }
+    }
+  },
+  "sme4_oracle": {
+    "source": "https://www.qrg.northwestern.edu/software/sme4/index.html",
+    "files": {
+      "sme4.zip": {
+        "url": "https://www.qrg.northwestern.edu/software/sme4/sme4.zip"
+      },
+      "sme4-corpus.zip": {
+        "url": "https://www.qrg.northwestern.edu/software/sme4/sme4-corpus.zip"
+      }
+    }
+  }
+}
+

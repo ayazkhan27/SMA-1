@@ -1,0 +1,17 @@
+{
+  "name": "solar-system/atom",
+  "expected_correspondences": [
+    ["sun", "nucleus"],
+    ["planet", "electron"],
+    ["attractsGravity(sun planet)", "attractsElectrostatic(nucleus electron)"]
+  ],
+  "base": [
+    "(attractsGravity sun planet)",
+    "(causes (attractsGravity sun planet) (orbit planet sun))"
+  ],
+  "target": [
+    "(attractsElectrostatic nucleus electron)",
+    "(causes (attractsElectrostatic nucleus electron) (orbit electron nucleus))"
+  ]
+}
+

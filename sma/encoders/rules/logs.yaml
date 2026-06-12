@@ -1,0 +1,9 @@
+# Higher-order relation rule sketch for the deterministic log encoder.
+# The MVP implements these in Python while keeping this data file as the
+# auditable adapter boundary for future expansion.
+rules:
+  - when: "timeout before retry within session"
+    emit: "cause(timeout, retry)"
+  - when: "failure before retry within session"
+    emit: "enables(failureEvent, retry)"
+

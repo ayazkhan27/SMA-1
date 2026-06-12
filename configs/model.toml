@@ -1,0 +1,14 @@
+[local_llm]
+backend = "llama_cpp"
+model_repo = "Qwen/Qwen2.5-0.5B-Instruct-GGUF"
+model_file = "qwen2.5-0.5b-instruct-q4_k_m.gguf"
+model_path = "models/qwen2.5-0.5b-instruct-q4_k_m.gguf"
+context_window = 4096
+threads = 8
+temperature = 0.2
+max_tokens = 384
+
+[policy]
+llm_role = "orchestration_and_verbalization_only"
+extraction = "deterministic_adapters_only"
+retrieval = "sma_rag_kg_deterministic_before_generation"

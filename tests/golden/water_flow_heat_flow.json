@@ -1,0 +1,19 @@
+{
+  "name": "water-flow/heat-flow",
+  "expected_correspondences": [
+    ["pressure(pipe water)", "temperature(pipe heat)"],
+    ["waterFlow(water pipe)", "heatFlow(heat pipe)"]
+  ],
+  "base": [
+    "(pressure pipe water)",
+    "(waterFlow water pipe)",
+    "(cause (pressure pipe water) (waterFlow water pipe))",
+    "(viscosity water)"
+  ],
+  "target": [
+    "(temperature pipe heat)",
+    "(heatFlow heat pipe)",
+    "(cause (temperature pipe heat) (heatFlow heat pipe))"
+  ]
+}
+
