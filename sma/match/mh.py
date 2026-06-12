@@ -104,7 +104,10 @@ def _capped_pairs(
 # count(template_B, 2) is vacuous shape-matching, not analogy - it was the
 # root cause of the Liberty haystack failure (generic bookkeeping skeleton
 # matching any session against any other).
-CONSTANT_ENTITY_TYPES = frozenset({"event_type", "integer"})
+# Integers are deliberately NOT constants: count(template_X, 3) vs
+# count(template_X, 5) is a legitimate analogy (same burst, different size);
+# the template-name constraint alone blocks the vacuous cross-template case.
+CONSTANT_ENTITY_TYPES = frozenset({"event_type"})
 
 
 def constants_compatible(b_ent: Entity, t_ent: Entity) -> bool:

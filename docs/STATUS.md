@@ -321,3 +321,24 @@ Append-only progress log. Each work session must reread
   numbers (HDFS 0.9549, family-hit, BGL->Spirit 0.93/0.92) are UNCITABLE
   until the verification battery re-runs under the new semantics. Gauntlet +
   transfer leg launched; results land in the next ledger entry.
+
+## 2026-06-13 (verification verdict: matcher semantics v3, ADR-006)
+
+- Final semantics: event_type entities are constants (match identically);
+  integers released back to variables (changed nothing empirically - the
+  template constraint alone blocks vacuous matching); MAC = weighted Lemma-2
+  bound ordering over all candidates (<=20k corpus), ANN demoted to >20k
+  scale optimization.
+- VERIFIED NUMBERS under v3 semantics (these supersede all earlier figures):
+  BGL->Spirit transfer (surprisal): macro-F1 0.8942, hit@1 0.9200 - the
+  headline SURVIVES (vs dense 0.31, BM25 0.40). HDFS family-hit@5: common
+  0.706 (surprisal) / 0.722 (ses), rare 0.700 / 0.600; BGL common 0.861;
+  EOF micro-case ses 3/5 (recovered); size-bias indicator eliminated
+  (top-5 mean lines == corpus mean).
+- HONEST DEFLATION: HDFS common dropped from 0.886-0.900 because part of
+  that score was vacuous scaffolding matching + cosine-shortlist luck. The
+  old number was partly an artifact; the new one is what the theory earns.
+- Scorer-default question (ses vs surprisal) re-opened by EOF flip (ses 3/5,
+  surprisal 0/5) - deferred to the calibration phase with full re-gauntlet.
+- Liberty haystack remains 0/5 pending the normalization forensics (raw
+  ordering now correct; ses_n>1 min-norm anomaly is the isolated open item).
