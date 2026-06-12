@@ -25,6 +25,10 @@ class RetrievalResult:
 
 
 class MacFacIndex:
+    # Below this corpus size the admissible bound orders ALL candidates
+    # directly; above it the ANN cosine pre-screen trims first (scale only).
+    ANN_THRESHOLD = 20000
+
     def __init__(self, config: MatchConfig | None = None, canon: Canonicalizer | None = None):
         self.config = config or MatchConfig()
         self.canon = canon or default_canonicalizer()
@@ -72,15 +76,30 @@ class MacFacIndex:
             # contents. Stale after add() — cleared there.
             self.config.functor_costs = self.corpus_costs()
         qvec = functor_vector(query, canon=self.canon)
-        ann_ids = [case_id for case_id, _ in self.ann.search(qvec, k=min(shortlist, len(self.cases)))]
-        if not ann_ids:
-            ann_ids = sorted(self.inverted.candidates(qvec))
         bound_costs = self.config.functor_costs if self.config.scorer == "surprisal" else None
+        # Lemma 2: the weighted histogram-intersection bound IS the admissible
+        # MAC ordering. Up to ANN_THRESHOLD cases we bound-order everything
+        # directly (the Liberty haystack showed cosine pre-screening can drop
+        # the true positives the bound ordering ranks first); beyond it, the
+        # ANN cosine pre-screen trims the candidate set for tractability.
+        if len(self.cases) <= self.ANN_THRESHOLD:
+            candidate_ids = set(self.inverted.candidates(qvec))
+            if len(candidate_ids) < min(shortlist, len(self.cases)):
+                # Zero-overlap cases still belong in the candidate pool (bound
+                # 0, scored only if budget reaches them) so top-k cardinality
+                # matches brute force on tiny/disjoint corpora.
+                candidate_ids = set(self.cases)
+        else:
+            candidate_ids = {
+                case_id
+                for case_id, _ in self.ann.search(qvec, k=min(max(shortlist * 5, 1000), len(self.cases)))
+            }
         bounded = [
             (case_id, self.inverted.bound(qvec, case_id, max_score_per_mh=4.0, costs=bound_costs))
-            for case_id in ann_ids
+            for case_id in candidate_ids
         ]
         bounded.sort(key=lambda row: (-row[1], row[0]))
+        bounded = bounded[: max(shortlist, 1)]
         # ses_n = score / max(self(base), self(target)) <= U_bound / self(target),
         # so dividing the raw-score bound by the query's self-score gives an
         # admissible bound in ses_n units (weighted consistently for the

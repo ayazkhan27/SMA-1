@@ -297,3 +297,27 @@ Append-only progress log. Each work session must reread
   ontology covers stock Linux syslog at ~100% median coverage. The recursion
   terminates when the rulebook already speaks the dialect; drafting is for
   genuinely alien vocabularies (the watcher demo).
+
+## 2026-06-13 (Phase 3 forensics, part 1: constants constraint + bound-ordered MAC)
+
+- ROOT CAUSE 1 FIXED (vacuous scaffolding): constant-like entities
+  (event_type template names, integers) now match only identically
+  (CONSTANT_ENTITY_TYPES in mh.py; kernels pairing unequal constants are
+  discarded). Effect measured on Liberty: vacuous tiny-normal raw scores
+  101.7 -> 13.2; needle raw scores now BEAT small normals (23.5 vs 13.2).
+  Blueprint 2.1 entities-vs-constants discipline, previously unimplemented.
+- ROOT CAUSE 2 FIXED (MAC recall): retrieval now bound-orders ALL candidates
+  via the weighted Lemma-2 inverted index for corpora <= 20k cases (ANN
+  cosine pre-screen demoted to a >20k scale optimization; it was keeping
+  1/250 needles in top-200 while bound ordering had 21 in its top-30).
+  Zero-overlap candidate padding keeps brute-force parity (gate G4 green).
+- STILL OPEN: haystack top-5 remains 0/5 because max-normalization divides
+  needle scores by their own 60-line bulk (raw ordering is now correct;
+  ses_n ordering inverts it), and min-normalization exhibits ses_n > 1 on
+  cross-matches (score exceeding self-score) - a trickle-down arithmetic
+  anomaly under forensic investigation. Until resolved, normalization
+  default stays "max" and the haystack failure stands as documented.
+- DISCIPLINE: these are matcher-semantics changes. ALL previously reported
+  numbers (HDFS 0.9549, family-hit, BGL->Spirit 0.93/0.92) are UNCITABLE
+  until the verification battery re-runs under the new semantics. Gauntlet +
+  transfer leg launched; results land in the next ledger entry.

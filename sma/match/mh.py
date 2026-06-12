@@ -98,12 +98,30 @@ def _capped_pairs(
     return pairs
 
 
-def support_closure(root: MatchHypothesis) -> tuple[MatchHypothesis, ...]:
+# Entity types whose names are CONSTANTS, not variables (blueprint 2.1:
+# entities/constants are distinct vocabulary classes). A template-name or
+# integer entity denotes itself; pairing count(template_A, 3) with
+# count(template_B, 2) is vacuous shape-matching, not analogy - it was the
+# root cause of the Liberty haystack failure (generic bookkeeping skeleton
+# matching any session against any other).
+CONSTANT_ENTITY_TYPES = frozenset({"event_type", "integer"})
+
+
+def constants_compatible(b_ent: Entity, t_ent: Entity) -> bool:
+    if b_ent.type in CONSTANT_ENTITY_TYPES and t_ent.type in CONSTANT_ENTITY_TYPES:
+        return b_ent.name == t_ent.name
+    return True
+
+
+def support_closure(root: MatchHypothesis) -> tuple[MatchHypothesis, ...] | None:
+    """Downward closure of a root MH; None when it pairs unequal constants."""
     out: list[MatchHypothesis] = []
     seen: set[tuple[str, str]] = set()
+    bad = False
 
     def add(mh: MatchHypothesis) -> None:
-        if mh.key in seen:
+        nonlocal bad
+        if bad or mh.key in seen:
             return
         seen.add(mh.key)
         out.append(mh)
@@ -112,9 +130,12 @@ def support_closure(root: MatchHypothesis) -> tuple[MatchHypothesis, ...]:
                 return
             for b_arg, t_arg in zip(mh.base.args, mh.target.args, strict=True):
                 if isinstance(b_arg, Entity) and isinstance(t_arg, Entity):
+                    if not constants_compatible(b_arg, t_arg):
+                        bad = True
+                        return
                     add(MatchHypothesis(b_arg, t_arg))
                 elif isinstance(b_arg, Statement) and isinstance(t_arg, Statement):
                     add(MatchHypothesis(b_arg, t_arg, ascension=mh.ascension))
 
     add(root)
-    return tuple(out)
+    return None if bad else tuple(out)

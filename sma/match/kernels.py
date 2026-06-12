@@ -38,6 +38,10 @@ def build_kernels(
         if seed.key in child_keys:
             continue
         closure = support_closure(seed)
+        if closure is None:
+            # Root pairs unequal constants (e.g. different template-name
+            # entities under count): structurally impossible, discard.
+            continue
         if not structurally_consistent(closure):
             continue
         key = tuple(sorted(mh.key for mh in closure))
