@@ -48,10 +48,11 @@ class Canonicalizer:
     lattice: PredicateLattice = field(default_factory=PredicateLattice)
 
     def canonical(self, symbol: str) -> str:
+        # NOTE: this used to strip "far_"/"near_" prefixes - a circularity
+        # with the old SSB generator (the benchmark's vocabulary bijection
+        # was known to the matcher). Removed: cross-vocabulary matching now
+        # goes exclusively through the lattice with ascension penalties.
         symbol = safe_symbol(symbol)
-        for prefix in ("far_", "near_"):
-            if symbol.startswith(prefix):
-                symbol = symbol.removeprefix(prefix)
         seen: set[str] = set()
         while symbol in self.aliases and symbol not in seen:
             seen.add(symbol)

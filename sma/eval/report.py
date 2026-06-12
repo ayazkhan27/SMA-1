@@ -115,9 +115,14 @@ def _ssb_case_rows(n: int, seed: int) -> list[dict]:
 
 
 def _mapping_rows(n: int, seed: int) -> list[dict]:
+    from sma.eval.ssb_generator import build_canonicalizer
+    from sma.eval.ssb_eval import ssb_config
+
     rows: list[dict] = []
-    for i, triple in enumerate(generate_triples(n, seed=seed)):
-        gmap = match_cases(triple.analog, triple.query)
+    triples = generate_triples(n, seed=seed)
+    canon = build_canonicalizer(triples)
+    for i, triple in enumerate(triples):
+        gmap = match_cases(triple.analog, triple.query, config=ssb_config(), canon=canon)
         rows.append(
             {
                 "run_id": "ssb_forced_choice_oracle_mapping",

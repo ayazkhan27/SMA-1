@@ -13,13 +13,28 @@ Vector = Counter[str]
 
 
 def functor_vector(
-    case: Case, wl: bool = True, canon: Canonicalizer | None = None, canonicalize: bool = True
+    case: Case,
+    wl: bool = True,
+    canon: Canonicalizer | None = None,
+    canonicalize: bool = True,
+    delta: int = 0,
 ) -> Vector:
+    """MAC content vector: canonical functor counts + WL-1 features.
+
+    With delta > 0, each functor also contributes its lattice ancestors within
+    delta steps (blueprint 2.7: counts over the <=delta ancestor closure), so
+    vocabularies bridged only by the lattice still intersect at the MAC stage.
+    Ancestor features only ADD mass, keeping the Lemma-2 bound admissible.
+    """
     canon = canon or default_canonicalizer()
     counts: Vector = Counter()
     for expr in case.expressions():
         functor = canon.canonical(expr.functor) if canonicalize else expr.functor
         counts[f"f:{functor}"] += 1
+        if delta:
+            for ancestor, dist in canon.lattice.ancestors(functor, delta).items():
+                if ancestor != functor:
+                    counts[f"f:{ancestor}"] += 1
         if wl:
             for i, arg in enumerate(expr.args):
                 if isinstance(arg, Statement):

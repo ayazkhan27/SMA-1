@@ -7,6 +7,15 @@ from dataclasses import dataclass
 
 from sma.index.macfac import MacFacIndex
 from sma.index.content_vectors import functor_vector, cosine
+from sma.match.types import MatchConfig
+from sma.eval.ssb_generator import build_canonicalizer
+
+# SSB matching crosses disjoint vocabularies bridged only by the generated
+# lattice: delta=2 reaches the shared concept; rho=0.95 is a pre-calibration
+# default (section 8.6 fits it properly), high enough that a full deep system
+# at rho^2 penalty still dominates a flat same-vocabulary distractor.
+def ssb_config() -> MatchConfig:
+    return MatchConfig(delta=2, rho=0.95)
 from sma.ir.sexpr import canonical_case_text
 from sma.eval.baselines.bm25 import rank_bm25_like
 from sma.eval.baselines.dense import rank_tfidf_dense, rank_tfidf_dense_batch
@@ -27,7 +36,7 @@ def evaluate_forced_choice(n: int = 12, seed: int = 11) -> RetrievalEval:
     ranks: list[int] = []
     start = time.perf_counter()
     for i, triple in enumerate(triples):
-        index = MacFacIndex()
+        index = MacFacIndex(config=ssb_config(), canon=build_canonicalizer([triple]))
         index.build([triple.analog, triple.distractor])
         results = index.retrieve(triple.query, k=2, shortlist=2)
         rank = rank_of(results, triple.analog.case_id)
@@ -57,7 +66,7 @@ def evaluate_library(
         documents.append((triple.analog.case_id, canonical_case_text(triple.analog.statements)))
         documents.append((triple.distractor.case_id, canonical_case_text(triple.distractor.statements)))
 
-    index = MacFacIndex()
+    index = MacFacIndex(config=ssb_config(), canon=build_canonicalizer(triples))
     index.build(library_cases)
     sma_rows: list[dict] = []
     sma_ranks: list[int] = []
@@ -110,7 +119,8 @@ def evaluate_library_mac_prefilter(n: int = 1000, seed: int = 23, k: int = 10) -
         library.extend([triple.analog, triple.distractor])
         documents.append((triple.analog.case_id, canonical_case_text(triple.analog.statements)))
         documents.append((triple.distractor.case_id, canonical_case_text(triple.distractor.statements)))
-    vectors = {case.case_id: functor_vector(case) for case in library}
+    canon = build_canonicalizer(triples)
+    vectors = {case.case_id: functor_vector(case, canon=canon, delta=2) for case in library}
 
     sma_ranks: list[int] = []
     bm25_ranks: list[int] = []
@@ -121,7 +131,7 @@ def evaluate_library_mac_prefilter(n: int = 1000, seed: int = 23, k: int = 10) -
     dense_rankings = rank_tfidf_dense_batch(query_texts, documents, k=k)
 
     for triple, query_text, dense in zip(triples, query_texts, dense_rankings):
-        qv = functor_vector(triple.query)
+        qv = functor_vector(triple.query, canon=canon, delta=2)
         ranked = sorted(
             ((case.case_id, cosine(qv, vectors[case.case_id])) for case in library),
             key=lambda row: (-row[1], row[0]),

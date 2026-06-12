@@ -382,3 +382,26 @@ Append-only progress log. Each work session must reread
   the four defects/fixes. Paper assets regenerated from v4final CSVs.
 - Phase 3 queue resumes: SSB de-circularization next, then calibration
   (inherits scorer-default + normalization selection), prereg tag, statistics.
+
+## 2026-06-13 (Phase 3: SSB de-circularized)
+
+- The far_/near_ prefix strip is REMOVED from the canonicalizer (it was the
+  benchmark knowing its own renaming trick). New generator: disjoint random
+  functor vocabularies per triple, bridged ONLY by a declared predicate
+  lattice (query-functor and analog-functor share an abstract concept);
+  matching requires minimal ascension (delta=2) at rho^dist penalty.
+- MAC stage: functor vectors now include the <=delta ancestor closure
+  (blueprint 2.7) so lattice-bridged vocabularies intersect at screening;
+  ancestor features only add mass (Lemma-2 bound stays admissible).
+- Three defects found by the rebuild: (a) MacFacIndex._score_case did not
+  pass its canonicalizer to match_cases (latent until custom lattices);
+  (b) ascension penalties compounded multiplicatively down support chains,
+  punishing deep systems exponentially - now per-MH as in SME; (c) the old
+  distractor rewiring could produce GENUINELY ISOMORPHIC "distractors" at
+  small widths (the matcher correctly scored one 1.0) - distractors are now
+  star-rewired, provably non-isomorphic to chains for width >= 3.
+- Pre-calibration defaults delta=2, rho=0.95: forced-choice and 24-case
+  library both 12/12 on two seeds; rho is formally a calibration-phase
+  parameter (8.6) with this as its registered prior. Gate G4 rewritten as
+  test_macfac_lattice_bridges_disjoint_vocabularies (asserts ZERO surface
+  overlap, lattice-only bridging). 30/30 tests.

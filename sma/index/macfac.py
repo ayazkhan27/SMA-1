@@ -38,7 +38,7 @@ class MacFacIndex:
         self._score_cache: dict[tuple, tuple[float, float]] = {}
 
     def add(self, case: Case) -> None:
-        vector = functor_vector(case, canon=self.canon)
+        vector = functor_vector(case, canon=self.canon, delta=self.config.delta)
         self.cases[case.case_id] = case
         self.ann.add(case.case_id, vector)
         self.inverted.add(case.case_id, vector)
@@ -75,7 +75,7 @@ class MacFacIndex:
             # Lazily derive costs from the indexed corpus; deterministic given
             # contents. Stale after add() — cleared there.
             self.config.functor_costs = self.corpus_costs()
-        qvec = functor_vector(query, canon=self.canon)
+        qvec = functor_vector(query, canon=self.canon, delta=self.config.delta)
         bound_costs = self.config.functor_costs if self.config.scorer == "surprisal" else None
         # Lemma 2: the weighted histogram-intersection bound IS the admissible
         # MAC ordering. Up to ANN_THRESHOLD cases we bound-order everything
@@ -151,7 +151,7 @@ class MacFacIndex:
         ]
 
     def brute_force(self, query: Case, k: int = 10) -> list[RetrievalResult]:
-        qvec = functor_vector(query, canon=self.canon)
+        qvec = functor_vector(query, canon=self.canon, delta=self.config.delta)
         results: list[RetrievalResult] = []
         for case_id, case in self.cases.items():
             score, ses_n = self._score_case(case_id, query)
@@ -169,6 +169,6 @@ class MacFacIndex:
     def _score_case(self, case_id: str, query: Case) -> tuple[float, float]:
         key = (case_id, query.case_id, self.config.scorer, self.config.normalization)
         if key not in self._score_cache:
-            gmap = match_cases(self.cases[case_id], query, config=self.config)
+            gmap = match_cases(self.cases[case_id], query, config=self.config, canon=self.canon)
             self._score_cache[key] = (gmap.score, gmap.normalized_score)
         return self._score_cache[key]

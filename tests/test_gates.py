@@ -165,14 +165,23 @@ def test_macfac_certified_matches_bruteforce():
 
 
 @pytest.mark.gate_G4
-def test_macfac_canonicalizes_far_analogs_before_screening():
-    triple = generate_triples(1, seed=11)[0]
-    qv = functor_vector(triple.query)
-    av = functor_vector(triple.analog)
-    dv = functor_vector(triple.distractor)
-    assert cosine(qv, av) > cosine(qv, dv)
+def test_macfac_lattice_bridges_disjoint_vocabularies():
+    """De-circularized SSB: query and analog share ZERO surface vocabulary;
+    the declared lattice is the only bridge (no string tricks)."""
+    from sma.eval.ssb_generator import build_canonicalizer
+    from sma.eval.ssb_eval import ssb_config
 
-    index = MacFacIndex()
+    triple = generate_triples(1, seed=11)[0]
+    canon = build_canonicalizer([triple])
+    # Without the lattice there is NO functor overlap at all.
+    assert cosine(functor_vector(triple.query), functor_vector(triple.analog)) == 0.0
+    # With ancestor-closure features the MAC stage sees the bridge.
+    qv = functor_vector(triple.query, canon=canon, delta=2)
+    av = functor_vector(triple.analog, canon=canon, delta=2)
+    assert cosine(qv, av) > 0.0
+    # Full retrieval ranks the structural analog over the surface distractor
+    # and stays certified-equal to brute force.
+    index = MacFacIndex(config=ssb_config(), canon=canon)
     index.build([triple.analog, triple.distractor])
     retrieved = index.retrieve(triple.query, k=2, shortlist=2)
     assert retrieved[0].case_id == triple.analog.case_id

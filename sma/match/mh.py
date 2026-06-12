@@ -161,7 +161,12 @@ def support_closure(
                     if not ok:
                         bad = True
                         return
-                    add(MatchHypothesis(b_arg, t_arg, ascension=mh.ascension * asc,
+                    # Each MH pays ITS OWN ascension penalty only - the
+                    # parent's penalty lives in the parent's weight.
+                    # Multiplying down the chain (a previous bug) punished
+                    # deep systems exponentially, the opposite of
+                    # systematicity.
+                    add(MatchHypothesis(b_arg, t_arg, ascension=asc,
                                         ancestor=ancestor, distance=dist))
                 else:
                     # Statement paired with entity (or vice versa): illegal.
