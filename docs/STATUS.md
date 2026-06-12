@@ -353,3 +353,23 @@ Append-only progress log. Each work session must reread
   scorer, H3 honesty, HDFS ladder; 4 LaTeX tables; 3 architecture diagrams.
 - Incremental discipline: re-run at each phase boundary so the paper
   assembles itself as evidence lands.
+
+## 2026-06-13 (normalization bake-off: a characterization, not a winner)
+
+- Parallel-connectivity fix (SME legality of argument correspondences) killed
+  the ses_n>1 anomaly and the cross-template junk; with it, the four
+  normalizations measured on the two adversarial probes:
+    max:    haystack 0/5, transfer 0.894  (precision-like; punishes size gap)
+    min:    haystack 5/5, transfer 0.344  (recall-like; class-blind saturation)
+    sqrt:   haystack 0/5                  (eliminated)
+    target: haystack 5/5, transfer 0.344  (== min when bases > queries)
+- FINDING: no single scale-free normalization serves both size-asymmetric
+  needle retrieval (recall-like demand) and cross-system class discrimination
+  (precision-like demand). Normalization therefore joins gamma/rho/delta/theta
+  as a CALIBRATED parameter (per task family, validation-selected) in the
+  Phase 3 calibration step - blueprint-consistent, and a paper finding.
+- Default stays "max" (semantics v4 = constants + parallel-connectivity +
+  bound-ordered MAC + max-norm); haystack-style queries are served by hybrid
+  mode (5/5 with SME receipts) and optionally per-deployment target-norm.
+- Final citable battery under v4 defaults launched (prior batteries mixed
+  semantics; discipline requires one clean set).

@@ -37,7 +37,7 @@ def build_kernels(
     for seed in seeds:
         if seed.key in child_keys:
             continue
-        closure = support_closure(seed)
+        closure = support_closure(seed, canon=canon, delta=config.delta, rho=config.rho)
         if closure is None:
             # Root pairs unequal constants (e.g. different template-name
             # entities under count): structurally impossible, discard.

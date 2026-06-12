@@ -73,5 +73,12 @@ def normalize_score(
     # Same weights in numerator and denominators keep ses_n scale-free.
     self_base = self_score(base, gamma, cost_fn=cost_fn)
     self_target = self_score(target, gamma, cost_fn=cost_fn)
-    pick = min if normalization == "min" else max
-    return score / max(pick(self_base, self_target), 1e-9)
+    if normalization == "min":
+        denom = min(self_base, self_target)
+    elif normalization == "sqrt":
+        denom = (self_base * self_target) ** 0.5
+    elif normalization == "target":
+        denom = self_target
+    else:  # "max", blueprint 2.3
+        denom = max(self_base, self_target)
+    return score / max(denom, 1e-9)

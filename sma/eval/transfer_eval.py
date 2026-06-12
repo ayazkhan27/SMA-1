@@ -406,6 +406,7 @@ def run_transfer(
     query_data: list[tuple[str, str, str]],
     pair_name: str,
     scorer: str = "ses",
+    normalization: str = "max",
 ) -> list[dict]:
     """Execute four-way cross-system transfer comparison.
 
@@ -445,7 +446,7 @@ def run_transfer(
     # Build indexes ONCE before the query loop
     # 1. Build SMA MAC/FAC index
     print(f"Building SMA Index (scorer={scorer})...")
-    sma_index = MacFacIndex(config=MatchConfig(scorer=scorer))
+    sma_index = MacFacIndex(config=MatchConfig(scorer=scorer, normalization=normalization))
     sma_index.build(index_cases)
 
     # 2. Build BM25 Index
@@ -654,7 +655,7 @@ SYSTEMS = {
 }
 
 
-def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path):
+def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path, normalization="max"):
     """Run a comma-separated list of "A->B" transfer pairs (e.g.
     "BGL->Spirit,HDFS->Spirit") with an explicit seed, appending rows to
     out_path. Additive entry point used by --pairs; the default (no --pairs)
@@ -703,7 +704,7 @@ def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path):
             print(f"Skipping pair '{pair}': empty index or query sample.")
             continue
         pair_name = f"{SYSTEMS[src][2]}->{SYSTEMS[dst][2]}[seed{seed}]"
-        all_rows.extend(run_transfer(index_data, query_data, pair_name, scorer=scorer))
+        all_rows.extend(run_transfer(index_data, query_data, pair_name, scorer=scorer, normalization=normalization))
 
     append_transfer_rows(all_rows, out_path)
 
@@ -711,6 +712,7 @@ def run_named_pairs(pairs_spec, scorer, seed, index_size, query_size, out_path):
 def main() -> None:
     parser = argparse.ArgumentParser(description="Cross-system transfer evaluation (T2-b)")
     parser.add_argument("--scorer", choices=["ses", "mdl", "surprisal"], default="ses")
+    parser.add_argument("--normalization", choices=["max", "min", "sqrt", "target"], default="max")
     parser.add_argument("--index-size", type=int, default=800,
                         help="stratified sessions to index from system A")
     parser.add_argument("--query-size", type=int, default=200,
@@ -730,7 +732,8 @@ def main() -> None:
     if args.pairs:
         run_named_pairs(
             args.pairs, args.scorer, args.seed,
-            args.index_size, args.query_size, args.out,
+            normalization=args.normalization,
+            index_size=args.index_size, query_size=args.query_size, out_path=args.out,
         )
         return
 

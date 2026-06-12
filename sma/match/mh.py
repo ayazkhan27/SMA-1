@@ -116,8 +116,24 @@ def constants_compatible(b_ent: Entity, t_ent: Entity) -> bool:
     return True
 
 
-def support_closure(root: MatchHypothesis) -> tuple[MatchHypothesis, ...] | None:
-    """Downward closure of a root MH; None when it pairs unequal constants."""
+def support_closure(
+    root: MatchHypothesis,
+    canon: Canonicalizer | None = None,
+    delta: int = 0,
+    rho: float = 1.0,
+) -> tuple[MatchHypothesis, ...] | None:
+    """Downward closure of a root MH; None when structurally impossible.
+
+    SME parallel connectivity: argument correspondences must themselves be
+    LEGAL match hypotheses. A statement-argument pair with incompatible
+    functors invalidates the whole kernel (previously it was silently
+    admitted, letting higher-order parents like `before` manufacture
+    cross-template "matches" that surprisal weighting then amplified - the
+    Liberty ses_n>1 anomaly). Compatibility = canonical identity, or lattice
+    ascension within delta at rho^dist penalty. Unequal constants likewise
+    invalidate.
+    """
+    canon = canon or default_canonicalizer()
     out: list[MatchHypothesis] = []
     seen: set[tuple[str, str]] = set()
     bad = False
@@ -130,6 +146,7 @@ def support_closure(root: MatchHypothesis) -> tuple[MatchHypothesis, ...] | None
         out.append(mh)
         if isinstance(mh.base, Statement) and isinstance(mh.target, Statement):
             if mh.base.arity != mh.target.arity:
+                bad = True
                 return
             for b_arg, t_arg in zip(mh.base.args, mh.target.args, strict=True):
                 if isinstance(b_arg, Entity) and isinstance(t_arg, Entity):
@@ -138,7 +155,18 @@ def support_closure(root: MatchHypothesis) -> tuple[MatchHypothesis, ...] | None
                         return
                     add(MatchHypothesis(b_arg, t_arg))
                 elif isinstance(b_arg, Statement) and isinstance(t_arg, Statement):
-                    add(MatchHypothesis(b_arg, t_arg, ascension=mh.ascension))
+                    ok, asc, ancestor, dist = canon.compatible(
+                        b_arg.functor, t_arg.functor, delta=delta, rho=rho
+                    )
+                    if not ok:
+                        bad = True
+                        return
+                    add(MatchHypothesis(b_arg, t_arg, ascension=mh.ascension * asc,
+                                        ancestor=ancestor, distance=dist))
+                else:
+                    # Statement paired with entity (or vice versa): illegal.
+                    bad = True
+                    return
 
     add(root)
     return None if bad else tuple(out)

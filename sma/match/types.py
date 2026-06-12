@@ -95,10 +95,11 @@ class MatchConfig:
     rho: float = 0.5
     delta: int = 0
     scorer: str = "surprisal"  # "ses" | "mdl" | "surprisal" (score-v2, ADR-005)
-    # "max" = blueprint 2.3 default; "min" = the 10.2 tripwire response that
-    # removes the large-session penalty (a 4-line query matching a 60-line
-    # alert burst should score by what the QUERY could match, not be divided
-    # by the burst's own bulk).
+    # Normalization of the structural score: "max" (blueprint 2.3),
+    # "min" (10.2 tripwire), "sqrt" (geometric mean, cosine-style symmetric),
+    # "target" (query-relative; ranking == raw-score ordering per query).
+    # max wins transfer but fails haystacks; min the reverse - the v4
+    # forensics measure all four before the calibration freeze decides.
     normalization: str = "max"
     # Corpus surprisal per canonical functor (-log2 p), supplied by the index
     # for scorer="surprisal"; None means unit weights (identical to "ses").
