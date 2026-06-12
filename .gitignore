@@ -39,3 +39,6 @@ paper/manuscript/main.pdf
 
 # reference papers (copyrighted; never commit)
 paper/reference_papers/
+# tikz build artifacts
+paper/figures/tikz/*.aux
+paper/figures/tikz/*.log
