@@ -28,3 +28,12 @@
 ```
 cd paper/manuscript && latexmk -pdf main.tex
 ```
+
+## Citation policy
+
+- `references.bib` is the single source of citations. Every entry MUST carry
+  a DOI or arXiv ID **verified against the publisher/arXiv at insertion
+  time** — no entries from memory. The verification date is noted in the
+  file header.
+- Before submission: re-verify all DOIs resolve (`curl -sI https://doi.org/<doi>`)
+  and drop `\nocite{*}` so only actually-cited works appear.
