@@ -86,3 +86,31 @@ def test_answer_from_uses_retrieved():
     assert ans == "Acme"
     # the retrieved memory must appear in the prompt sent to the LLM
     assert "user works at Acme" in str(llm.calls[-1])
+
+
+from sma.eval.longmemeval import Session
+
+def _sess(sid, text):
+    return Session(sid, "2025/01/01", [{"role": "user", "content": text}])
+
+def test_context_only_accumulates_and_answers():
+    from sma.eval.memory_backends.context_only import ContextOnly
+    llm = FakeLLM(["Acme"])  # one answer call
+    b = ContextOnly(llm); b.reset()
+    b.ingest(_sess("s1", "I work at Globex."))
+    b.ingest(_sess("s2", "Now I work at Acme."))
+    r = b.query("Where does the user work?")
+    assert r.answer == "Acme"
+    joined = str(llm.calls[-1])
+    assert "Globex" in joined and "Acme" in joined  # full transcript is the memory
+
+def test_rag_notes_extracts_then_retrieves():
+    from sma.eval.memory_backends.rag_notes import RagNotes
+    # 2 extract calls (one per session turn) + 1 answer call
+    llm = FakeLLM(['["works at Globex"]', '["works at Acme"]', "Acme"])
+    b = RagNotes(llm, k=5); b.reset()
+    b.ingest(_sess("s1", "I work at Globex."))
+    b.ingest(_sess("s2", "Now I work at Acme."))
+    r = b.query("Where does the user work?")
+    assert r.answer == "Acme"
+    assert any("Acme" in note for note in r.retrieved)
