@@ -1,0 +1,15 @@
+########## agentic arm: discovery ##########
+  5345 entities loaded; assembling memories...
+
+===== AGENTIC SUITE [discovery] (n_all=324 n_rare=192 n_novel=36) =====
+memory          t1 all/rare     t5 all/rare     t10 all/rare    AURC    novF1   
+sma             0.571/0.589     0.796/0.849     0.861/0.932     0.106   0.178   
+bm25            0.213/0.286     0.435/0.552     0.534/0.635     0.638   0.000   
+dense           0.383/0.443     0.623/0.682     0.753/0.786     0.298   0.000   
+hybrid_rrf      0.336/0.417     0.620/0.703     0.756/0.818     0.392   0.000   
+hipporag        0.093/0.109     0.278/0.318     0.373/0.401     0.721   0.185   
+hybrid_rerank   0.265/0.328     0.540/0.651     0.688/0.818     0.435   0.000   
+
+primary: SMA vs best-RAG (dense) on tail top-5  delta=+0.1556 CI=[0.1000,0.2111] p=0.0002 cliffs=0.156  -> WIN
+
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/agentic_discovery.csv

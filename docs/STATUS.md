@@ -843,3 +843,28 @@ under pre-registration. These numbers are now CLAIMS.
 - C3 (across fields): medicine (+0.33, p=0.0002) + cyber (+0.07, p=0.035) = 2/2
   unrelated domains with SMA > enterprise RAG on tail top-5, both surviving Holm.
   Discovery (GO protein-function) in progress for a 3rd.
+
+## 2026-06-13 (Agentic DISCOVERY arm + 3-domain C3 VERDICT: CONFIRMED)
+
+- GO gene-function arm (5345 human proteins -> GO biological-process terms, gold
+  from GOA GAF; 324 answerable + 36 novel, 3 seeds):
+    memory          t5 all/rare   AURC(↓)  novF1
+    SMA             0.796/0.849   0.106    0.178
+    hybrid_rrf      0.620/0.703   0.392    0.000
+    dense (BGE)     0.623/0.682   0.298    0.000   <- harness "best" by all-slice
+    hybrid_rerank   0.540/0.651   0.435    0.000
+    bm25            0.435/0.552   0.638    0.000
+    hipporag        0.278/0.318   0.721    0.185
+  Tail top-5: SMA 0.849 vs best RAG 0.682 -> delta=+0.156, CI[0.100,0.211],
+  p=0.0002, Cliff's=0.156 -> WIN.
+- 3-DOMAIN VERDICT (agentic suite, SMA vs best enterprise RAG, tail top-5):
+    medicine  +0.333  p=0.0002   (Holm 0.0006)
+    discovery +0.156  p=0.0002   (Holm 0.0004)
+    cyber     +0.073  p=0.035    (Holm 0.0346)
+  ALL THREE Holm-significant -> C3 "across fields" CONFIRMED on 3 unrelated
+  golden-ontology domains (medicine, genomics, cyber). SMA also best on AURC
+  (cite-or-abstain) and the ONLY-nonzero novelty F1 (with HippoRAG) in every arm;
+  all pure-RAG novelty F1 = 0.000.
+- This is the paper's headline: one universal structure-mapping memory beats the
+  full enterprise RAG/KG gauntlet on the long tail across fields, with calibrated
+  abstention + novelty detection RAG structurally lacks.
