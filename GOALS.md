@@ -24,12 +24,10 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
 - [x] Phase 2  Scoring resolution: surprisal-SES scorer gauntlet (vs SES, MDL,
       RRF combo) on family strata + EOF case + transfer; ses_n bias study;
       BugsInPy T3 fix-retrieval.
-- [ ] Phase 3  Freeze train: SSB de-circularization DONE; calibration grid on
-      validation DONE (24 configs, reports/calibration_grid.csv — winners are
-      the shipped defaults: surprisal/max/gamma 0.25/rho 0.95); score-v2 +
-      prereg FROZEN at tag prereg-v1 (configs/preregistration.md). REMAINING:
-      single-shot confirmatory runs, seeds 201-205, paired bootstrap +
-      Holm-Bonferroni + Cliff's delta (numbers become claims).
+- [x] Phase 3  Freeze train: SSB de-circularization, calibration grid (24
+      configs), score-v2 + prereg FROZEN at tag prereg-v1, AND the single-shot
+      confirmatory battery (T1-T4 + SSB, seeds 201-205/41,43, paired bootstrap
+      + Holm + Cliff's delta). Numbers are now claims (STATUS 2026-06-12).
 - [ ] Phase 4  Differentiator: drift protocol T5 (wrong-action rate under
       concept drift); OpenStack missing-event spike (SAGE expectation
       violation).
