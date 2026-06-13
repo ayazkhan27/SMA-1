@@ -15,6 +15,7 @@ from .attack import load_attack_stix
 from .cpc import load_cpc
 from .mitre_xml import load_capec, load_cwe, load_mitre_xml
 from .rdf_loader import load_rdflib
+from .usgaap import load_usgaap
 from .graph import OntologyGraph, Term
 from .loader import fid, load_obo, load_ontology, load_owl, load_owl_dir
 from .mount import MountedOntology, mount
@@ -40,4 +41,5 @@ __all__ = [
     "load_cwe",
     "load_mitre_xml",
     "load_rdflib",
+    "load_usgaap",
 ]

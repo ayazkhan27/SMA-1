@@ -36,6 +36,7 @@ ARMS = {
     "cyber": "sma.eval.agentic.arms.cyber",
     "discovery": "sma.eval.agentic.arms.discovery",
     "legal": "sma.eval.agentic.arms.legal",
+    "finance": "sma.eval.agentic.arms.finance",
 }
 
 
