@@ -1,0 +1,20 @@
+{
+  "_comment": "Registry seed for the universal ontology adapter. Each entry mounts a curated golden ontology as an SMA is-a lattice + higher-order relations. merge WITHIN an ecosystem (OBO via BFO/RO), route ACROSS ecosystems (see docs/PAPER_SPINE.md sec 7).",
+  "ecosystems": {
+    "obo": {
+      "description": "OBO Foundry: BFO/RO-aligned, mergeable within.",
+      "ontologies": [
+        {"name": "hpo", "domain": "medicine", "prefix": "HP:", "path": "data/raw/hpo/hp.obo", "purl": "http://purl.obolibrary.org/obo/hp.obo", "version": "hp/releases/2026-06-06", "md5": "d407eed13976fdbb92de5a12678ca180", "note": "phenotypes; flagship rare-disease arm; pure is-a"},
+        {"name": "mondo", "domain": "medicine", "prefix": "MONDO:", "path": "data/raw/obo/mondo.obo", "purl": "http://purl.obolibrary.org/obo/mondo.obo", "version": "releases/2026-06-02", "md5": "efc0b05f58b8c29feedd175bc97bc132", "note": "diseases; disease axis to pair with HPO phenotypes"},
+        {"name": "go", "domain": "biology", "prefix": "GO:", "path": "data/raw/obo/go-basic.obo", "purl": "http://purl.obolibrary.org/obo/go/go-basic.obo", "version": "releases/2026-05-19", "md5": "ac0e62d6ead77e98ccbca856c5aaf857", "note": "gene function; rich RO typed relations (part_of/regulates)"},
+        {"name": "uberon", "domain": "anatomy", "prefix": "UBERON:", "path": "data/raw/obo/uberon-basic.obo", "purl": "http://purl.obolibrary.org/obo/uberon/basic.obo", "version": "uberon/releases/2026-04-01", "md5": "84f2930b39f9c4b9822e763eab0f6067", "note": "anatomy; part_of/develops_from-rich"}
+      ]
+    },
+    "cyber": {
+      "description": "MITRE ATT&CK (STIX 2.1). Routed ACROSS from OBO, never merged.",
+      "ontologies": [
+        {"name": "attack", "domain": "cyber", "prefix": "T", "path": "data/raw/attack/enterprise-attack.json", "purl": "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json", "version": "", "md5": "", "note": "techniques/tactics; second golden-ontology domain (C3); data not yet on disk"}
+      ]
+    }
+  }
+}

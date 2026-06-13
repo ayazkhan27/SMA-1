@@ -115,5 +115,27 @@
       }
     },
     "source_note": "Human Phenotype Ontology + disease-phenotype annotations (OMIM/Orphanet). Downloaded 2026-06-13 (latest release). License: HPO open. Used for the exploratory rare-disease diagnosis benchmark (scripts/rare_disease_test.py). md5 of the snapshot recorded; note 'latest' updates over time."
+  },
+  "obo_foundry": {
+    "source": "https://obofoundry.org (PURL)",
+    "ecosystem": "OBO Foundry (BFO/RO-aligned; merge WITHIN, route ACROSS)",
+    "files": {
+      "go-basic.obo": {
+        "md5": "ac0e62d6ead77e98ccbca856c5aaf857",
+        "url": "http://purl.obolibrary.org/obo/go/go-basic.obo",
+        "version": "releases/2026-05-19"
+      },
+      "mondo.obo": {
+        "md5": "efc0b05f58b8c29feedd175bc97bc132",
+        "url": "http://purl.obolibrary.org/obo/mondo.obo",
+        "version": "releases/2026-06-02"
+      },
+      "uberon-basic.obo": {
+        "md5": "84f2930b39f9c4b9822e763eab0f6067",
+        "url": "http://purl.obolibrary.org/obo/uberon/basic.obo",
+        "version": "uberon/releases/2026-04-01"
+      }
+    },
+    "source_note": "Golden domain ontologies mounted by the universal adapter (sma/ontology). GO=gene function, MONDO=disease, Uberon=anatomy. All carry RO typed relations (part_of/regulates/develops_from) that exercise SMA's higher-order matching. Registry seed: configs/ontologies.json."
   }
 }
