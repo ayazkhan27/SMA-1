@@ -687,3 +687,32 @@ under pre-registration. These numbers are now CLAIMS.
   phenotypes, cite-or-abstain, SAGE novelty (a patient matching NOTHING = a
   candidate new disease). Strong case for a real paper arm / the 'true power'
   high-value domain demonstration.
+
+## 2026-06-13 (Phase 4a drift run COMPLETE — INVALID for SMA: strawman encoder)
+
+- The LongMemEval drift battery (500 instances, single-shot) finished. Raw
+  per-instance accuracy (reports/confirmatory/t5_rows.csv):
+    method        all     drift   nondrift
+    context-only  0.490   0.441   0.526
+    rag-notes     0.194   0.166   0.215
+    sma           0.030   0.028   0.031
+- DO NOT REPORT THIS AS AN SMA RESULT. Root cause (sma/eval/memory_backends/
+  sma_memory.py::_fact_to_case): conversational facts from the shared LLM
+  extractor are FREE TEXT ("User lives in Seattle"), and the backend builds a
+  case by whitespace-splitting -> stmt(toks[0], toks[1], rest). The FUNCTOR is
+  the first word of the sentence, so nearly every fact collapses to functor
+  "User"/"The"/"I"; MAC cannot discriminate and retrieval returns noise. 0.030
+  is a broken-encoder artifact, not "SMA on drift." SAGE flagging is likewise
+  non-discriminative (drift recall 0.815 vs nondrift false-flag 0.824 -> flags
+  ~everything) because expectation_violation over garbage cases is meaningless.
+- Interpretation consistent with the paper spine: SMA without a STRUCTURAL
+  encoder/ontology has nothing to match on. LongMemEval = free-form
+  conversational recall with NO ontology = the chat analog of the 4b
+  flat-tabular null. It was a mismatched arena for SMA's drift/SAGE story.
+- H4 (drift recovery) / H6 (SAGE novelty) REMAIN UNHATCHED. Two honest paths:
+  (a) build a real conversational triple encoder (LLM emits (subj,rel,obj);
+      relation as functor, subj/obj as entities) -> a FAIR null on LongMemEval;
+  (b) reposition drift/SAGE to a STRUCTURED domain where expectation-violation
+      has real structure to violate (e.g. a patient whose HPO phenotype profile
+      shifts; a mutated ATT&CK technique chain) — aligns with the spine.
+  Recommendation: (b). Did NOT build a drift figure (would visualize a bug).
