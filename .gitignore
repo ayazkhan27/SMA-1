@@ -44,3 +44,13 @@ paper/figures/tikz/*.aux
 paper/figures/tikz/*.log
 paper/figures/individual/*.aux
 paper/figures/individual/*.log
+
+# Copyrighted reference papers / images kept at repo root (never commit)
+/s42256-026-01233-9.pdf
+/s44386-026-00047-4.pdf
+/cf82f006-*.pdf
+/MaMMALFigureCollection.png
+# transient run logs + scratch
+reports/confirmatory/*_downloads.log
+reports/confirmatory/drift_run.log
+reports/macfac_examined.txt
