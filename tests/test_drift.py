@@ -155,3 +155,21 @@ def test_grader_exact_and_substring():
     assert grade_answer("They work at Acme Corp.", "Acme") == 1.0
     assert grade_answer("Globex", "Acme") == 0.0
     assert grade_answer("", "Acme") == 0.0
+
+
+def test_update_recovery_detects_recovery_point():
+    from sma.eval.drift_metrics import update_recovery
+    # correctness per session after a change at change_idx=1; recovered (and stayed) at index 2
+    assert update_recovery([0, 0, 1, 1], change_idx=1) == 2  # sessions to recover
+    assert update_recovery([0, 0, 0, 0], change_idx=1) is None  # never recovers
+    assert update_recovery([0, 1, 0, 1], change_idx=1) == 3  # only stable from index 3
+
+def test_detection_delay():
+    from sma.eval.drift_metrics import detection_delay
+    assert detection_delay([False, False, True, False], change_idx=1) == 1  # 2 - 1
+    assert detection_delay([False, False], change_idx=1) is None  # never detected
+
+def test_staleness_rate():
+    from sma.eval.drift_metrics import staleness_rate
+    assert staleness_rate([1, 0, 0, 1], change_idx=1) == 2/3  # post-change: [0,0,1] -> 2 stale of 3
+    assert staleness_rate([1], change_idx=1) == 0.0  # no post-change probes
