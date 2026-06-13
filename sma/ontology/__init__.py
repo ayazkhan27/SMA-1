@@ -12,6 +12,7 @@ selects which ontology a query belongs to. See ``sma/ontology/README.md``.
 from __future__ import annotations
 
 from .attack import load_attack_stix
+from .cpc import load_cpc
 from .graph import OntologyGraph, Term
 from .loader import fid, load_obo, load_ontology, load_owl, load_owl_dir
 from .mount import MountedOntology, mount
@@ -32,4 +33,5 @@ __all__ = [
     "OntologyEntry",
     "DomainRouter",
     "load_attack_stix",
+    "load_cpc",
 ]

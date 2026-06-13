@@ -19,7 +19,7 @@ import time
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from sma.ontology import (DomainRouter, OntologyRegistry, load_attack_stix,
-                          load_obo, load_owl_dir, mount)
+                          load_cpc, load_obo, load_owl_dir, mount)
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "configs/ontologies.json"
@@ -38,6 +38,8 @@ def _load_graph(o):
         return load_attack_stix(str(path), name=o["name"])
     if fmt == "owl_dir":
         return load_owl_dir(str(path), name=o["name"], pattern=o.get("pattern", "*.rdf"))
+    if fmt == "cpc":
+        return load_cpc(str(path), name=o["name"])
     raise ValueError(f"unknown fmt {fmt}")
 
 
