@@ -1,0 +1,75 @@
+{
+  "domain": "diabetes",
+  "rules": [
+    {
+      "relation": "admission_discharge_sour",
+      "subjects": [
+        "admission_type_id",
+        "admission_source_id"
+      ],
+      "objects": [
+        "discharge_disposition_id"
+      ],
+      "kind": "subject_object"
+    },
+    {
+      "relation": "diagnosis_sequence",
+      "subjects": [
+        "diag_1",
+        "diag_2",
+        "diag_3"
+      ],
+      "objects": [],
+      "kind": "pairwise"
+    },
+    {
+      "relation": "medication_change_outcom",
+      "subjects": [
+        "change",
+        "diabetesMed"
+      ],
+      "objects": [
+        "A1Cresult",
+        "max_glu_serum"
+      ],
+      "kind": "subject_object"
+    },
+    {
+      "relation": "treatment_drugs",
+      "subjects": [
+        "metformin",
+        "glipizide",
+        "glyburide",
+        "insulin",
+        "pioglitazone",
+        "rosiglitazone"
+      ],
+      "objects": [],
+      "kind": "pairwise"
+    },
+    {
+      "relation": "visit_utilization",
+      "subjects": [
+        "number_outpatient",
+        "number_emergency",
+        "number_inpatient"
+      ],
+      "objects": [
+        "time_in_hospital"
+      ],
+      "kind": "subject_object"
+    },
+    {
+      "relation": "demographics_age_gender",
+      "subjects": [
+        "race",
+        "gender",
+        "age"
+      ],
+      "objects": [],
+      "kind": "pairwise"
+    }
+  ],
+  "content_id": "27f3f59a80c08296",
+  "taint": "LLM-proposed, unreviewed"
+}

@@ -562,3 +562,26 @@ under pre-registration. These numbers are now CLAIMS.
   residual HO-rules (treats/comorbid/escalates) -> re-encode -> re-measure
   whether SMA rises above baselines (H8). Spec: docs/superpowers/specs/
   2026-06-12-phase4b-crossdomain-design.md.
+
+## 2026-06-12 (Phase 4b 'after' — dynamic adapter, BOTH domains; honest mixed result)
+
+- The LLM drafted HO-relation rules per domain (one call each; ADR-007 taint +
+  content-addressed in cd_<domain>_rules.json); a deterministic applier emitted
+  higher-order statements; re-encoded; re-measured. Drafting raised HO-density
+  from 0 in both domains (diabetes 0->0.402, ieee 0->0.776), so the dynamic
+  adapter MECHANICALLY works.
+- Effect on SMA (the H8 test) is MIXED and honest:
+  - Healthcare (diabetes): SMA 0.425 -> 0.485 (+0.060). The drafted structure
+    (diagnosis-sequence, medication-change-outcome, treatment co-occurrence)
+    lifted SMA -> direct evidence that systematicity is the active ingredient.
+    Reaches parity with baselines (0.53/0.57) on a genuinely hard clinical task.
+  - Finance (ieee): SMA 0.730 -> 0.706 (-0.024). The LLM over-generated pairwise
+    relations across ALL 14 C- and 15 D- anonymized count columns (~196 HO-rels/
+    txn) -> structural NOISE, not signal -> SMA did not improve.
+- Interpretation (paper-worthy, strengthens governance): the dynamic adapter is
+  real and systematicity is the active ingredient where drafted structure is
+  MEANINGFUL (healthcare); but UNREVIEWED LLM rules vary in quality and can add
+  noise (finance over-connected count features). This empirically motivates the
+  ADR-007 requirement that drafted adapters need admin review before promotion -
+  a human reviewer rejects 'pairwise over all count columns'. Reported honestly;
+  NOT tuned to a win.
