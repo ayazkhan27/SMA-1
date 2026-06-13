@@ -1,5 +1,7 @@
 # Golden-Ontology Structure-Mapping Memory Turns a Generalist LLM into a Verifiable Specialist
 
+*The compilable manuscript is `paper/manuscript/sma_nature_mi.tex` (canonical); this markdown mirrors it.*
+
 *Draft for Nature Machine Intelligence. Status: 2026-06-13 working draft. All
 numbers are from committed runs (`docs/STATUS.md`); slots marked `‹PENDING›`
 await the cyber/discovery arm runs in progress. Honesty rails: every reported
@@ -24,8 +26,8 @@ On a memory-swap benchmark where only the retriever varies, SMA matches a
 hand-built, domain-specific ontology tool on retrieval rank while **beating
 enterprise-grade RAG and knowledge-graph retrieval** (BM25, BGE neural dense,
 hybrid RRF, hybrid + cross-encoder reranking, HippoRAG) on the rare/long-tail
-slice that matters most — across **three unrelated domains** (medicine **+33**,
-genomics **+16**, cyber **+7** percentage points top-5; all p<0.05, Holm-
+slice that matters most — across **five unrelated domains** (medicine **+33**, finance **+17**,
+genomics **+16**, cyber **+7**, legal **+6** percentage points top-5; all p<0.05, Holm-
 corrected). Crucially, SMA also provides two capabilities these baselines
 structurally lack: **calibrated cite-or-abstain** (risk-coverage AURC ~0.02–0.11
 vs 0.26–0.44 for the best RAG) and **structural-novelty flagging** of unknown
