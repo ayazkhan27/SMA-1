@@ -4,6 +4,7 @@ from .code_treesitter import CodeEncoder
 from .logs_drain import LogEncoder
 from .prose_tier1 import ProseTier1Encoder
 from .structured import StructuredEncoder
+from .healthcare import HealthcareEncoder
 from .traces import TraceEncoder
 
 ENCODERS = {
@@ -11,6 +12,7 @@ ENCODERS = {
     "code": CodeEncoder,
     "traces": TraceEncoder,
     "structured": StructuredEncoder,
+    "healthcare": HealthcareEncoder,
     "agentobs": AgentObservationEncoder,
     "prose_tier1": ProseTier1Encoder,
 }

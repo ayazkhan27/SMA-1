@@ -625,3 +625,39 @@ under pre-registration. These numbers are now CLAIMS.
   structure is meaningful (healthcare); NO significant SMA-beats-baseline win in
   either domain; finance exposes the cross-record-structure limitation. Report
   this, not an overclaim.
+
+## 2026-06-12 (Phase 4b THIRD ARM — expert hand-designed healthcare adapter)
+
+- Built a genuine clinical-informatics encoder (sma/encoders/healthcare.py):
+  ICD-9 category hierarchy (Strack 2014), diabetes complication extraction,
+  antidiabetic drug CLASSES, glycemic-control logic, and higher-order causal/
+  temporal clinical relations (comorbidWith, treats, manifests, cause(poor
+  control->escalation), presentsWith, addresses, chronicity). Real medical
+  knowledge, never fitted to the readmission label.
+- Fixed a comparison confound first: the index/query split had been keyed by
+  encoding-dependent case_id (so arms used different partitions + baselines
+  drifted). New shared evaluator (sma/eval/crossdomain.py) splits by record
+  order -> identical partition across arms -> baselines now identical (Dense
+  0.565 in all three). scripts/crossdomain_arms.py runs all arms on one split.
+- DEFINITIVE three-arm comparison (diabetes, identical split):
+    generic  HO 0.000  SMA 0.425
+    expert   HO 0.075  SMA 0.466   (raw features + curated clinical structure)
+    drafted  HO 0.447  SMA 0.547   (raw features + LLM-drafted dense structure)
+  None beat the Dense baseline (0.565) -> SMA reaches PARITY at best on this
+  hard readmission task.
+- HONEST findings (the answer to 'can expert adapters help?'):
+  1. SMA accuracy tracks higher-order-relation DENSITY nearly monotonically.
+  2. The LLM-DRAFTED adapter BEAT the hand-designed expert one - not because its
+     rules are smarter, but because pairwise-over-groups generates DENSER HO
+     structure; the expert's sparse curated relations (HO 0.075) under-provide.
+  3. Two encoder-design pitfalls diagnosed en route: content must live in
+     FUNCTORS not entity args (SMA discriminates on functors); and clinical
+     ABSTRACTION collapses discriminative detail (must keep raw features + add
+     structure, not replace).
+  4. Clinical correctness != retrieval utility; flat-tabular readmission may
+     simply favor value-based retrieval. Reported honestly; not tuned to a win.
+- Implication for the paper/product: domain adapters help SMA in proportion to
+  the MEANINGFUL higher-order structure they expose; the dynamic (LLM-drafted)
+  adapter is a strong, cheap way to generate that density, and hand-curation
+  must focus on density+meaning, not abstraction. Ties to ADR-007 (review
+  drafted rules) and motivates 'density-aware' adapter design as future work.
