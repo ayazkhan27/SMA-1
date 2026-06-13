@@ -585,3 +585,25 @@ under pre-registration. These numbers are now CLAIMS.
   ADR-007 requirement that drafted adapters need admin review before promotion -
   a human reviewer rejects 'pairwise over all count columns'. Reported honestly;
   NOT tuned to a win.
+
+## 2026-06-12 (Phase 4b 'after' v2 — train-only + schema-grounded drafting)
+
+- Fixed a contamination flaw (drafter saw rows from the full shuffled set, incl.
+  test) and enriched context (per-column distinct-value summary from TRAINING
+  rows only) - prompted by the maintainer's question. Drafter now sees train
+  rows + value semantics, never test rows or labels. This is strictly more
+  correct (removes leakage) AND gives the LLM enough to draft selective rules.
+- Healthcare: rules became directed (medication->diabetesMed, diagnosis->
+  number_diagnoses, glucose->change). SMA 0.425(before) -> 0.547(after v2),
+  now ABOVE BM25 0.513 (close to Dense 0.565). Clean evidence that grounded
+  structure surfaces SMA's systematicity advantage.
+- Finance: schema summary made rules SELECTIVE (LLM dropped the all-D / all-C
+  blanket; capped C at 6). But SMA stayed ~parity (0.730->0.710). Honest deeper
+  reason: real fraud structure is CROSS-transaction (card/device rings across
+  many txns), but we encode each transaction independently, so within-row
+  card_identity relations are trivial. The domain needs relational encoding
+  ACROSS records - an architectural limitation, not a drafting failure. Noted
+  for the paper as a scoped limitation + future work.
+- Net H8: dynamic adapter + grounded drafting RECOVERS SMA's structural edge
+  where per-record structure is meaningful (healthcare win); finance exposes the
+  cross-record-structure boundary. v1 (3-row, possibly-contaminated) superseded.

@@ -43,7 +43,29 @@ DRAFT_SYS = (
     '{"relation": "<shortName>", "subjects": ["col", ...], "objects": ["col", ...], '
     '"kind": "pairwise"|"subject_object"}. "pairwise" relates every pair within '
     'subjects; "subject_object" relates each subject column to each object column. '
-    "Use ONLY columns from the provided list. No prose.")
+    "Use ONLY columns from the provided list. Use the per-column value summary to "
+    "judge what each column MEANS (codes, categories, counts, time-deltas) and "
+    "relate only columns that are genuinely related; do NOT blanket-connect every "
+    "count column to every other - that adds noise, not structure. Prefer a few "
+    "high-value relations over many weak ones. No prose.")
+
+
+def schema_summary(train_items, max_vals: int = 12) -> str:
+    """Per-column distinct-value summary from TRAINING rows only, so the drafter
+    understands cryptic columns (e.g. C1 is a count, D1 a day-delta) and drafts
+    selective rules. No labels, no test rows."""
+    from collections import defaultdict
+    vals = defaultdict(set)
+    for it in train_items:
+        for k, v in it.fields.items():
+            vals[k].add(v)
+    lines = []
+    for col in sorted(vals):
+        vs = sorted(vals[col])
+        shown = ", ".join(vs[:max_vals])
+        extra = f" … (+{len(vs)-max_vals} more, {len(vs)} distinct)" if len(vs) > max_vals else ""
+        lines.append(f"  {col}: {shown}{extra}")
+    return "\n".join(lines)
 
 
 def _load_env():
@@ -52,12 +74,14 @@ def _load_env():
             k, v = line.split("=", 1); os.environ.setdefault(k.strip(), v.strip())
 
 
-def propose_rules(llm, columns, samples):
+def propose_rules(llm, columns, summary, samples):
     cols = ", ".join(columns)
     ex = "\n".join("row: " + ", ".join(f"{k}={v}" for k, v in s.items()) for s in samples)
     out = llm.complete([{"role": "system", "content": DRAFT_SYS},
-                        {"role": "user", "content": f"Columns: {cols}\n\nExamples:\n{ex}"}],
-                       max_tokens=700)
+                        {"role": "user", "content":
+                         f"Columns: {cols}\n\nPer-column values (training data):\n{summary}"
+                         f"\n\nExample rows:\n{ex}"}],
+                       max_tokens=900)
     txt = out.strip()
     if txt.startswith("```"):
         txt = txt.split("```")[1].lstrip("json").strip()
@@ -100,18 +124,23 @@ def apply_rules(fields: dict, rules: list) -> list[Statement]:
     return out
 
 
-def main(domain: str, sample=1000, k=10):
+def main(domain: str, sample=1000, k=10, n_draft_rows=25):
     index_n = int(sample * 0.7)
     loader, row_csv, row_text, labels = DOMAINS[domain]()
     items = loader(sample, 7)
+    # Split FIRST. The rule-drafter sees TRAINING (index) rows only — never the
+    # query/test rows — so the drafted encoder is not fit to the eval set.
+    train_items = items[:index_n]
     _load_env()
     from sma.agent.llm import DeepSeekOrchestrator
     llm = DeepSeekOrchestrator()
 
-    columns = sorted({c for it in items for c in it.fields})
-    samples = [items[i].fields for i in range(3)]
-    print(f"[{domain}] drafting HO-rules from {len(columns)} columns...", flush=True)
-    rules = propose_rules(llm, columns, samples)
+    columns = sorted({c for it in train_items for c in it.fields})
+    summary = schema_summary(train_items)            # per-column distinct values (train)
+    samples = [train_items[i].fields for i in range(min(n_draft_rows, len(train_items)))]
+    print(f"[{domain}] drafting HO-rules from {len(columns)} cols + value summary "
+          f"+ {len(samples)} train rows (test rows withheld)...", flush=True)
+    rules = propose_rules(llm, columns, summary, samples)
     print(f"[{domain}] drafted {len(rules)} rules:",
           [r["relation"] for r in rules], flush=True)
     if not rules:

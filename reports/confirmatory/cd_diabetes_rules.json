@@ -2,7 +2,7 @@
   "domain": "diabetes",
   "rules": [
     {
-      "relation": "admission_discharge_sour",
+      "relation": "admission_discharge",
       "subjects": [
         "admission_type_id",
         "admission_source_id"
@@ -13,46 +13,66 @@
       "kind": "subject_object"
     },
     {
-      "relation": "diagnosis_sequence",
+      "relation": "glucose_control",
       "subjects": [
-        "diag_1",
-        "diag_2",
-        "diag_3"
-      ],
-      "objects": [],
-      "kind": "pairwise"
-    },
-    {
-      "relation": "medication_change_outcom",
-      "subjects": [
-        "change",
-        "diabetesMed"
+        "max_glu_serum",
+        "A1Cresult"
       ],
       "objects": [
-        "A1Cresult",
-        "max_glu_serum"
+        "change"
       ],
       "kind": "subject_object"
     },
     {
-      "relation": "treatment_drugs",
+      "relation": "medication_usage",
       "subjects": [
         "metformin",
         "glipizide",
         "glyburide",
         "insulin",
         "pioglitazone",
-        "rosiglitazone"
+        "repaglinide",
+        "nateglinide",
+        "glimepiride",
+        "rosiglitazone",
+        "acarbose",
+        "miglitol",
+        "tolbutamide",
+        "chlorpropamide",
+        "acetohexamide",
+        "tolazamide",
+        "examide",
+        "citoglipton",
+        "troglitazone",
+        "glyburide-metformin",
+        "glipizide-metformin",
+        "glimepiride-pioglitazone",
+        "metformin-rosiglitazone",
+        "metformin-pioglitazone"
       ],
-      "objects": [],
-      "kind": "pairwise"
+      "objects": [
+        "diabetesMed"
+      ],
+      "kind": "subject_object"
     },
     {
-      "relation": "visit_utilization",
+      "relation": "diagnosis_chain",
       "subjects": [
-        "number_outpatient",
-        "number_emergency",
-        "number_inpatient"
+        "diag_1",
+        "diag_2",
+        "diag_3"
+      ],
+      "objects": [
+        "number_diagnoses"
+      ],
+      "kind": "subject_object"
+    },
+    {
+      "relation": "visit_activity",
+      "subjects": [
+        "num_lab_procedures",
+        "num_procedures",
+        "num_medications"
       ],
       "objects": [
         "time_in_hospital"
@@ -60,16 +80,18 @@
       "kind": "subject_object"
     },
     {
-      "relation": "demographics_age_gender",
+      "relation": "prior_visits",
       "subjects": [
-        "race",
-        "gender",
-        "age"
+        "number_outpatient",
+        "number_emergency",
+        "number_inpatient"
       ],
-      "objects": [],
-      "kind": "pairwise"
+      "objects": [
+        "admission_type_id"
+      ],
+      "kind": "subject_object"
     }
   ],
-  "content_id": "27f3f59a80c08296",
+  "content_id": "dedfe8b67c9af2e6",
   "taint": "LLM-proposed, unreviewed"
 }
