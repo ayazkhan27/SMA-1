@@ -28,10 +28,25 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
       configs), score-v2 + prereg FROZEN at tag prereg-v1, AND the single-shot
       confirmatory battery (T1-T4 + SSB, seeds 201-205/41,43, paired bootstrap
       + Holm + Cliff's delta). Numbers are now claims (STATUS 2026-06-12).
-- [ ] Phase 4  Differentiator: drift protocol T5 (wrong-action rate under
-      concept drift); OpenStack missing-event spike (SAGE expectation
-      violation).
-- [ ] Phase 5  Scale & latency: real HNSW, tiered WL/SME retrieval, parallel
-      FAC, Rust hot loops; gate p95 < 300 ms @ 100k cases.
-- [ ] Phase 6  Publish & pilot: paper, arXiv preprint, Apache-2.0 release,
-      Docker artifact, stakeholder demo pack.
+- [ ] Phase 4  Differentiator (the breakthrough content):
+      4a DRIFT: T5 state-drift (state-fidelity F1 decay vs horizon for
+         context-only / RAG-notes / SMA; H4 shallow-slope claim) + concept-drift
+         (wrong-action rate on regime change) + SAGE expectation-violation
+         (OpenStack missing-event spike). Needs LLM-in-loop (DeepSeek).
+      4b CROSS-DOMAIN BREADTH + DYNAMIC ADAPTERS (one experiment): expose the
+         generic adapters to a real NON-telemetry domain (finance fraud /
+         healthcare claims, public + license-clean); MEASURE higher-order-
+         relation density and SMA's edge vs structural depth; then run the
+         draft-adapter loop (LLM proposes residual HO-relation rules when
+         coverage is low) and re-measure whether SMA's structural advantage
+         recovers. Validates generality + the dynamic adapter + systematicity-
+         as-active-ingredient in one arc. Governance of drafting: see ADR-007.
+- [ ] Phase 5  Scale & latency + hardening: real HNSW, tiered WL/SME retrieval,
+      parallel FAC, Rust hot loops; gate p95 < 300 ms @ 100k cases. Implement
+      ADR-007 adapter RBAC / quarantine / audit / kill-switch.
+- [ ] Phase 6  Publish & release: write the manuscript (NeurIPS 2026 primary,
+      Nature MI alternative); arXiv preprint; Apache-2.0 (LICENSE present);
+      build the clean public tree (scripts/build_release.py -> dist/sma-public),
+      GitHub (khanayaz2727@gmail.com), Hugging Face Space (release/hf_space) +
+      optional SSB dataset card, Zenodo DOI, Docker artifact. Plan in
+      release/RELEASE_PLAN.md.
