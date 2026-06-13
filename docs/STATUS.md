@@ -524,3 +524,24 @@ under pre-registration. These numbers are now CLAIMS.
   per-category accuracy with the standard concept-drift protocol (prequential +
   ADWIN-style delay/recovery); SAGE expectation-violation is the SMA-unique
   drift detector. Blueprint §8.3 T5 updated to point here (synthetic superseded).
+
+## 2026-06-12 (Phase 4a drift: built via subagent-driven dev, run launched)
+
+- Executed the 12-task drift plan task-by-task (subagent-driven, TDD): LongMemEval
+  loader (real 500-instance oracle, schema verified), 4 memory backends
+  (context-only/rag-notes/sma/zep-isolated), SAGE expectation_violation drift
+  detector, drift metrics (recovery/detection-delay/staleness, delta convention),
+  deterministic grader, single-shot harness. 16 drift tests pass (+1 zep skip).
+- Controller refinements before the run: (a) shared EXTRACTION CACHE - rag-notes
+  and sma now get byte-identical extracted facts (truly held-constant) AND it
+  halves API cost; (b) per-instance checkpoint + resume (learned from the OOM'd
+  confirmatory battery - a crash never loses prior work).
+- Cost (measured on 3 real instances): full 500-instance ORACLE run, 3 backends,
+  projects to ~$3.26 / ~5 h. DeepSeek balance $13.48 -> ample (~$10 spare).
+  Expensive future items deferred: the 277MB _s_cleaned realistic-haystack run
+  (~10-50x) and adding the Zep/Graphiti SOTA baseline (heavy extraction).
+- Run LAUNCHED (detached, resumable). First instance checkpointed OK; SMA fired
+  an expectation-violation drift flag. Results -> reports/confirmatory/t5_*.csv.
+- NEXT when it completes: Task 12 (drift figure), stats analysis, STATUS results
+  entry (honest outcome: win / parity / null); note the deterministic grader is
+  a strict proxy (LLM-judge re-grade is the option for headline accuracy).
