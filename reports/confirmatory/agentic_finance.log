@@ -1,0 +1,15 @@
+########## agentic arm: finance ##########
+  313 entities loaded; assembling memories...
+
+===== AGENTIC SUITE [finance] (n_all=324 n_rare=208 n_novel=36) =====
+memory          t1 all/rare     t5 all/rare     t10 all/rare    AURC    novF1   
+sma             0.160/0.212     0.377/0.418     0.506/0.558     0.530   0.182   
+bm25            0.068/0.091     0.182/0.250     0.278/0.332     0.851   0.000   
+dense           0.043/0.058     0.170/0.188     0.281/0.264     0.783   0.000   
+hybrid_rrf      0.059/0.077     0.191/0.231     0.284/0.298     0.795   0.000   
+hipporag        0.009/0.014     0.074/0.101     0.120/0.111     0.925   0.179   
+hybrid_rerank   0.037/0.053     0.173/0.202     0.256/0.274     0.857   0.000   
+
+primary: SMA vs best-RAG (hybrid_rrf) on tail top-5  delta=+0.1667 CI=[0.1111,0.2250] p=0.0002 cliffs=0.167  -> WIN
+
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/agentic_finance.csv

@@ -1,0 +1,20 @@
+digraph adapter {
+  rankdir=LR; bgcolor="transparent";
+  node [fontname="Arial" fontsize=11 shape=box style="rounded,filled" color="#5F6B78" penwidth=1.2];
+  edge [color="#2E6B86" penwidth=1.2 arrowsize=0.7];
+
+  subgraph cluster_fmt {
+    label="ontology sources"; fontname="Arial"; fontsize=10; color="#9AA3AB"; style=dashed;
+    obo  [label="OBO"  fillcolor="#E3EEF2"];
+    owl  [label="OWL/TTL" fillcolor="#E3EEF2"];
+    stix [label="STIX" fillcolor="#E3EEF2"];
+    cpc  [label="CPC XML" fillcolor="#E3EEF2"];
+    xbrl [label="XBRL" fillcolor="#E3EEF2"];
+  }
+  mount [label="universal\nloader + mount" shape=hexagon fillcolor="#FBF0E2" penwidth=1.4];
+  norm [label="normalized graph\n is-a lattice + higher-order" fillcolor="#E6F0E6"];
+  route [label="registry\n+ domain router" fillcolor="#ECE8F4"];
+
+  obo->mount; owl->mount; stix->mount; cpc->mount; xbrl->mount;
+  mount->norm->route;
+}

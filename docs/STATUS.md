@@ -868,3 +868,24 @@ under pre-registration. These numbers are now CLAIMS.
 - This is the paper's headline: one universal structure-mapping memory beats the
   full enterprise RAG/KG gauntlet on the long tail across fields, with calibrated
   abstention + novelty detection RAG structurally lacks.
+
+## 2026-06-13 (Agentic FINANCE arm: SMA ~2x best RAG, hard low-signal task)
+
+- SEC filing -> US-GAAP concept retrieval (313 filings, 10-40 concepts; gold from
+  SEC 2024q1 num.txt; FIBO has no instance corpus so US-GAAP provides the gold).
+    memory          t5 all/rare   AURC(↓)  novF1
+    SMA             0.377/0.418   0.530    0.182
+    hybrid_rrf      0.191/0.231   0.795    0.000   <- best enterprise RAG
+    bm25            0.182/0.250   0.851    0.000
+    hybrid_rerank   0.173/0.202   0.857    0.000
+    dense           0.170/0.188   0.783    0.000
+    hipporag        0.074/0.101   0.925    0.179
+- Tail top-5: SMA 0.418 vs best RAG 0.231 -> delta=+0.167, CI[0.111,0.225],
+  p=0.0002, Cliff's=0.167 -> WIN (SMA ~2x best RAG). Honest: absolute accuracy is
+  LOW for all methods -- US-GAAP concepts are heavily shared across filings (weak
+  discriminability) and the presentation hierarchy is grouping-not-strict-is-a
+  (softest-semantics ontology). The relative win is large + significant; novelty
+  0.182 vs 0 for pure RAG; AURC best.
+- 4/4 finished domains WIN vs enterprise RAG on tail top-5: medicine +0.333,
+  genomics +0.156, finance +0.167, cyber +0.073 (all p<=0.035). Legal (patent->CPC)
+  still running (slow over the 254k CPC IC closure).
