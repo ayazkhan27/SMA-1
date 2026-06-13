@@ -511,3 +511,16 @@ Verdict: H2 (both halves) and H4 confirmed decisively; H5 confirmed; H1 mixed
 (one decisive, one qualified, one null); T4 parity. The "structure beats
 surface exactly off-surface and on rare events; parity in-domain" story holds
 under pre-registration. These numbers are now CLAIMS.
+
+## 2026-06-12 (Phase 4a drift design FROZEN via brainstorming)
+
+- Brainstormed the drift experiment to a design spec (superpowers:brainstorming):
+  docs/superpowers/specs/2026-06-12-phase4a-drift-design.md. Four decisions:
+  (1) adapters NOT improved before 4b cross-domain test (test-as-is then draft,
+  the honest before/after); (2) drift uses REAL data, no synthetic; (3) arena =
+  LongMemEval (+LoCoMo) agent-memory benchmark, extraction LLM-held-constant to
+  isolate the memory mechanism; (4) 4th SOTA variant = Zep/Graphiti, run by us
+  on DeepSeek for an equal-footing head-to-head. Metrics reconcile agent-memory
+  per-category accuracy with the standard concept-drift protocol (prequential +
+  ADWIN-style delay/recovery); SAGE expectation-violation is the SMA-unique
+  drift detector. Blueprint §8.3 T5 updated to point here (synthetic superseded).

@@ -29,10 +29,14 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
       confirmatory battery (T1-T4 + SSB, seeds 201-205/41,43, paired bootstrap
       + Holm + Cliff's delta). Numbers are now claims (STATUS 2026-06-12).
 - [ ] Phase 4  Differentiator (the breakthrough content):
-      4a DRIFT: T5 state-drift (state-fidelity F1 decay vs horizon for
-         context-only / RAG-notes / SMA; H4 shallow-slope claim) + concept-drift
-         (wrong-action rate on regime change) + SAGE expectation-violation
-         (OpenStack missing-event spike). Needs LLM-in-loop (DeepSeek).
+      4a DRIFT (design FROZEN: docs/superpowers/specs/2026-06-12-phase4a-drift-design.md):
+         REAL data (no synthetic) on LongMemEval (+ LoCoMo) agent-memory
+         benchmark; 4 variants context-only/RAG-notes/Zep-Graphiti(SOTA, run on
+         DeepSeek)/SMA; extraction LLM-based & held-constant (isolates the
+         memory mechanism); metrics = LongMemEval per-category accuracy
+         (knowledge-updates=concept-drift, temporal) + update-recovery/staleness
+         + SAGE expectation-violation as a standard drift detector. Supersedes
+         blueprint §8.3 synthetic T5.
       4b CROSS-DOMAIN BREADTH + DYNAMIC ADAPTERS (one experiment): expose the
          generic adapters to a real NON-telemetry domain (finance fraud /
          healthcare claims, public + license-clean); MEASURE higher-order-
