@@ -1,0 +1,46 @@
+
+########## A1-hpo-rare-disease ##########
+  13002 entities loaded; mounting + running...
+  [A1-hpo-rare-disease seed 7] 50/150 (49s)
+  [A1-hpo-rare-disease seed 7] 100/150 (98s)
+  [A1-hpo-rare-disease seed 7] 150/150 (147s)
+  [A1-hpo-rare-disease seed 17] 50/150 (49s)
+  [A1-hpo-rare-disease seed 17] 100/150 (97s)
+  [A1-hpo-rare-disease seed 17] 150/150 (145s)
+  [A1-hpo-rare-disease seed 23] 50/150 (49s)
+  [A1-hpo-rare-disease seed 23] 100/150 (99s)
+  [A1-hpo-rare-disease seed 23] 150/150 (149s)
+
+=== arm A1-hpo-rare-disease: 450 pooled queries ===
+method      top-1   top-5   top-10  
+SMA         0.638   0.909   0.967   
+Phenomizer  0.733   0.909   0.953   
+Jaccard     0.491   0.698   0.769   
+primary (top-5) SMA-phen: delta=+0.0000 CI[-0.0333,+0.0333] p=1.0000 cliffs=+0.000
+
+########## A2-go-gene-function ##########
+  31631 entities loaded; mounting + running...
+  [A2-go-gene-function seed 7] 50/150 (42s)
+  [A2-go-gene-function seed 7] 100/150 (84s)
+  [A2-go-gene-function seed 7] 150/150 (125s)
+  [A2-go-gene-function seed 17] 50/150 (41s)
+  [A2-go-gene-function seed 17] 100/150 (82s)
+  [A2-go-gene-function seed 17] 150/150 (123s)
+  [A2-go-gene-function seed 23] 50/150 (42s)
+  [A2-go-gene-function seed 23] 100/150 (84s)
+  [A2-go-gene-function seed 23] 150/150 (126s)
+
+=== arm A2-go-gene-function: 450 pooled queries ===
+method      top-1   top-5   top-10  
+SMA         0.520   0.804   0.862   
+Phenomizer  0.487   0.769   0.860   
+Jaccard     0.440   0.658   0.727   
+primary (top-5) SMA-phen: delta=+0.0356 CI[-0.0111,+0.0800] p=0.1546 cliffs=+0.036
+
+===== SUITE SUMMARY (Holm across arms) =====
+arm                     SMA t5   best base t5  delta     p_holm   verdict
+A1-hpo-rare-disease     0.909    0.909         +0.0000   1.0000   parity/null
+A2-go-gene-function     0.804    0.769         +0.0356   0.3092   parity/null
+
+C3 (across fields): 0 arm(s) confirm C1. NOT YET (need >=2)
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/ontology_suite.csv

@@ -716,3 +716,38 @@ under pre-registration. These numbers are now CLAIMS.
       has real structure to violate (e.g. a patient whose HPO phenotype profile
       shifts; a mutated ATT&CK technique chain) — aligns with the spine.
   Recommendation: (b). Did NOT build a drift figure (would visualize a bug).
+
+## 2026-06-13 (Pre-registered ontology suite A1+A2 — PARITY, C3 NOT confirmed)
+
+- Ran configs/preregistration_ontology.md A1 (HPO rare-disease) + A2 (GO gene
+  function) through the universal adapter, strict protocol (sorted/hash-stable,
+  450 pooled queries/arm, 2500 candidates, paired bootstrap + Holm).
+    arm     method      top-1  top-5  top-10
+    A1 HPO  SMA         0.638  0.909  0.967
+            Phenomizer  0.733  0.909  0.953   <- beats SMA at top-1
+            Jaccard     0.491  0.698  0.769
+    A2 GO   SMA         0.520  0.804  0.862
+            Phenomizer  0.487  0.769  0.860
+            Jaccard     0.440  0.658  0.727
+  Primary (top-5) Holm: A1 delta=0.000 p=1.0; A2 delta=+0.036 p_holm=0.31.
+  BOTH parity/null. C3 (>=2 significant arms) NOT confirmed.
+- HONEST READ: the exploratory rare-disease win (STATUS 2026-06-13 earlier)
+  did NOT replicate under pre-registration. vs an ontology-AWARE SOTA
+  (Phenomizer, same HPO IC), SMA is at parity -- almost tautological. vs the
+  non-ontology lexical floor (Jaccard ~ naive RAG), SMA wins big (+21pp HPO,
+  +15pp GO top-5) -- which IS the spine's claim (ontology structure > no
+  structure), but Jaccard is not a real RAG/KG baseline.
+- CONSEQUENCES for the paper:
+  (1) Wrong opponent: "> RAG/KG" needs real DENSE retrieval + a KG/GraphRAG/
+      HippoRAG baseline in the suite, not Jaccard. We have NOT beaten a real
+      dense/KG retriever here yet.
+  (2) Wrong metric: rank-vs-bespoke-ontology-tool is parity. SMA's edge is
+      CAPABILITY (cite-or-abstain, cross-ontology routing, higher-order
+      relations, SAGE novelty) + GENERALITY (one mechanism, all domains) --
+      none measured by these arms.
+  (3) C1 was registered as a TAIL claim (rare slice, IC>median); the harness
+      pooled ALL queries and did not isolate the tail. The registered tail
+      test is NOT yet executed -- a real gap, not an excuse.
+- NEXT: (a) add dense + HippoRAG baselines to the suite; (b) implement the
+  rare-slice cut; (c) pivot the suite to CAPABILITY metrics + the 5-domain
+  agentic design (medicine/legal/cyber/finance/discovery).
