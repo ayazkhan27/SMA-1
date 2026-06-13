@@ -490,7 +490,8 @@ def build_demo(framework: ComparisonFramework | None = None):
                         )
                         chat_scorer = gr.Radio(
                             ["surprisal", "ses", "mdl"], value="surprisal",
-                            label="SMA scorer (ses: systematicity; mdl: surprisal-weighted, finds rare failure families)",
+                            label="SMA scorer (surprisal: frozen default, finds rare failure families; "
+                                  "ses: pure systematicity; mdl: parameter-free compression)",
                         )
                         with gr.Row():
                             chat_adapter = gr.Dropdown(adapters, value="logs", label="Query adapter")
