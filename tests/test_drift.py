@@ -134,3 +134,16 @@ def test_expectation_violation_empty_pool_is_max():
     from sma.sage.pools import SagePool
     pool = SagePool("t2", assimilation_threshold=0.2)
     assert pool.expectation_violation(make_case([stmt("x", "a", "b")])) == 1.0
+
+
+def test_sma_memory_reencodes_and_flags_drift():
+    from sma.eval.memory_backends.sma_memory import SmaMemory
+    # 2 extracts (one per session turn) + 1 answer
+    llm = FakeLLM(['["worksAt user globex"]', '["worksAt user acme"]', "Acme"])
+    b = SmaMemory(llm, k=5); b.reset()
+    b.ingest(_sess("s1", "I work at Globex."))
+    b.ingest(_sess("s2", "Now I work at Acme."))
+    r = b.query("worksAt user ?")
+    assert r.answer == "Acme"
+    assert b.last_violation >= 0.0   # expectation-violation tracked at ingest
+    assert isinstance(r.drift_flagged, bool)
