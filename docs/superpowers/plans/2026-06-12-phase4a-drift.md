@@ -39,25 +39,34 @@ Reference spec: `docs/superpowers/specs/2026-06-12-phase4a-drift-design.md`.
 
 - [ ] **Step 1: Add the manifest block**
 
-Add to `data/manifests/datasets.json` a top-level key (sibling of `loghub_raw`):
+Add to `data/manifests/datasets.json` a top-level key (sibling of `loghub_raw`).
+NOTE (controller-verified 2026-06-12): the original `xiaowu0162/longmemeval` repo
+is **deprecated**; the live repo is `longmemeval-cleaned`. The oracle file is
+already downloaded to `data/raw/longmemeval/longmemeval_oracle.json` and its md5
+is verified below. The 277 MB `_s_cleaned` file is fetched on demand for the full
+run; record its md5 on first fetch.
 
 ```json
 "longmemeval": {
-  "source": "https://huggingface.co/datasets/xiaowu0162/longmemeval",
+  "source": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned",
   "files": {
-    "longmemeval_s.json": {
+    "longmemeval_oracle.json": {
+      "md5": "4c2b4c8c936cf26968f4d0fdc93ca31c",
+      "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_oracle.json"
+    },
+    "longmemeval_s_cleaned.json": {
       "md5": "FILL_ON_FIRST_FETCH",
-      "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval/resolve/main/longmemeval_s.json"
+      "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json"
     }
   },
-  "source_note": "LongMemEval (Wu et al. 2024). longmemeval_s = small/realistic haystack. md5 recorded + verified locally on first download (same discipline as loghub spirit/liberty)."
+  "source_note": "LongMemEval (Wu et al. 2024), longmemeval-cleaned repo. oracle = answer-bearing sessions only (15 MB, cheap dev/pilot); _s_cleaned = realistic haystack (277 MB, the leaderboard setting). 500 instances each; drift-relevant categories knowledge-update(78)+temporal-reasoning(133)=211. md5 verified locally (same discipline as loghub spirit/liberty)."
 }
 ```
 
-- [ ] **Step 2: Fetch and record the checksum**
+- [ ] **Step 2: Verify the oracle checksum; record the _s checksum on first real fetch**
 
-Run: `python3 scripts/fetch_datasets.py --manifest data/manifests/datasets.json --only longmemeval` (if `--only` is unsupported, fetch all). On first run it downloads; compute the md5 with `md5sum data/raw/longmemeval/longmemeval_s.json`, paste it into the manifest replacing `FILL_ON_FIRST_FETCH`, and re-run to confirm it verifies.
-Expected: "longmemeval_s.json: md5 OK".
+The oracle is already present. Verify: `md5sum data/raw/longmemeval/longmemeval_oracle.json` → must equal `4c2b4c8c936cf26968f4d0fdc93ca31c`. The 277 MB `longmemeval_s_cleaned.json` is downloaded only for the full run (Task 11 `--full`); on that first fetch, compute its md5 and replace `FILL_ON_FIRST_FETCH`. Confirm `scripts/fetch_datasets.py` verifies the oracle entry.
+Expected: "longmemeval_oracle.json: md5 OK".
 
 - [ ] **Step 3: Commit**
 
@@ -815,7 +824,9 @@ from sma.eval.drift_metrics import update_recovery, detection_delay, staleness_r
 from sma.eval.stats import paired_bootstrap, holm_bonferroni, cliffs_delta
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
-DATA = ROOT / "data" / "raw" / "longmemeval" / "longmemeval_s.json"
+DATA_DIR = ROOT / "data" / "raw" / "longmemeval"
+ORACLE = DATA_DIR / "longmemeval_oracle.json"          # cheap dev/pilot (15 MB)
+FULL = DATA_DIR / "longmemeval_s_cleaned.json"          # leaderboard setting (277 MB)
 OUT = ROOT / "reports" / "confirmatory"
 
 def make_backends(llm):
@@ -839,11 +850,12 @@ def get_llm(smoke):
     from sma.agent.llm import DeepSeekOrchestrator
     return DeepSeekOrchestrator()
 
-def run(limit, smoke):
+def run(limit, smoke, full):
     rows_path = OUT / ("t5_rows_smoke.csv" if smoke else "t5_rows.csv")
     if rows_path.exists() and not smoke:
         sys.exit(f"REFUSE: {rows_path} exists (single-shot). Log a rerun in STATUS.md and delete to force.")
-    insts = load_instances(DATA)
+    data = FULL if full else ORACLE   # oracle for dev/pilot; --full for the leaderboard setting
+    insts = load_instances(data)
     if smoke: insts = insts[:5]
     elif limit: insts = insts[:limit]
     llm = get_llm(smoke)
@@ -888,8 +900,9 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--full", action="store_true", help="use longmemeval_s_cleaned (277MB leaderboard setting); default oracle")
     a = ap.parse_args()
-    run(a.limit, a.smoke)
+    run(a.limit, a.smoke, a.full)
 ```
 
 - [ ] **Step 2: Run the smoke (no network, deterministic stub)**
