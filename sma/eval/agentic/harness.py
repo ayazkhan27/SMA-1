@@ -46,10 +46,18 @@ NOVELTY_THRESHOLD = 0.5  # fixed (not per-method tuned); noted caveat in the spe
 def _ancestors(term: str, parents: dict[str, tuple[str, ...]], cache: dict[str, set]) -> set:
     if term in cache:
         return cache[term]
+    # Iterative closure with a visited set: cycle-safe (some ontologies, e.g. CPC
+    # built from repeated scheme symbols, contain is-a cycles) and immune to the
+    # recursion limit on deep hierarchies. Same result as the recursive form on
+    # acyclic graphs.
     acc: set[str] = set()
-    for p in parents.get(term, ()):
+    stack = list(parents.get(term, ()))
+    while stack:
+        p = stack.pop()
+        if p in acc or p == term:
+            continue
         acc.add(p)
-        acc |= _ancestors(p, parents, cache)
+        stack.extend(parents.get(p, ()))
     cache[term] = acc
     return acc
 
