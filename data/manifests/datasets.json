@@ -77,5 +77,19 @@
         "url": "https://www.qrg.northwestern.edu/software/sme4/sme4-corpus.zip"
       }
     }
+  },
+  "longmemeval": {
+    "source": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned",
+    "files": {
+      "longmemeval_oracle.json": {
+        "md5": "4c2b4c8c936cf26968f4d0fdc93ca31c",
+        "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_oracle.json"
+      },
+      "longmemeval_s_cleaned.json": {
+        "md5": "FILL_ON_FIRST_FETCH",
+        "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json"
+      }
+    },
+    "source_note": "LongMemEval (Wu et al. 2024), longmemeval-cleaned repo. oracle = answer-bearing sessions only (15 MB, cheap dev/pilot); _s_cleaned = realistic haystack (277 MB, leaderboard setting). 500 instances each; drift-relevant categories knowledge-update(78)+temporal-reasoning(133)=211. md5 verified locally (same discipline as loghub spirit/liberty)."
   }
 }
