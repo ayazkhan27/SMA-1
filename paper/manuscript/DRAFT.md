@@ -35,25 +35,57 @@ free-form conversational recall).
 
 ## Main
 
-[Intro — 4–5 paragraphs]
-1. The grounding problem: LLMs hallucinate in specialist domains; RAG is the
-   default fix but indexes token similarity. KGs add entity edges but traverse
-   them by path, not by analogy. Both discard the *subsumption lattice* (what
-   generalizes to what) and *higher-order relations* (relations over relations)
-   that experts reason with.
-2. The structure-mapping lineage (Gentner's SME; Forbus's MAC/FAC) provides a
-   retrieval principle that indexes relational structure. We operationalize it
-   as a memory whose geometry is a curated ontology.
-3. The thesis (one sentence): a structure-mapping memory grounded in a golden
-   domain ontology turns a generalist LLM into a verifiable specialist —
-   retrieving by logical structure that vector RAG and KGs discard, and beating
-   both on rare/cross-vocabulary/high-stakes reasoning where hallucination is
-   unacceptable.
-4. Contributions: (i) a universal OWL/OBO→SMA loader + registry + router; (ii) a
-   memory-swap agentic benchmark isolating the retriever variable across six
-   domains against the enterprise RAG/KG gauntlet; (iii) an honest delineation —
-   parity vs the bespoke ontology oracle, decisive wins vs RAG/KG on the tail,
-   plus abstention + novelty capabilities baselines cannot provide.
+Large language models are fluent generalists but unreliable specialists: in
+medicine, law, security and finance they produce confident, plausible, and
+sometimes fabricated answers. The dominant remedy, retrieval-augmented
+generation (RAG), grounds the model in an external corpus retrieved by
+embedding similarity. This works when the answer is *frequent and lexically
+similar* to the query, but it fails on the cases that define expertise — the
+rare presentation, the cross-vocabulary analogy, the long-tail entity — because
+vector retrieval averages rarity away and indexes surface form rather than
+meaning. Knowledge-graph retrieval (including recent graph-RAG variants) adds
+typed entity edges, but it traverses them by path adjacency and discriminates on
+entity arguments; it still discards the two structures an expert reasons with
+most: the *subsumption lattice* (what generalizes to what) and *higher-order
+relations* (relations whose arguments are themselves relations).
+
+Cognitive science has long studied retrieval by relational structure. Gentner's
+structure-mapping theory and Forbus's MAC/FAC model retrieve analogues by the
+systematicity of their relational structure rather than their surface features —
+the principle by which an expert recognizes that a novel case is "like" a known
+one despite a different vocabulary. We operationalize this as a retrieval
+*memory* whose geometry is a curated domain ontology: each observation becomes a
+functor over a subject, the ontology's is-a tree becomes an ascension lattice
+along which specific terms match general ones, and the ontology's typed relations
+become higher-order statements that structure-mapping rewards. A rarity-weighted
+(information-content) scorer makes the rare-but-decisive term dominate by
+construction.
+
+Our thesis is that **a structure-mapping memory grounded in a golden domain
+ontology turns a generalist LLM into a verifiable specialist** — retrieving by
+logical structure that vector RAG and knowledge graphs discard, and so beating
+both on the rare, cross-vocabulary, high-stakes reasoning where hallucination is
+unacceptable, while additionally offering provenance, calibrated abstention, and
+detection of genuinely novel inputs. Crucially, we also delimit the thesis: the
+advantage is *specific to structure*. Where no ontology applies — flat tabular
+prediction, free-form conversational recall — the advantage disappears, and we
+report those null results alongside the wins.
+
+We make three contributions. First, a **universal ontology adapter**: a single
+loader ingests any OBO, OWL (including Turtle via rdflib), STIX, CPC, or
+MITRE-XML source into a normalized graph, mounts it as a structure-mapping
+retrieval geometry, and a registry + router select the right ontology per query
+— demonstrated on eleven ontologies spanning six domains (~594k concepts) with no
+per-domain retrieval code. Second, a **memory-swap agentic benchmark** that holds
+the language model and prompt fixed and swaps only the retrieval memory, so any
+difference is causally attributable to retrieval, evaluated against the full
+enterprise RAG/KG gauntlet (BM25, neural dense, hybrid fusion, cross-encoder
+reranking, and a knowledge-graph retriever). Third, an **honest characterization**
+of when structure-mapping helps: it reaches parity with a hand-built,
+domain-specific ontology tool on pure-subsumption ranking, wins decisively over
+general-purpose RAG/KG on the long-tail slice across unrelated domains, and
+uniquely provides calibrated cite-or-abstain and structural-novelty signals that
+embedding retrieval cannot.
 
 ### Results
 
