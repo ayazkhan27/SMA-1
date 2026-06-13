@@ -42,3 +42,15 @@ def test_loader_on_real_oracle():
     assert any(i.is_drift for i in inst)
     cats = {i.category for i in inst}
     assert "knowledge-update" in cats and "temporal-reasoning" in cats
+
+
+from sma.eval.memory_backends.base import MemoryBackend, QueryResult
+
+def test_backend_is_abstract():
+    import pytest
+    with pytest.raises(TypeError):
+        MemoryBackend()  # abstract; cannot instantiate
+
+def test_query_result_defaults():
+    r = QueryResult(answer="x")
+    assert r.retrieved == [] and r.drift_flagged is False
