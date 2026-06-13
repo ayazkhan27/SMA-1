@@ -46,36 +46,78 @@ class _Stub:
             return lines[-1][:60] if lines else "unknown"
         return "unknown"
 
+class _ExtractCache:
+    """Wraps an LLM and memoizes EXTRACTION calls (system prompt contains
+    'Extract') keyed by the turn text. This (a) guarantees extraction is truly
+    held constant across backends — rag-notes and sma get byte-identical facts
+    for the same turn — and (b) halves token cost by not extracting the same
+    turn twice. Answer calls (per-backend, different context) are never cached."""
+    def __init__(self, llm):
+        self.llm = llm
+        self._cache: dict[str, str] = {}
+        self.hits = 0
+        self.misses = 0
+    def complete(self, messages, max_tokens=600, temperature=0.0):
+        if messages and "Extract" in messages[0].get("content", ""):
+            key = messages[-1]["content"]
+            if key in self._cache:
+                self.hits += 1
+                return self._cache[key]
+            self.misses += 1
+            out = self.llm.complete(messages, max_tokens=max_tokens, temperature=temperature)
+            self._cache[key] = out
+            return out
+        return self.llm.complete(messages, max_tokens=max_tokens, temperature=temperature)
+
 def get_llm(smoke):
     if smoke:
         return _Stub()
     from sma.agent.llm import DeepSeekOrchestrator
-    return DeepSeekOrchestrator()
+    return _ExtractCache(DeepSeekOrchestrator())
+
+FIELDS = ["qid", "category", "method", "correct", "drift", "flagged"]
 
 def run(limit, smoke, full):
     rows_path = OUT / ("t5_rows_smoke.csv" if smoke else "t5_rows.csv")
-    if rows_path.exists() and not smoke:
-        sys.exit(f"REFUSE: {rows_path} exists (single-shot). Log a rerun in STATUS.md and delete to force.")
+    OUT.mkdir(parents=True, exist_ok=True)
     data = FULL if full else ORACLE
     insts = load_instances(data)
     if smoke: insts = insts[:5]
     elif limit: insts = insts[:limit]
+    # Resume: rows are written per-instance so a crash never loses prior work.
+    # Re-launching skips instances already in the CSV (single-shot per qid).
+    rows: list[dict] = []
+    done: set[str] = set()
+    if rows_path.exists():
+        rows = list(csv.DictReader(rows_path.open()))
+        for r in rows:
+            r["correct"] = float(r["correct"]); r["drift"] = int(r["drift"]); r["flagged"] = int(r["flagged"])
+        done = {r["qid"] for r in rows}
+        remaining = [i for i in insts if i.question_id not in done]
+        if not remaining:
+            print(f"all {len(done)} instances already done in {rows_path}; computing stats only", flush=True)
+        else:
+            print(f"resuming: {len(done)} done, {len(remaining)} remaining", flush=True)
+        insts = remaining
     llm = get_llm(smoke)
-    rows = []
-    for inst in insts:
+    new_file = not rows_path.exists()
+    fh = rows_path.open("a", newline="")
+    writer = csv.DictWriter(fh, fieldnames=FIELDS)
+    if new_file:
+        writer.writeheader()
+    for n, inst in enumerate(insts, 1):
         for b in make_backends(llm):
             b.reset()
             for s in inst.sessions:
                 b.ingest(s)
             r = b.query(inst.question)
-            rows.append({"qid": inst.question_id, "category": inst.category,
-                         "method": b.name, "correct": grade_answer(r.answer, inst.answer),
-                         "drift": int(inst.is_drift), "flagged": int(r.drift_flagged)})
-        print(f"[{len(rows)}] {inst.question_id} done", flush=True)
-    OUT.mkdir(parents=True, exist_ok=True)
-    with rows_path.open("w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=["qid", "category", "method", "correct", "drift", "flagged"])
-        w.writeheader(); w.writerows(rows)
+            row = {"qid": inst.question_id, "category": inst.category,
+                   "method": b.name, "correct": grade_answer(r.answer, inst.answer),
+                   "drift": int(inst.is_drift), "flagged": int(r.drift_flagged)}
+            rows.append(row); writer.writerow(row)
+        fh.flush()  # checkpoint after every instance
+        print(f"[{len(done)+n}] {inst.question_id} done", flush=True)
+    fh.close()
     methods = sorted({r["method"] for r in rows})
     drift_rows = [r for r in rows if r["drift"]]
     by = lambda m: [r["correct"] for r in drift_rows if r["method"] == m]
