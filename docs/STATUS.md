@@ -915,3 +915,24 @@ under pre-registration. These numbers are now CLAIMS.
   legal +0.064 (all). All Holm-significant. SMA best AURC + only-nonzero novelty
   in every arm. THE headline is complete: one universal structure-mapping memory
   beats the enterprise RAG/KG gauntlet across FIVE unrelated golden-ontology fields.
+
+## 2026-06-13 (FREEZE adapter-v1 + register prereg-v2 — phase boundary)
+
+- FROZEN `adapter-v1` (git tag; ADR-008): the universal ontology adapter
+  (loaders/registry/router + Memory protocol + run_oneshot harness) and the pinned
+  ontology versions. Matcher dials remain prereg-v1 (surprisal/max/gamma0.25/rho0.95/
+  delta2). Validation at freeze: 111 tests green; 5/5 agentic arms WIN vs best
+  enterprise RAG on tail top-5 (Holm-sig). After this tag the API + ontology
+  versions do not move without a new tag + fresh validation.
+- REGISTERED `prereg-v2` (configs/preregistration_v2_llmqa.md): the LLM-QA
+  "trustworthy specialist" phase. Memory-swap AGENT (LLM+prompt fixed, swap
+  none/dense-RAG/SMA); ontology-grounded diagnosis QA on medicine; metrics =
+  accuracy + citation-faithfulness + abstention-calibration (risk-coverage AUROC)
+  + novelty-recall; per-axis paired-bootstrap + Holm falsifiers; DeepSeek budget,
+  pilot-then-full. This is the breakthrough phase (-> Figure 5). Registered BEFORE
+  any run.
+- PAPER STATUS: experimental core complete (5-domain retrieval, all wins +
+  capabilities). Manuscript sma_nature_mi.tex compiles (6pp, 5-domain Table 2).
+  Figures: Fig 1 (Claude Design, conceptual, prompts ready) + Fig 2/4d/ED1/ED3
+  (matplotlib SVG). Remaining for submission: run prereg-v2 (Fig 5), paired
+  transfer ED redo, Extended Data, references; then Phase 6 release.
