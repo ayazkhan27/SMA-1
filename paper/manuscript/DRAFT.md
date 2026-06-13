@@ -160,3 +160,26 @@ cross-vocabulary reasoning — and we report these nulls to delimit it.
 **Table 1.** The eleven mounted ontologies (domain, source, terms, is-a, typed).
 **Table 2.** Medicine arm full results (all + rare slices, AURC, novelty F1).
 **Extended Data.** De-risk suite (A1 HPO, A2 GO) vs Phenomizer/Jaccard/Dense/Hippo.
+
+---
+
+### Table 1 — The eleven mounted golden ontologies (one universal loader)
+
+| Domain | Ontology | Format | Terms | is-a edges | Typed relations |
+|---|---|---|---|---|---|
+| Medicine | HPO | OBO | 19,810 | 24,329 | 0 (pure is-a) |
+| Medicine | MONDO | OBO | 56,273 | 78,736 | 34,157 |
+| Anatomy | Uberon | OBO | 14,973 | 19,382 | 11,697 |
+| Biology | GO | OBO | 38,263 | 57,803 | 14,076 |
+| Chemistry | ChEBI | OBO | 205,592 | 285,589 | 94,902 |
+| Cyber | MITRE ATT&CK | STIX 2.1 | 712 | 475 | 872 |
+| Cyber | MITRE CAPEC | XML | 558 | 532 | 194 |
+| Cyber | MITRE CWE | XML | 944 | 1,160 | 284 |
+| Legal/IP | CPC | XML | 254,274 | 256,106 | 0 (pure is-a) |
+| Legal | LKIF-core | OWL | 153 | 171 | 48 |
+| Finance | FIBO | RDF (rdflib) | 2,948 | 3,819 | 1,335 |
+
+Total ≈ 594k concepts across 6 domains, all routed (no merged omni-graph; merge
+WITHIN an aligned ecosystem, route ACROSS). Pure-is-a ontologies (HPO, CPC) yield
+parity vs the ontology oracle; relation-rich ones (ChEBI, MONDO, GO, ATT&CK) are
+where higher-order structure-mapping should exceed it.
