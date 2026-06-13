@@ -545,3 +545,20 @@ under pre-registration. These numbers are now CLAIMS.
 - NEXT when it completes: Task 12 (drift figure), stats analysis, STATUS results
   entry (honest outcome: win / parity / null); note the deterministic grader is
   a strict proxy (LLM-judge re-grade is the option for headline accuracy).
+
+## 2026-06-12 (Phase 4b 'before' — built in parallel with the 4a drift run)
+
+- Cross-domain generality test, healthcare domain. Real UCI Diabetes-130 (101766
+  encounters, CC BY 4.0). Generic `structured` adapter encoding: mean
+  HO-relation density = 0.0000 (pure flat (attribute row value) triples; every
+  encounter shares the 50-col schema so functor-count vectors don't discriminate).
+- Readmission-by-analogy retrieval (balanced early-<30 vs not, index 700 / query
+  300, k=10): macro-F1 SMA 0.425 vs BM25 0.537, Dense 0.565. Paired bootstrap:
+  NOT significant (Holm p 0.42 / 0.25; CIs include 0) -> statistical PARITY.
+  Confirms H7: flat encoding gives systematicity nothing to exploit, so SMA's
+  structural advantage vanishes (it retrieves near-randomly while value-based
+  baselines get marginal signal). This is the honest 'before'.
+- AFTER (deferred until 4a frees the DeepSeek budget): draft-adapter loop adds
+  residual HO-rules (treats/comorbid/escalates) -> re-encode -> re-measure
+  whether SMA rises above baselines (H8). Spec: docs/superpowers/specs/
+  2026-06-12-phase4b-crossdomain-design.md.
