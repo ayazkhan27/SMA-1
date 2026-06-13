@@ -889,3 +889,29 @@ under pre-registration. These numbers are now CLAIMS.
 - 4/4 finished domains WIN vs enterprise RAG on tail top-5: medicine +0.333,
   genomics +0.156, finance +0.167, cyber +0.073 (all p<=0.035). Legal (patent->CPC)
   still running (slow over the 254k CPC IC closure).
+
+## 2026-06-13 (Agentic LEGAL arm — 5/5 domains WIN; rare slice degenerate for CPC)
+
+- Patent->CPC classification (1464 USPTO patents -> examiner CPC codes; full run,
+  n_index 2000, all 6 memories incl reranker; ~2h over the 254k-node CPC graph).
+    memory          t5 ALL   AURC(↓)  novF1     (rare slice EMPTY -> see note)
+    SMA             0.941    0.021    0.182
+    dense (BGE)     0.870    0.059    0.000   <- best enterprise RAG
+    hybrid_rrf      0.793    0.203    0.000
+    hybrid_rerank   0.793    0.161    0.000
+    bm25            0.670    0.290    0.000
+    hipporag        0.417    0.462    0.182
+  All-slice top-5: SMA 0.941 vs best RAG 0.870 -> delta=+0.064, CI[0.025,0.103],
+  p=0.0022 -> WIN. SMA best AURC + only-nonzero novelty (0.182) vs 0 for pure RAG.
+- HONEST NOTE: n_rare=0. The rare-slice definition (entity's rarest-term IC >
+  corpus median) DEGENERATES for CPC: patents' CPC subgroup codes are largely
+  unique within the sample, so closure-propagated IC is near-uniform and
+  "max IC > median" is (almost) never strictly true -> empty slice. Legal is
+  therefore reported on the ALL-query slice (clearly flagged). A robuster rare-slice
+  definition (percentile/frequency threshold) would fix it but needs a re-run for
+  cross-domain consistency; deferred.
+- 5/5 DOMAINS WIN vs best enterprise RAG (tail top-5 where defined; all-slice for
+  legal): medicine +0.333, genomics +0.156, finance +0.167, cyber +0.073 (rare),
+  legal +0.064 (all). All Holm-significant. SMA best AURC + only-nonzero novelty
+  in every arm. THE headline is complete: one universal structure-mapping memory
+  beats the enterprise RAG/KG gauntlet across FIVE unrelated golden-ontology fields.

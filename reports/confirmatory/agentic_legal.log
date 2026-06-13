@@ -1,0 +1,15 @@
+########## agentic arm: legal ##########
+  1464 entities loaded; assembling memories...
+
+===== AGENTIC SUITE [legal] (n_all=324 n_rare=0 n_novel=36) =====
+memory          t1 all/rare     t5 all/rare     t10 all/rare    AURC    novF1   
+sma             0.815/0.000     0.941/0.000     0.972/0.000     0.021   0.182   
+bm25            0.435/0.000     0.670/0.000     0.731/0.000     0.290   0.000   
+dense           0.660/0.000     0.870/0.000     0.954/0.000     0.059   0.000   
+hybrid_rrf      0.562/0.000     0.793/0.000     0.889/0.000     0.203   0.000   
+hipporag        0.207/0.000     0.417/0.000     0.525/0.000     0.462   0.182   
+hybrid_rerank   0.451/0.000     0.793/0.000     0.889/0.000     0.161   0.000   
+
+primary: SMA vs best-RAG (dense) on tail top-5  delta=+0.0639 CI=[0.0250,0.1028] p=0.0022 cliffs=0.064  -> WIN
+
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/agentic_legal.csv
