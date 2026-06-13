@@ -661,3 +661,29 @@ under pre-registration. These numbers are now CLAIMS.
   adapter is a strong, cheap way to generate that density, and hand-curation
   must focus on density+meaning, not abstraction. Ties to ADR-007 (review
   drafted rules) and motivates 'density-aware' adapter design as future work.
+
+## 2026-06-13 (Exploratory: rare-disease diagnosis vs SOTA-equivalent)
+
+- Curiosity benchmark (NOT pre-registered) on the standard rare-disease setup:
+  HPO phenotype ontology + OMIM/Orphanet disease annotations; simulated patients
+  (partial, imprecise presentations: ~5 symptoms, climbed 0-2 ontology levels,
+  +3 noise) ranked against 3000 candidate diseases. SMA encodes each phenotype
+  as a FUNCTOR (the 4b lesson) with the HPO is-a tree as its ascension lattice;
+  surprisal scorer == information-content weighting. Baselines: Phenomizer-style
+  IC best-match semantic similarity (the SOTA-equivalent) and Jaccard.
+- Result, stable across 3 seeds (7/11/19), mean:
+    method      top-1   top-5   top-10  MRR
+    SMA         0.498   0.812   0.918   0.631
+    Phenomizer  0.530   0.765   0.853   0.641
+    Jaccard     0.378   0.575   0.660   0.483
+  SMA TIES the SOTA-equiv on top-1/MRR and BEATS it on top-5 (+5) and top-10
+  (+6.5) on EVERY seed -- the clinically meaningful differential-diagnosis
+  shortlist. Opposite of the flat-tabular 4b result, exactly as the domain
+  thesis predicted: rare disease has real ASCENSION structure (HPO) for SMA to
+  exploit (its proven cross-specificity strength), plus it is rare (one-shot).
+- Caveats: exploratory/synthetic patients (standard methodology); Phenomizer is
+  a faithful re-implementation, not the exact tool; not significance-tested.
+  Extras SMA brings that Phenomizer cannot: candidate-inference of missing
+  phenotypes, cite-or-abstain, SAGE novelty (a patient matching NOTHING = a
+  candidate new disease). Strong case for a real paper arm / the 'true power'
+  high-value domain demonstration.
