@@ -225,3 +225,38 @@ def load_owl(path: str, name: str = "") -> OntologyGraph:
         name = Path(path).stem
     name = name.removesuffix(".owl")
     return OntologyGraph(name=name, version=version, terms=terms)
+
+
+def load_owl_dir(root: str, name: str = "", pattern: str = "*.rdf") -> OntologyGraph:
+    """Load + merge a multi-file OWL/RDF ontology (e.g. LKIF, FIBO) into one graph.
+
+    Many real OWL ontologies ship as a directory of modules rather than a single
+    file. This loads every file matching ``pattern`` under ``root`` (recursively)
+    and merges their terms. On id collision the first non-empty term wins; a later
+    file may fill in a missing label or add parents/relations.
+    """
+    root_path = Path(root)
+    files = sorted(root_path.rglob(pattern)) if root_path.is_dir() else [root_path]
+    merged: dict[str, Term] = {}
+    version = ""
+    for f in files:
+        try:
+            g = load_owl(str(f), name=name)
+        except ET.ParseError:
+            continue  # skip non-RDF/XML or malformed module files
+        version = version or g.version
+        for tid, term in g.terms.items():
+            cur = merged.get(tid)
+            if cur is None:
+                merged[tid] = term
+                continue
+            merged[tid] = Term(
+                id=tid,
+                name=cur.name or term.name,
+                parents=tuple(dict.fromkeys((*cur.parents, *term.parents))),
+                relations=tuple(dict.fromkeys((*cur.relations, *term.relations))),
+                obsolete=cur.obsolete and term.obsolete,
+            )
+    if not name:
+        name = root_path.stem
+    return OntologyGraph(name=name, version=version, terms=merged)

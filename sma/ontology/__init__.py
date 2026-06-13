@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from .attack import load_attack_stix
 from .graph import OntologyGraph, Term
-from .loader import fid, load_obo, load_ontology, load_owl
+from .loader import fid, load_obo, load_ontology, load_owl, load_owl_dir
 from .mount import MountedOntology, mount
 from .registry import OntologyEntry, OntologyRegistry
 from .router import DomainRouter
@@ -23,6 +23,7 @@ __all__ = [
     "Term",
     "load_obo",
     "load_owl",
+    "load_owl_dir",
     "load_ontology",
     "fid",
     "MountedOntology",

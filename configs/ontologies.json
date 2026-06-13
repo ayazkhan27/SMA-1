@@ -1,20 +1,20 @@
 {
-  "_comment": "Registry seed for the universal ontology adapter. Each entry mounts a curated golden ontology as an SMA is-a lattice + higher-order relations. merge WITHIN an ecosystem (OBO via BFO/RO), route ACROSS ecosystems (see docs/PAPER_SPINE.md sec 7).",
-  "ecosystems": {
-    "obo": {
-      "description": "OBO Foundry: BFO/RO-aligned, mergeable within.",
-      "ontologies": [
-        {"name": "hpo", "domain": "medicine", "prefix": "HP:", "path": "data/raw/hpo/hp.obo", "purl": "http://purl.obolibrary.org/obo/hp.obo", "version": "hp/releases/2026-06-06", "md5": "d407eed13976fdbb92de5a12678ca180", "note": "phenotypes; flagship rare-disease arm; pure is-a"},
-        {"name": "mondo", "domain": "medicine", "prefix": "MONDO:", "path": "data/raw/obo/mondo.obo", "purl": "http://purl.obolibrary.org/obo/mondo.obo", "version": "releases/2026-06-02", "md5": "efc0b05f58b8c29feedd175bc97bc132", "note": "diseases; disease axis to pair with HPO phenotypes"},
-        {"name": "go", "domain": "biology", "prefix": "GO:", "path": "data/raw/obo/go-basic.obo", "purl": "http://purl.obolibrary.org/obo/go/go-basic.obo", "version": "releases/2026-05-19", "md5": "ac0e62d6ead77e98ccbca856c5aaf857", "note": "gene function; rich RO typed relations (part_of/regulates)"},
-        {"name": "uberon", "domain": "anatomy", "prefix": "UBERON:", "path": "data/raw/obo/uberon-basic.obo", "purl": "http://purl.obolibrary.org/obo/uberon/basic.obo", "version": "uberon/releases/2026-04-01", "md5": "84f2930b39f9c4b9822e763eab0f6067", "note": "anatomy; part_of/develops_from-rich"}
-      ]
-    },
-    "cyber": {
-      "description": "MITRE ATT&CK (STIX 2.1). Routed ACROSS from OBO, never merged.",
-      "ontologies": [
-        {"name": "attack", "domain": "cyber", "prefix": "T", "path": "data/raw/attack/enterprise-attack.json", "purl": "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json", "version": "", "md5": "", "note": "techniques/tactics; second golden-ontology domain (C3); data not yet on disk"}
-      ]
-    }
+  "_comment": "Registry seed for the universal ontology adapter, spanning all 5 paper domains for domain routing. Each entry mounts a golden ontology as an SMA is-a lattice + higher-order relations. merge WITHIN an ecosystem (OBO via BFO/RO), route ACROSS ecosystems (docs/PAPER_SPINE.md sec 7). fmt: obo|owl|owl_dir|stix. prefix '' => route by domain only.",
+  "ontologies": [
+    {"name": "hpo",    "domain": "medicine",  "prefix": "HP:",     "fmt": "obo",     "path": "data/raw/hpo/hp.obo",            "purl": "http://purl.obolibrary.org/obo/hp.obo",                 "note": "phenotypes; flagship rare-disease arm"},
+    {"name": "mondo",  "domain": "medicine",  "prefix": "MONDO:",  "fmt": "obo",     "path": "data/raw/obo/mondo.obo",         "purl": "http://purl.obolibrary.org/obo/mondo.obo",              "note": "diseases"},
+    {"name": "uberon", "domain": "anatomy",   "prefix": "UBERON:", "fmt": "obo",     "path": "data/raw/obo/uberon-basic.obo",  "purl": "http://purl.obolibrary.org/obo/uberon/basic.obo",       "note": "anatomy; part_of/develops_from-rich"},
+    {"name": "go",     "domain": "biology",   "prefix": "GO:",     "fmt": "obo",     "path": "data/raw/obo/go-basic.obo",      "purl": "http://purl.obolibrary.org/obo/go/go-basic.obo",        "note": "gene function; RO typed relations"},
+    {"name": "chebi",  "domain": "chemistry", "prefix": "CHEBI:",  "fmt": "obo",     "path": "data/raw/obo/chebi_lite.obo",    "purl": "http://purl.obolibrary.org/obo/chebi/chebi_lite.obo",   "note": "chemical entities; discovery domain"},
+    {"name": "attack", "domain": "cyber",     "prefix": "T",       "fmt": "stix",    "path": "data/raw/attack/enterprise-attack.json", "purl": "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json", "note": "MITRE ATT&CK techniques/tactics; cyber arm"},
+    {"name": "lkif",   "domain": "legal",     "prefix": "",        "fmt": "owl_dir", "path": "data/raw/legal", "pattern": "*.owl",  "purl": "https://github.com/RinkeHoekstra/lkif-core",            "note": "LKIF-core legal ontology modules; legal arm (route by domain)"},
+    {"name": "fibo",   "domain": "finance",   "prefix": "",        "fmt": "owl_dir", "path": "data/raw/finance/fibo", "pattern": "*.rdf", "purl": "https://github.com/edmcouncil/fibo", "note": "FIBO financial ontology modules (RDF/XML subset); finance arm (route by domain)"}
+  ],
+  "routing": {
+    "medicine": ["hpo", "mondo", "uberon", "go"],
+    "cyber": ["attack"],
+    "legal": ["lkif"],
+    "finance": ["fibo"],
+    "discovery": ["chebi", "go"]
   }
 }
