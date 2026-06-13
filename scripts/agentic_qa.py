@@ -82,7 +82,7 @@ def make_llm(mock: bool):
     return DeepSeekOrchestrator()
 
 
-def run(memory_name: str, *, mock: bool, n_answerable: int, n_held: int, k: int) -> dict:
+def run(memory_name: str, *, mock: bool, n_answerable: int, n_held: int, k: int, n_index: int = 1500) -> dict:
     """Build pools + memory, run every pool through the agent, compute metrics."""
     print(f"########## LLM-QA: memory={memory_name} mock={mock} ##########", flush=True)
     mounted = mount(load_obo(str(HP_OBO), name="hpo"))
@@ -91,6 +91,7 @@ def run(memory_name: str, *, mock: bool, n_answerable: int, n_held: int, k: int)
         str(HPOA),
         n_answerable=n_answerable,
         n_held=n_held,
+        n_index=n_index,
     )
     index_items = pools["index_items"]
     print(
@@ -206,6 +207,8 @@ def main(argv: list[str] | None = None) -> None:
         help="use a deterministic MockLLM (NO DeepSeek spend)",
     )
     ap.add_argument(
+        "--n-index", type=int, default=1500, help="diseases indexed (smaller = faster pilot)")
+    ap.add_argument(
         "--pilot",
         action="store_true",
         help="small pool sizes for a quick smoke run (overrides -n flags to 8)",
@@ -213,8 +216,10 @@ def main(argv: list[str] | None = None) -> None:
     args = ap.parse_args(argv)
 
     n_answerable, n_held = args.n_answerable, args.n_held
+    n_index = args.n_index
     if args.pilot:
         n_answerable = n_held = 8
+        n_index = 200
 
     run_result = run(
         args.memory,
@@ -222,6 +227,7 @@ def main(argv: list[str] | None = None) -> None:
         n_answerable=n_answerable,
         n_held=n_held,
         k=args.k,
+        n_index=n_index,
     )
     print_table(run_result)
     per_item_path, summary_path = write_csvs(run_result)
