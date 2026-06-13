@@ -56,9 +56,9 @@ calibrated abstention, and novelty detection RAG cannot provide.
   `paper/figures/individual/fig01–13`) — superseded by the new Fig 1 (Claude Design)
   + Fig 2 (matplotlib).
 
-## Open decision for us to agree
-The one real fork: **does the Phase 3 SSB/transfer line belong as Extended Data in
-this paper (validating the engine), or is it a separate paper?** My recommendation:
-**Extended Data** — it cheaply substantiates "the matcher really does match on
-structure across a vocabulary gap," which the golden-ontology claim leans on, without
-competing for the narrative. Everything in OUT stays out of the results.
+## Resolved (2026-06-13)
+The Phase 3 **SSB + cross-system transfer** line → **Extended Data** (agreed). It
+substantiates "the matcher really does match on structure across a vocabulary gap,"
+which the golden-ontology claim leans on, without competing for the narrative.
+Everything in OUT stays out of the reported results. The three buckets above are the
+agreed scope for the paper.

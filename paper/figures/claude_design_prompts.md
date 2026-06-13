@@ -1,3 +1,9 @@
+# Claude Design prompts — SMA paper figures
+
+> SUPERSEDED by the per-figure files in `paper/figures/prompts/` (`fig_a_mechanism.md`, `fig_b_adapter.md`, `fig_c_domains.md`, `fig_d_results.md`). Each of those is self-contained and now begins with a **research-scientist-to-designer science briefing** (what SMA is, what we test) + the Nature MI journal standard + the shared style block. Use those.
+
+---
+
 # Claude Design prompts — SMA paper figures (individual, SVG)
 
 Each figure is a **standalone SVG** (we stitch later). Paste one prompt at a time.
