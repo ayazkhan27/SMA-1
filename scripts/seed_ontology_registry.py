@@ -42,6 +42,9 @@ def _load_graph(o):
         return load_cpc(str(path), name=o["name"])
     if fmt in ("capec", "cwe"):
         return load_mitre_xml(str(path), fmt, name=o["name"])
+    if fmt == "rdflib":
+        from sma.ontology import load_rdflib
+        return load_rdflib(str(path), name=o["name"], pattern=o.get("pattern", "*.rdf"))
     raise ValueError(f"unknown fmt {fmt}")
 
 

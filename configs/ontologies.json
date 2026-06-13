@@ -11,7 +11,7 @@
     {"name": "cwe",    "domain": "cyber",     "prefix": "CWE-",    "fmt": "cwe",     "path": "data/raw/cyber/cwec_v4.20.xml", "purl": "https://cwe.mitre.org/data/xml/cwec_latest.xml.zip", "note": "MITRE CWE software weaknesses (deep ChildOf is-a); defender side of cyber arm"},
     {"name": "cpc",    "domain": "legal",     "prefix": "",        "fmt": "cpc",     "path": "data/raw/legal/cpc",             "purl": "https://www.cooperativepatentclassification.org/cpcSchemeAndDefinitions/bulk", "note": "Cooperative Patent Classification (~254k nodes, deep is-a); legal/IP arm primary ontology"},
     {"name": "lkif",   "domain": "legal",     "prefix": "",        "fmt": "owl_dir", "path": "data/raw/legal", "pattern": "*.owl",  "purl": "https://github.com/RinkeHoekstra/lkif-core",            "note": "LKIF-core legal upper ontology (153 concepts); supplements CPC"},
-    {"name": "fibo",   "domain": "finance",   "prefix": "",        "fmt": "owl_dir", "path": "data/raw/finance/fibo", "pattern": "*.rdf", "purl": "https://github.com/edmcouncil/fibo", "note": "FIBO financial ontology modules (RDF/XML subset); finance arm (route by domain)"}
+    {"name": "fibo",   "domain": "finance",   "prefix": "",        "fmt": "rdflib",  "path": "data/raw/finance/fibo", "pattern": "*.rdf", "purl": "https://github.com/edmcouncil/fibo", "note": "Full FIBO financial ontology via rdflib (~2950 classes, 1314 typed relations; FIBO production is inherently compact). Route by domain."}
   ],
   "routing": {
     "medicine": ["hpo", "mondo", "uberon", "go"],
