@@ -7,6 +7,8 @@ from sma.eval.agentic_qa.metrics import (
     abstention,
     accuracy,
     citation_faithfulness,
+    grounding_auroc,
+    novelty_f1,
     novelty_recall,
 )
 from sma.eval.agentic_qa.pools import QAItem, build_pools
@@ -19,5 +21,7 @@ __all__ = [
     "accuracy",
     "citation_faithfulness",
     "abstention",
+    "grounding_auroc",
     "novelty_recall",
+    "novelty_f1",
 ]

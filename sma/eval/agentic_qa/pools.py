@@ -75,6 +75,7 @@ def build_pools(
     n_index: int = 1500,
     n_answerable: int = 120,
     n_held: int = 120,
+    n_calib: int = 60,
     min_ph: int = 7,
     max_ph: int = 30,
 ) -> dict:
@@ -91,10 +92,17 @@ def build_pools(
       HELD-OUT diseases (``answerable=False, novel=True``); the same list is
       returned under both keys because held-out cases are both unanswerable and
       novel.
+    * ``"calib_answerable"`` / ``"calib_ook"`` — up to ``n_calib`` :class:`QAItem`\\
+      s each, drawn from the SPARE indexed / held-out diseases (disjoint from the
+      test pools above). The driver scores these retrieval-only (no LLM spend) to
+      calibrate the cite-or-abstain threshold without ever touching the test
+      split. Empty when no spare diseases remain.
 
     Eligible diseases carry ``min_ph..max_ph`` phenotypes that are present in
     ``mounted.graph.terms``; their ids are sorted then shuffled under ``seed``.
-    The first ``n_index`` are INDEXED; the remainder are HELD-OUT.
+    The first ``n_index`` are INDEXED; the remainder are HELD-OUT. The test pools
+    are drawn first (so their cases are unchanged by ``n_calib``), then the
+    calibration pools from the remaining ids.
     """
     # Local import keeps this module importable even while the sibling
     # agentic_qa.metrics is mid-construction (the package __init__ imports it).
@@ -174,10 +182,16 @@ def build_pools(
 
     answerable = qitems(indexed_ids, n_answerable, answerable=True)
     novel = qitems(held_ids, n_held, answerable=False)
+    # Calibration pools: SPARE ids beyond the test draws (disjoint), scored
+    # retrieval-only to fit the abstention threshold without test-set leakage.
+    calib_answerable = qitems(indexed_ids[n_answerable:], n_calib, answerable=True)
+    calib_ook = qitems(held_ids[n_held:], n_calib, answerable=False)
 
     return {
         "index_items": index_items,
         "answerable": answerable,
         "ook": novel,
         "novel": novel,
+        "calib_answerable": calib_answerable,
+        "calib_ook": calib_ook,
     }

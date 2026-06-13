@@ -14,7 +14,10 @@ from sma.eval.agentic.metrics import risk_coverage_aurc
 from sma.eval.agentic_qa.metrics import (
     abstention,
     accuracy,
+    auroc,
     citation_faithfulness,
+    grounding_auroc,
+    novelty_f1,
     novelty_recall,
 )
 
@@ -32,6 +35,7 @@ class R:
     answer: str = ""
     novelty_flag: bool = False
     confidence: float = 1.0
+    grounding_score: float | None = None
 
 
 # --- accuracy --------------------------------------------------------------
@@ -119,13 +123,20 @@ def test_abstention_aurc_matches_direct_call():
     assert math.isclose(out["aurc"], (0 + 0.5 + 2 / 3 + 0.75 + 0.8) / 5)
 
 
-def test_abstention_novel_excluded_from_union():
-    # A novel item is neither answerable nor ook -> it must not move any axis.
-    base = _abstention_fixture()
-    with_novel = base + [
-        R(gold_id="N1", answerable=False, novel=True, abstained=False, novelty_flag=True),
+def test_held_out_novel_counts_as_should_abstain():
+    # A held-out NOVEL case is out-of-knowledge too: it SHOULD abstain, so it
+    # joins the should-abstain set (an unindexed disease is both ook AND novel).
+    base = _abstention_fixture()  # ook = {O1 abstain, O2 answer} -> recall 1/2
+    # a novel case that correctly abstained raises recall to 2/3.
+    with_abstain = base + [
+        R(gold_id="N1", answerable=False, novel=True, abstained=True, novelty_flag=True),
     ]
-    assert abstention(with_novel) == abstention(base)
+    assert abstention(with_abstain)["abstain_recall"] == 2 / 3
+    # a novel case that answered (failed to abstain) lowers recall to 1/3.
+    with_answer = base + [
+        R(gold_id="N2", answerable=False, novel=True, abstained=False, pred_id="ZZ"),
+    ]
+    assert abstention(with_answer)["abstain_recall"] == 1 / 3
 
 
 def test_abstention_empty_pools_no_zero_division():
@@ -170,6 +181,61 @@ def test_novelty_recall_no_novel_is_zero():
     assert novelty_recall([R(novel=False), R(answerable=True)]) == 0.0
 
 
+# --- novelty F1 (penalises false alarms on answerable) ---------------------
+def test_novelty_f1_balances_recall_and_false_alarms():
+    # Held-out (novel) are positives -> answerable=False; indexed are negatives.
+    results = [
+        R(answerable=False, novel=True, novelty_flag=True),    # tp
+        R(answerable=False, novel=True, novelty_flag=True),    # tp
+        R(answerable=False, novel=True, novelty_flag=False),   # fn
+        R(answerable=True, novel=False, novelty_flag=True),    # fp: false alarm
+        R(answerable=True, novel=False, novelty_flag=False),   # tn
+    ]
+    out = novelty_f1(results)
+    assert math.isclose(out["recall"], 2 / 3)
+    assert math.isclose(out["precision"], 2 / 3)  # 2 tp / (2 tp + 1 fp)
+    assert math.isclose(out["f1"], 2 / 3)
+    assert math.isclose(out["fpr"], 1 / 2)        # 1 false flag / 2 answerable
+
+
+def test_novelty_f1_flag_everything_has_low_precision():
+    # Flagging every item gets recall 1.0 but precision/F1 are punished.
+    results = [
+        R(answerable=False, novel=True, novelty_flag=True),
+        R(answerable=True, novel=False, novelty_flag=True),
+        R(answerable=True, novel=False, novelty_flag=True),
+    ]
+    out = novelty_f1(results)
+    assert out["recall"] == 1.0
+    assert math.isclose(out["precision"], 1 / 3)
+    assert math.isclose(out["fpr"], 1.0)
+
+
+# --- grounding AUROC (threshold-free known-vs-unknown discrimination) -------
+def test_auroc_concordant_and_ties():
+    # (1>0)=1, (1==1)=.5, (1>0)=1, (1==1)=.5 -> 3/4.
+    assert auroc([1.0, 1.0], [0.0, 1.0]) == 0.75
+    # perfect separation.
+    assert auroc([0.9, 0.8], [0.3, 0.1]) == 1.0
+
+
+def test_grounding_auroc_separates_answerable_from_held_out():
+    results = [
+        R(answerable=True, grounding_score=0.90),
+        R(answerable=True, grounding_score=0.80),
+        R(answerable=False, novel=True, grounding_score=0.30),
+        R(answerable=False, novel=True, grounding_score=0.10),
+    ]
+    # every answerable score exceeds every held-out score -> 1.0.
+    assert grounding_auroc(results) == 1.0
+
+
+def test_grounding_auroc_na_when_no_grounding_score():
+    # closed-book: grounding_score is None everywhere -> N/A (None).
+    results = [R(answerable=True), R(answerable=False, novel=True)]
+    assert grounding_auroc(results) is None
+
+
 # --- dict inputs work identically to objects -------------------------------
 def test_metrics_accept_plain_dicts():
     results = [
@@ -190,5 +256,6 @@ def test_metrics_accept_plain_dicts():
     assert citation_faithfulness(results) == 1.0  # only A is answered+cited, faithful
     assert novelty_recall(results) == 1.0      # the one novel item is flagged
     out = abstention(results)
-    assert out["abstain_recall"] == 1.0        # the one ook item abstained
+    # held-out set = {O (abstained), N (answered)} -> abstain-recall 1/2.
+    assert out["abstain_recall"] == 1 / 2
     assert math.isclose(out["false_abstain"], 1 / 2)  # B wrongly abstained

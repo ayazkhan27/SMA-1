@@ -9,16 +9,25 @@ distinguish a *verifiable specialist* from a confident-but-opaque RAG agent:
   answerable** items: did the cited candidate actually turn out to be the gold?
   N/A (``None``) for the closed-book condition, which has no citation.
 * :func:`abstention` — selective prediction over the union of **answerable**
-  (should answer) and **out-of-knowledge** (should abstain): abstain-recall,
-  false-abstain, selective-accuracy, plus the risk-coverage AURC with
-  confidence ``= 1 - abstain_flag``.
-* :func:`novelty_recall` — fraction of the **novel** pool that is flagged.
+  (should answer) and **held-out / out-of-knowledge** (should abstain):
+  abstain-recall, false-abstain, selective-accuracy, plus the risk-coverage AURC
+  with confidence ``= 1 - abstain_flag``.
+* :func:`grounding_auroc` — threshold-free discrimination of the RAW grounding
+  score: AUROC for separating answerable (high score) from held-out (low score).
+  The intrinsic "can the memory tell known from unknown" signal, independent of
+  where the abstention threshold sits.
+* :func:`novelty_recall` / :func:`novelty_f1` — recall (and precision/F1 against
+  answerable false-alarms) of the novelty flag over the **novel** pool.
 
 A result is a simple dict or object exposing: ``gold_id``, ``gold_name``,
 ``answerable``, ``novel``, ``abstained`` (bool), ``pred_id`` (str | None),
-``answer`` (str), ``novelty_flag`` (bool), ``confidence`` (float). The three
-pools are disjoint: answerable / out-of-knowledge (``not answerable and not
-novel``) / novel.
+``answer`` (str), ``novelty_flag`` (bool), ``confidence`` (float),
+``grounding_score`` (float | None). The data have two disjoint groups:
+**answerable** (the gold disease IS indexed) and **held-out** (the gold disease
+is NOT indexed). A held-out case is simultaneously out-of-knowledge (the agent
+should ABSTAIN) and novel (the agent should FLAG it) — both correct trustworthy
+behaviours on the same unindexed case — so abstention and novelty are scored on
+the same held-out items (``answerable == False``, ``novel == True``).
 """
 
 from __future__ import annotations
@@ -90,10 +99,11 @@ def citation_faithfulness(results: list[Any]) -> float | None:
 
 
 def abstention(results: list[Any]) -> dict[str, Any]:
-    """Selective prediction over {answerable should-answer} + {ook should-abstain}.
+    """Selective prediction over {answerable should-answer} + {held-out should-abstain}.
 
-    Out-of-knowledge (ook) items are ``not answerable and not novel``. Returns a
-    dict with:
+    The should-abstain (out-of-knowledge) set is every **held-out** item — i.e.
+    ``not answerable`` — because an unindexed disease is out-of-knowledge whether
+    or not it is also flagged novel (it always is, here). Returns a dict with:
 
     * ``abstain_recall`` — fraction of ook items that abstained;
     * ``false_abstain`` — fraction of answerable items that wrongly abstained;
@@ -107,11 +117,7 @@ def abstention(results: list[Any]) -> dict[str, Any]:
     Empty pools yield 0.0 for their respective fractions (no division by zero).
     """
     answerable = [r for r in results if _get(r, "answerable")]
-    ook = [
-        r
-        for r in results
-        if not _get(r, "answerable") and not _get(r, "novel")
-    ]
+    ook = [r for r in results if not _get(r, "answerable")]
 
     n_ook_abstain = sum(1 for r in ook if _get(r, "abstained"))
     abstain_recall = n_ook_abstain / len(ook) if ook else 0.0
@@ -160,3 +166,74 @@ def novelty_recall(results: list[Any]) -> float:
         return 0.0
     hits = sum(1 for r in novel if _get(r, "novelty_flag"))
     return hits / len(novel)
+
+
+def novelty_f1(results: list[Any]) -> dict[str, float]:
+    """Precision / recall / F1 of the novelty flag (held-out positive, answerable negative).
+
+    Treats **novel** (held-out) items as positives and **answerable** (indexed)
+    items as negatives, so a novelty flag fired on an answerable case counts as a
+    false alarm. This penalises an agent that flags everything (recall 1.0 is
+    cheap; F1 is not). Returns ``precision`` / ``recall`` / ``f1`` / ``fpr``
+    (false-positive rate on answerable). Empty-pool fractions collapse to 0.0.
+    """
+    novel = [r for r in results if _get(r, "novel")]
+    answerable = [r for r in results if _get(r, "answerable")]
+
+    tp = sum(1 for r in novel if _get(r, "novelty_flag"))
+    fn = len(novel) - tp
+    fp = sum(1 for r in answerable if _get(r, "novelty_flag"))
+
+    recall = tp / len(novel) if novel else 0.0
+    precision = tp / (tp + fp) if (tp + fp) else 0.0
+    f1 = (
+        2 * precision * recall / (precision + recall)
+        if (precision + recall)
+        else 0.0
+    )
+    fpr = fp / len(answerable) if answerable else 0.0
+    return {"precision": precision, "recall": recall, "f1": f1, "fpr": fpr}
+
+
+def auroc(pos: list[float], neg: list[float]) -> float:
+    """Rank-based (Mann-Whitney U) AUROC that ``pos`` scores exceed ``neg`` scores.
+
+    Concordant pairs count 1, ties 0.5. ``pos`` are the should-answer (high-score)
+    class, ``neg`` the should-abstain (low-score) class. Assumes both non-empty.
+    Reused by the driver to score the calibration split and by
+    :func:`grounding_auroc` to score the test split.
+    """
+    wins = 0.0
+    for p in pos:
+        for n in neg:
+            if p > n:
+                wins += 1.0
+            elif p == n:
+                wins += 0.5
+    return wins / (len(pos) * len(neg))
+
+
+def grounding_auroc(results: list[Any]) -> float | None:
+    """Threshold-free discrimination of the RAW grounding score: answerable vs held-out.
+
+    AUROC that the top structural grounding score is higher on **answerable**
+    (the gold disease is indexed -> should ground) than on **held-out** items
+    (not indexed -> should not ground). This is the intrinsic known-vs-unknown
+    signal, independent of where any abstention threshold is set. Returns ``None``
+    (N/A) when either group is empty or carries no grounding score (closed-book).
+    """
+    pos = [
+        s
+        for r in results
+        if _get(r, "answerable")
+        and (s := _get(r, "grounding_score")) is not None
+    ]
+    neg = [
+        s
+        for r in results
+        if not _get(r, "answerable")
+        and (s := _get(r, "grounding_score")) is not None
+    ]
+    if not pos or not neg:
+        return None
+    return auroc(pos, neg)

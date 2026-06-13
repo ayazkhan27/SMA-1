@@ -87,7 +87,14 @@ def _build(mounted, hpoa_path, **kw):
 
 def test_pools_structure_and_membership(mounted, hpoa_path):
     pools = _build(mounted, hpoa_path)
-    assert set(pools) == {"index_items", "answerable", "ook", "novel"}
+    assert set(pools) == {
+        "index_items",
+        "answerable",
+        "ook",
+        "novel",
+        "calib_answerable",
+        "calib_ook",
+    }
 
     index_items = pools["index_items"]
     assert index_items, "index_items must be non-empty"
@@ -166,3 +173,33 @@ def test_different_seed_changes_split_or_cases(mounted, hpoa_path):
     a_sig = ([it.key for it in a["index_items"]], [q.case_text for q in a["answerable"]])
     b_sig = ([it.key for it in b["index_items"]], [q.case_text for q in b["answerable"]])
     assert a_sig != b_sig
+
+
+def test_calibration_pools_disjoint_and_labelled(mounted, hpoa_path):
+    # Leave spares on both sides: 4 indexed (2 test + spares), 2 held (1 test + 1 spare).
+    pools = _build(mounted, hpoa_path, n_index=4, n_answerable=2, n_held=1, n_calib=1)
+    calib = pools["calib_answerable"] + pools["calib_ook"]
+    assert calib, "calibration pools must be non-empty when spare diseases remain"
+
+    # Disjoint from the test split (no leakage of test cases into calibration).
+    test_ids = {q.gold_id for q in pools["answerable"]} | {q.gold_id for q in pools["novel"]}
+    assert all(q.gold_id not in test_ids for q in calib)
+
+    # calib_answerable golds ARE indexed (should-answer); calib_ook are NOT.
+    indexed = {it.key for it in pools["index_items"]}
+    for q in pools["calib_answerable"]:
+        assert q.answerable is True and q.gold_id in indexed
+    for q in pools["calib_ook"]:
+        assert q.answerable is False and q.gold_id not in indexed
+
+
+def test_calibration_pools_do_not_perturb_test_cases(mounted, hpoa_path):
+    # Adding calibration draws must not change the test pools (drawn first).
+    a = _build(mounted, hpoa_path, n_calib=0)
+    b = _build(mounted, hpoa_path, n_calib=1)
+    assert [(q.gold_id, q.case_text) for q in a["answerable"]] == [
+        (q.gold_id, q.case_text) for q in b["answerable"]
+    ]
+    assert [(q.gold_id, q.case_text) for q in a["novel"]] == [
+        (q.gold_id, q.case_text) for q in b["novel"]
+    ]

@@ -36,6 +36,7 @@ RESULT_FIELDS = {
     "answer",
     "novelty_flag",
     "confidence",
+    "grounding_score",
 }
 
 KEY_TO_NAME = {"OMIM:1": "Disease One", "OMIM:2": "Disease Two", "OMIM:3": "Disease Three"}
@@ -187,6 +188,53 @@ def test_novelty_flag_below_threshold_is_false():
         MockLLM(choice=1), ToyMemory(_two_hits(), novelty=0.2), novelty_threshold=0.5
     )
     assert agent.answer(_item())["novelty_flag"] is False
+
+
+# --- calibrated structural gate (raw grounding score) ----------------------
+def test_score_gate_below_threshold_abstains_without_llm():
+    # Top raw grounding score is 0.91; a threshold above it -> structural abstain
+    # AND novelty flag, and the LLM must NOT be consulted (budget saved).
+    llm = MockLLM(choice=1)
+    agent = _agent(llm, ToyMemory(_two_hits(), novelty=0.0), score_threshold=0.95)
+    result = agent.answer(_item(answerable=False, novel=True, gold_id="OMIM:3"))
+
+    assert result["abstained"] is True
+    assert result["pred_id"] is None
+    assert result["answer"] == "ABSTAIN"
+    assert result["novelty_flag"] is True  # nothing grounds it -> novel
+    assert result["grounding_score"] == 0.91
+    assert llm.calls == []  # no LLM call on a structural abstain
+
+
+def test_score_gate_above_threshold_answers_and_consults_llm():
+    # Threshold below the top score -> above the gate -> LLM decides; gated novelty
+    # is False (the structural signal says "grounded").
+    llm = MockLLM(choice=1)
+    agent = _agent(llm, ToyMemory(_two_hits(), novelty=0.9), score_threshold=0.50)
+    result = agent.answer(_item())
+
+    assert result["abstained"] is False
+    assert result["pred_id"] == "OMIM:1"
+    assert result["novelty_flag"] is False
+    assert result["grounding_score"] == 0.91
+    assert len(llm.calls) == 1
+
+
+def test_score_gate_empty_retrieval_structurally_abstains():
+    # No candidates -> grounding_score 0.0 < threshold -> abstain, no LLM call.
+    llm = MockLLM(choice=1)
+    agent = _agent(llm, ToyMemory([], novelty=0.0), score_threshold=0.50)
+    result = agent.answer(_item())
+    assert result["abstained"] is True
+    assert result["grounding_score"] == 0.0
+    assert result["novelty_flag"] is True
+    assert llm.calls == []
+
+
+def test_grounding_score_recorded_without_gate():
+    # With no threshold the raw top score is still recorded (for grounding AUROC).
+    result = _agent(MockLLM(choice=1), ToyMemory(_two_hits())).answer(_item())
+    assert result["grounding_score"] == 0.91
 
 
 # --- closed-book condition -------------------------------------------------

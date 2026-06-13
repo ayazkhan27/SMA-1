@@ -98,3 +98,49 @@ accuracy reference), and a hallucination/abstention reference
   (no retrieval) → that cell is N/A, not 0.
 - Cross-domain LLM-QA (cyber/legal/finance) is a follow-up; medicine is the
   registered primary because it is the highest-stakes and best-grounded.
+
+## 8. Addendum — abstention mechanism + pool realization (2026-06-13, PRE full run)
+
+Registered **after the mock + a small real pilot, before the confirmatory run**.
+The prereg explicitly permits a pilot to surface implementation decisions (§6);
+these are recorded here transparently. None of it peeks at the test split.
+
+**(a) Pool realization — out-of-knowledge ≡ novel on the held-out set.** The §3
+pools 2 (out-of-knowledge → should ABSTAIN) and 3 (novel → should FLAG) are
+realized on the **same held-out diseases**: an unindexed disease is *both*
+out-of-knowledge and novel, and the correct trustworthy behaviour on it is to do
+*both* (abstain AND flag). So abstention is scored over {answerable vs held-out}
+and novelty over {held-out}, on the same items. This is the faithful reading and
+it makes abstention *harder* (every held-out case is a should-abstain case), not
+easier.
+
+**(b) Cite-or-abstain signal = the RAW structural grounding score, calibrated.**
+The pilot's retrieval-only diagnostic showed the LLM-only abstention and SAGE's
+`expectation_violation` flag do **not** separate known from unknown
+(answerable-vs-held-out AUROC ≈ 0.48), and the squashed top-hit confidence
+saturates (the rank-1 hit is always ≈1.0 by construction). The **raw top
+structural match score** *does* separate them (AUROC ≈ 0.84). Therefore the
+registered cite-or-abstain signal is the raw grounding score, gated by a
+threshold **calibrated on a DISJOINT calibration split** (`calib_answerable` /
+`calib_ook`, drawn from spare indexed / held-out diseases, never the test pools)
+by maximising **Youden's J** (TPR−FPR) for "answer iff score ≥ t". Calibration is
+**retrieval-only (no LLM spend, no test leakage)** and **per-memory** (each
+retriever — SMA and dense — fits its own threshold; the fairest comparison).
+Below threshold the agent abstains AND flags novel **without an LLM call**. This
+replaces nothing in the claim (§1) or falsifiers (§5); it specifies *how* the
+abstain/novelty decision is made, identically for every memory.
+
+**(c) Added reported axis — threshold-free grounding-AUROC.** Alongside the
+realized operating-point metrics (abstain-recall, false-abstain,
+selective-accuracy, risk-coverage AURC) we report the **threshold-free**
+grounding-AUROC: the AUROC that the raw score is higher on answerable than on
+held-out cases. It is the cleanest "can the memory tell known from unknown"
+statistic because it does not depend on where the threshold sits. Novelty is
+reported as recall **and** precision/F1 (held-out positive, answerable
+false-alarm negative) so "flag everything" cannot win.
+
+**(d) Falsifiers unchanged.** §5 stands: per-axis Δ(SMA − best baseline) 95% CI
+(paired bootstrap, seed 12345) must exclude 0 after Holm; SMA must win ≥2 of the
+three capability axes; the accuracy floor still guards against a coverage-for-
+accuracy trade. Determinism: seeded pools + a deterministic Youden sweep +
+`PYTHONHASHSEED=0`.

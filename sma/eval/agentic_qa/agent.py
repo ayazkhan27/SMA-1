@@ -7,7 +7,7 @@ retrieval ``Memory`` (none / dense-RAG / SMA), exactly as registered in
 result dict carrying every field the trustworthy-QA metrics read
 (``sma.eval.agentic_qa.metrics``): ``gold_id``, ``gold_name``, ``answerable``,
 ``novel``, ``abstained``, ``pred_id``, ``answer``, ``novelty_flag``,
-``confidence``.
+``confidence``, ``grounding_score``.
 
 Two grounding regimes:
 
@@ -15,8 +15,11 @@ Two grounding regimes:
   numbered list, and ask the LLM for a strict one-line JSON ``{"choice": <n>}``
   where ``n`` is a candidate number or ``0`` to abstain. ``pred_id`` is the
   chosen candidate's key (the disease id), so correctness/citation can be checked
-  structurally against the gold. The SMA condition additionally surfaces the
-  ``expectation_violation`` novelty flag via ``memory.novelty(query)``.
+  structurally against the gold. When a calibrated ``score_threshold`` is given,
+  a case whose top RAW grounding score falls below it is abstained AND flagged
+  novel *before* the LLM call (the structural score, not the saturated confidence
+  or the expectation-violation flag, is what separates known from unknown); with
+  no threshold the novelty flag falls back to ``memory.novelty(query)``.
 * **closed-book** (``memory is None``) — the LLM answers from the case alone with
   a strict one-line JSON ``{"diagnosis": "<name or ABSTAIN>"}``; ``pred_id`` is
   ``None`` (no citation), ``confidence`` is a flat ``0.5``, and novelty is N/A.
@@ -168,6 +171,7 @@ class QAAgent:
         key_to_terms: dict[str, frozenset[str]] | None = None,
         k: int = 5,
         novelty_threshold: float = 0.5,
+        score_threshold: float | None = None,
     ):
         self.llm = llm
         self.memory = memory
@@ -175,6 +179,12 @@ class QAAgent:
         self.key_to_terms = key_to_terms or {}
         self.k = k
         self.novelty_threshold = novelty_threshold
+        # Calibrated cite-or-abstain: the RAW structural grounding score (not the
+        # saturated normalized confidence, nor the expectation-violation flag — both
+        # of which fail to separate known/unknown, AUROC~0.48) is the abstention
+        # signal. Below this threshold the memory has no grounding -> abstain + flag
+        # novel, WITHOUT spending an LLM call. None = no gate (LLM-only abstention).
+        self.score_threshold = score_threshold
 
     # -- rendering ----------------------------------------------------------
     def _feature_text(self, key: str) -> str:
@@ -215,14 +225,67 @@ class QAAgent:
             return self._answer_closed_book(item)
         return self._answer_grounded(item)
 
+    def _result(
+        self,
+        item: QAItem,
+        *,
+        abstained: bool,
+        pred_id: str | None,
+        answer: str,
+        novelty_flag: bool,
+        confidence: float,
+        grounding_score: float | None,
+    ) -> dict:
+        """Assemble the per-item result dict the trustworthy-QA metrics read."""
+        return {
+            "gold_id": item.gold_id,
+            "gold_name": item.gold_name,
+            "answerable": item.answerable,
+            "novel": item.novel,
+            "abstained": abstained,
+            "pred_id": pred_id,
+            "answer": answer,
+            "novelty_flag": novelty_flag,
+            "confidence": confidence,
+            # The RAW top structural grounding score (None closed-book). This is
+            # the signal that actually separates known from unknown; the metrics
+            # use it for threshold-free discrimination AUROC.
+            "grounding_score": grounding_score,
+        }
+
     def _answer_grounded(self, item: QAItem) -> dict:
         query = Query(item.case_terms, item.case_text)
         retrieved = self.memory.retrieve(query, self.k)
-        candidates_text, keys = self._render_candidates(retrieved)
         confidence = retrieved[0].confidence if retrieved else 0.0
+        grounding_score = retrieved[0].score if retrieved else 0.0
 
-        novelty = self.memory.novelty(query)
-        novelty_flag = bool(novelty > self.novelty_threshold)
+        # Calibrated cite-or-abstain. If the top RAW grounding score is below the
+        # validation-calibrated threshold, the memory does not structurally ground
+        # this case -> ABSTAIN and FLAG NOVEL, WITHOUT spending an LLM call. The
+        # raw structural match score is the discriminating signal (answerable vs
+        # out-of-knowledge AUROC ~0.84); the squashed confidence (top hit always
+        # ~1.0) and the expectation-violation flag are not (AUROC ~0.48). A None
+        # threshold disables the gate -> pure LLM-mediated abstention (legacy).
+        if self.score_threshold is not None and grounding_score < self.score_threshold:
+            return self._result(
+                item,
+                abstained=True,
+                pred_id=None,
+                answer=ABSTAIN,
+                novelty_flag=True,
+                confidence=confidence,
+                grounding_score=grounding_score,
+            )
+
+        candidates_text, keys = self._render_candidates(retrieved)
+
+        # With a calibrated gate, the structural signal IS the novelty signal:
+        # above threshold here -> not flagged. Without a gate, fall back to the
+        # memory's own expectation-violation novelty vs novelty_threshold.
+        if self.score_threshold is not None:
+            novelty_flag = False
+        else:
+            novelty_flag = bool(self.memory.novelty(query) > self.novelty_threshold)
 
         user = (
             f"Clinical case:\n{item.case_text}\n\n"
@@ -251,17 +314,15 @@ class QAAgent:
             answer = self.key_to_name.get(pred_id, pred_id)
             abstained = False
 
-        return {
-            "gold_id": item.gold_id,
-            "gold_name": item.gold_name,
-            "answerable": item.answerable,
-            "novel": item.novel,
-            "abstained": abstained,
-            "pred_id": pred_id,
-            "answer": answer,
-            "novelty_flag": novelty_flag,
-            "confidence": confidence,
-        }
+        return self._result(
+            item,
+            abstained=abstained,
+            pred_id=pred_id,
+            answer=answer,
+            novelty_flag=novelty_flag,
+            confidence=confidence,
+            grounding_score=grounding_score,
+        )
 
     def _answer_closed_book(self, item: QAItem) -> dict:
         user = (
@@ -281,17 +342,15 @@ class QAAgent:
         abstained = diagnosis.strip().upper() == ABSTAIN
         answer = ABSTAIN if abstained else diagnosis
 
-        return {
-            "gold_id": item.gold_id,
-            "gold_name": item.gold_name,
-            "answerable": item.answerable,
-            "novel": item.novel,
-            "abstained": abstained,
-            "pred_id": None,
-            "answer": answer,
-            "novelty_flag": False,
-            "confidence": 0.5,
-        }
+        return self._result(
+            item,
+            abstained=abstained,
+            pred_id=None,
+            answer=answer,
+            novelty_flag=False,
+            confidence=0.5,
+            grounding_score=None,
+        )
 
     # -- parsing ------------------------------------------------------------
     @staticmethod
