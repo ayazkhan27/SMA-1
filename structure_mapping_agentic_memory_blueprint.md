@@ -441,3 +441,49 @@ BUDGET: 12 person-weeks (×2.5 if solo agent); one 16-core/64GB CPU box; LLM tok
 Falkenhainer, Forbus & Gentner (1986 AAAI; 1989 *Artif. Intell.* 41:1–63) — SME. · Gentner (1983, *Cog. Sci.* 7) — structure‑mapping theory/systematicity. · Forbus, Gentner & Law (1995, *Cog. Sci.* 19) — MAC/FAC. · Law, Forbus & Gentner (1994 CogSci) — identicality vs similarity tables. · Forbus & Oblinger (1990 CogSci) — greedy SME. · Forbus, Ferguson, Lovett & Gentner (2017, *Cog. Sci.* 41(5)) — large‑scale SME, O(n² log n). · Veale & Keane (1997 IJCAI) — NP‑hardness. · Kuehne et al. (2000) SEQL; Halstead & Forbus (2005); McLure, Friedman & Forbus (2015) — SAGE; AILEEN (arXiv 2006.01962; 2210.11731) — SAGE thresholds/probabilities. · Gentner, Rattermann & Forbus (1993, *Cog. Psych.*) — soundness/retrieval materials. · Gentner & Forbus (2025, *Curr. Dir. Psych. Sci.*) — SME retrospective. · QRG SME v4: qrg.northwestern.edu/software/sme4. · Lewis & Mitchell (2024, arXiv 2402.08955) and Webb, Holyoak & Lu (2024 reply, arXiv 2404.13070) — the LLM‑analogy robustness debate. · Sourati et al. (2024, TACL) — ARN. · Gutiérrez et al. (NeurIPS 2024; ICML 2025) — HippoRAG/2. · He et al. (ISSRE 2023) — LogHub; github.com/logpai/loghub. · Murena et al. (IJCAI 2020; 2017) — minimal‑complexity analogy. · Rissanen (1978) — MDL. · Shervashidze et al. (2011, JMLR) — WL kernels. · Crouse et al. (AAAI 2021) — Neural Analogical Matching. · Agent drift / reliability: arXiv 2601.04170; arXiv 2602.16666.
 
 *End of blueprint. A competent engineer or CLI agent should be able to start at §7‑P0 and proceed gate by gate without further design decisions; every remaining judgment call has a predefined tripwire response in §10.2.*
+
+---
+
+## 14. Universal adapter + agentic suite — the current paper spine (Phase 4c, 2026‑06‑13)
+
+The project pivoted from "SMA as a general structural retriever" (sections 1–13,
+`prereg-v1`, the SSB/logs/code battery) to the **golden‑ontology thesis**
+(`docs/PAPER_SPINE.md`): *a structure‑mapping memory grounded in a curated golden
+ontology turns a generalist LLM into a verifiable specialist that beats RAG/KG on
+the rare/tail slice, with provenance + abstention + novelty RAG cannot provide.*
+Sections 1–13 remain the engine's foundation; in the current paper they are
+**Extended Data / Methods** (see `docs/PAPER_SCOPE.md` for the IN/SUPPLEMENTARY/OUT
+split — SSB + cross‑system transfer → Extended Data).
+
+### 14.1 Universal ontology adapter (`sma/ontology/`, FROZEN `adapter-v1`, ADR‑008)
+- **Loaders → one `OntologyGraph`** (terms, is‑a edges, typed relations): `load_obo`,
+  `load_owl` (stdlib), `load_owl_dir`, `load_rdflib` (Turtle/complex OWL),
+  `load_attack_stix`, `load_cpc`, `load_mitre_xml`, `load_usgaap`.
+- **`mount()` → `MountedOntology`**: builds a `Canonicalizer` is‑a lattice + a
+  higher‑order case builder (generalizes the hand‑rolled HPO mount).
+- **`OntologyRegistry` + `DomainRouter`**: version‑pinned ontologies, route per
+  query (merge WITHIN an aligned ecosystem, route ACROSS — never a merged
+  omni‑graph). 11 ontologies / 6 domains, ~594k concepts (`configs/ontologies.json`).
+
+### 14.2 Agentic memory‑swap suite (`sma/eval/agentic/`, FROZEN)
+- A `Memory` interface wraps SMA and the enterprise gauntlet identically: BM25,
+  BGE neural dense, Hybrid‑RRF, Hybrid+cross‑encoder‑rerank, HippoRAG. `run_oneshot`
+  holds the LLM/prompt fixed and swaps only the memory → clean causal attribution.
+- Metrics: tail top‑k (rare slice), risk‑coverage AURC (cite‑or‑abstain), novelty F1.
+- **Result (5/5 domains, Holm‑sig):** SMA beats best enterprise RAG on tail top‑5 —
+  medicine +0.333, finance +0.167, genomics +0.156, cyber +0.073, legal +0.064;
+  best AURC + only non‑zero novelty in every arm. De‑risk: SMA ties the bespoke
+  ontology oracle (Phenomizer) but beats general RAG/KG. Honest nulls recorded:
+  flat‑tabular (4b) and free‑form conversational recall (4a) — no ontology ⇒ no edge.
+
+### 14.3 Next — Phase 5 LLM‑QA (`prereg-v2`)
+The memory‑swap **agent** (fixed DeepSeek + prompt; swap none/dense‑RAG/SMA) on
+ontology‑grounded diagnosis QA, scored on accuracy + citation‑faithfulness +
+abstention‑calibration + novelty — the end‑to‑end "verifiable specialist" test
+(→ Figure 5). See `configs/preregistration_v2_llmqa.md`.
+
+### 14.4 Display items
+Figure 1 (concept+system, Claude Design; `paper/figures/prompts/`), Figure 2
+(5‑domain results), Figure 3 (capabilities in action), Figure 4 (structural
+boundary), Figure 5 (LLM‑QA, pending). Data figures: `scripts/figures_paper.py`
+→ `paper/figures/svg/`. Manuscript: `paper/manuscript/sma_nature_mi.tex` (canonical).

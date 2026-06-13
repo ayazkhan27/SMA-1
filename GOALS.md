@@ -88,14 +88,29 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
       transfer -> Extended Data); OUT (general-retrieval battery, exploratory
       rare-disease test, invalid 4a drift, pre-pivot figures). Total figure plan:
       4 main (+1 after LLM-QA) + 4 Extended Data.
-- [ ] NEXT after legal: freeze **adapter-v1** (loader/registry/router + Memory +
-      harness + pinned ontologies, once tests green); refresh figure2/Table2 to 5
-      domains; LaTeX manuscript update.
-- [ ] **prereg-v2 + LLM-QA "trustworthy specialist" phase** (the breakthrough):
-      SMA as an agent tool, none/RAG/SMA on ALCE (citation) + MIRAGE (medical QA)
-      + an abstention benchmark; metrics = accuracy + citation-faithfulness +
-      abstention-calibration + novelty. -> Figure 5.
+- [x] FROZE **adapter-v1** (git tag; ADR-008): universal adapter + agentic harness
+      API + pinned ontology versions; 111 tests green, 5/5 validated. figure2/Table2
+      refreshed to 5 domains; manuscript recompiled (6pp).
+- [x] REGISTERED **prereg-v2** (configs/preregistration_v2_llmqa.md): the LLM-QA
+      trustworthy-specialist phase, before any run.
+
+## Phase 5 — LLM-QA "TRUSTWORTHY SPECIALIST" (the breakthrough; prereg-v2)
+- [ ] Build the memory-swap AGENT (sma/eval/agentic_qa or similar): fixed LLM
+      (DeepSeek) + prompt, swap none/dense-RAG/SMA; one-shot retrieve→{answer,cite,
+      abstain}+novelty. Ontology-grounded diagnosis QA on medicine (HPO/MONDO).
+- [ ] 3 question pools (answerable / out-of-knowledge / novel); metrics = accuracy
+      + citation-faithfulness (ALCE-style) + abstention-calibration (risk-coverage
+      AUROC) + novelty-recall; paired-bootstrap + Holm per axis.
+- [ ] Pilot slice -> projected DeepSeek cost -> full run; -> Figure 5. Report all
+      conditions incl. nulls (anti-cherry-pick).
+- [ ] (optional) extend LLM-QA to cyber/legal/finance; interactive AgentClinic
+      flagship (single domain).
+
+## Phase 6 — FINALIZE & RELEASE
+- [ ] Extended Data: full per-domain metrics table; paired cross-system transfer
+      redo (ED1 transfer panel); risk-coverage curves. references.bib polish.
 - [ ] (optional) Structural-fraud arm (Elliptic/AMLSim + typology taxonomy) — turn
       the flat-tabular credit-card NULL into a structural WIN (closes the boundary).
-- [ ] Paper finalization: Extended Data figs (full per-domain metrics; paired
-      transfer redo), references, manuscript polish. Then Phase 6 release.
+- [ ] Manuscript polish -> arXiv preprint -> submission (Nature MI). Apache-2.0
+      public tree (scripts/build_release.py -> dist/), GitHub (khanayaz2727@gmail.com),
+      Hugging Face Space, Zenodo DOI, Docker. Plan: release/RELEASE_PLAN.md.
