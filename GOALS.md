@@ -54,3 +54,21 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
       GitHub (khanayaz2727@gmail.com), Hugging Face Space (release/hf_space) +
       optional SSB dataset card, Zenodo DOI, Docker artifact. Plan in
       release/RELEASE_PLAN.md.
+
+## Phase 4c — PAPER SPINE: golden-ontology SMA > RAG/KG (2026-06-13)
+- [x] Universal OWL/OBO loader + registry + DomainRouter (sma/ontology); loaders
+      for OBO, OWL (stdlib + rdflib), multi-file OWL dir, STIX (ATT&CK), CPC,
+      MITRE CAPEC/CWE. 11 ontologies / 6 domains loaded for routing (~600k terms):
+      medicine HPO+MONDO+GO+Uberon, cyber ATT&CK+CAPEC+CWE, discovery ChEBI+GO,
+      legal CPC(254k), finance FIBO. configs/ontologies.json + seed script.
+- [x] Pre-registered gigatest (configs/preregistration_ontology.md). De-risk:
+      SMA ties the ontology oracle (Phenomizer) but beats real RAG/KG.
+- [x] Agentic suite (sma/eval/agentic): memory-swap harness, 6 retrievers incl.
+      enterprise RAG (BGE dense / Hybrid-RRF / Hybrid+bge-reranker) + HippoRAG;
+      metrics tail top-k + cite-or-abstain AURC + novelty F1. MEDICINE ARM:
+      SMA beats best enterprise RAG +33pp tail top-5 (p=0.0002), AURC 0.017 vs
+      0.317, novelty F1 0.182 vs 0.000. docs/superpowers/{specs,plans}.
+- [ ] Remaining agentic arms (follow-ups, ontologies already loaded+routing):
+      cyber (ATT&CK/CAPEC/CWE), legal (CPC), finance (FIBO), discovery (ChEBI).
+      Each: real gold task + the same harness. + neural-embedding robustness,
+      novelty-threshold tuning, interactive flagship (AgentClinic-style, Medicine).
