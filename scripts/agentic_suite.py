@@ -31,7 +31,11 @@ from sma.eval.agentic import (
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 OUT = ROOT / "reports/confirmatory"
 
-ARMS = {"medicine": "sma.eval.agentic.arms.medicine"}
+ARMS = {
+    "medicine": "sma.eval.agentic.arms.medicine",
+    "cyber": "sma.eval.agentic.arms.cyber",
+    "discovery": "sma.eval.agentic.arms.discovery",
+}
 
 
 def build_memories(mounted, *, fast: bool) -> list:
