@@ -95,14 +95,23 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
       trustworthy-specialist phase, before any run.
 
 ## Phase 5 — LLM-QA "TRUSTWORTHY SPECIALIST" (the breakthrough; prereg-v2)
-- [ ] Build the memory-swap AGENT (sma/eval/agentic_qa or similar): fixed LLM
-      (DeepSeek) + prompt, swap none/dense-RAG/SMA; one-shot retrieve→{answer,cite,
-      abstain}+novelty. Ontology-grounded diagnosis QA on medicine (HPO/MONDO).
-- [ ] 3 question pools (answerable / out-of-knowledge / novel); metrics = accuracy
-      + citation-faithfulness (ALCE-style) + abstention-calibration (risk-coverage
-      AUROC) + novelty-recall; paired-bootstrap + Holm per axis.
-- [ ] Pilot slice -> projected DeepSeek cost -> full run; -> Figure 5. Report all
-      conditions incl. nulls (anti-cherry-pick).
+- [x] Built the memory-swap AGENT (sma/eval/agentic_qa): fixed LLM (DeepSeek
+      temp 0) + prompt, swap none/dense-RAG/SMA; one-shot retrieve→{answer,cite,
+      abstain}+novelty on HPO diagnosis QA. Calibrated structural cite-or-abstain
+      gate (raw grounding score vs a per-memory Youden's-J threshold fit on a
+      disjoint split; abstain+flag-novel below it, skipping the LLM call). 48
+      tests green; frozen adapter-v1 untouched (commits 99b75bc, c3feed9).
+- [x] 3 pools (answerable / held-out=out-of-knowledge≡novel); metrics = accuracy
+      + ALCE citation-faithfulness + abstention (risk-coverage + selective acc) +
+      threshold-free grounding-AUROC + novelty recall/precision/F1; paired
+      bootstrap (10k, seed 12345) + Holm (scripts/agentic_qa_stats.py).
+- [x] Pilot → full run DONE (real DeepSeek, n=120+120). RESULT: SMA-grounded
+      agent is a VERIFIABLE SPECIALIST — accuracy 0.342 vs dense 0.100 vs
+      closed-book 0.017 (Δ+0.242), grounding-AUROC 0.793 vs dense's near-chance
+      0.547 (Δ+0.246), novelty-F1 0.789 vs 0.553 (Δ+0.308), selective-acc 0.625
+      vs 0.500 (Δ+0.125) — 4/5 axes Holm-significant; abstain-recall a TIE (both
+      gates catch ~90% of unknowns, but dense pays 79% false-abstain vs SMA 45%).
+      Figure 5 + manuscript (6pp) updated. Nulls reported (anti-cherry-pick).
 - [ ] (optional) extend LLM-QA to cyber/legal/finance; interactive AgentClinic
       flagship (single domain).
 

@@ -476,14 +476,23 @@ split — SSB + cross‑system transfer → Extended Data).
   ontology oracle (Phenomizer) but beats general RAG/KG. Honest nulls recorded:
   flat‑tabular (4b) and free‑form conversational recall (4a) — no ontology ⇒ no edge.
 
-### 14.3 Next — Phase 5 LLM‑QA (`prereg-v2`)
-The memory‑swap **agent** (fixed DeepSeek + prompt; swap none/dense‑RAG/SMA) on
-ontology‑grounded diagnosis QA, scored on accuracy + citation‑faithfulness +
-abstention‑calibration + novelty — the end‑to‑end "verifiable specialist" test
-(→ Figure 5). See `configs/preregistration_v2_llmqa.md`.
+### 14.3 Phase 5 LLM‑QA (`prereg-v2`) — DONE, verifiable specialist CONFIRMED
+The memory‑swap **agent** (fixed DeepSeek + prompt; swap none/dense‑RAG/SMA;
+`sma/eval/agentic_qa/`) on ontology‑grounded HPO diagnosis QA, n=120 answerable +
+120 held‑out. Cite‑or‑abstain is gated on the **raw structural grounding score**
+at a threshold calibrated per memory on a **disjoint** split (Youden's J,
+retrieval‑only); below it the agent abstains and flags novel without an LLM call.
+RESULT (real run): the SMA‑grounded agent is most accurate (0.342 vs dense 0.100
+vs closed‑book 0.017), most faithful in citation (0.621 vs 0.480), and uniquely
+tells known from unknown — grounding‑AUROC 0.793 vs dense's near‑chance 0.547 —
+so it flags novelty (F1 0.789 vs 0.553) and abstains discriminatively (45%
+false‑abstain vs dense's 79% at equal abstain‑recall). 4/5 pre‑registered axes
+Holm‑significant; abstain‑recall a tie. → Figure 5. See
+`configs/preregistration_v2_llmqa.md` (§8 addendum) and `scripts/agentic_qa_stats.py`.
 
 ### 14.4 Display items
 Figure 1 (concept+system, Claude Design; `paper/figures/prompts/`), Figure 2
 (5‑domain results), Figure 3 (capabilities in action), Figure 4 (structural
-boundary), Figure 5 (LLM‑QA, pending). Data figures: `scripts/figures_paper.py`
+boundary), Figure 5 (LLM‑QA trustworthy specialist, DONE —
+`figure5_trustworthy`). Data figures: `scripts/figures_paper.py`
 → `paper/figures/svg/`. Manuscript: `paper/manuscript/sma_nature_mi.tex` (canonical).

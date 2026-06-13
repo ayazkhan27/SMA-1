@@ -1,0 +1,65 @@
+===== START none 23:35:02 =====
+########## LLM-QA: memory=none mock=False ##########
+  index=1500 answerable=120 ook/novel=120 calib=120; assembling memory...
+
+===== TRUSTWORTHY-QA [none] =====
+  accuracy             : 0.017
+  citation_faithful    : NA
+  abstain_recall       : 0.475
+  false_abstain        : 0.550
+  selective_accuracy   : 0.246
+  abstention_aurc      : 0.973  (lower is better)
+  grounding_auroc      : NA  (known vs unknown)
+  novelty_recall       : 0.000
+  novelty_precision    : 0.000
+  novelty_f1           : 0.000
+  novelty_fpr          : 0.000  (false flags on answerable)
+
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/qa_none.csv
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/qa_none_summary.csv
+===== END none 23:39:03 =====
+===== START dense 23:39:03 =====
+########## LLM-QA: memory=dense mock=False ##########
+  index=1500 answerable=120 ook/novel=120 calib=120; assembling memory...
+  calibrated score_threshold=0.8212 (calib AUROC 0.612, n=120)
+
+===== TRUSTWORTHY-QA [dense] =====
+  score_threshold      : 0.8212  (calibrated, retrieval-only)
+  accuracy             : 0.100
+  citation_faithful    : 0.480
+  abstain_recall       : 0.900
+  false_abstain        : 0.792
+  selective_accuracy   : 0.500
+  abstention_aurc      : 0.825  (lower is better)
+  grounding_auroc      : 0.547  (known vs unknown)
+  novelty_recall       : 0.567
+  novelty_precision    : 0.540
+  novelty_f1           : 0.553
+  novelty_fpr          : 0.483  (false flags on answerable)
+
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/qa_dense.csv
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/qa_dense_summary.csv
+===== END dense 23:42:08 =====
+===== START sma 23:42:08 =====
+########## LLM-QA: memory=sma mock=False ##########
+  index=1500 answerable=120 ook/novel=120 calib=120; assembling memory...
+  calibrated score_threshold=59.5817 (calib AUROC 0.729, n=120)
+
+===== TRUSTWORTHY-QA [sma] =====
+  score_threshold      : 59.5817  (calibrated, retrieval-only)
+  accuracy             : 0.342
+  citation_faithful    : 0.621
+  abstain_recall       : 0.908
+  false_abstain        : 0.450
+  selective_accuracy   : 0.625
+  abstention_aurc      : 0.625  (lower is better)
+  grounding_auroc      : 0.793  (known vs unknown)
+  novelty_recall       : 0.875
+  novelty_precision    : 0.719
+  novelty_f1           : 0.789
+  novelty_fpr          : 0.342  (false flags on answerable)
+
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/qa_sma.csv
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/qa_sma_summary.csv
+===== END sma 23:52:53 =====
+ALL DONE 23:52:53

@@ -1,0 +1,2 @@
+memory,score_threshold,accuracy,citation_faithfulness,abstain_recall,false_abstain,selective_accuracy,aurc,grounding_auroc,novelty_recall,novelty_precision,novelty_f1,novelty_fpr
+none,NA,0.0167,NA,0.4750,0.5500,0.2458,0.9731,NA,0.0000,0.0000,0.0000,0.0000

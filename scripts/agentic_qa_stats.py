@@ -71,13 +71,6 @@ def _answered_correct(r: dict) -> float:
     return 1.0 if (not _b(r["abstained"]) and _correct(r)) else 0.0
 
 
-def _faithful_citation(r: dict) -> float:
-    # answered AND cited the gold (pred_id == gold_id). Abstain/wrong/no-cite = 0.
-    pid = r.get("pred_id")
-    return 1.0 if (not _b(r["abstained"]) and pid not in ("", "None", None)
-                   and pid == r["gold_id"]) else 0.0
-
-
 def _abstained(r: dict) -> float:
     return 1.0 if _b(r["abstained"]) else 0.0
 
@@ -168,9 +161,12 @@ def main() -> None:
     rng = random.Random(SEED)
 
     # axis -> (pool of gold_ids, per-item outcome fn). Baseline is dense.
+    # NB: a paired "answered AND cited gold" proxy is identical to accuracy for
+    # grounded id-match (answered => pred_id set; correct <=> pred_id==gold), so
+    # it is NOT a separate paired axis — citation-faithfulness is reported
+    # descriptively (the ALCE-style conditional support score in the summaries).
     per_item = [
         ("accuracy", answerable, _answered_correct),
-        ("faithful_citation", answerable, _faithful_citation),
         ("abstain_recall", held, _abstained),
         ("novelty_recall", held, _novelty),
         ("selective_accuracy", gold_ids, _selective),

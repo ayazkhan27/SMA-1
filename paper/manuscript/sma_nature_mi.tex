@@ -40,7 +40,12 @@ $+33$, finance $+17$, genomics $+16$, cyber $+7$, legal $+6$ percentage points
 top-5; all $p<0.05$, Holm-corrected). SMA additionally provides two capabilities these baselines
 structurally lack: calibrated cite-or-abstain (risk-coverage AURC $0.02$--$0.11$
 vs $0.26$--$0.44$) and structural-novelty flagging (F1 $\approx 0.18$ where every
-pure-RAG baseline scores exactly $0$). We delimit the thesis honestly: the
+pure-RAG baseline scores exactly $0$). End-to-end, when a fixed LLM is equipped
+with each memory, the SMA-grounded agent becomes a \textbf{verifiable
+specialist}: most accurate, most faithful in citation, and uniquely able to tell
+known from unknown (grounding AUROC $0.79$ vs vector-RAG's near-chance $0.55$), so
+it abstains and flags novelty without refusing the answerable. We delimit the
+thesis honestly: the
 advantage is specific to structure and vanishes on flat-tabular prediction and
 free-form conversational recall.
 \end{abstract}
@@ -152,6 +157,46 @@ SMA and the graph-based HippoRAG are non-zero. (d) Headline effect size
 $\Delta$(SMA $-$ best RAG) tail top-5 per domain with 95\% CI; all above zero.}
 \end{figure}
 
+\textit{The end-to-end agent is a verifiable specialist.} The retrieval suite
+isolates the retriever; we next put a real LLM in the loop and measure what
+matters in deployment, where a confident wrong answer is catastrophic. Holding
+the LLM (DeepSeek, temperature $0$) and prompt fixed and swapping only the memory
+(closed-book / dense-RAG / SMA), an ontology-grounded diagnosis agent answered
+$120$ \emph{answerable} (indexed-disease) and $120$ \emph{held-out}
+(unseen-disease) clinical cases, with a cite-or-abstain threshold calibrated per
+memory on a \emph{disjoint} split (pre-registration v2). The SMA-grounded agent
+dominates the trustworthy-QA composite (Fig.~5). It is the most accurate ($0.342$
+vs dense $0.100$ vs closed-book $0.017$; paired-bootstrap $\Delta{=}{+}0.242$,
+95\% CI $[0.167,0.325]$, Holm-significant) and the most faithful in citation
+(ALCE-style support $0.621$ vs $0.480$). Decisively, its raw structural grounding
+score separates known from unknown entities (AUROC $0.793$ vs dense's near-chance
+$0.547$; $\Delta{=}{+}0.246$ $[0.159,0.333]$): cosine similarity stays high even
+for unseen diseases, so dense RAG can reach abstain-recall $0.90$ only by refusing
+$79\%$ of answerable cases, whereas SMA reaches $0.91$ while refusing $45\%$
+(abstain-recall itself a tie, $\Delta{=}{+}0.008$, $p{=}0.92$). The net selective
+accuracy is $0.625$ vs $0.500$ ($\Delta{=}{+}0.125$ $[0.071,0.179]$) and
+structural-novelty F1 is $0.789$ vs $0.553$ (novelty-recall $\Delta{=}{+}0.308$
+$[0.200,0.408]$); closed-book scores $0$ on novelty and cannot cite at all. Four
+of five pre-registered axes are Holm-significant wins, abstain-recall is a tie,
+and the accuracy floor holds (SMA above, not below, RAG). Equipped with
+structure-mapping memory a generalist LLM answers, cites, abstains, and flags
+novelty; equipped with vector RAG it answers less accurately and cannot tell when
+it does not know.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{svg/figure5_trustworthy.pdf}
+\caption{\textbf{The SMA-grounded LLM agent is a verifiable specialist}
+(medicine; $n{=}120$ answerable ${+}\,120$ held-out; LLM and prompt fixed, memory
+swapped). (a) Trustworthy-QA axes for closed-book / dense-RAG / SMA: accuracy,
+citation-faithfulness, abstain-recall, known-vs-unknown discrimination (grounding
+AUROC), and novelty F1; closed-book has no retrieval, so its citation and
+grounding cells are N/A (marked), not zero. (b) Mechanism: SMA's raw structural
+grounding score (top hit) separates answerable (known) from held-out (unknown)
+cases, AUROC $0.79$; the dashed line is the cite-or-abstain threshold calibrated
+on a disjoint split. Dense cosine similarity barely separates the two (AUROC
+$0.55$), forcing its gate to over-abstain.}
+\end{figure}
+
 \msec{Discussion}
 
 One mechanism serves medicine, cyber, chemistry, legal and finance with no
@@ -161,11 +206,12 @@ ontologies mounted as retrieval geometry; an LLM can draft rules but cannot
 hallucinate decades of community curation. Relational richness, not raw size,
 drives SMA's edge over the IC oracle: pure-is-a ontologies (HPO, CPC) yield
 parity, while relation-rich ones should let higher-order structure-mapping pull
-ahead --- an open prediction. Limitations: novelty thresholds are untuned;
-HippoRAG is somewhat disadvantaged by a bag-of-term-names document
-representation; the interactive agentic flagship is left as a single-domain case
-study; and licensed ontologies (SNOMED, UMLS) are excluded in favour of fully
-open sources.
+ahead --- an open prediction. Limitations: the retrieval-suite novelty threshold
+is fixed (untuned), though the end-to-end agent calibrates it per memory on a
+disjoint split; HippoRAG is somewhat disadvantaged by a bag-of-term-names
+document representation; the interactive agentic flagship is left as a
+single-domain case study; and licensed ontologies (SNOMED, UMLS) are excluded in
+favour of fully open sources.
 
 \msec{Methods (summary)}
 
@@ -184,7 +230,12 @@ scores tail top-$k$ (rare slice = rarest-term IC above the corpus median),
 risk-coverage AURC, and novelty F1, with paired bootstrap (10k, seed 12345) and
 Holm correction. Baselines: BM25; BGE-small neural dense; hybrid RRF;
 hybrid + \texttt{bge-reranker-base}; HippoRAG-2. Ontologies are version-pinned;
-\texttt{PYTHONHASHSEED=0} and sorted set$\to$list ensure reproducibility.
+\texttt{PYTHONHASHSEED=0} and sorted set$\to$list ensure reproducibility. The
+end-to-end LLM-QA agent (\texttt{sma/eval/agentic\_qa}, pre-registration~v2) holds
+DeepSeek and the prompt fixed, swaps the memory, retrieves top-$k$, then
+answers + cites or abstains; the cite-or-abstain signal is the raw top grounding
+score gated at a threshold calibrated per memory on a disjoint split (Youden's J,
+retrieval-only, no LLM spend), below which the agent abstains and flags novelty.
 
 \begin{table}[t]\centering\small
 \caption{The eleven mounted golden ontologies (one universal loader).}

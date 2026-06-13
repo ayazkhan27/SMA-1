@@ -1,0 +1,2 @@
+memory,score_threshold,accuracy,citation_faithfulness,abstain_recall,false_abstain,selective_accuracy,aurc,grounding_auroc,novelty_recall,novelty_precision,novelty_f1,novelty_fpr
+sma,59.5817,0.3417,0.621,0.9083,0.4500,0.6250,0.6253,0.793,0.8750,0.7192,0.7895,0.3417

@@ -1,0 +1,6 @@
+axis,baseline,sma,base,delta,ci_low,ci_high,p,p_holm,wins
+accuracy,dense,0.3417,0.1000,+0.2417,+0.1667,+0.3250,0,0,yes
+abstain_recall,dense,0.9083,0.9000,+0.0083,-0.0583,+0.0750,0.9166,0.9166,no
+novelty_recall,dense,0.8750,0.5667,+0.3083,+0.2000,+0.4083,0,0,yes
+selective_accuracy,dense,0.6250,0.5000,+0.1250,+0.0708,+0.1792,0,0,yes
+grounding_auroc,dense,0.7935,0.5472,+0.2463,+0.1592,+0.3333,0,0,yes

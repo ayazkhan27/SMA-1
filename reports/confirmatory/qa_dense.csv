@@ -1,0 +1,241 @@
+memory,gold_id,gold_name,answerable,novel,abstained,pred_id,answer,novelty_flag,confidence,grounding_score
+dense,OMIM:535000,Leber optic atrophy,True,False,True,,ABSTAIN,True,0.7969626784324646,0.7969626784324646
+dense,ORPHA:1578,Pterin-4 alpha-carbinolamine dehydratase deficiency,True,False,False,ORPHA:1578,Pterin-4 alpha-carbinolamine dehydratase deficiency,False,0.8488141894340515,0.8488141894340515
+dense,OMIM:618394,Immunodeficiency 60,True,False,True,,ABSTAIN,True,0.8097097873687744,0.8097097873687744
+dense,ORPHA:100083,Laryngeal neuroendocrine tumor,True,False,True,,ABSTAIN,True,0.8049758672714233,0.8049758672714233
+dense,OMIM:606519,PHACE association,True,False,True,,ABSTAIN,True,0.811607301235199,0.811607301235199
+dense,OMIM:618010,Glycosylphosphatidylinositol biosynthesis defect 17,True,False,True,,ABSTAIN,True,0.8176434636116028,0.8176434636116028
+dense,OMIM:240900,Hypoinsulinemic hypoglycemia with hemihypertrophy,True,False,True,,ABSTAIN,True,0.8184872269630432,0.8184872269630432
+dense,OMIM:615911,Frontotemporal dementia and/or amyotrophic lateral sclerosis 2,True,False,True,,ABSTAIN,True,0.8189031481742859,0.8189031481742859
+dense,ORPHA:510,Lesch-Nyhan syndrome,True,False,True,,ABSTAIN,False,0.8224032521247864,0.8224032521247864
+dense,OMIM:236270,"Homocystinuria-megaloblastic anemia, cbl E type",True,False,True,,ABSTAIN,False,0.8324254751205444,0.8324254751205444
+dense,ORPHA:3266,Isolated humero-radio-ulnar synostosis,True,False,True,,ABSTAIN,False,0.8606561422348022,0.8606561422348022
+dense,ORPHA:11,Pentasomy X syndrome,True,False,True,,ABSTAIN,True,0.8085690140724182,0.8085690140724182
+dense,ORPHA:79292,Fish-eye disease,True,False,True,,ABSTAIN,True,0.8151764869689941,0.8151764869689941
+dense,ORPHA:70578,Adult acute respiratory distress syndrome,True,False,False,ORPHA:70578,Adult acute respiratory distress syndrome,False,0.824115514755249,0.824115514755249
+dense,OMIM:246000,"Leg, absence deformity of, with congenital cataract",True,False,True,,ABSTAIN,False,0.8323120474815369,0.8323120474815369
+dense,OMIM:614077,Hermansky-Pudlak syndrome 8,True,False,True,,ABSTAIN,True,0.8143020868301392,0.8143020868301392
+dense,ORPHA:100082,Neuroendocrine tumor of anal canal,True,False,True,,ABSTAIN,True,0.816259503364563,0.816259503364563
+dense,OMIM:620461,"Encephalopathy, acute, infection-induced, susceptibility to, 12",True,False,True,,ABSTAIN,False,0.824036180973053,0.824036180973053
+dense,OMIM:620012,"Developmental delay, hypotonia, and impaired language",True,False,True,,ABSTAIN,False,0.8277789354324341,0.8277789354324341
+dense,ORPHA:1875,Congenital muscular dystrophy-infantile cataract-hypogonadism syndrome,True,False,True,,ABSTAIN,True,0.8200973272323608,0.8200973272323608
+dense,OMIM:233600,Immunodeficiency 59 and hypoglycemia,True,False,True,,ABSTAIN,True,0.8030059337615967,0.8030059337615967
+dense,OMIM:618302,"Intellectual developmental disorder, autosomal recessive 68",True,False,True,,ABSTAIN,False,0.8403026461601257,0.8403026461601257
+dense,OMIM:308700,Hypogonadotropic hypogonadism 1 with or without anosmia,True,False,False,OMIM:614880,Hypogonadotropic hypogonadism 15 with or without anosmia,False,0.8410322070121765,0.8410322070121765
+dense,ORPHA:2774,Multicentric carpo-tarsal osteolysis with or without nephropathy,True,False,True,,ABSTAIN,True,0.7960804104804993,0.7960804104804993
+dense,OMIM:277100,VALINEMIA,True,False,False,OMIM:277100,VALINEMIA,False,0.8366010785102844,0.8366010785102844
+dense,ORPHA:309288,"Alpha-mannosidosis, adult form",True,False,True,,ABSTAIN,True,0.8026108145713806,0.8026108145713806
+dense,OMIM:231550,Achalasia-Addisonianism-Alacrima syndrome,True,False,True,,ABSTAIN,False,0.84356290102005,0.84356290102005
+dense,OMIM:620197,"Ciliary dyskinesia, primary, 49, without situs inversus",True,False,False,OMIM:620197,"Ciliary dyskinesia, primary, 49, without situs inversus",False,0.851739227771759,0.851739227771759
+dense,OMIM:601650,Paragangliomas 2,True,False,False,OMIM:601650,Paragangliomas 2,False,0.8563739657402039,0.8563739657402039
+dense,OMIM:192500,Long QT syndrome 1,True,False,True,,ABSTAIN,True,0.8057498931884766,0.8057498931884766
+dense,ORPHA:401768,Proximal myopathy with extrapyramidal signs,True,False,True,,ABSTAIN,False,0.8259043097496033,0.8259043097496033
+dense,ORPHA:2004,Laryngotracheoesophageal cleft,True,False,False,ORPHA:2004,Laryngotracheoesophageal cleft,False,0.8339874744415283,0.8339874744415283
+dense,OMIM:616540,"Epilepsy, progressive myoclonic, 9",True,False,False,OMIM:159950,Spinal muscular atrophy with progressive myoclonic epilepsy,False,0.8367202281951904,0.8367202281951904
+dense,OMIM:616740,Immunodeficiency 46,True,False,True,,ABSTAIN,False,0.8338261246681213,0.8338261246681213
+dense,OMIM:614935,"Ciliary dyskinesia, primary, 19",True,False,False,OMIM:606763,"Ciliary dyskinesia, primary, 2",False,0.845733106136322,0.845733106136322
+dense,OMIM:612933,Glycogen storage disease XI,True,False,True,,ABSTAIN,False,0.830763578414917,0.830763578414917
+dense,OMIM:619955,Dworschak-Punetha neurodevelopmental syndrome,True,False,True,,ABSTAIN,False,0.8239187002182007,0.8239187002182007
+dense,ORPHA:2073,Narcolepsy type 1,True,False,True,,ABSTAIN,True,0.7996317744255066,0.7996317744255066
+dense,OMIM:226650,"Epidermolysis bullosa, junctional, Non-Herlitz type",True,False,False,ORPHA:1028,Amelo-onycho-hypohidrotic syndrome,False,0.8539378643035889,0.8539378643035889
+dense,OMIM:615960,Poretti-Boltshauser syndrome,True,False,True,,ABSTAIN,True,0.8054519891738892,0.8054519891738892
+dense,OMIM:254300,"Myasthenia, limb-girdle, familial",True,False,True,,ABSTAIN,False,0.8254963755607605,0.8254963755607605
+dense,ORPHA:75373,Progressive bifocal chorioretinal atrophy,True,False,True,,ABSTAIN,False,0.827373206615448,0.827373206615448
+dense,OMIM:240200,"Hypoadrenocorticism, familial",True,False,True,,ABSTAIN,False,0.827380359172821,0.827380359172821
+dense,OMIM:256840,"Neuropathy, hereditary sensory, with spastic paraplegia, autosomal recessive",True,False,True,,ABSTAIN,True,0.7957836985588074,0.7957836985588074
+dense,OMIM:619216,"Neuropathy, hereditary motor, with myopathic features",True,False,True,,ABSTAIN,False,0.8265448808670044,0.8265448808670044
+dense,ORPHA:314795,SHOX-related short stature,True,False,True,,ABSTAIN,True,0.7893801927566528,0.7893801927566528
+dense,OMIM:601438,"Rhizomelic dysplasia, Patterson-Lowry type",True,False,True,,ABSTAIN,True,0.8070581555366516,0.8070581555366516
+dense,OMIM:112250,Diaphyseal medullary stenosis with malignant fibrous histiocytoma,True,False,True,,ABSTAIN,True,0.8016568422317505,0.8016568422317505
+dense,OMIM:604403,"Generalized epilepsy with febrile seizures plus, type 2",True,False,True,,ABSTAIN,True,0.8159778118133545,0.8159778118133545
+dense,OMIM:616549,"Klippel-Feil syndrome 4, autosomal recessive, with myopathy and facial dysmorphism",True,False,True,,ABSTAIN,True,0.7916604280471802,0.7916604280471802
+dense,ORPHA:1307,Distal limb deficiencies-micrognathia syndrome,True,False,True,,ABSTAIN,True,0.8113678097724915,0.8113678097724915
+dense,OMIM:617565,Perrault syndrome 6,True,False,False,ORPHA:2855,Perrault syndrome,False,0.881679356098175,0.881679356098175
+dense,OMIM:620666,"Spastic ataxia 10, autosomal recessive",True,False,True,,ABSTAIN,False,0.8397804498672485,0.8397804498672485
+dense,OMIM:617638,Immunodeficiency 11B with atopic dermatitis,True,False,True,,ABSTAIN,True,0.7975056171417236,0.7975056171417236
+dense,ORPHA:231154,Combined immunodeficiency due to partial RAG1 deficiency,True,False,False,OMIM:612782,Immunodeficiency 9,False,0.8272836804389954,0.8272836804389954
+dense,OMIM:611228,"Charcot-Marie-Tooth disease, type 4J",True,False,True,,ABSTAIN,True,0.8208082318305969,0.8208082318305969
+dense,OMIM:619052,"Mitochondrial complex IV deficiency, nuclear type 8",True,False,True,,ABSTAIN,False,0.8243888020515442,0.8243888020515442
+dense,ORPHA:98878,Hemophilia A,True,False,False,ORPHA:98878,Hemophilia A,False,0.8226712942123413,0.8226712942123413
+dense,OMIM:168500,Parietal foramina,True,False,True,,ABSTAIN,False,0.8528146147727966,0.8528146147727966
+dense,OMIM:621259,Stargardt disease 5,True,False,True,,ABSTAIN,True,0.8180145621299744,0.8180145621299744
+dense,OMIM:604145,"Cardiomyopathy, dilated, 1G",True,False,True,,ABSTAIN,True,0.802394688129425,0.802394688129425
+dense,ORPHA:93930,Classic bladder exstrophy,True,False,True,,ABSTAIN,False,0.8274309039115906,0.8274309039115906
+dense,OMIM:613641,"Charcot-marie-tooth disease, recessive intermediate B",True,False,True,,ABSTAIN,True,0.8099148869514465,0.8099148869514465
+dense,OMIM:616038,Neu-Laxova syndrome 2,True,False,True,,ABSTAIN,True,0.8102777600288391,0.8102777600288391
+dense,OMIM:608728,"Spondyloepimetaphyseal dysplasia, Borochowitz-Cormier-Daire type",True,False,True,,ABSTAIN,False,0.8220052123069763,0.8220052123069763
+dense,OMIM:603457,Bosma arhinia microphthalmia syndrome,True,False,False,ORPHA:2095,Gorlin-Chaudhry-Moss syndrome,False,0.8504835367202759,0.8504835367202759
+dense,OMIM:615916,"Cardiomyopathy, dilated, 1nn",True,False,False,OMIM:615916,"Cardiomyopathy, dilated, 1nn",False,0.8228663802146912,0.8228663802146912
+dense,ORPHA:250994,1q21.1 microduplication syndrome,True,False,False,OMIM:608840,"Muscular dystrophy-dystroglycanopathy (congenital with impaired intellectual development), type B, 6",False,0.8332876563072205,0.8332876563072205
+dense,OMIM:611945,"Spastic paraplegia 37, autosomal dominant",True,False,True,,ABSTAIN,True,0.7942420244216919,0.7942420244216919
+dense,OMIM:232600,Glycogen storage disease V,True,False,False,OMIM:261670,"Phosphoglycerate mutase, muscle, deficiency of",False,0.8225804567337036,0.8225804567337036
+dense,OMIM:611225,"Spastic paraplegia 18, autosomal recessive",True,False,True,,ABSTAIN,True,0.8186423182487488,0.8186423182487488
+dense,ORPHA:56425,Cold agglutinin disease,True,False,True,,ABSTAIN,True,0.8028005361557007,0.8028005361557007
+dense,OMIM:616398,"Dystonia 26, myoclonic",True,False,False,ORPHA:98805,"Primary dystonia, DYT4 type",False,0.8361754417419434,0.8361754417419434
+dense,ORPHA:3411,Double uterus-hemivagina-renal agenesis syndrome,True,False,True,,ABSTAIN,True,0.8042957186698914,0.8042957186698914
+dense,OMIM:612319,"Spastic paraplegia 35, autosomal recessive",True,False,True,,ABSTAIN,True,0.7776833176612854,0.7776833176612854
+dense,OMIM:500003,"Striatonigral degeneration, infantile, mitochondrial",True,False,True,,ABSTAIN,True,0.8104059100151062,0.8104059100151062
+dense,ORPHA:101028,Transaldolase deficiency,True,False,True,,ABSTAIN,True,0.8110936880111694,0.8110936880111694
+dense,OMIM:617600,"Intellectual developmental disorder, autosomal dominant 45",True,False,False,ORPHA:2148,Lissencephaly type 1 due to doublecortin gene mutation,False,0.8347556591033936,0.8347556591033936
+dense,OMIM:609528,"Cerebral dysgenesis, neuropathy, ichthyosis, and palmoplantar keratoderma syndrome",True,False,True,,ABSTAIN,False,0.8223839402198792,0.8223839402198792
+dense,ORPHA:2379,Early-onset parkinsonism-intellectual disability syndrome,True,False,True,,ABSTAIN,False,0.8323125243186951,0.8323125243186951
+dense,OMIM:619398,Inflammatory bowel disease (infantile ulcerative colitis) 31,True,False,True,,ABSTAIN,False,0.8235155940055847,0.8235155940055847
+dense,OMIM:604381,Patent ductus arteriosus and bicuspid aortic valve with hand anomalies,True,False,False,OMIM:604381,Patent ductus arteriosus and bicuspid aortic valve with hand anomalies,False,0.8643503189086914,0.8643503189086914
+dense,OMIM:612989,Optic atrophy 7 with or without auditory neuropathy,True,False,False,ORPHA:1369,Congenital cataract-hypertrophic cardiomyopathy-mitochondrial myopathy syndrome,False,0.8244702219963074,0.8244702219963074
+dense,OMIM:620897,Ovarian dysgenesis 11,True,False,False,OMIM:620897,Ovarian dysgenesis 11,False,0.8381149172782898,0.8381149172782898
+dense,ORPHA:75377,Central areolar choroidal dystrophy,True,False,True,,ABSTAIN,True,0.8055772185325623,0.8055772185325623
+dense,OMIM:610475,"Pigmented nodular adrenocortical disease, primary, 2",True,False,True,,ABSTAIN,True,0.7978653311729431,0.7978653311729431
+dense,ORPHA:228371,Foodborne botulism,True,False,True,,ABSTAIN,False,0.824835479259491,0.824835479259491
+dense,OMIM:613154,"Muscular dystrophy-dystroglycanopathy (congenital with brain and eye anomalies), type A, 6",True,False,True,,ABSTAIN,True,0.8115689754486084,0.8115689754486084
+dense,OMIM:184840,"Stickler syndrome, type III",True,False,False,OMIM:184840,"Stickler syndrome, type III",False,0.8374647498130798,0.8374647498130798
+dense,ORPHA:98895,Becker muscular dystrophy,True,False,True,,ABSTAIN,True,0.8151697516441345,0.8151697516441345
+dense,ORPHA:3305,Tetraploidy syndrome,True,False,True,,ABSTAIN,False,0.8513768315315247,0.8513768315315247
+dense,ORPHA:90160,Pressure-induced localized lipoatrophy,True,False,True,,ABSTAIN,True,0.7926046848297119,0.7926046848297119
+dense,OMIM:610006,2-Methylbutyryl-Coa dehydrogenase deficiency,True,False,True,,ABSTAIN,True,0.8123560547828674,0.8123560547828674
+dense,ORPHA:1807,Focal facial dermal dysplasia type III,True,False,True,,ABSTAIN,False,0.8373581767082214,0.8373581767082214
+dense,OMIM:609616,"Spondylomegaepiphyseal dysplasia with upper limb mesomelia, punctatecalcifications, and deafness",True,False,True,,ABSTAIN,True,0.8148807287216187,0.8148807287216187
+dense,ORPHA:3145,Arginine vasopressin resistance-intracranial calcification-short stature-facial dysmorphism syndrome,True,False,True,,ABSTAIN,True,0.81242835521698,0.81242835521698
+dense,OMIM:607765,"Bile acid synthesis defect, congenital, 1",True,False,False,ORPHA:1414,Cholestasis-lymphedema syndrome,False,0.8455231785774231,0.8455231785774231
+dense,OMIM:176200,Porphyria variegata,True,False,False,OMIM:176200,Porphyria variegata,False,0.8371737003326416,0.8371737003326416
+dense,ORPHA:3010,Qazi-Markouizos syndrome,True,False,True,,ABSTAIN,False,0.8223677277565002,0.8223677277565002
+dense,ORPHA:99939,Autosomal dominant Charcot-Marie-Tooth disease type 2E,True,False,True,,ABSTAIN,False,0.8309755921363831,0.8309755921363831
+dense,ORPHA:91130,Cardiomyopathy-hypotonia-lactic acidosis syndrome,True,False,True,,ABSTAIN,False,0.8351275324821472,0.8351275324821472
+dense,OMIM:620183,"Microcephaly 30, primary, autosomal recessive",True,False,True,,ABSTAIN,False,0.8293378949165344,0.8293378949165344
+dense,OMIM:620641,Tan-Almurshedi syndrome,True,False,True,,ABSTAIN,False,0.8406713008880615,0.8406713008880615
+dense,OMIM:617236,Cone-rod dystrophy and hearing loss,True,False,True,,ABSTAIN,False,0.8266875147819519,0.8266875147819519
+dense,OMIM:223200,"Disorganization, mouse, homolog of",True,False,True,,ABSTAIN,True,0.795586884021759,0.795586884021759
+dense,ORPHA:99950,Charcot-Marie-Tooth disease type 4D,True,False,True,,ABSTAIN,True,0.7945648431777954,0.7945648431777954
+dense,OMIM:271520,Spondylocostal dysostosis with anal atresia and urogenital anomalies,True,False,True,,ABSTAIN,True,0.8161622285842896,0.8161622285842896
+dense,OMIM:618331,"Encephalopathy, progressive, early-onset, with episodic rhabdomyolysis",True,False,True,,ABSTAIN,False,0.8270965218544006,0.8270965218544006
+dense,OMIM:600972,"Achondrogenesis, type IB",True,False,True,,ABSTAIN,True,0.7883428931236267,0.7883428931236267
+dense,OMIM:301059,"Spermatogenic failure, X-linked, 3",True,False,True,,ABSTAIN,False,0.847038984298706,0.847038984298706
+dense,ORPHA:85184,"Craniometadiaphyseal dysplasia, wormian bone type",True,False,True,,ABSTAIN,True,0.7991607189178467,0.7991607189178467
+dense,OMIM:616029,Ectodermal dysplasia/short stature syndrome,True,False,True,,ABSTAIN,True,0.7993462681770325,0.7993462681770325
+dense,OMIM:615072,"Brachydactyly, type A1, C",True,False,True,,ABSTAIN,False,0.8528589606285095,0.8528589606285095
+dense,OMIM:224100,"Anemia, dyserythropoietic congenital, type II",True,False,True,,ABSTAIN,True,0.8189472556114197,0.8189472556114197
+dense,OMIM:611431,Legius syndrome,True,False,True,,ABSTAIN,True,0.8005487322807312,0.8005487322807312
+dense,ORPHA:998,Albinism-deafness syndrome,True,False,True,,ABSTAIN,False,0.8331924676895142,0.8331924676895142
+dense,ORPHA:86909,Myoclonic epilepsy of infancy,True,False,True,,ABSTAIN,True,0.8173878192901611,0.8173878192901611
+dense,OMIM:607731,"Charcot-Marie-Tooth disease, axonal, type 2H",True,False,True,,ABSTAIN,True,0.7753707766532898,0.7753707766532898
+dense,OMIM:619080,Kilquist syndrome,True,False,True,,ABSTAIN,True,0.8076068162918091,0.8076068162918091
+dense,ORPHA:747,Autoimmune pulmonary alveolar proteinosis,True,False,True,,ABSTAIN,True,0.812061071395874,0.812061071395874
+dense,ORPHA:209964,Solitary rectal ulcer syndrome,False,True,True,,ABSTAIN,True,0.8006948232650757,0.8006948232650757
+dense,OMIM:604169,Left ventricular noncompaction 1,False,True,True,,ABSTAIN,True,0.7974252104759216,0.7974252104759216
+dense,OMIM:608681,"Spondylocostal dysostosis 2, autosomal recessive",False,True,True,,ABSTAIN,False,0.8335004448890686,0.8335004448890686
+dense,ORPHA:36367,Distal deletion 1q syndrome,False,True,True,,ABSTAIN,False,0.8255152702331543,0.8255152702331543
+dense,OMIM:605726,"Spinal muscular atrophy, distal, autosomal recessive, 2",False,True,True,,ABSTAIN,True,0.811595618724823,0.811595618724823
+dense,OMIM:162210,"Neurofibromatosis, familial spinal",False,True,True,,ABSTAIN,True,0.7780382037162781,0.7780382037162781
+dense,OMIM:160800,"Myotonia congenita, autosomal dominant",False,True,True,,ABSTAIN,True,0.8185018301010132,0.8185018301010132
+dense,OMIM:610476,"Arrhythmogenic right ventricular dysplasia, familial, 11",False,True,False,OMIM:611528,Arrhythmogenic right ventricular dysplasia 12,False,0.8334741592407227,0.8334741592407227
+dense,ORPHA:100025,Alpha-heavy chain disease,False,True,True,,ABSTAIN,True,0.82054203748703,0.82054203748703
+dense,OMIM:249650,Mercaptolactate-Cysteine disulfiduria,False,True,True,,ABSTAIN,False,0.8319647908210754,0.8319647908210754
+dense,OMIM:616948,"Spinocerebellar ataxia, autosomal recessive 22",False,True,True,,ABSTAIN,False,0.8368253707885742,0.8368253707885742
+dense,ORPHA:2182,Hydrocephalus with stenosis of the aqueduct of Sylvius,False,True,True,,ABSTAIN,True,0.8079221248626709,0.8079221248626709
+dense,OMIM:616617,Heimler syndrome 2,False,True,False,ORPHA:1946,Amelocerebrohypohidrotic syndrome,False,0.8357906341552734,0.8357906341552734
+dense,ORPHA:95434,Autosomal recessive cerebellar ataxia-movement disorder syndrome,False,True,True,,ABSTAIN,True,0.8126712441444397,0.8126712441444397
+dense,OMIM:617018,Spinocerebellar ataxia 43,False,True,True,,ABSTAIN,True,0.8140819668769836,0.8140819668769836
+dense,OMIM:620894,"Cardiomyopathy, dilated, 2K",False,True,True,,ABSTAIN,True,0.7999058961868286,0.7999058961868286
+dense,ORPHA:2770,Nasu-Hakola disease,False,True,True,,ABSTAIN,False,0.8274312615394592,0.8274312615394592
+dense,OMIM:615558,"Hypobetalipoproteinemia, familial, 1",False,True,True,,ABSTAIN,False,0.8354469537734985,0.8354469537734985
+dense,OMIM:601096,"SPONDYLOEPIMETAPHYSEAL DYSPLASIA, MICROMELIC",False,True,True,,ABSTAIN,False,0.8247599601745605,0.8247599601745605
+dense,ORPHA:1949,Self-limited neonatal epilepsy,False,True,True,,ABSTAIN,True,0.7781111598014832,0.7781111598014832
+dense,OMIM:615511,Myopathy due to myoadenylate deaminase deficiency,False,True,True,,ABSTAIN,False,0.8313580751419067,0.8313580751419067
+dense,OMIM:186570,Tarsal-Carpal coalition syndrome,False,True,True,,ABSTAIN,False,0.8221008777618408,0.8221008777618408
+dense,OMIM:613854,"Congenital heart defects, multiple types, 6",False,True,True,,ABSTAIN,True,0.7831494212150574,0.7831494212150574
+dense,OMIM:611126,"Mitochondrial complex I deficiency, nuclear type 20",False,True,True,,ABSTAIN,True,0.8121720552444458,0.8121720552444458
+dense,OMIM:619352,"Ataxia, intention tremor, and hypotonia syndrome, childhood-onset",False,True,True,,ABSTAIN,True,0.7964968085289001,0.7964968085289001
+dense,OMIM:618273,Mega-corpus-callosum syndrome with cerebellar hypoplasia and cortical malformations,False,True,True,,ABSTAIN,False,0.8491995930671692,0.8491995930671692
+dense,ORPHA:275555,Preeclampsia,False,True,True,,ABSTAIN,True,0.8075669407844543,0.8075669407844543
+dense,OMIM:616277,Mitochondrial short-chain enoyl-coa hydratase 1 deficiency,False,True,True,,ABSTAIN,True,0.783150315284729,0.783150315284729
+dense,OMIM:615373,Left ventricular noncompaction 8,False,True,True,,ABSTAIN,True,0.8125872015953064,0.8125872015953064
+dense,OMIM:618433,Spermatogenic failure 38,False,True,True,,ABSTAIN,False,0.8349663615226746,0.8349663615226746
+dense,OMIM:612561,Diamond-Blackfan anemia 6,False,True,True,,ABSTAIN,True,0.8107161521911621,0.8107161521911621
+dense,OMIM:615871,"Epileptic encephalopathy, early infantile, 24",False,True,True,,ABSTAIN,True,0.7887556552886963,0.7887556552886963
+dense,OMIM:615548,"Neuropathy, hereditary sensory and autonomic, type VII",False,True,True,,ABSTAIN,True,0.8045654296875,0.8045654296875
+dense,OMIM:619735,"Spastic paraplegia 86, autosomal recessive",False,True,True,,ABSTAIN,True,0.8070751428604126,0.8070751428604126
+dense,OMIM:271630,"Brachyolmia type 1, Toledo type",False,True,True,,ABSTAIN,True,0.808016300201416,0.808016300201416
+dense,ORPHA:901,Wells syndrome,False,True,True,,ABSTAIN,True,0.8016706109046936,0.8016706109046936
+dense,OMIM:614808,Amyotrophic lateral sclerosis 18,False,True,False,OMIM:602099,"Amyotrophic lateral sclerosis 5, juvenile",False,0.8392107486724854,0.8392107486724854
+dense,OMIM:146720,Ichthyosis-Cheek-Eyebrow syndrome,False,True,True,,ABSTAIN,False,0.8657199144363403,0.8657199144363403
+dense,OMIM:236500,"Multinucleated neurons, anhydramnios, renal dysplasia, cerebellar hypoplasia, and hydranencephaly",False,True,True,,ABSTAIN,True,0.7972021102905273,0.7972021102905273
+dense,ORPHA:2387,Leukonychia totalis,False,True,True,,ABSTAIN,False,0.8418375849723816,0.8418375849723816
+dense,ORPHA:1486,Lethal congenital contracture syndrome type 1,False,True,True,,ABSTAIN,False,0.830405056476593,0.830405056476593
+dense,ORPHA:93325,Autosomal dominant Kenny-Caffey syndrome,False,True,True,,ABSTAIN,True,0.8090474605560303,0.8090474605560303
+dense,OMIM:112310,Boomerang dysplasia,False,True,True,,ABSTAIN,False,0.8255031704902649,0.8255031704902649
+dense,OMIM:619483,"Central hypoventilation syndrome, congenital, 3",False,True,True,,ABSTAIN,False,0.8294658660888672,0.8294658660888672
+dense,OMIM:617392,"Ectodermal dysplasia 13, Hair/tooth type",False,True,False,OMIM:602032,"Ectodermal dysplasia 4, hair/nail type",False,0.8349089622497559,0.8349089622497559
+dense,ORPHA:130,Brugada syndrome,False,True,True,,ABSTAIN,True,0.7955220341682434,0.7955220341682434
+dense,OMIM:619688,"Leukodystrophy, hypomyelinating, 23, with ataxia, deafness, liver dysfunction, and dilated cardiomyopathy",False,True,True,,ABSTAIN,False,0.8352004885673523,0.8352004885673523
+dense,OMIM:617050,Hermansky-Pudlak syndrome 10,False,True,True,,ABSTAIN,True,0.795912504196167,0.795912504196167
+dense,ORPHA:2334,Autosomal dominant keratitis,False,True,True,,ABSTAIN,True,0.8114355802536011,0.8114355802536011
+dense,OMIM:146500,"Multiple system atrophy 1, susceptibility to",False,True,True,,ABSTAIN,False,0.8270877599716187,0.8270877599716187
+dense,ORPHA:411527,Central retinal vein occlusion,False,True,True,,ABSTAIN,True,0.8208513855934143,0.8208513855934143
+dense,OMIM:618963,"Immunodeficiency 69, mycobacteriosis",False,True,True,,ABSTAIN,False,0.8336735367774963,0.8336735367774963
+dense,OMIM:229050,"Folate malabsorption, hereditary",False,True,True,,ABSTAIN,False,0.8334848284721375,0.8334848284721375
+dense,OMIM:611926,"Immunodeficiency, ovarian dysgenesis, and pulmonary fibrosis",False,True,True,,ABSTAIN,False,0.8289802670478821,0.8289802670478821
+dense,OMIM:619971,Neurodevelopmental disorder with epilepsy and brain atrophy,False,True,True,,ABSTAIN,False,0.8215983510017395,0.8215983510017395
+dense,OMIM:173800,Poland syndrome,False,True,True,,ABSTAIN,True,0.8053746223449707,0.8053746223449707
+dense,ORPHA:252054,Hemangioblastoma,False,True,True,,ABSTAIN,True,0.7919512391090393,0.7919512391090393
+dense,OMIM:615236,Woods syndrome,False,True,True,,ABSTAIN,False,0.8279604911804199,0.8279604911804199
+dense,ORPHA:806,Scott syndrome,False,True,True,,ABSTAIN,True,0.7875073552131653,0.7875073552131653
+dense,OMIM:620444,Craniofacial microsomia 2,False,True,False,OMIM:202650,Agnathia-Otocephaly complex,False,0.8403165340423584,0.8403165340423584
+dense,ORPHA:1231,Barber-Say syndrome,False,True,True,,ABSTAIN,True,0.8144176602363586,0.8144176602363586
+dense,ORPHA:2295,Familial articular hypermobility syndrome,False,True,False,ORPHA:1899,Arthrochalasia Ehlers-Danlos syndrome,False,0.8259097933769226,0.8259097933769226
+dense,ORPHA:3269,Isolated radio-ulnar synostosis,False,True,True,,ABSTAIN,True,0.8146253824234009,0.8146253824234009
+dense,OMIM:617132,Developmental and epileptic encephalopathy 44,False,True,True,,ABSTAIN,True,0.8114060163497925,0.8114060163497925
+dense,OMIM:610992,Phosphoserine aminotransferase deficiency,False,True,True,,ABSTAIN,False,0.8239521980285645,0.8239521980285645
+dense,OMIM:104100,Palmoplantar keratoderma with congenital alopecia,False,True,True,,ABSTAIN,True,0.8150612115859985,0.8150612115859985
+dense,OMIM:257220,"Niemann-pick disease, type C1",False,True,True,,ABSTAIN,True,0.8050715327262878,0.8050715327262878
+dense,ORPHA:313772,Early-onset spastic ataxia-myoclonic epilepsy-neuropathy syndrome,False,True,True,,ABSTAIN,False,0.8442215919494629,0.8442215919494629
+dense,ORPHA:85410,Oligoarticular juvenile idiopathic arthritis,False,True,True,,ABSTAIN,True,0.7864071726799011,0.7864071726799011
+dense,OMIM:125595,Dermatopathia pigmentosa reticularis,False,True,True,,ABSTAIN,True,0.8172436356544495,0.8172436356544495
+dense,ORPHA:79499,Autosomal dominant deafness-onychodystrophy syndrome,False,True,True,,ABSTAIN,True,0.8061056733131409,0.8061056733131409
+dense,OMIM:603543,Limb-Mammary syndrome,False,True,True,,ABSTAIN,True,0.8105147480964661,0.8105147480964661
+dense,OMIM:615043,"Spastic paraplegia 43, autosomal recessive",False,True,True,,ABSTAIN,True,0.8118969202041626,0.8118969202041626
+dense,OMIM:603736,"Ohdo syndrome, Say-Barber-Biesecker-Young-Simpson variant",False,True,True,,ABSTAIN,False,0.8313605785369873,0.8313605785369873
+dense,OMIM:604400,"Arrhythmogenic right ventricular dysplasia, familial, 5",False,True,True,,ABSTAIN,True,0.7867758274078369,0.7867758274078369
+dense,OMIM:108650,"Spastic ataxia 7, autosomal dominant",False,True,True,,ABSTAIN,False,0.8341413736343384,0.8341413736343384
+dense,ORPHA:60026,Pulmonary nodular lymphoid hyperplasia,False,True,True,,ABSTAIN,True,0.8119083642959595,0.8119083642959595
+dense,OMIM:617983,"Microcephaly 21, primary, autosomal recessive",False,True,True,,ABSTAIN,True,0.8155861496925354,0.8155861496925354
+dense,OMIM:619405,"Spinocerebellar ataxia, autosomal recessive 30",False,True,True,,ABSTAIN,True,0.7925788760185242,0.7925788760185242
+dense,OMIM:605321,Frontoocular syndrome,False,True,True,,ABSTAIN,True,0.8115512728691101,0.8115512728691101
+dense,OMIM:301006,"Galloway-Mowat syndrome 2, X-linked",False,True,True,,ABSTAIN,True,0.8110043406486511,0.8110043406486511
+dense,OMIM:613862,Retinitis pigmentosa 38,False,True,True,,ABSTAIN,False,0.8245449662208557,0.8245449662208557
+dense,OMIM:609306,Spinocerebellar ataxia 26,False,True,False,OMIM:615945,Spinocerebellar ataxia 37,False,0.8588598966598511,0.8588598966598511
+dense,OMIM:606324,"Parkinson disease 7, autosomal recessive early-onset",False,True,True,,ABSTAIN,False,0.8380265235900879,0.8380265235900879
+dense,OMIM:183600,Split-Hand/foot malformation 1,False,True,True,,ABSTAIN,True,0.7882591485977173,0.7882591485977173
+dense,ORPHA:2074,Gemignani syndrome,False,True,False,ORPHA:1422,Chondrodysplasia-difference of sex development syndrome,False,0.8275164365768433,0.8275164365768433
+dense,OMIM:618261,Lymphoproliferative syndrome 3,False,True,True,,ABSTAIN,True,0.8071181178092957,0.8071181178092957
+dense,ORPHA:275,Severe combined immunodeficiency due to DCLRE1C deficiency,False,True,True,,ABSTAIN,True,0.8085364103317261,0.8085364103317261
+dense,OMIM:262600,"Pituitary hormone deficiency, combined, 2",False,True,True,,ABSTAIN,False,0.834834098815918,0.834834098815918
+dense,ORPHA:939,3-hydroxyisobutyric aciduria,False,True,True,,ABSTAIN,False,0.8340532183647156,0.8340532183647156
+dense,OMIM:300400,"Severe combined immunodeficiency, X-linked",False,True,True,,ABSTAIN,True,0.8187506794929504,0.8187506794929504
+dense,ORPHA:1711,Mosaic trisomy 17 syndrome,False,True,True,,ABSTAIN,True,0.8088433146476746,0.8088433146476746
+dense,OMIM:619637,Dystonia 32,False,True,True,,ABSTAIN,True,0.8030557632446289,0.8030557632446289
+dense,ORPHA:551,MERRF,False,True,True,,ABSTAIN,True,0.8180018663406372,0.8180018663406372
+dense,ORPHA:1797,Autosomal dominant spondylocostal dysostosis,False,True,True,,ABSTAIN,False,0.8218213319778442,0.8218213319778442
+dense,OMIM:609040,"Arrhythmogenic right ventricular dysplasia, familial, 9",False,True,False,OMIM:611528,Arrhythmogenic right ventricular dysplasia 12,False,0.8215345740318298,0.8215345740318298
+dense,ORPHA:70588,Meconium aspiration syndrome,False,True,True,,ABSTAIN,True,0.7783428430557251,0.7783428430557251
+dense,OMIM:611812,"46,XX sex reversal with dysgenesis of kidneys, adrenals, and lungs",False,True,True,,ABSTAIN,True,0.8085924386978149,0.8085924386978149
+dense,OMIM:616370,Multiple mitochondrial dysfunctions syndrome 4,False,True,True,,ABSTAIN,True,0.8207167387008667,0.8207167387008667
+dense,OMIM:617883,"Fanconi anemia, complementation group S",False,True,True,,ABSTAIN,False,0.8322874903678894,0.8322874903678894
+dense,OMIM:314050,"Thrombocytopenia with beta-thalassemia, X-linked",False,True,True,,ABSTAIN,False,0.8391079902648926,0.8391079902648926
+dense,OMIM:609021,Peripheral cone dystrophy,False,True,False,OMIM:612989,Optic atrophy 7 with or without auditory neuropathy,False,0.822515070438385,0.822515070438385
+dense,OMIM:614209,"Meckel syndrome, type 9",False,True,True,,ABSTAIN,False,0.8212030529975891,0.8212030529975891
+dense,ORPHA:2229,Dilated cardiomyopathy-hypergonadotropic hypogonadism syndrome,False,True,True,,ABSTAIN,True,0.8187008500099182,0.8187008500099182
+dense,OMIM:618577,Neurodevelopmental disorder with structural brain anomalies and dysmorphic facies,False,True,False,OMIM:309620,Christianson syndrome,False,0.850307285785675,0.850307285785675
+dense,OMIM:602579,"Congenital disorder of glycosylation, type Ib",False,True,True,,ABSTAIN,True,0.821118950843811,0.821118950843811
+dense,ORPHA:309108,Pancreatic colipase deficiency,False,True,False,ORPHA:70593,Immunodeficiency due to selective anti-polysaccharide antibody deficiency,False,0.8251218795776367,0.8251218795776367
+dense,ORPHA:405,Familial hypocalciuric hypercalcemia,False,True,True,,ABSTAIN,True,0.8149459958076477,0.8149459958076477
+dense,OMIM:620731,Microphthalmia/coloboma 11,False,True,True,,ABSTAIN,True,0.8201216459274292,0.8201216459274292
+dense,OMIM:608810,"Myopathy, myofibrillar, 2, mfm2",False,True,True,,ABSTAIN,False,0.8374394774436951,0.8374394774436951
+dense,ORPHA:79095,Congenital bile acid synthesis defect type 4,False,True,True,,ABSTAIN,False,0.8274653553962708,0.8274653553962708
+dense,OMIM:274150,"Thrombotic thrombocytopenic purpura, hereditary",False,True,True,,ABSTAIN,True,0.8063808083534241,0.8063808083534241
+dense,ORPHA:34516,DNAJB6-related limb-girdle muscular dystrophy D1,False,True,True,,ABSTAIN,False,0.8303418755531311,0.8303418755531311
+dense,OMIM:129550,Ectodermal dysplasia with adrenal cyst,False,True,True,,ABSTAIN,True,0.8105404376983643,0.8105404376983643
+dense,OMIM:208155,Arthrogryposis multiplex congenita with whistling face,False,True,True,,ABSTAIN,True,0.7939684987068176,0.7939684987068176
+dense,ORPHA:210128,Urocanic aciduria,False,True,True,,ABSTAIN,False,0.8522555828094482,0.8522555828094482
+dense,OMIM:613115,"Neuropathy, hereditary sensory and autonomic, type IIB",False,True,True,,ABSTAIN,True,0.805616557598114,0.805616557598114
+dense,ORPHA:3282,Multifocal atrial tachycardia,False,True,True,,ABSTAIN,True,0.8171716332435608,0.8171716332435608
+dense,ORPHA:28378,Tyrosinemia type 2,False,True,True,,ABSTAIN,False,0.8806118369102478,0.8806118369102478
+dense,OMIM:620947,Spinocerebellar ataxia 51,False,True,True,,ABSTAIN,True,0.815280020236969,0.815280020236969

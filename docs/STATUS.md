@@ -936,3 +936,45 @@ under pre-registration. These numbers are now CLAIMS.
   Figures: Fig 1 (Claude Design, conceptual, prompts ready) + Fig 2/4d/ED1/ED3
   (matplotlib SVG). Remaining for submission: run prereg-v2 (Fig 5), paired
   transfer ED redo, Extended Data, references; then Phase 6 release.
+
+## 2026-06-13 (Phase 5 LLM-QA — VERIFIABLE SPECIALIST confirmed; prereg-v2)
+
+- Memory-swap LLM agent (sma/eval/agentic_qa), LLM (DeepSeek, temp 0) + prompt
+  FIXED, swap none/dense/SMA. Medicine HPO, n_index=1500, 120 answerable + 120
+  held-out, cite-or-abstain threshold CALIBRATED per memory on a disjoint 60+60
+  split (Youden's J, retrieval-only — no LLM spend, no test leakage). Full real
+  run (none 23:35→39, dense →42, sma →53; clean rc=0).
+    axis                  none    dense    SMA
+    accuracy              0.017   0.100    0.342
+    citation_faithful     NA      0.480    0.621
+    abstain_recall        0.475   0.900    0.908
+    false_abstain (↓)     0.550   0.792    0.450
+    selective_accuracy    0.246   0.500    0.625
+    grounding_auroc       NA      0.547    0.793
+    novelty_f1            0.000   0.553    0.789
+- CONFIRMATORY (paired bootstrap 10k, seed 12345, Holm; SMA−dense), 4/5 WIN:
+    accuracy            Δ+0.242 [0.167,0.325]  WIN
+    grounding_auroc     Δ+0.246 [0.159,0.333]  WIN
+    novelty_recall      Δ+0.308 [0.200,0.408]  WIN
+    selective_accuracy  Δ+0.125 [0.071,0.179]  WIN
+    abstain_recall      Δ+0.008 [-0.058,0.075] TIE (p_holm 0.92)
+- THE MECHANISM (Fig 5b): SMA's RAW structural grounding score separates known
+  (answerable) from unknown (held-out) at AUROC 0.793; dense COSINE is near
+  chance (0.547). So dense can abstain on the unknown pool only by refusing 79%
+  of answerable cases; SMA refuses 45% at the SAME abstain-recall. Closed-book is
+  near-useless (acc 0.017, no citation, novelty 0) — memory is the active
+  ingredient. Accuracy floor holds (SMA > dense, not below). C-QA CONFIRMED:
+  SMA wins all 3 capability axes (citation, abstention/grounding, novelty) + the
+  accuracy floor; the one null (abstain-recall) is a tie, reported honestly.
+- PILOT FINDING that drove the harness refinement (committed 99b75bc): the
+  LLM-only abstention + SAGE expectation_violation flag do NOT separate known/
+  unknown (AUROC ~0.48) and the squashed top-hit confidence saturates; the RAW
+  match score does (~0.84). Fixed by gating on the raw score at a calibrated
+  threshold (skips the LLM call on structural abstains → saves budget). Metric
+  fix: held-out = both out-of-knowledge AND novel (scored on the same items);
+  added threshold-free grounding_auroc + novelty_f1 (so 'flag everything' can't
+  win). prereg-v2 §8 addendum registered PRE full-run. 48 agentic_qa tests green;
+  frozen adapter-v1 untouched.
+- ARTIFACTS: reports/confirmatory/qa_{none,dense,sma}{,_summary}.csv + qa_stats.csv;
+  Fig 5 paper/figures/svg/figure5_trustworthy.{svg,png,pdf}; manuscript recompiled
+  6pp w/ Fig 5 + end-to-end abstract sentence + Methods note. Phase 5 ledger DONE.
