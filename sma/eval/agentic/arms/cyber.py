@@ -15,7 +15,10 @@ from sma.ontology import load_attack_stix, mount
 
 ROOT = pathlib.Path(__file__).resolve().parents[4]
 STIX = ROOT / "data/raw/attack/enterprise-attack.json"
-MIN_TERMS = 7
+# Band matches the medicine arm: >=7 techniques to be non-trivial, <=30 to keep
+# structure-mapping cases tractable (prolific groups with 100+ techniques blow up
+# SME kernel enumeration). Excludes the most-documented groups; n reported.
+MIN_TERMS, MAX_TERMS = 7, 30
 
 
 def load():
@@ -41,5 +44,5 @@ def load():
             if s in groups and t in ext and ext[t] in graph.terms:
                 recs.setdefault(groups[s], set()).add(ext[t])
 
-    records = {g: ts for g, ts in recs.items() if len(ts) >= MIN_TERMS}
+    records = {g: ts for g, ts in recs.items() if MIN_TERMS <= len(ts) <= MAX_TERMS}
     return mounted, records
