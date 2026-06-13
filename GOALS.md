@@ -72,8 +72,9 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
       medicine +0.333 (p=2e-4), genomics/GO +0.156 (p=2e-4), finance/US-GAAP
       +0.167 (p=2e-4, ~2x best RAG), cyber/ATT&CK +0.073 (p=0.035). SMA best AURC
       + only-nonzero novelty F1 (~0.18) in every arm; pure RAG novelty = 0.
-- [~] Legal arm (patent->CPC, USPTO grant XML via Kaggle): leaner re-run in
-      progress (full run was pathologically slow over CPC's 254k phrase graph).
+- [x] Legal arm (patent->CPC, USPTO full run): SMA 0.941 vs best RAG 0.870 all-slice,
+      +0.064 p=0.002 WIN. 5/5 DOMAINS WIN. Honest: legal rare slice empty (CPC's
+      near-uniform IC -> no rare split), reported all-slice + flagged in Fig 2/Table 2.
 - [x] Real gold sourced for the 2 hard domains: finance = SEC filings -> US-GAAP
       concepts (FIBO is a schema w/ no instance corpus; honest note); legal =
       USPTO patent -> CPC codes. load_usgaap + arms/{legal,finance}.py.
