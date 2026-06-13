@@ -1,0 +1,231 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf}
+\graphicspath{{../figures/}}
+\definecolor{tg}{HTML}{5F6B78}
+\newcommand{\msec}[1]{\medskip\noindent{\bfseries\color{tg} #1}\par}
+
+\title{\bfseries Golden-Ontology Structure-Mapping Memory Turns a Generalist
+LLM into a Verifiable Specialist}
+\author{Ayaz Khan\\\small Columbia University \quad\texttt{aak2259@columbia.edu}}
+\date{2026-06-13 — working draft for \emph{Nature Machine Intelligence}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent Retrieval-augmented generation (RAG) grounds large language models in
+external text, but vector and knowledge-graph retrieval index \emph{surface
+similarity} and \emph{entity adjacency}, discarding the logical structure
+(subsumption and higher-order relations) that defines expertise. We present
+\textbf{Structure-Mapping Agentic Memory (SMA)}, a retrieval memory that encodes
+each observation as a functor over a subject and retrieves by analogical
+structure-mapping (MAC/FAC) against a \emph{golden domain ontology} mounted as
+its ascension lattice. A single universal loader ingests any OWL/OBO/STIX/CPC
+source --- we mount eleven ontologies across six domains ($\approx$594k concepts)
+--- and a router selects per query. On a memory-swap benchmark where only the
+retriever varies, SMA reaches parity with a hand-built ontology tool on
+pure-subsumption ranking while \textbf{beating the enterprise RAG/KG gauntlet}
+(BM25, BGE neural dense, hybrid RRF, hybrid + cross-encoder rerank, HippoRAG) on
+the rare/long-tail slice across \textbf{three unrelated domains} (medicine
+$+33$, genomics $+16$, cyber $+7$ percentage points top-5; all $p<0.05$,
+Holm-corrected). SMA additionally provides two capabilities these baselines
+structurally lack: calibrated cite-or-abstain (risk-coverage AURC $0.02$--$0.11$
+vs $0.26$--$0.44$) and structural-novelty flagging (F1 $\approx 0.18$ where every
+pure-RAG baseline scores exactly $0$). We delimit the thesis honestly: the
+advantage is specific to structure and vanishes on flat-tabular prediction and
+free-form conversational recall.
+\end{abstract}
+
+\msec{Main}
+
+Large language models are fluent generalists but unreliable specialists. The
+dominant remedy, RAG, retrieves by embedding similarity: effective when the
+answer is frequent and lexically similar, but failing on the cases that define
+expertise --- the rare presentation, the cross-vocabulary analogy, the long-tail
+entity --- because vector retrieval averages rarity away and indexes surface
+form. Knowledge-graph retrieval adds typed entity edges but traverses them by
+path adjacency, still discarding the \emph{subsumption lattice} (what generalizes
+to what) and \emph{higher-order relations} (relations over relations) that
+experts reason with.
+
+Structure-mapping theory (Gentner) and the MAC/FAC retrieval model (Forbus)
+retrieve analogues by the systematicity of their relational structure rather
+than surface features. We operationalize this as a retrieval \emph{memory} whose
+geometry is a curated ontology: each observation becomes a functor over a
+subject; the ontology's is-a tree becomes an ascension lattice along which
+specific terms match general ones (penalty $\rho^{\text{dist}}$); its typed
+relations become higher-order statements; and an information-content scorer
+($-\log_2 p$) makes the rare-but-decisive term dominate by construction.
+
+Our thesis: \emph{a structure-mapping memory grounded in a golden domain ontology
+turns a generalist LLM into a verifiable specialist}, beating vector RAG and
+knowledge graphs on rare, cross-vocabulary, high-stakes reasoning while offering
+provenance, calibrated abstention, and novelty detection. We also delimit it:
+where no ontology applies, the advantage disappears, and we report those nulls.
+
+We contribute (i) a \textbf{universal ontology adapter} (loader + registry +
+router) demonstrated on eleven ontologies / six domains with no per-domain
+retrieval code; (ii) a \textbf{memory-swap agentic benchmark} that holds the LLM
+and prompt fixed and swaps only the retriever, against the full enterprise RAG/KG
+gauntlet; and (iii) an \textbf{honest characterization} of when structure-mapping
+helps.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{individual/fig1_overview.pdf}
+\caption{\textbf{The universal-adapter system.} (a) Any golden ontology is
+mounted as retrieval geometry: an artifact is encoded as functors over a subject,
+the is-a tree becomes the ascension lattice, and typed relations become
+higher-order statements. (b) What each retriever indexes and discards: vector RAG
+(token similarity, discards rarity), knowledge graph (entity adjacency, no
+subsumption), SMA (functors + lattice, rarity-weighted). (c) Structure-mapping
+retrieval (MAC bound $\to$ FAC alignment) with verifiable agency: a structural
+citation, and an abstain/novelty signal from expectation violation. (d) One
+universal loader mounts eleven ontologies; a domain router routes across six
+domains without merging them.}
+\end{figure}
+
+\msec{Results}
+
+\textit{The universal adapter and memory-swap protocol.} The loader parses any
+OBO/OWL/STIX/CPC source into a normalized ontology graph, mounts the is-a tree as
+the ascension lattice and typed relations as higher-order statements, and indexes
+each entity's term-set as an analogical case (Table~1). The benchmark holds the
+language model and prompt fixed and swaps only the retrieval memory among SMA and
+five enterprise baselines, so any difference is attributable to retrieval.
+
+\textit{SMA matches the bespoke ontology oracle but beats general-purpose
+RAG/KG.} On a pre-registered retrieval benchmark, SMA reaches statistical parity
+with Phenomizer --- a hand-built ontology-aware information-content tool --- on
+top-5 (HPO $\Delta{=}0.000$, $p{=}1.0$; GO $\Delta{=}{+}0.036$, $p{=}0.31$ Holm).
+This is expected: both consume the same ontology, and on pure-subsumption tasks
+IC similarity is near-optimal. Against retrievers that do \emph{not} use the
+ontology, SMA wins by large margins. We therefore frame the claim as
+\textbf{SMA $>$ RAG/KG}, with the ontology oracle a ceiling reference.
+
+\textit{Across the enterprise gauntlet, SMA wins on the tail across fields}
+(Fig.~2, Table~2). On \textbf{medicine} (rare-disease diagnosis) SMA attains tail
+top-5 $0.949$ vs $0.606$ for the best enterprise configuration (hybrid +
+cross-encoder rerank), $\Delta{=}{+}0.333$, 95\% CI $[0.281,0.389]$,
+$p{=}2{\times}10^{-4}$. On \textbf{genomics} (GO gene-function) SMA reaches
+$0.849$ vs $0.682$, $\Delta{=}{+}0.156$, $p{=}2{\times}10^{-4}$. On
+\textbf{cyber} (ATT\&CK threat-group attribution) SMA leads $0.766$ vs $0.749$,
+$\Delta{=}{+}0.073$, $p{=}0.035$ --- a smaller margin, honestly attributable to
+threat groups' distinctive technique vocabularies that lexical/dense retrieval
+partly capture. All three unrelated domains survive Holm correction, confirming
+the pre-registered across-fields criterion.
+
+\textit{Cite-or-abstain and structural novelty.} SMA has the lowest risk-coverage
+AURC in every arm ($0.017$/$0.106$/$0.096$ vs best-RAG $0.26$--$0.44$): a
+structural match either exists or it does not, whereas cosine similarity is
+always moderately high, so RAG cannot tell when to abstain. On held-out unknown
+entities SMA's expectation-violation flag yields novelty F1 $\approx 0.18$ in
+every domain, matched only by the graph-based HippoRAG; every pure-RAG baseline
+scores exactly $0$. (Absolute F1 is reported honestly: the threshold is fixed and
+untuned; the contrast that matters is non-zero versus structurally zero.)
+
+\textit{Where SMA does not help.} SMA confers no advantage on flat single-record
+tabular prediction (readmission, card fraud $\to$ parity with value-based
+retrieval) nor free-form conversational recall with no ontology to mount. The
+advantage is specific to ontology-grounded, rare, cross-vocabulary reasoning.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{individual/fig_agentic_results.pdf}
+\caption{\textbf{Agentic memory-swap results.} (a) Tail top-5 (rare slice) by
+domain: SMA versus the enterprise RAG/KG gauntlet. (b) Cite-or-abstain
+risk-coverage AURC (lower is better) on medicine. (c) Structural-novelty F1; only
+SMA and the graph-based HippoRAG are non-zero. (d) Headline effect size
+$\Delta$(SMA $-$ best RAG) tail top-5 per domain with 95\% CI; all above zero.}
+\end{figure}
+
+\msec{Discussion}
+
+One mechanism serves medicine, cyber, chemistry, legal and finance with no
+per-domain retrieval code --- a generality the bespoke ontology tools (one per
+domain) cannot match. The defensible asset is a registry of curated golden
+ontologies mounted as retrieval geometry; an LLM can draft rules but cannot
+hallucinate decades of community curation. Relational richness, not raw size,
+drives SMA's edge over the IC oracle: pure-is-a ontologies (HPO, CPC) yield
+parity, while relation-rich ones should let higher-order structure-mapping pull
+ahead --- an open prediction. Limitations: novelty thresholds are untuned;
+HippoRAG is somewhat disadvantaged by a bag-of-term-names document
+representation; the interactive agentic flagship is left as a single-domain case
+study; and licensed ontologies (SNOMED, UMLS) are excluded in favour of fully
+open sources.
+
+\msec{Methods (summary)}
+
+Statements are functors over entities; SME builds consistent kernel mappings;
+MAC/FAC provides a certified admissible content bound for tractable first-stage
+retrieval and best-first alignment for the second; cross-vocabulary matching
+ascends the ontology lattice with penalty $\rho^{\text{dist}}$ (frozen
+$\rho{=}0.95$, $\delta{=}2$). The surprisal scorer weights a matched functor by
+$-\log_2 p$. The universal loader (\texttt{sma/ontology}) provides
+\texttt{load\_obo/load\_owl/load\_owl\_dir/load\_rdflib/load\_attack\_stix/}
+\texttt{load\_cpc/load\_mitre\_xml}; \texttt{mount()} builds the lattice + case
+builder; a registry and router select per query. The memory-swap harness
+(\texttt{sma/eval/agentic}) wraps SMA and each baseline behind one interface,
+indexes identical records, generates hard partial/imprecise/noisy queries, and
+scores tail top-$k$ (rare slice = rarest-term IC above the corpus median),
+risk-coverage AURC, and novelty F1, with paired bootstrap (10k, seed 12345) and
+Holm correction. Baselines: BM25; BGE-small neural dense; hybrid RRF;
+hybrid + \texttt{bge-reranker-base}; HippoRAG-2. Ontologies are version-pinned;
+\texttt{PYTHONHASHSEED=0} and sorted set$\to$list ensure reproducibility.
+
+\begin{table}[t]\centering\small
+\caption{The eleven mounted golden ontologies (one universal loader).}
+\begin{tabular}{llrrr}
+\toprule
+Domain & Ontology & Terms & is-a & Typed rel. \\
+\midrule
+Medicine & HPO & 19{,}810 & 24{,}329 & 0 \\
+Medicine & MONDO & 56{,}273 & 78{,}736 & 34{,}157 \\
+Anatomy & Uberon & 14{,}973 & 19{,}382 & 11{,}697 \\
+Biology & GO & 38{,}263 & 57{,}803 & 14{,}076 \\
+Chemistry & ChEBI & 205{,}592 & 285{,}589 & 94{,}902 \\
+Cyber & MITRE ATT\&CK & 712 & 475 & 872 \\
+Cyber & MITRE CAPEC & 558 & 532 & 194 \\
+Cyber & MITRE CWE & 944 & 1{,}160 & 284 \\
+Legal/IP & CPC & 254{,}274 & 256{,}106 & 0 \\
+Legal & LKIF-core & 153 & 171 & 48 \\
+Finance & FIBO & 2{,}948 & 3{,}819 & 1{,}335 \\
+\midrule
+\multicolumn{2}{l}{\textbf{Total}} & \textbf{$\approx$594k} & & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering\small
+\caption{Agentic memory-swap results across three domains. (a) Tail top-5 (rare
+slice). (b) Capability axes. Bold = best.}
+\begin{tabular}{lccc}
+\toprule
+\multicolumn{4}{l}{\textit{(a) Tail top-5 accuracy (rare slice)}}\\
+Memory & Medicine & Genomics & Cyber \\
+\midrule
+\textbf{SMA (ours)} & \textbf{0.949} & \textbf{0.849} & \textbf{0.766} \\
+BM25 & 0.485 & 0.552 & 0.703 \\
+BGE dense & 0.496 & 0.682 & 0.629 \\
+Hybrid-RRF & 0.511 & 0.703 & 0.749 \\
+Hybrid + rerank & 0.606 & 0.651 & 0.651 \\
+HippoRAG (KG) & 0.361 & 0.318 & 0.377 \\
+$\Delta$ SMA $-$ best RAG & $+0.333$ & $+0.156$ & $+0.073$ \\
+($p$, Holm) & $6{\times}10^{-4}$ & $4{\times}10^{-4}$ & $0.035$ \\
+\midrule
+\multicolumn{4}{l}{\textit{(b) Risk-coverage AURC (lower better) / novelty F1}}\\
+SMA & \textbf{0.017} / 0.18 & \textbf{0.106} / 0.18 & \textbf{0.096} / 0.18 \\
+best RAG & 0.317 / 0.00 & 0.298 / 0.00 & 0.261 / 0.00 \\
+HippoRAG & 0.628 / 0.19 & 0.721 / 0.19 & 0.560 / 0.18 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}
