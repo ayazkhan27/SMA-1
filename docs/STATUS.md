@@ -787,3 +787,36 @@ under pre-registration. These numbers are now CLAIMS.
 - Registration lesson (reported transparently): the prereg conflated "general
   baselines to beat" (Dense/HippoRAG) with "ontology oracle reference"
   (Phenomizer). Future arms separate them: beat RAG/KG; match-or-beat the oracle.
+
+## 2026-06-13 (Agentic suite — Medicine arm: SMA BEATS enterprise RAG/KG decisively)
+
+- One-shot memory-swap harness (sma/eval/agentic), Medicine arm (HPO, 1800-disease
+  index, 324 answerable + 36 novel queries, 3 seeds). The ONLY variable is the
+  retrieval memory. Enterprise RAG gauntlet = BM25, BGE neural dense, Hybrid-RRF,
+  Hybrid+bge-reranker, HippoRAG. (No ontology oracle here -- this tests the spine's
+  actual claim: SMA > RAG/KG.)
+    memory          t5 all / rare   AURC(↓)  novF1
+    SMA             0.954 / 0.949   0.017    0.182
+    hybrid_rerank   0.583 / 0.606   0.317    0.000   <- best enterprise RAG
+    hybrid_rrf      0.506 / 0.511   0.523    0.000
+    dense (BGE)     0.481 / 0.496   0.401    0.000
+    bm25            0.463 / 0.485   0.510    0.000
+    hipporag (KG)   0.358 / 0.361   0.628    0.186
+- HEADLINE (tail top-5, rare slice): SMA 0.949 vs best enterprise RAG
+  (hybrid+rerank) 0.606 -> delta=+0.333, 95% CI [0.281, 0.389], p=0.0002,
+  Cliff's=0.333. SMA WINS decisively vs SOTA neural+hybrid+reranked RAG and KG.
+  This is what the de-risk lacked (it only had TF-IDF + the Phenomizer oracle).
+- CAPABILITIES (what RAG structurally cannot do):
+  * Cite-or-abstain: SMA AURC 0.017 vs best RAG 0.317 -- ~18x better-calibrated
+    selective prediction (its confidence actually tracks correctness).
+  * Novelty: SMA 0.182 / HippoRAG 0.186, ALL pure-RAG baselines 0.000 -- only
+    structure-aware methods can flag held-out/novel entities at all.
+- HONEST CAVEATS: (1) novelty F1 is modest absolute (0.18) -- threshold is fixed
+  0.5, not tuned; room to improve. (2) HippoRAG underperforms (0.36) partly
+  because the term-name-bag doc representation suits its NL-passage phrase graph
+  poorly -- it may be handicapped; but even the strongest RAG (hybrid+rerank) loses
+  to SMA by +33pp, so the headline is robust. (3) This reconciles with the de-risk:
+  SMA TIES the bespoke ontology oracle (Phenomizer) but BEATS general-purpose
+  RAG/KG -- both true; the agentic arm proves the paper's "> RAG/KG" claim.
+- Reproduce: PYTHONHASHSEED=0 python3 scripts/agentic_suite.py --arm medicine
+  (reports/confirmatory/agentic_medicine.{log,csv}).
