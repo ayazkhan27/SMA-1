@@ -13,6 +13,7 @@ from __future__ import annotations
 
 from .attack import load_attack_stix
 from .cpc import load_cpc
+from .mitre_xml import load_capec, load_cwe, load_mitre_xml
 from .graph import OntologyGraph, Term
 from .loader import fid, load_obo, load_ontology, load_owl, load_owl_dir
 from .mount import MountedOntology, mount
@@ -34,4 +35,7 @@ __all__ = [
     "DomainRouter",
     "load_attack_stix",
     "load_cpc",
+    "load_capec",
+    "load_cwe",
+    "load_mitre_xml",
 ]

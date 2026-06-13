@@ -6,14 +6,16 @@
     {"name": "uberon", "domain": "anatomy",   "prefix": "UBERON:", "fmt": "obo",     "path": "data/raw/obo/uberon-basic.obo",  "purl": "http://purl.obolibrary.org/obo/uberon/basic.obo",       "note": "anatomy; part_of/develops_from-rich"},
     {"name": "go",     "domain": "biology",   "prefix": "GO:",     "fmt": "obo",     "path": "data/raw/obo/go-basic.obo",      "purl": "http://purl.obolibrary.org/obo/go/go-basic.obo",        "note": "gene function; RO typed relations"},
     {"name": "chebi",  "domain": "chemistry", "prefix": "CHEBI:",  "fmt": "obo",     "path": "data/raw/obo/chebi_lite.obo",    "purl": "http://purl.obolibrary.org/obo/chebi/chebi_lite.obo",   "note": "chemical entities; discovery domain"},
-    {"name": "attack", "domain": "cyber",     "prefix": "T",       "fmt": "stix",    "path": "data/raw/attack/enterprise-attack.json", "purl": "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json", "note": "MITRE ATT&CK techniques/tactics; cyber arm"},
+    {"name": "attack", "domain": "cyber",     "prefix": "T",       "fmt": "stix",    "path": "data/raw/attack/enterprise-attack.json", "purl": "https://raw.githubusercontent.com/mitre/cti/master/enterprise-attack/enterprise-attack.json", "note": "MITRE ATT&CK techniques/tactics; cyber arm primary"},
+    {"name": "capec",  "domain": "cyber",     "prefix": "CAPEC-",  "fmt": "capec",   "path": "data/raw/cyber/capec_latest.xml", "purl": "https://capec.mitre.org/data/xml/capec_latest.xml", "note": "MITRE CAPEC attack patterns (deep ChildOf is-a + CanPrecede/exploits->CWE); enriches ATT&CK"},
+    {"name": "cwe",    "domain": "cyber",     "prefix": "CWE-",    "fmt": "cwe",     "path": "data/raw/cyber/cwec_v4.20.xml", "purl": "https://cwe.mitre.org/data/xml/cwec_latest.xml.zip", "note": "MITRE CWE software weaknesses (deep ChildOf is-a); defender side of cyber arm"},
     {"name": "cpc",    "domain": "legal",     "prefix": "",        "fmt": "cpc",     "path": "data/raw/legal/cpc",             "purl": "https://www.cooperativepatentclassification.org/cpcSchemeAndDefinitions/bulk", "note": "Cooperative Patent Classification (~254k nodes, deep is-a); legal/IP arm primary ontology"},
     {"name": "lkif",   "domain": "legal",     "prefix": "",        "fmt": "owl_dir", "path": "data/raw/legal", "pattern": "*.owl",  "purl": "https://github.com/RinkeHoekstra/lkif-core",            "note": "LKIF-core legal upper ontology (153 concepts); supplements CPC"},
     {"name": "fibo",   "domain": "finance",   "prefix": "",        "fmt": "owl_dir", "path": "data/raw/finance/fibo", "pattern": "*.rdf", "purl": "https://github.com/edmcouncil/fibo", "note": "FIBO financial ontology modules (RDF/XML subset); finance arm (route by domain)"}
   ],
   "routing": {
     "medicine": ["hpo", "mondo", "uberon", "go"],
-    "cyber": ["attack"],
+    "cyber": ["attack", "capec", "cwe"],
     "legal": ["cpc", "lkif"],
     "finance": ["fibo"],
     "discovery": ["chebi", "go"]
