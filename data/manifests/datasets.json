@@ -86,7 +86,7 @@
         "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_oracle.json"
       },
       "longmemeval_s_cleaned.json": {
-        "md5": "FILL_ON_FIRST_FETCH",
+        "md5": "9b009af4084c6207e9d41aa0dcb6506c",
         "url": "https://huggingface.co/datasets/xiaowu0162/longmemeval-cleaned/resolve/main/longmemeval_s_cleaned.json"
       }
     },
