@@ -820,3 +820,26 @@ under pre-registration. These numbers are now CLAIMS.
   RAG/KG -- both true; the agentic arm proves the paper's "> RAG/KG" claim.
 - Reproduce: PYTHONHASHSEED=0 python3 scripts/agentic_suite.py --arm medicine
   (reports/confirmatory/agentic_medicine.{log,csv}).
+
+## 2026-06-13 (Agentic CYBER arm: SMA > RAG on the tail, marginal; dominates on capabilities)
+
+- ATT&CK threat-group attribution (82 groups w/ 7-30 techniques, gold from STIX
+  'uses'; 222 answerable + 24 novel queries, 3 seeds). Capped technique-sets to
+  <=30 (prolific 100+-technique groups blew up SME kernel enumeration -> 15min
+  timeout on the first run; honest scope note).
+    memory          t5 all/rare   AURC(↓)  novF1
+    SMA             0.811/0.766   0.096    0.178
+    hybrid_rrf      0.730/0.749   0.261    0.000   <- best enterprise RAG
+    bm25            0.644/0.703   0.296    0.000
+    hybrid_rerank   0.662/0.651   0.308    0.000
+    dense           0.631/0.629   0.288    0.000
+    hipporag        0.419/0.377   0.560    0.182
+- Tail top-5: SMA 0.766 vs best RAG 0.749 -> delta=+0.073, CI[0.008,0.142],
+  p=0.035, Cliff's=0.073 -> WIN, but MARGINAL (vs medicine +0.33). Honest read:
+  threat groups have distinctive technique vocabularies that lexical/dense
+  retrieval partly captures, so the rank gap narrows. SMA still dominates the
+  capability axes: AURC 0.096 (best; RAG 0.26-0.31) and novelty F1 0.178 vs 0.000
+  for all pure-RAG baselines.
+- C3 (across fields): medicine (+0.33, p=0.0002) + cyber (+0.07, p=0.035) = 2/2
+  unrelated domains with SMA > enterprise RAG on tail top-5, both surviving Holm.
+  Discovery (GO protein-function) in progress for a 3rd.

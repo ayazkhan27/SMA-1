@@ -1,0 +1,15 @@
+########## agentic arm: cyber ##########
+  82 entities loaded; assembling memories...
+
+===== AGENTIC SUITE [cyber] (n_all=222 n_rare=175 n_novel=24) =====
+memory          t1 all/rare     t5 all/rare     t10 all/rare    AURC    novF1   
+sma             0.640/0.571     0.811/0.766     0.919/0.903     0.096   0.178   
+bm25            0.360/0.411     0.644/0.703     0.775/0.823     0.296   0.000   
+dense           0.392/0.360     0.631/0.629     0.743/0.726     0.288   0.000   
+hybrid_rrf      0.432/0.463     0.730/0.749     0.833/0.840     0.261   0.000   
+hipporag        0.167/0.154     0.419/0.377     0.541/0.486     0.560   0.182   
+hybrid_rerank   0.378/0.360     0.662/0.651     0.788/0.794     0.308   0.000   
+
+primary: SMA vs best-RAG (hybrid_rrf) on tail top-5  delta=+0.0732 CI=[0.0081,0.1423] p=0.0346 cliffs=0.073  -> WIN
+
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/agentic_cyber.csv
