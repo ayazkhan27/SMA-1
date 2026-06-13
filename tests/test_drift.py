@@ -173,3 +173,12 @@ def test_staleness_rate():
     from sma.eval.drift_metrics import staleness_rate
     assert staleness_rate([1, 0, 0, 1], change_idx=1) == 2/3  # post-change: [0,0,1] -> 2 stale of 3
     assert staleness_rate([1], change_idx=1) == 0.0  # no post-change probes
+
+
+def test_zep_imports_or_skips():
+    import pytest
+    from sma.eval.memory_backends.zep_graphiti import ZepGraphiti, ZEP_AVAILABLE
+    if not ZEP_AVAILABLE:
+        pytest.skip("graphiti not installed; Zep baseline runs in its container")
+    b = ZepGraphiti(llm=None)
+    assert b.name == "zep-graphiti"

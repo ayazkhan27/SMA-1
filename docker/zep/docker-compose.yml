@@ -1,0 +1,6 @@
+services:
+  falkordb:
+    image: falkordb/falkordb:latest
+    ports: ["6379:6379", "3000:3000"]
+  # Graphiti runs in-process from the harness; FalkorDB is its graph store.
+  # Set SMA_DEEPSEEK_API_KEY + Graphiti LLM env so extraction uses DeepSeek.
