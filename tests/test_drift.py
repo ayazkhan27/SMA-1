@@ -159,10 +159,10 @@ def test_grader_exact_and_substring():
 
 def test_update_recovery_detects_recovery_point():
     from sma.eval.drift_metrics import update_recovery
-    # correctness per session after a change at change_idx=1; recovered (and stayed) at index 2
-    assert update_recovery([0, 0, 1, 1], change_idx=1) == 2  # sessions to recover
-    assert update_recovery([0, 0, 0, 0], change_idx=1) is None  # never recovers
-    assert update_recovery([0, 1, 0, 1], change_idx=1) == 3  # only stable from index 3
+    # delta convention: sessions AFTER change_idx until stable recovery (0 = at change)
+    assert update_recovery([0, 0, 1, 1], change_idx=1) == 1   # recovers at index 2 -> 1 after change
+    assert update_recovery([0, 0, 0, 0], change_idx=1) is None
+    assert update_recovery([0, 1, 0, 1], change_idx=1) == 2   # stable from index 3 -> 2 after change
 
 def test_detection_delay():
     from sma.eval.drift_metrics import detection_delay

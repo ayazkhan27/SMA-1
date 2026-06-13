@@ -3,11 +3,10 @@ from __future__ import annotations
 
 
 def update_recovery(correctness: list[int], change_idx: int) -> int | None:
-    """Sessions after the change until the memory returns the NEW value and
-    keeps it. None if it never recovers within the window."""
+    """Sessions after the change until the memory returns the NEW value and keeps it (0 = recovered in the change session). None if it never recovers."""
     for i in range(change_idx, len(correctness)):
         if correctness[i] == 1 and all(c == 1 for c in correctness[i:]):
-            return i - change_idx + 1
+            return i - change_idx
     return None
 
 
