@@ -124,3 +124,33 @@ RAG sees the same case". Left: the same three-symptom case; arrow "embed" → a
 **one solid gray dot** lost among them. Caption (red-grey italic): "structure and
 rarity discarded — no relations, no subsumption, no rare-feature emphasis." Keep
 the inset clearly subordinate (smaller) to the pipeline above.
+
+---
+
+## Designer Q&A — binding refinements (apply these)
+1. **Single takeaway (build hierarchy around this):** "SMA matches the logical
+   *structure* of a case (relations + hierarchy + rare feature) that vector RAG
+   collapses into one point and loses." The dominant visual is the **structured-
+   graph (SMA) vs point-in-cloud (RAG) contrast**; all else subordinate.
+2. **Reusable system:** this is panel a of Figure 1, but build the structured-graph
+   glyph, the RAG dot-cloud glyph, and the cite/abstain/novelty icons as **reusable
+   components** (they recur in Figure 3).
+3. **MAC → FAC = two light sub-steps:** MAC = a fast *filter funnel* (many → short
+   list); FAC = *careful alignment* (the dashed correspondence lines) on the
+   survivors. Labeled, modest size.
+4. **Push the rare feature hard:** the rare phenotype is visibly heavier (thicker
+   teal ring, slightly larger, a "−log p · high weight" tag); in the RAG inset show
+   that SAME feature fading into the average ("rarity averaged away").
+5. **No emoji — custom flat icons:** Cite = provenance *receipt* (doc + check + 2–3
+   evidence lines); Abstain = *gauge* with needle below a threshold ("hold");
+   Novelty = *starburst/flag* ("new — escalate"). One-word labels.
+6. **RAG contrast = prominent counterpoint, visually subordinate:** own grey band,
+   ~25–30% area, desaturated so SMA reads first; keep the "✗ cannot cite / abstain /
+   flag novelty" punchline.
+7. **Single worked example** (clinical/HPO); breadth lives in Figure 1c.
+8. **Real ontology IDs on anchor nodes:** e.g. "Seizure (HP:0001250)" on the key /
+   rare nodes; short names elsewhere.
+9. **Typeface:** Helvetica/Arial, **embedded/outlined** (never a system serif/emoji
+   fallback), final 5–7 pt.
+10. **Palette:** keep the teal set but ensure colour-blind-safe (hue+lightness
+   separation; never red-alone for "wrong" — always pair red with the ✗ shape).
