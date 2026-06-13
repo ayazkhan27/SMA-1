@@ -53,7 +53,7 @@ ARMS = {
 }
 
 
-def main(which):
+def main(which, n_index=2000, n_query=120):
     keys = list(ARMS) if which == "all" else [which]
     results = []
     for k in keys:
@@ -62,31 +62,36 @@ def main(which):
         mo = mount(load_obo(str(ROOT / obo), name=name))
         records = loader()
         print(f"  {len(records)} entities loaded; mounting + running...", flush=True)
-        results.append(run_arm(label, mo, records))
+        results.append(run_arm(label, mo, records, n_index=n_index, n_query=n_query))
 
-    pvals = {r["arm"]: r["p_value"] for r in results}
-    holm = holm_bonferroni(pvals)
-    print("\n===== SUITE SUMMARY (Holm across arms) =====")
-    print(f"{'arm':<24}{'SMA t5':<9}{'best base t5':<14}{'delta':<10}{'p_holm':<9}{'verdict'}")
+    # Holm across arms, on each slice's primary p-value separately
     rows = []
-    for r in results:
-        ph = holm[r["arm"]]
-        base_t5 = r[r["best_baseline"]]["t5"]
-        win = "WIN" if (ph < 0.05 and r["primary_delta_t5"] > 0) else "parity/null"
-        print(f"{r['arm']:<24}{r['sma']['t5']:<9.3f}{base_t5:<14.3f}"
-              f"{r['primary_delta_t5']:<+10.4f}{ph:<9.4f}{win}")
-        rows.append({
-            "arm": r["arm"], "n": r["n_queries"], "best_baseline": r["best_baseline"],
-            "sma_t1": f"{r['sma']['t1']:.4f}", "sma_t5": f"{r['sma']['t5']:.4f}",
-            "sma_t10": f"{r['sma']['t10']:.4f}", "sma_mrr": f"{r['sma_mrr']:.4f}",
-            "base_t5": f"{base_t5:.4f}", "delta_t5": f"{r['primary_delta_t5']:.4f}",
-            "ci_low": f"{r['ci_low']:.4f}", "ci_high": f"{r['ci_high']:.4f}",
-            "p_value": f"{r['p_value']:.4f}", "p_holm": f"{ph:.4f}",
-            "cliffs": f"{r['cliffs']:.4f}", "verdict": win,
-        })
-    confirmed = sum(1 for x in rows if x["verdict"] == "WIN")
-    print(f"\nC3 (across fields): {confirmed} arm(s) confirm C1. "
-          f"{'CONFIRMED' if confirmed >= 2 else 'NOT YET (need >=2)'}")
+    for slice_name in ("all", "rare"):
+        pvals = {r["arm"]: r["slices"][slice_name]["p_value"] for r in results}
+        holm = holm_bonferroni(pvals)
+        print(f"\n===== SUITE SUMMARY [{slice_name} slice] (Holm across arms) =====")
+        print(f"{'arm':<24}{'SMA t5':<9}{'best(base)':<18}{'delta':<10}{'p_holm':<9}{'verdict'}")
+        for r in results:
+            s = r["slices"][slice_name]; ph = holm[r["arm"]]
+            base_t5 = s["metrics"][s["best_baseline"]]["t5"]
+            blabel = s["best_baseline"]
+            win = "WIN" if (ph < 0.05 and s["delta_t5"] > 0) else "parity/null"
+            print(f"{r['arm']:<24}{s['metrics']['sma']['t5']:<9.3f}"
+                  f"{f'{base_t5:.3f}({blabel})':<18}{s['delta_t5']:<+10.4f}{ph:<9.4f}{win}")
+            rows.append({
+                "arm": r["arm"], "slice": slice_name, "n": s["n"], "best_baseline": blabel,
+                "sma_t1": f"{s['metrics']['sma']['t1']:.4f}", "sma_t5": f"{s['metrics']['sma']['t5']:.4f}",
+                "sma_t10": f"{s['metrics']['sma']['t10']:.4f}",
+                "dense_t5": f"{s['metrics']['dense']['t5']:.4f}", "hippo_t5": f"{s['metrics']['hippo']['t5']:.4f}",
+                "phen_t5": f"{s['metrics']['phen']['t5']:.4f}", "jac_t5": f"{s['metrics']['jac']['t5']:.4f}",
+                "base_t5": f"{base_t5:.4f}", "delta_t5": f"{s['delta_t5']:.4f}",
+                "ci_low": f"{s['ci_low']:.4f}", "ci_high": f"{s['ci_high']:.4f}",
+                "p_value": f"{s['p_value']:.4f}", "p_holm": f"{ph:.4f}",
+                "cliffs": f"{s['cliffs']:.4f}", "verdict": win,
+            })
+        confirmed = sum(1 for r in results if holm[r["arm"]] < 0.05 and r["slices"][slice_name]["delta_t5"] > 0)
+        print(f"  C3 [{slice_name}]: {confirmed} arm(s) confirm C1 vs REAL baselines. "
+              f"{'CONFIRMED' if confirmed >= 2 else 'NOT YET (need >=2)'}")
     OUT.mkdir(parents=True, exist_ok=True)
     with (OUT / "ontology_suite.csv").open("w", newline="") as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows[0])); w.writeheader(); w.writerows(rows)
