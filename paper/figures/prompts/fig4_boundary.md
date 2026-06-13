@@ -73,6 +73,42 @@ genomics `#3E8E5A`, cyber `#4A6F8A`, legal `#7A5DA8`, finance `#C68A2E`.
 
 ---
 
+## DESIGN DIRECTIVES — read before drawing (these answer, in advance, the questions you'd otherwise ask)
+
+- **Lead with ONE idea.** Each figure below states its single takeaway. Build the
+  visual hierarchy so that one idea dominates and everything else is subordinate.
+- **Show the mechanism literally, not just a label.** Where a step has a *decision
+  rule*, draw the rule — e.g. abstain = a gauge with a threshold tick τ, the needle
+  *below* it, and the consequence "score < τ → refuse"; novelty = the query
+  *failing to align with anything* in the store (no correspondence lines, "∅ no
+  match") → flag. A vague glyph is not enough.
+- **Name specifics; ground in real artefacts.** Use real ontology identifiers
+  ("Seizure (HP:0001250)"), real ontology/format/domain names, and concrete
+  outputs (provenance = *which* stored case + *which* features justified the match).
+  Authenticity matters — the science is about real, expert-curated golden ontologies.
+- **Make contrast show FAILURE.** When contrasting SMA with vector RAG, show RAG
+  returning a concrete *wrong* answer (confident + incorrect), not just a fuzzy
+  cloud — the failure is the punch. Always pair red with a ✗ shape (colour-blind-safe).
+- **Scaffold reading order.** Add light numbered step markers (1→2→3→…) or a thin
+  directional spine so a non-specialist parses the flow at a glance. Subtle, never heavy.
+- **Reusable system.** These are panels of one multi-figure paper sharing a single
+  visual language. Design the recurring glyphs — structured-graph, RAG dot-cloud,
+  the cite/abstain/novelty trust icons, the domain badges — as reusable components,
+  identical across figures.
+- **No emoji.** Custom flat single-colour line icons only; one-word labels.
+- **Typeface & palette.** Helvetica/Arial, **embedded/outlined** (never a serif or
+  emoji system fallback), 5–7 pt at final print size. Keep the teal semantic palette;
+  ensure colour-blind-safe (separation by both hue *and* lightness).
+- **Deliverable & true size.** Output an editable **SVG** (live/embedded text) + a
+  high-res **PDF**. Design at TRUE print size: a full-width Nature figure ≈ **180 mm**
+  wide (single-column ≈ 88 mm). Set the artboard so body text is 5–7 pt *at that
+  width* — do not design oversized and shrink.
+- **Nature MI standard.** Flat vector, lettered panels, information-dense but
+  uncluttered, generous whitespace; communicate a mechanism at a glance; long
+  explanation belongs in the caption, not the artwork.
+
+---
+
 ## What this panel must convey
 **Honesty / scope.** SMA's advantage is *specific to structure*. This schematic
 contrasts two faces of the SAME domain — credit-card fraud — to define when SMA wins
@@ -108,3 +144,17 @@ a rare/novel *structure* — SMA's home; embeddings/classifiers miss it."
 Between the halves, a small centered banner: **"define the tail = rare/novel
 *structure*, not statistical rarity."** Keep both halves visually balanced; the left
 deliberately flat/grey, the right relational/coloured.
+
+## Figure-specific sharpenings (apply with the directives)
+**Single takeaway:** *SMA's advantage is **structural, not statistical** — it wins
+where decisive structure exists; flat-tabular fraud is the honest null, and we say so.*
+- **Left (flat-tabular fraud → null):** show a literal transaction **row of ~6 numeric
+  cells**; arrow → **two equal-height bars** (SMA = value-based model) with a grey "="
+  and "no structure to exploit → SMA = baseline (reported null)". Deliberately flat/grey.
+- **Right (structural/typology fraud → win):** show the same fraud as a **graph**
+  (account→device→merchant→counterparty, labelled edges) tagged "synthetic-identity
+  chain"; arrow → SMA retrieves the matching rare typology (teal ✓) **and** the SAME
+  novelty starburst as Figs A/3 — "⚑ novel typology — escalate" — for an unseen pattern.
+- Centre banner: **"the tail SMA owns = rare/novel *structure*, not statistical rarity."**
+Balance the two halves; left muted/grey, right relational/coloured. Reuse the
+structured-graph glyph and the novelty icon from Figure A.

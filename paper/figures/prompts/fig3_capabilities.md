@@ -73,6 +73,42 @@ genomics `#3E8E5A`, cyber `#4A6F8A`, legal `#7A5DA8`, finance `#C68A2E`.
 
 ---
 
+## DESIGN DIRECTIVES — read before drawing (these answer, in advance, the questions you'd otherwise ask)
+
+- **Lead with ONE idea.** Each figure below states its single takeaway. Build the
+  visual hierarchy so that one idea dominates and everything else is subordinate.
+- **Show the mechanism literally, not just a label.** Where a step has a *decision
+  rule*, draw the rule — e.g. abstain = a gauge with a threshold tick τ, the needle
+  *below* it, and the consequence "score < τ → refuse"; novelty = the query
+  *failing to align with anything* in the store (no correspondence lines, "∅ no
+  match") → flag. A vague glyph is not enough.
+- **Name specifics; ground in real artefacts.** Use real ontology identifiers
+  ("Seizure (HP:0001250)"), real ontology/format/domain names, and concrete
+  outputs (provenance = *which* stored case + *which* features justified the match).
+  Authenticity matters — the science is about real, expert-curated golden ontologies.
+- **Make contrast show FAILURE.** When contrasting SMA with vector RAG, show RAG
+  returning a concrete *wrong* answer (confident + incorrect), not just a fuzzy
+  cloud — the failure is the punch. Always pair red with a ✗ shape (colour-blind-safe).
+- **Scaffold reading order.** Add light numbered step markers (1→2→3→…) or a thin
+  directional spine so a non-specialist parses the flow at a glance. Subtle, never heavy.
+- **Reusable system.** These are panels of one multi-figure paper sharing a single
+  visual language. Design the recurring glyphs — structured-graph, RAG dot-cloud,
+  the cite/abstain/novelty trust icons, the domain badges — as reusable components,
+  identical across figures.
+- **No emoji.** Custom flat single-colour line icons only; one-word labels.
+- **Typeface & palette.** Helvetica/Arial, **embedded/outlined** (never a serif or
+  emoji system fallback), 5–7 pt at final print size. Keep the teal semantic palette;
+  ensure colour-blind-safe (separation by both hue *and* lightness).
+- **Deliverable & true size.** Output an editable **SVG** (live/embedded text) + a
+  high-res **PDF**. Design at TRUE print size: a full-width Nature figure ≈ **180 mm**
+  wide (single-column ≈ 88 mm). Set the artboard so body text is 5–7 pt *at that
+  width* — do not design oversized and shrink.
+- **Nature MI standard.** Flat vector, lettered panels, information-dense but
+  uncluttered, generous whitespace; communicate a mechanism at a glance; long
+  explanation belongs in the caption, not the artwork.
+
+---
+
 ## What this panel must convey
 This figure makes the abstract capabilities **concrete** with three side-by-side
 mini-scenarios, each comparing **SMA (left) vs vector RAG (right)** on the *same*
@@ -110,3 +146,18 @@ nearest cluster → grey chip "Mislabeled as nearest known class", red ✗.
 Keep each vignette compact and schematic; consistent iconography across rows
 (structural-graph glyph for SMA, single-dot-in-cloud for RAG). This is the
 "verifiable specialist vs confident black box" figure.
+
+## Figure-specific sharpenings (apply with the directives)
+**Single takeaway:** *SMA can cite, abstain, and flag-novelty — three things vector
+RAG architecturally cannot — demonstrated on the same inputs.*
+- **Row a (cite):** SMA shows a **named provenance receipt** — "✓ matched Case #214
+  (rare disease X); justified by Seizure (HP:0001250), Ataxia (HP:0001251)". RAG
+  returns "<common disease> ✗" with only "similarity 0.71 — no justification".
+- **Row b (abstain):** SMA = a gauge with a **threshold tick τ, needle below it**,
+  and "best alignment 0.31 < τ → **abstain (no answer)**". RAG = a confident **wrong**
+  answer (red ✗), note "cosine always returns a neighbour".
+- **Row c (novelty):** SMA = the query **fails to align with anything** in the store
+  ("∅ no aligned case") → **starburst "novel — escalate"**. RAG = snaps to the nearest
+  known class → "mislabeled as nearest known ✗".
+Use the SAME cite/abstain/novelty icons and the SAME structured-graph + dot-cloud
+glyphs as Figure A (reusable system). Pair every red with a ✗ shape.
