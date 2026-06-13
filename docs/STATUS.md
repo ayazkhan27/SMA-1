@@ -607,3 +607,21 @@ under pre-registration. These numbers are now CLAIMS.
 - Net H8: dynamic adapter + grounded drafting RECOVERS SMA's structural edge
   where per-record structure is meaningful (healthcare win); finance exposes the
   cross-record-structure boundary. v1 (3-row, possibly-contaminated) superseded.
+
+## 2026-06-12 (CORRECTION to the 4b v2 framing — significance checked)
+
+- I initially mis-stated healthcare as "beats BM25 / a win". The paired
+  bootstrap says otherwise and the record is corrected here:
+  - Healthcare after-v2: SMA 0.547 vs BM25 0.513 -> delta +0.037, CI
+    [-0.040,+0.110], p_holm 0.73 = NOT significant; vs Dense 0.565 = parity.
+    So SMA reaches STATISTICAL PARITY with strong baselines (favorable point
+    estimate), NOT a significant win. The honest signal is the within-SMA lift
+    0.425->0.547 as HO-density 0->0.45 (suggestive; no paired before/after test
+    run yet).
+  - Finance after-v2: SMA 0.710 vs BM25 0.771 -> delta -0.063, CI
+    [-0.115,-0.014], p_holm 0.033 = SIGNIFICANTLY BELOW BM25; vs Dense = parity.
+- Accurate net H8: the dynamic adapter mechanically injects structure
+  (HO-density 0->0.45/0.75) and lifts SMA toward parity where per-record
+  structure is meaningful (healthcare); NO significant SMA-beats-baseline win in
+  either domain; finance exposes the cross-record-structure limitation. Report
+  this, not an overclaim.
