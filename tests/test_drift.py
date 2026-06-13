@@ -114,3 +114,23 @@ def test_rag_notes_extracts_then_retrieves():
     r = b.query("Where does the user work?")
     assert r.answer == "Acme"
     assert any("Acme" in note for note in r.retrieved)
+
+
+def test_expectation_violation_flags_off_schema_case():
+    from sma.ir.schema import make_case, stmt
+    from sma.sage.pools import SagePool
+    pool = SagePool("t", assimilation_threshold=0.2)
+    # build a schema from two similar cases
+    a = make_case([stmt("worksAt", "user", "globex")])
+    b = make_case([stmt("worksAt", "user", "globex")])
+    pool.assimilate(a); pool.assimilate(b)
+    consistent = make_case([stmt("worksAt", "user", "globex")])
+    novel = make_case([stmt("livesIn", "user", "mars")])
+    assert pool.expectation_violation(consistent) < pool.expectation_violation(novel)
+    assert pool.expectation_violation(novel) > 0.5
+
+def test_expectation_violation_empty_pool_is_max():
+    from sma.ir.schema import make_case, stmt
+    from sma.sage.pools import SagePool
+    pool = SagePool("t2", assimilation_threshold=0.2)
+    assert pool.expectation_violation(make_case([stmt("x", "a", "b")])) == 1.0

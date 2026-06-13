@@ -65,6 +65,22 @@ class SagePool:
         self.outliers.append(case)
         return "outlier"
 
+    def expectation_violation(self, case: Case) -> float:
+        """1 - best normalized structural fit to any learned schema.
+
+        Near 0 = the case is explained by an existing generalization;
+        near 1 = the case breaks every schema (a candidate concept-drift
+        point). With no generalizations yet, returns 1.0 (nothing to expect).
+        """
+        if not self.generalizations:
+            return 1.0
+        best = 0.0
+        for gen in self.generalizations:
+            schema = gen.schema_case(self.probability_cutoff, self.min_constituents)
+            gmap = match_cases(schema, case, self.config)
+            best = max(best, gmap.normalized_score)
+        return max(0.0, 1.0 - best)
+
     def _add_to_generalization(self, gen: Generalization, case: Case) -> None:
         if case.case_id not in gen.constituents:
             gen.constituents.append(case.case_id)
