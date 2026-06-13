@@ -208,8 +208,100 @@ def ed3_ablation():
     return _save(fig, "ed3_ablation")
 
 
+# ---------------------------------------------------------------- Figure 5 ---
+def figure5_trustworthy():
+    """Phase 5 LLM-QA: the SMA-grounded agent is a *verifiable specialist*.
+
+    (a) the trustworthy-QA axes across the three memory conditions
+        (closed-book / Dense-RAG / SMA) — accuracy plus the capability axes RAG
+        structurally lacks (citation-faithfulness, abstention, known-vs-unknown
+        discrimination, novelty-F1); N/A cells (closed-book has no retrieval) are
+        marked, not zeroed.
+    (b) the mechanism: SMA's RAW structural grounding score cleanly separates
+        known (answerable) from held-out (unknown) cases, so the calibrated gate
+        abstains and flags novelty; the dashed line is the calibrated threshold.
+    """
+    def summ(mem):
+        rows = _rows(CONF / f"qa_{mem}_summary.csv")
+        return rows[0] if rows else None
+
+    s = {m: summ(m) for m in ("none", "dense", "sma")}
+    if not s["sma"]:
+        return None
+
+    def val(mem, key):
+        r = s.get(mem)
+        if not r:
+            return None
+        v = r.get(key, "NA")
+        return None if v in ("NA", "", None) else float(v)
+
+    fig, ax = plt.subplots(1, 2, figsize=(7.2, 2.9), gridspec_kw={"width_ratios": [1.55, 1]})
+
+    # (a) grouped bars over the trustworthy axes
+    axes = [("accuracy", "Accuracy"), ("citation_faithfulness", "Citation\nfaithful"),
+            ("abstain_recall", "Abstain\nrecall"), ("grounding_auroc", "Known vs\nunknown"),
+            ("novelty_f1", "Novelty\nF1")]
+    conds = [("none", "Closed-book", "#C7CCD1"), ("dense", "Dense-RAG", "#A7AFB6"),
+             ("sma", "SMA", SMA_C)]
+    nb = len(conds); w = 0.8 / nb
+    for i, (mem, lab, c) in enumerate(conds):
+        labelled = False
+        for j, (key, _) in enumerate(axes):
+            v = val(mem, key)
+            x = j + (i - nb / 2) * w + w / 2
+            if v is None:
+                ax[0].text(x, 0.015, "n/a", ha="center", va="bottom", fontsize=4.0,
+                           rotation=90, color="#9AA3AB")
+            else:
+                ax[0].bar(x, v, w, color=c, edgecolor="white", linewidth=0.3,
+                          label=(lab if not labelled else None))
+                labelled = True
+    ax[0].set_xticks(range(len(axes))); ax[0].set_xticklabels([l for _, l in axes], fontsize=6)
+    ax[0].set_ylabel("score"); ax[0].set_ylim(0, 1.05)
+    ax[0].axhline(0.5, color="#E3E7EA", lw=0.5, zorder=0)
+    ax[0].legend(fontsize=5.5, ncol=3, frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.16))
+    ax[0].set_title("a   Trustworthy-QA: only SMA cites, abstains, and flags novelty",
+                    loc="left", fontsize=7.3)
+
+    # (b) mechanism: SMA grounding-score separation, known vs unknown
+    import numpy as np
+    rows = _rows(CONF / "qa_sma.csv")
+    ans = [float(r["grounding_score"]) for r in rows
+           if str(r["answerable"]).strip().lower() == "true"
+           and r["grounding_score"] not in ("", "NA", "None")]
+    held = [float(r["grounding_score"]) for r in rows
+            if str(r["answerable"]).strip().lower() == "false"
+            and r["grounding_score"] not in ("", "NA", "None")]
+    thr = val("sma", "score_threshold")
+    auc = val("sma", "grounding_auroc")
+    if ans and held:
+        bins = np.linspace(min(ans + held), max(ans + held), 20)
+        ax[1].hist(held, bins=bins, color="#A7AFB6", alpha=0.85,
+                   label="held-out (unknown)", edgecolor="white", linewidth=0.2)
+        ax[1].hist(ans, bins=bins, color=SMA_C, alpha=0.7,
+                   label="answerable (known)", edgecolor="white", linewidth=0.2)
+        ymax = ax[1].get_ylim()[1]
+        ax[1].set_ylim(0, ymax * 1.28)  # headroom for the legend in the central gap
+        if thr is not None:
+            ax[1].axvline(thr, color="#D98A3D", lw=1.1, ls="--")
+            ax[1].text(thr, ymax * 0.5, "calibrated\nthreshold ", rotation=90,
+                       fontsize=4.6, color="#B86E1F", ha="right", va="center")
+        if auc is not None:
+            ax[1].text(0.5, 0.52, f"AUROC {auc:.2f}", transform=ax[1].transAxes,
+                       ha="center", fontsize=6.5, color=SMA_C, fontweight="bold")
+        ax[1].set_xlabel("SMA structural grounding score (top hit)")
+        ax[1].set_ylabel("cases")
+        # legend in the top-centre whitespace (the gap between the two modes)
+        ax[1].legend(fontsize=5, frameon=False, loc="upper center", ncol=1,
+                     handlelength=1.0, borderaxespad=0.2)
+    ax[1].set_title("b   Why: structure separates known from unknown", loc="left", fontsize=7.3)
+    fig.tight_layout(w_pad=1.6)
+    return _save(fig, "figure5_trustworthy")
+
+
 if __name__ == "__main__":
-    for fn in (figure2, figure4_data, ed1_ssb, ed3_ablation):
+    for fn in (figure2, figure4_data, ed1_ssb, ed3_ablation, figure5_trustworthy):
         try:
             p = fn()
             print(f"wrote {p}" if p else f"{fn.__name__}: no data, skipped")
