@@ -154,3 +154,24 @@ the inset clearly subordinate (smaller) to the pipeline above.
    fallback), final 5–7 pt.
 10. **Palette:** keep the teal set but ensure colour-blind-safe (hue+lightness
    separation; never red-alone for "wrong" — always pair red with the ✗ shape).
+
+## Designer Q&A — round 2 (additive sharpenings; round-1 choices unchanged)
+1. **Show the ontology grounding:** the is-a lattice emerges from a small labelled
+   source tab "HPO · expert-curated ontology" with a thin "mount" connector — the
+   structure is grounded in expert curation, not invented.
+2. **Abstain = the decision rule, visible:** gauge with a threshold tick τ, needle
+   BELOW it, and the consequence "best alignment 0.31 < τ → abstain (no answer)".
+3. **Novelty = show the trigger:** query fails to align with anything in the store
+   (greyed candidates, no correspondence lines, "∅ no aligned case") → starburst
+   "novel — escalate".
+4. **Higher-order "causes":** keep it, but it must join two ARROWS (relations),
+   not nodes — the "relation over relations" reading must be unambiguous.
+5. **RAG inset shows FAILURE:** embed → nearest dot → "returns: <common disease>
+   ✗ (wrong)" — confident & incorrect, not just a fuzzy cloud. Pair red with ✗.
+6. **Cite = name case + features:** receipt "✓ matched Case #214 (rare disease X);
+   justified by Seizure (HP:0001250), Ataxia (HP:0001251), …".
+7. **No reversals** of round-1 choices.
+8. **Reading-order scaffolding:** small numbered markers 1→2→3→4 (or a thin guide
+   spine) so a non-specialist parses input→encode→match→output at a glance.
+9. **Deliverable:** SVG (editable, embedded text) + high-res PDF; design at TRUE
+   print size — full-width Nature figure ≈180 mm wide, 5–7 pt body text at that size.
