@@ -91,5 +91,15 @@
       }
     },
     "source_note": "LongMemEval (Wu et al. 2024), longmemeval-cleaned repo. oracle = answer-bearing sessions only (15 MB, cheap dev/pilot); _s_cleaned = realistic haystack (277 MB, leaderboard setting). 500 instances each; drift-relevant categories knowledge-update(78)+temporal-reasoning(133)=211. md5 verified locally (same discipline as loghub spirit/liberty)."
+  },
+  "diabetes130": {
+    "source": "https://archive.ics.uci.edu/dataset/296/diabetes+130-us+hospitals+for+years+1999-2008",
+    "files": {
+      "dataset_diabetes.zip": {
+        "md5": "f22425753cefbc18e321825450ec0f00",
+        "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/00296/dataset_diabetes.zip"
+      }
+    },
+    "source_note": "UCI Diabetes 130-US hospitals 1999-2008 (Strack et al. 2014). 101766 encounters, 50 cols, readmission target. 4b cross-domain (healthcare): tabular EHR with latent diagnosis->treatment->outcome structure. License: CC BY 4.0."
   }
 }
