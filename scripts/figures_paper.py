@@ -59,16 +59,28 @@ def figure2():
     present = [(a, lab) for a, lab in ARM_ORDER if arms.get(a)]
     fig, ax = plt.subplots(1, 2, figsize=(7.2, 2.9), gridspec_kw={"width_ratios": [2.2, 1]})
 
-    # (a) grouped bars: tail top-5 (rare) per domain
+    # (a) grouped bars: tail top-5 (rare slice; all-slice where the rare slice is
+    # undefined — CPC/legal has near-uniform IC so no rare split, flagged with †).
+    def t5(a, m):
+        r = arms[a].get(m)
+        if not r:
+            return 0.0
+        use_all = int(arms[a]["sma"]["n_rare"]) == 0
+        return float(r["t5_all" if use_all else "t5_rare"])
+    daggers = {a for a, _ in present if int(arms[a]["sma"]["n_rare"]) == 0}
     mems = MEM_ORDER
     nb = len(mems); w = 0.82 / nb
     for i, m in enumerate(mems):
-        vals = [float(arms[a][m]["t5_rare"]) if m in arms[a] else 0 for a, _ in present]
+        vals = [t5(a, m) for a, _ in present]
         xs = [j + (i - nb / 2) * w + w / 2 for j in range(len(present))]
         ax[0].bar(xs, vals, w, color=MEM_COLOR[m], label=MEM_LABEL[m],
                   edgecolor="white", linewidth=0.3)
-    ax[0].set_xticks(range(len(present))); ax[0].set_xticklabels([l for _, l in present])
+    ax[0].set_xticks(range(len(present)))
+    ax[0].set_xticklabels([l + ("†" if a in daggers else "") for a, l in present])
     ax[0].set_ylabel("Tail top-5 accuracy (rare slice)"); ax[0].set_ylim(0, 1.0)
+    if daggers:
+        ax[0].text(0.0, -0.30, "† all-query slice (rare slice undefined for CPC's uniform IC)",
+                   transform=ax[0].transAxes, fontsize=4.6, color="#5F6B78", style="italic")
     ax[0].legend(fontsize=5, ncol=3, loc="upper center", bbox_to_anchor=(0.5, -0.16), frameon=False)
     ax[0].set_title("a   SMA vs enterprise RAG/KG, by domain", loc="left", fontsize=8)
 
