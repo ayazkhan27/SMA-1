@@ -68,7 +68,12 @@ STOP CONDITIONS: D1-D7 satisfied, or a blueprint kill criterion fires and the pr
       metrics tail top-k + cite-or-abstain AURC + novelty F1. MEDICINE ARM:
       SMA beats best enterprise RAG +33pp tail top-5 (p=0.0002), AURC 0.017 vs
       0.317, novelty F1 0.182 vs 0.000. docs/superpowers/{specs,plans}.
-- [ ] Remaining agentic arms (follow-ups, ontologies already loaded+routing):
-      cyber (ATT&CK/CAPEC/CWE), legal (CPC), finance (FIBO), discovery (ChEBI).
-      Each: real gold task + the same harness. + neural-embedding robustness,
-      novelty-threshold tuning, interactive flagship (AgentClinic-style, Medicine).
+- [x] Agentic arms DONE (3 domains, C3 CONFIRMED): medicine +0.333 (p=2e-4),
+      genomics/GO +0.156 (p=2e-4), cyber/ATT&CK +0.073 (p=0.035) on tail top-5 vs
+      best enterprise RAG; all Holm-significant. SMA best AURC + only-nonzero
+      novelty in every arm. Nature-MI draft (paper/manuscript/sma_nature_mi.tex,
+      DRAFT.md) + Fig 1 (TikZ) + Fig 2 (data).
+- [ ] DEFERRED (honest gaps, need gold corpora / budget): legal arm (patent->CPC
+      dataset), finance arm (entity->FIBO gold), interactive AgentClinic-style
+      flagship (DeepSeek budget), novelty-threshold tuning, LaTeX/Nature-template
+      port + neural-embedding-API robustness check. SNOMED/UMLS excluded (licensed).
