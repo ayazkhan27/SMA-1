@@ -139,53 +139,60 @@ def ed1_ssb():
         return None
     legs = sorted(set(r["leg"] for r in rows))
     methods = sorted(set(r["method"] for r in rows), key=lambda m: (m != "SMA", m))
-    fig, ax = plt.subplots(figsize=(3.4, 2.6))
-    nb = len(methods); w = 0.8 / nb
+    fig, ax = plt.subplots(figsize=(3.8, 2.8))
+    nb = len(methods); w = 0.78 / nb
     mc = {"SMA": SMA_C, "BM25": "#C7CCD1", "TFIDF-Dense": "#A7AFB6", "Dense": "#A7AFB6"}
     for i, m in enumerate(methods):
         vals = [next((float(r["mean"]) for r in rows if r["leg"] == lg and r["method"] == m), 0) for lg in legs]
         xs = [j + (i - nb / 2) * w + w / 2 for j in range(len(legs))]
         ax.bar(xs, vals, w, color=mc.get(m, "#888"), label=m, edgecolor="white", lw=0.3)
+        # value labels make the deliberate zeros legible (the whole point)
+        for x, v in zip(xs, vals):
+            ax.text(x, v + 0.02, f"{v:.2f}", ha="center", va="bottom", fontsize=4.8,
+                    color=(SMA_C if m == "SMA" else "#8A929B"))
     ax.set_xticks(range(len(legs))); ax.set_xticklabels([l.replace("_", " ") for l in legs])
-    ax.set_ylabel("rank-1 accuracy"); ax.set_ylim(0, 1.08)
-    ax.legend(fontsize=5.5, frameon=False, loc="upper right")
-    ax.set_title("SSB: structure across a zero-lexical-overlap gap", loc="left", fontsize=8)
-    ax.text(0.02, 0.06, "lexical & dense baselines: rank-1 = 0\n(no surface overlap to exploit)",
-            transform=ax.transAxes, fontsize=5.6, style="italic", color="#5F6B78")
+    ax.set_ylabel("rank-1 accuracy"); ax.set_ylim(0, 1.14)
+    ax.legend(fontsize=5.5, frameon=False, loc="upper center", ncol=3, bbox_to_anchor=(0.5, -0.13))
+    ax.set_title("SSB: only structure survives a zero-lexical-overlap gap", loc="left", fontsize=8)
+    ax.text(0.5, 0.42, "BM25 & dense retrieval score 0 —\nno surface overlap to match;\nonly structure-mapping solves it",
+            transform=ax.transAxes, fontsize=5.4, style="italic", color="#5F6B78", ha="center")
     fig.tight_layout()
     return _save(fig, "ed1_ssb")
 
 
 # ---------------------------------------------------------------- ED3 --------
 def ed3_ablation():
+    """Why the frozen dials: ablate one knob at a time from the chosen config and
+    show it loses on a validation metric. Frozen = surprisal/max/gamma0.25/rho0.95."""
     rows = _rows(ROOT / "reports/calibration_grid.csv")
     if not rows:
         return None
-    fig, ax = plt.subplots(1, 2, figsize=(7.0, 2.6))
-    # at normalization=max: family_rare vs rho, one line per scorer
-    sub = [r for r in rows if r["normalization"] == "max"]
-    SCOL = {"surprisal": SMA_C, "ses": "#A7AFB6", "mdl": GOLD}
-    scorers = sorted(set(r["scorer"] for r in sub))
-    for sc in scorers:
-        srows = sorted((r for r in sub if r["scorer"] == sc), key=lambda r: float(r["rho"]))
-        # average across gamma for each rho
-        rhos = sorted(set(float(r["rho"]) for r in srows))
-        y = [statistics.mean(float(r["hdfs_family_rare"]) for r in srows if float(r["rho"]) == rh) for rh in rhos]
-        ax[0].plot(rhos, y, marker="o", ms=3, label=sc, color=SCOL.get(sc), marker="o", ms=3)
-    ax[0].set_xlabel(r"$\rho$ (ascension penalty)"); ax[0].set_ylabel("rare-family hit-rate")
-    ax[0].legend(fontsize=5.5, frameon=False); ax[0].set_title("a   Scorer x rho (norm=max)", loc="left", fontsize=8)
-    ax[0].axvline(0.95, color="#9AA3AB", lw=0.6, ls="--")
 
-    # ssb_r1 vs rho per scorer
-    for sc in scorers:
-        srows = sorted((r for r in sub if r["scorer"] == sc), key=lambda r: float(r["rho"]))
-        rhos = sorted(set(float(r["rho"]) for r in srows))
-        y = [statistics.mean(float(r["ssb_r1"]) for r in srows if float(r["rho"]) == rh) for rh in rhos]
-        ax[1].plot(rhos, y, marker="s", ms=3, label=sc, color=SCOL.get(sc), marker="o", ms=3)
-    ax[1].set_xlabel(r"$\rho$"); ax[1].set_ylabel("SSB rank-1"); ax[1].set_ylim(0.7, 1.02)
-    ax[1].axvline(0.95, color="#9AA3AB", lw=0.6, ls="--")
-    ax[1].set_title("b   SSB rank-1 (frozen rho=0.95)", loc="left", fontsize=8)
-    fig.tight_layout(w_pad=1.8)
+    def cfg(scorer, norm, rho, gamma="0.25"):
+        return next((r for r in rows if r["scorer"] == scorer and r["normalization"] == norm
+                     and r["rho"] == rho and r["gamma"] == gamma), None)
+
+    configs = [("Frozen (surprisal·max·ρ0.95)", cfg("surprisal", "max", "0.95"), SMA_C),
+               ("−ρ → 0.90", cfg("surprisal", "max", "0.9"), "#5B6670"),
+               ("−norm → target", cfg("surprisal", "target", "0.95"), "#7E8893"),
+               ("−scorer → SES", cfg("ses", "max", "0.95"), "#C7CCD1")]
+    configs = [(lab, r, c) for lab, r, c in configs if r]
+    metrics = [("ssb_r1", "SSB\nrank-1"), ("hdfs_family_common", "Family-hit\n(common)"),
+               ("haystack_needles", "Haystack\nrecall")]
+    fig, ax = plt.subplots(figsize=(4.7, 2.9))
+    nb = len(configs); w = 0.8 / nb
+    for i, (lab, r, c) in enumerate(configs):
+        vals = [float(r[m]) for m, _ in metrics]
+        xs = [j + (i - nb / 2) * w + w / 2 for j in range(len(metrics))]
+        ax.bar(xs, vals, w, color=c, label=lab, edgecolor="white", lw=0.3)
+    ax.set_xticks(range(len(metrics))); ax.set_xticklabels([l for _, l in metrics])
+    ax.set_ylabel("validation score"); ax.set_ylim(0, 1.1)
+    ax.legend(fontsize=5, frameon=False, ncol=2, loc="lower center", bbox_to_anchor=(0.5, -0.46))
+    ax.set_title("Frozen dials win the calibration grid", loc="left", fontsize=8)
+    ax.annotate("ρ=0.90 breaks\nstructure-only SSB", xy=(-0.27, 0.79), xytext=(0.15, 0.45),
+                fontsize=5, color="#5F6B78", ha="left",
+                arrowprops=dict(arrowstyle="->", color="#9AA3AB", lw=0.6))
+    fig.tight_layout()
     return _save(fig, "ed3_ablation")
 
 
