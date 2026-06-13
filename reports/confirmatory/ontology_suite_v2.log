@@ -1,0 +1,71 @@
+
+########## A1-hpo-rare-disease ##########
+  13002 entities loaded; mounting + running...
+  [A1-hpo-rare-disease seed 7] 50/120 (47s)
+  [A1-hpo-rare-disease seed 7] 100/120 (93s)
+  [A1-hpo-rare-disease seed 17] 50/120 (46s)
+  [A1-hpo-rare-disease seed 17] 100/120 (93s)
+  [A1-hpo-rare-disease seed 23] 50/120 (47s)
+  [A1-hpo-rare-disease seed 23] 100/120 (95s)
+
+=== arm A1-hpo-rare-disease: 360 queries (312 rare) ===
+
+  [all] n=360
+  method      top-1   top-5   top-10  MRR     
+  SMA         0.669   0.911   0.989   0.777   
+  Phenomizer  0.761   0.944   0.969   0.840   
+  Jaccard     0.536   0.711   0.781   0.616   
+  Dense-RAG   0.342   0.617   0.689   0.459   
+  HippoRAG    0.103   0.314   0.442   0.198   
+  primary top-5 SMA vs Phenomizer: delta=-0.0333 CI[-0.0639,-0.0028] p=0.0366 cliffs=-0.033
+
+  [rare] n=312
+  method      top-1   top-5   top-10  MRR     
+  SMA         0.667   0.917   0.987   0.777   
+  Phenomizer  0.795   0.952   0.974   0.864   
+  Jaccard     0.535   0.708   0.782   0.616   
+  Dense-RAG   0.346   0.622   0.699   0.468   
+  HippoRAG    0.109   0.337   0.452   0.210   
+  primary top-5 SMA vs Phenomizer: delta=-0.0353 CI[-0.0705,-0.0032] p=0.0466 cliffs=-0.035
+
+########## A2-go-gene-function ##########
+  31631 entities loaded; mounting + running...
+  [A2-go-gene-function seed 7] 50/120 (40s)
+  [A2-go-gene-function seed 7] 100/120 (79s)
+  [A2-go-gene-function seed 17] 50/120 (39s)
+  [A2-go-gene-function seed 17] 100/120 (78s)
+  [A2-go-gene-function seed 23] 50/120 (40s)
+  [A2-go-gene-function seed 23] 100/120 (79s)
+
+=== arm A2-go-gene-function: 360 queries (228 rare) ===
+
+  [all] n=360
+  method      top-1   top-5   top-10  MRR     
+  SMA         0.508   0.775   0.836   0.614   
+  Phenomizer  0.528   0.786   0.881   0.646   
+  Jaccard     0.506   0.697   0.756   0.597   
+  Dense-RAG   0.408   0.672   0.783   0.532   
+  HippoRAG    0.089   0.264   0.336   0.164   
+  primary top-5 SMA vs Phenomizer: delta=-0.0111 CI[-0.0611,+0.0389] p=0.7079 cliffs=-0.011
+
+  [rare] n=228
+  method      top-1   top-5   top-10  MRR     
+  SMA         0.539   0.846   0.921   0.659   
+  Phenomizer  0.632   0.860   0.921   0.732   
+  Jaccard     0.566   0.737   0.772   0.648   
+  Dense-RAG   0.456   0.719   0.811   0.578   
+  HippoRAG    0.110   0.303   0.382   0.194   
+  primary top-5 SMA vs Phenomizer: delta=-0.0132 CI[-0.0658,+0.0395] p=0.6773 cliffs=-0.013
+
+===== SUITE SUMMARY [all slice] (Holm across arms) =====
+arm                     SMA t5   best(base)        delta     p_holm   verdict
+A1-hpo-rare-disease     0.911    0.944(phen)       -0.0333   0.0732   parity/null
+A2-go-gene-function     0.775    0.786(phen)       -0.0111   0.7079   parity/null
+  C3 [all]: 0 arm(s) confirm C1 vs REAL baselines. NOT YET (need >=2)
+
+===== SUITE SUMMARY [rare slice] (Holm across arms) =====
+arm                     SMA t5   best(base)        delta     p_holm   verdict
+A1-hpo-rare-disease     0.917    0.952(phen)       -0.0353   0.0932   parity/null
+A2-go-gene-function     0.846    0.860(phen)       -0.0132   0.6773   parity/null
+  C3 [rare]: 0 arm(s) confirm C1 vs REAL baselines. NOT YET (need >=2)
+wrote /mnt/zephyr27/Documents/SMA-1/reports/confirmatory/ontology_suite.csv
