@@ -147,3 +147,11 @@ def test_sma_memory_reencodes_and_flags_drift():
     assert r.answer == "Acme"
     assert b.last_violation >= 0.0   # expectation-violation tracked at ingest
     assert isinstance(r.drift_flagged, bool)
+
+
+def test_grader_exact_and_substring():
+    from sma.eval.longmemeval import grade_answer
+    assert grade_answer("Acme", "Acme") == 1.0
+    assert grade_answer("They work at Acme Corp.", "Acme") == 1.0
+    assert grade_answer("Globex", "Acme") == 0.0
+    assert grade_answer("", "Acme") == 0.0

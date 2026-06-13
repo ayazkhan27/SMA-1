@@ -40,3 +40,12 @@ def load_instances(path: str | pathlib.Path) -> list[LMEInstance]:
             question_date=r.get("question_date", ""), sessions=sessions,
             answer_session_ids=tuple(r.get("answer_session_ids", []))))
     return out
+
+
+def grade_answer(prediction: str, gold: str) -> float:
+    """LongMemEval-style lenient match: normalized substring containment.
+    (The official grader uses an LLM judge; this deterministic proxy is used
+    for unit tests and the smoke run. The battery can swap in the LLM judge.)"""
+    p = " ".join(prediction.lower().split())
+    g = " ".join(gold.lower().split())
+    return 1.0 if g and g in p else 0.0
