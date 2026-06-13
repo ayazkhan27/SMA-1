@@ -46,6 +46,18 @@ def test_loader_on_real_oracle():
 
 from sma.eval.memory_backends.base import MemoryBackend, QueryResult
 
+
+# ---------------------------------------------------------------------------
+# Shared helper — used by Task 4 and all subsequent drift-experiment tests
+# ---------------------------------------------------------------------------
+class FakeLLM:
+    """Scripted stand-in for DeepSeek: pops the next canned response per call."""
+    def __init__(self, scripted): self.scripted = list(scripted); self.calls = []
+    def complete(self, messages, max_tokens=600, temperature=0.0):
+        self.calls.append(messages)
+        return self.scripted.pop(0)
+
+
 def test_backend_is_abstract():
     import pytest
     with pytest.raises(TypeError):
@@ -54,3 +66,23 @@ def test_backend_is_abstract():
 def test_query_result_defaults():
     r = QueryResult(answer="x")
     assert r.retrieved == [] and r.drift_flagged is False
+
+
+def test_extract_facts_parses_json_array():
+    from sma.eval.memory_backends.shared_llm import extract_facts
+    llm = FakeLLM(['["user works at Acme", "user lives in NYC"]'])
+    facts = extract_facts(llm, "I moved to Acme in NYC.")
+    assert facts == ["user works at Acme", "user lives in NYC"]
+
+def test_extract_facts_handles_bad_json():
+    from sma.eval.memory_backends.shared_llm import extract_facts
+    llm = FakeLLM(["not json at all"])
+    assert extract_facts(llm, "whatever") == []
+
+def test_answer_from_uses_retrieved():
+    from sma.eval.memory_backends.shared_llm import answer_from
+    llm = FakeLLM(["Acme"])
+    ans = answer_from(llm, "Where does the user work?", ["user works at Acme"])
+    assert ans == "Acme"
+    # the retrieved memory must appear in the prompt sent to the LLM
+    assert "user works at Acme" in str(llm.calls[-1])
