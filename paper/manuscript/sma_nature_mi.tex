@@ -35,9 +35,9 @@ source --- we mount eleven ontologies across six domains ($\approx$594k concepts
 retriever varies, SMA reaches parity with a hand-built ontology tool on
 pure-subsumption ranking while \textbf{beating the enterprise RAG/KG gauntlet}
 (BM25, BGE neural dense, hybrid RRF, hybrid + cross-encoder rerank, HippoRAG) on
-the rare/long-tail slice across \textbf{three unrelated domains} (medicine
-$+33$, genomics $+16$, cyber $+7$ percentage points top-5; all $p<0.05$,
-Holm-corrected). SMA additionally provides two capabilities these baselines
+the rare/long-tail slice across \textbf{five unrelated domains} (medicine
+$+33$, finance $+17$, genomics $+16$, cyber $+7$, legal $+6$ percentage points
+top-5; all $p<0.05$, Holm-corrected). SMA additionally provides two capabilities these baselines
 structurally lack: calibrated cite-or-abstain (risk-coverage AURC $0.02$--$0.11$
 vs $0.26$--$0.44$) and structural-novelty flagging (F1 $\approx 0.18$ where every
 pure-RAG baseline scores exactly $0$). We delimit the thesis honestly: the
@@ -116,15 +116,21 @@ ontology, SMA wins by large margins. We therefore frame the claim as
 top-5 $0.949$ vs $0.606$ for the best enterprise configuration (hybrid +
 cross-encoder rerank), $\Delta{=}{+}0.333$, 95\% CI $[0.281,0.389]$,
 $p{=}2{\times}10^{-4}$. On \textbf{genomics} (GO gene-function) SMA reaches
-$0.849$ vs $0.682$, $\Delta{=}{+}0.156$, $p{=}2{\times}10^{-4}$. On
-\textbf{cyber} (ATT\&CK threat-group attribution) SMA leads $0.766$ vs $0.749$,
+$0.849$ vs $0.682$, $\Delta{=}{+}0.156$; on \textbf{finance} (SEC filing to
+US-GAAP concept) $0.418$ vs $0.231$, $\Delta{=}{+}0.167$ (roughly double the best
+RAG, though all methods are low here as US-GAAP concepts are weakly
+discriminative); and on \textbf{legal} (patent to CPC classification, all-query
+slice) $0.941$ vs $0.870$, $\Delta{=}{+}0.064$, $p{=}0.002$. On \textbf{cyber}
+(ATT\&CK threat-group attribution) SMA leads $0.766$ vs $0.749$,
 $\Delta{=}{+}0.073$, $p{=}0.035$ --- a smaller margin, honestly attributable to
 threat groups' distinctive technique vocabularies that lexical/dense retrieval
-partly capture. All three unrelated domains survive Holm correction, confirming
-the pre-registered across-fields criterion.
+partly capture. All \textbf{five} unrelated domains survive Holm correction,
+confirming the pre-registered across-fields criterion (legal's rare slice is
+undefined --- CPC's near-uniform information content yields no rare split --- so
+legal is reported on the all-query slice).
 
 \textit{Cite-or-abstain and structural novelty.} SMA has the lowest risk-coverage
-AURC in every arm ($0.017$/$0.106$/$0.096$ vs best-RAG $0.26$--$0.44$): a
+AURC in every one of the five arms ($0.017$--$0.530$ vs best-RAG $0.26$--$0.80$): a
 structural match either exists or it does not, whereas cosine similarity is
 always moderately high, so RAG cannot tell when to abstain. On held-out unknown
 entities SMA's expectation-violation flag yields novelty F1 $\approx 0.18$ in
@@ -138,7 +144,7 @@ retrieval) nor free-form conversational recall with no ontology to mount. The
 advantage is specific to ontology-grounded, rare, cross-vocabulary reasoning.
 
 \begin{figure}[t]\centering
-\includegraphics[width=\linewidth]{individual/fig_agentic_results.pdf}
+\includegraphics[width=\linewidth]{svg/figure2_results.pdf}
 \caption{\textbf{Agentic memory-swap results.} (a) Tail top-5 (rare slice) by
 domain: SMA versus the enterprise RAG/KG gauntlet. (b) Cite-or-abstain
 risk-coverage AURC (lower is better) on medicine. (c) Structural-novelty F1; only
@@ -203,27 +209,29 @@ Finance & FIBO & 2{,}948 & 3{,}819 & 1{,}335 \\
 \end{tabular}
 \end{table}
 
-\begin{table}[t]\centering\small
-\caption{Agentic memory-swap results across three domains. (a) Tail top-5 (rare
-slice). (b) Capability axes. Bold = best.}
-\begin{tabular}{lccc}
+\begin{table}[t]\centering\footnotesize
+\caption{Agentic memory-swap results across five domains. (a) Tail top-5 (rare
+slice; legal on the all-query slice $\dagger$ --- CPC's near-uniform information
+content yields no rare split). (b) Capability axes (AURC lower is better; novelty
+F1). Bold = best per column.}
+\begin{tabular}{lccccc}
 \toprule
-\multicolumn{4}{l}{\textit{(a) Tail top-5 accuracy (rare slice)}}\\
-Memory & Medicine & Genomics & Cyber \\
+\multicolumn{6}{l}{\textit{(a) Tail top-5 accuracy (rare slice)}}\\
+Memory & Medicine & Genomics & Finance & Cyber & Legal$\dagger$ \\
 \midrule
-\textbf{SMA (ours)} & \textbf{0.949} & \textbf{0.849} & \textbf{0.766} \\
-BM25 & 0.485 & 0.552 & 0.703 \\
-BGE dense & 0.496 & 0.682 & 0.629 \\
-Hybrid-RRF & 0.511 & 0.703 & 0.749 \\
-Hybrid + rerank & 0.606 & 0.651 & 0.651 \\
-HippoRAG (KG) & 0.361 & 0.318 & 0.377 \\
-$\Delta$ SMA $-$ best RAG & $+0.333$ & $+0.156$ & $+0.073$ \\
-($p$, Holm) & $6{\times}10^{-4}$ & $4{\times}10^{-4}$ & $0.035$ \\
+\textbf{SMA (ours)} & \textbf{0.949} & \textbf{0.849} & \textbf{0.418} & \textbf{0.766} & \textbf{0.941} \\
+BM25 & 0.485 & 0.552 & 0.250 & 0.703 & 0.670 \\
+BGE dense & 0.496 & 0.682 & 0.188 & 0.629 & 0.870 \\
+Hybrid-RRF & 0.511 & 0.703 & 0.231 & 0.749 & 0.793 \\
+Hybrid + rerank & 0.606 & 0.651 & 0.202 & 0.651 & 0.793 \\
+HippoRAG (KG) & 0.361 & 0.318 & 0.101 & 0.377 & 0.417 \\
+$\Delta$ SMA $-$ best RAG & $+0.333$ & $+0.156$ & $+0.167$ & $+0.073$ & $+0.064$ \\
+($p$, Holm) & $6{\times}10^{-4}$ & $4{\times}10^{-4}$ & $2{\times}10^{-4}$ & $0.035$ & $0.002$ \\
 \midrule
-\multicolumn{4}{l}{\textit{(b) Risk-coverage AURC (lower better) / novelty F1}}\\
-SMA & \textbf{0.017} / 0.18 & \textbf{0.106} / 0.18 & \textbf{0.096} / 0.18 \\
-best RAG & 0.317 / 0.00 & 0.298 / 0.00 & 0.261 / 0.00 \\
-HippoRAG & 0.628 / 0.19 & 0.721 / 0.19 & 0.560 / 0.18 \\
+\multicolumn{6}{l}{\textit{(b) Risk-coverage AURC / novelty F1}}\\
+SMA & \textbf{0.017}/0.18 & \textbf{0.106}/0.18 & \textbf{0.530}/0.18 & \textbf{0.096}/0.18 & \textbf{0.021}/0.18 \\
+best RAG & 0.317/0.00 & 0.298/0.00 & 0.795/0.00 & 0.261/0.00 & 0.059/0.00 \\
+HippoRAG & 0.628/0.19 & 0.721/0.19 & 0.925/0.18 & 0.560/0.18 & 0.462/0.18 \\
 \bottomrule
 \end{tabular}
 \end{table}

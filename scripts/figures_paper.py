@@ -46,7 +46,7 @@ def _rows(path):
 
 
 def _save(fig, name):
-    for ext in ("svg", "png"):
+    for ext in ("svg", "png", "pdf"):
         fig.savefig(OUT / f"{name}.{ext}", bbox_inches="tight", dpi=300)
     plt.close(fig)
     return OUT / f"{name}.svg"
