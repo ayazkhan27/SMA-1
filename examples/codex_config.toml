@@ -1,0 +1,29 @@
+# Wire SMA-1 into Codex CLI as an MCP server.
+#
+# Copy this [mcp_servers.*] block into ~/.codex/config.toml
+# (or a project-scoped .codex/config.toml in a trusted project), then run `codex`
+# and confirm with /mcp in the TUI. Equivalent CLI:
+#     codex mcp add sma --env SMA_MANIFEST=/abs/path/sma_manifest.json -- python -m sma.mcp
+#
+# Install first:  pip install -e ".[mcp]"   (provides the `sma-mcp` script + the mcp SDK)
+
+[mcp_servers.sma]
+command = "python"
+args = ["-m", "sma.mcp"]              # or: command = "sma-mcp"
+env = { SMA_MANIFEST = "/abs/path/to/sma_manifest.json" }
+# SMA_GROUND_THRESHOLD: raw-score cite-or-abstain cut (calibrate offline; unset => no gate)
+# SMA_NOVELTY_THRESHOLD: expectation-violation cut for the novelty flag (default 0.5)
+
+# Optional: pair SMA with a scientific-corpus MCP (literature / datasets / benchmarks),
+# e.g. Harvard Zitnik Lab's ToolUniverse, so the loop is:
+#   Codex asks -> ToolUniverse pulls papers/data -> you encode to term-ids
+#   -> SMA indexes + returns STRUCTURAL analogs + novelty -> Codex reasons -> iterate.
+[mcp_servers.tooluniverse]
+command = "uvx"
+args = ["--refresh", "tooluniverse"]
+env = { PYTHONIOENCODING = "utf-8" }
+
+# Unattended discovery loops: let Codex call the read-only SMA tools without prompts.
+# (Keep mount/index gated if the agent shouldn't mutate your memory.)
+[tools]
+# default_tools_approval_mode = "auto"

@@ -60,6 +60,9 @@ local-llm = [
   "huggingface-hub>=0.23",
   "llama-cpp-python>=0.2.90"
 ]
+mcp = [
+  "mcp>=1.0"
+]
 
 [project.urls]
 Homepage = "https://github.com/ayazkhan27/SMA-1"
@@ -68,6 +71,7 @@ Issues = "https://github.com/ayazkhan27/SMA-1/issues"
 
 [project.scripts]
 sma = "sma.cli:main"
+sma-mcp = "sma.mcp:main"
 
 [tool.setuptools.packages.find]
 include = ["sma*"]
