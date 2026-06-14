@@ -6,9 +6,9 @@ authors:
   - family-names: Khan
     given-names: Ayaz
 license: Apache-2.0
-repository-code: "https://github.com/khanayaz2727/SMA-1"  # TODO confirm repo URL
+repository-code: "https://github.com/khanayaz2727/SMA-1"
 version: 1.0.0
-date-released: TODO
+date-released: "2026-06-14"
 
 preferred-citation:
   type: article

@@ -323,7 +323,7 @@ climb $0$--$2$ is-a levels by \texttt{rng.choice([0,0,1,1,2])} (replacing the te
 with a random asserted parent at each step) to model imprecise observation;
 (iii) append $3$ in-vocabulary noise terms drawn from the indexed pool
 (\texttt{rng.sample(noise\_pool, 3)}). The resulting query carries no gold-entity
-identifier --- only term ids, rendered to text via the identical term-name lookup
+identifier, only term ids, rendered to text via the identical term-name lookup
 used at indexing.
 
 \textbf{Indexing, splits, and seeds.} Per seed, the eligible pool is shuffled and
@@ -336,8 +336,8 @@ pooled over $3$ seeds $\{7,17,23\}$ with $120$ queries per seed; reported
 $n_\text{all}/n_\text{rare}/n_\text{novel}$ are these pooled totals (cyber is
 smaller because few intrusion-sets meet the 7--30 band).
 
-\textbf{Fairness (identical-record protocol).} Every memory --- SMA, BM25,
-BGE-dense, hybrid-RRF, hybrid$+$rerank, HippoRAG --- indexes the \emph{byte-identical}
+\textbf{Fairness (identical-record protocol).} Every memory (SMA, BM25,
+BGE-dense, hybrid-RRF, hybrid$+$rerank, HippoRAG) indexes the \emph{byte-identical}
 flattened term-name record built once per entity
 (\texttt{IndexItem.text = " ".join(term\_name(t))}); only the retrieval mechanism
 differs. Crucially, is-a ancestors are \emph{deliberately withheld} from the
@@ -353,7 +353,7 @@ technique terms (keyed by external id, e.g.\ \texttt{T1059.001}) and tactic term
 \texttt{x\_mitre\_aliases} are never materialized as terms
 (\texttt{sma/ontology/attack.py}). Group names are used solely as gold entity
 keys, so no threat-group name or alias can enter any indexed document or query
-text --- the attribution task cannot be solved by name leakage.
+text, and the attribution task therefore cannot be solved by name leakage.
 
 $^{\dagger}$Legal: CPC's near-uniform information content yields no rare split
 ($n_\text{rare}=0$ of $324$); legal is scored on the all-query slice.
@@ -406,11 +406,11 @@ OMIM                                & Gold annotations (medicine)& restricted   
 \begin{flushleft}
 {\footnotesize
 $^\dagger$\textbf{OMIM caveat.} We do not redistribute OMIM source records. For the
-medicine arm we release only \emph{derived} gold labels --- disease identifiers
+medicine arm we release only \emph{derived} gold labels (disease identifiers
 paired with their phenotype (HPO term) sets, obtained through the openly licensed
-HPO disease--phenotype annotation file --- not OMIM clinical-synopsis text or any
-OMIM source field. Users requiring OMIM source records must obtain them directly
-from OMIM under its own terms.
+HPO disease--phenotype annotation file), and never OMIM clinical-synopsis text or
+any OMIM source field. Users requiring OMIM source records must obtain them
+directly from OMIM under its own terms.
 SNOMED CT and UMLS are deliberately excluded in favour of fully open
 reproducibility (see Limitations).}
 \end{flushleft}
@@ -428,7 +428,7 @@ reproducibility (see Limitations).}
 Held-out cases are \emph{out-of-index} (the entity's case record is removed
 from the indexed pool) but \emph{in-ontology} (its term classes remain in the
 mounted lattice). Unknown and known cases therefore draw from the same
-vocabulary---the harder, more realistic regime---rather than the trivial
+vocabulary, the harder and more realistic regime, rather than the trivial
 setting in which novelty coincides with unseen terms. Novelty is detected from
 \emph{expectation violation} against the indexed cases (the structural
 grounding score has no analogue to align to), not from term absence. The
@@ -501,9 +501,9 @@ Cyber    & $+0.06$ & $+0.14$ & $+0.02$ & $+0.11$ & $+0.39$ & $0.0346$ & $0.1730$
 {\footnotesize
 $\Delta$ values are the marginal SMA tail top-5 (rare slice) minus each
 baseline's tail top-5; legal$^\dagger$ uses the all-query slice (CPC has no rare
-split). These per-baseline marginal differences are distinct from---and for the
-narrow cyber margin smaller than---the per-query paired-bootstrap mean $\Delta$
-reported against the committed best baseline in Table~2. The
+split). These per-baseline marginal differences are distinct from the per-query
+paired-bootstrap mean $\Delta$ reported against the committed best baseline in
+Table~2, and for the narrow cyber margin they are smaller than it. The
 ``vs.\ best'' columns correct the data-selected comparator by Bonferroni over
 the five baselines. Four of five domains survive ($p_\text{Bonf}\le 0.011$);
 cyber is directional ($p=0.035$, $p_\text{Bonf}=0.17$). $p_\text{raw}=0.0002$ is

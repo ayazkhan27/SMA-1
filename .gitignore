@@ -67,3 +67,8 @@ reports/macfac_examined.txt
 # Local design-reference material (third-party exemplars; not for public repo)
 /References/
 /ClaudeDesignBadFigures/
+
+# Nature template package (external) + local manuscript backups
+*journal*article*template*.zip
+paper/manuscript/sma_nature_mi_xelatex_backup.tex
+paper/manuscript/*.synctex.gz
