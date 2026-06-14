@@ -72,3 +72,6 @@ reports/macfac_examined.txt
 *journal*article*template*.zip
 paper/manuscript/sma_nature_mi_xelatex_backup.tex
 paper/manuscript/*.synctex.gz
+
+# Internal design blueprint (not for public release)
+structure_mapping_agentic_memory_blueprint.md
