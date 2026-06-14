@@ -104,8 +104,10 @@ codex mcp add sma -- uvx structuremappingmemory     # Codex CLI
 claude mcp add sma -- uvx structuremappingmemory    # Claude Code
 ```
 
-`/mcp` to confirm, then ask it to `mount_ontology` / `retrieve` / `novelty`. Full guide,
-manifest config, and alternatives (pipx / pip): [`docs/MCP.md`](docs/MCP.md).
+`/mcp` to confirm. It ships a **catalog of 271 public ontologies** (23 categories — OBO
+Foundry science + cybersecurity, finance, legal/IP, geoscience, materials, web/library),
+mounted on demand: `search_catalog` / `mount_from_catalog("chebi")`, then `retrieve` /
+`novelty`. Full guide, manifest config, and alternatives (pipx / pip): [`docs/MCP.md`](docs/MCP.md).
 
 Or for development, with the evaluation/encoder extras:
 

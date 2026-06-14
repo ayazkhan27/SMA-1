@@ -1,5 +1,5 @@
 """SMA-1: Structure-Mapping Agentic Memory MVP."""
 
 __all__ = ["__version__"]
-__version__ = "1.1.1"
+__version__ = "1.2.0"
 
