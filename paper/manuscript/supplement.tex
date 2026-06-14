@@ -134,6 +134,385 @@ Abstain recall: 4/5 axes Holm-significant; abstain-recall is the honest tie
 
 
 % ============================================================
+% ED TABLE 3 — Synthetic Structure Benchmark (SSB): structure-only control
+% Source: reports/confirmatory/ssb_stats.csv, ssb_summary.csv
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\caption*{\textbf{Extended Data Table~3 $|$ Synthetic Structure Benchmark (SSB): a
+    structure-only control.}
+  Zero-lexical-overlap, lattice-bridged relational analogs where the gold match is
+  recoverable only by structure-mapping; BM25 and TF-IDF/dense retrieval are
+  information-theoretically blind by construction. \emph{Library} task: $n{=}200$ pooled
+  queries ($100$ queries $\times\,2$ seeds, seeds $41/43$); \emph{forced-choice}: each query
+  against a single structural distractor. Deltas, 95\% CIs, Holm-adjusted $p$-values, and
+  Cliff's $\delta$ are SMA versus each baseline (paired bootstrap). The control is
+  de-circularized (no \texttt{far\_}-prefix bijection; no $(i,i{+}2)$ rewiring).
+  All numbers from \texttt{reports/confirmatory/ssb\_stats.csv} and \texttt{ssb\_summary.csv}.}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{llcccccc}
+\toprule
+\textbf{Task} & \textbf{Method} & \textbf{$r@1$} & \textbf{MRR} &
+    \textbf{$\Delta\,r@1$} & \textbf{95\% CI} & \textbf{$p_{\mathrm{Holm}}$} & \textbf{Cliff's $\delta$} \\
+\midrule
+\multirow{3}{*}{Library}
+  & \textbf{SMA (ours)} & \textbf{0.895} & \textbf{0.948} & --- & --- & --- & --- \\
+  & BM25                & 0.000 & 0.010 & $+0.895$ & $[0.850, 0.935]$ & $4{\times}10^{-4}$ & $0.895$ \\
+  & TF-IDF/dense        & 0.000 & 0.010 & $+0.895$ & $[0.850, 0.935]$ & $4{\times}10^{-4}$ & $0.895$ \\
+\midrule
+Forced-choice
+  & \textbf{SMA (ours)} & \textbf{1.000} & \textbf{1.000} & --- & --- & --- & --- \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+{\footnotesize
+$r@1$ = rank-1 accuracy; MRR = mean reciprocal rank. BM25 and TF-IDF/dense score $0.000$ at
+rank-1 (MRR $\approx 0.010$, at chance) because query and gold entry share no surface tokens;
+the match is recoverable only by aligning higher-order relational structure across the
+ascension lattice. SSB carries no information-content gradient for either baseline to exploit,
+so the result isolates SMA's structure-mapping mechanism from both lexical overlap and
+information-content similarity.}
+\end{flushleft}
+\label{tab:ed3_ssb}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 4 — Ancestor-expanded RAG + IC-similarity fair baselines
+% Source: reports/confirmatory/ontology_fair_baselines.csv
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\caption*{\textbf{Extended Data Table~4 $|$ Ancestor-expanded RAG and
+    information-content baselines (rare-slice top-5).}
+  Each baseline indexes the byte-identical flattened term-name record; the
+  $+$ancestors arms additionally expand every document and query term-set with
+  its full is-a ancestor closure before indexing. Phenomizer (IC best-match
+  average) and Jaccard are ontology-aware information-content references.
+  $\Delta = \text{SMA} - \text{method}$ on the rare-query slice; $p_{\mathrm{Holm}}$
+  is Holm--Bonferroni-corrected across baselines within each ontology
+  ($10^4$ paired-bootstrap resamples). Giving BM25/dense the is-a ancestor
+  closure \emph{lowers} their accuracy (common ancestors dilute IDF/cosine);
+  SMA beats every expanded RAG arm. The sole non-significant contrast is plain
+  BM25 on GO. All numbers from
+  \texttt{reports/confirmatory/ontology\_fair\_baselines.csv}.}
+\small
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{lcccccc}
+\toprule
+& \multicolumn{3}{c}{\textbf{HPO (rare disease)}} & \multicolumn{3}{c}{\textbf{GO (gene function)}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}
+\textbf{Method} & \textbf{Top-5} & \textbf{$\Delta$} & \textbf{$p_{\mathrm{Holm}}$}
+                & \textbf{Top-5} & \textbf{$\Delta$} & \textbf{$p_{\mathrm{Holm}}$} \\
+\midrule
+\textbf{SMA (ours)}        & \textbf{0.917} & ---      & ---     & \textbf{0.846} & ---      & ---     \\
+\midrule
+Phenomizer (IC-BMA)        & 0.952 & $-0.035$ & 0.047   & 0.860 & $-0.013$ & 0.677   \\
+Jaccard                    & 0.708 & $+0.208$ & 0.0012  & 0.737 & $+0.110$ & 0.0012  \\
+BM25                       & 0.731 & $+0.186$ & 0.0012  & 0.776 & $+0.070$ & 0.076   \\
+BM25 $+$ ancestors         & 0.715 & $+0.202$ & 0.0012  & 0.504 & $+0.342$ & 0.0012  \\
+Dense-RAG (TF-IDF)         & 0.622 & $+0.295$ & 0.0012  & 0.719 & $+0.127$ & 0.0012  \\
+Dense-RAG $+$ ancestors    & 0.561 & $+0.356$ & 0.0012  & 0.465 & $+0.382$ & 0.0012  \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+{\footnotesize
+Phenomizer is an information-content oracle reference (negative $\Delta$:
+SMA reaches parity but does not beat it; see main text and
+Extended Data Table~1). The $+$ancestors arms are the fairness
+control: ancestor-expanding the retrievable text \emph{reduces} BM25 and dense
+accuracy on both ontologies, so SMA's margin is not an artifact of ancestor
+visibility. The only non-significant SMA contrast is against unexpanded BM25 on
+GO ($p_{\mathrm{Holm}}{=}0.076$).}
+\end{flushleft}
+\label{tab:ed4_fair_baselines}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 5 — Elliptic Bitcoin graph-fraud boundary probe (honest null)
+% Source: reports/confirmatory/agentic_fraud_elliptic.csv
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\caption*{\textbf{Extended Data Table~5 $|$ Elliptic Bitcoin graph-fraud boundary
+    probe (honest null).}
+  SMA, dense, and lexical retrieval over a graph-neighbourhood licit/illicit
+  typology encoding, versus a flat logistic-regression baseline on the full
+  $166$-feature record. SMA shows no edge over the best retrieval baseline
+  ($\Delta$ accuracy $+0.004$, 95\% CI $[-0.010,+0.019]$, $p{=}0.56$), and
+  \emph{all} retrieval methods trail logistic regression. Macro-F1 averages over
+  the licit and illicit classes; illicit-F1 isolates the rare fraud class
+  ($219$ illicit of $2{,}250$ pooled test instances); ROC-AUC is threshold-free.
+  All numbers from \texttt{reports/confirmatory/agentic\_fraud\_elliptic.csv}
+  ($k{=}15$; seeds $7|17|23$).}
+\small
+\setlength{\tabcolsep}{8pt}
+\begin{tabular}{lccc}
+\toprule
+\textbf{Method} & \textbf{Macro-F1} & \textbf{Illicit-F1} & \textbf{ROC-AUC} \\
+\midrule
+SMA (graph typology)        & 0.581 & 0.243 & 0.622 \\
+Dense-RAG                   & 0.586 & 0.262 & 0.727 \\
+BM25                        & 0.602 & 0.289 & 0.709 \\
+\midrule
+Logistic regression (flat, 166-feat.) & \textbf{0.787} & \textbf{0.621} & \textbf{0.919} \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+{\footnotesize
+\textbf{Bold} $=$ best per column. The flat logistic-regression baseline on the
+native $166$ engineered transaction features outperforms every
+structure/retrieval method, including SMA, on all three metrics: on this task the
+discriminative signal is in the per-record feature vector, not in a coarse
+typology lattice over the transaction graph. SMA vs.\ best retrieval baseline:
+$\Delta$ accuracy $+0.004$, 95\% CI $[-0.010,+0.019]$, $p{=}0.56$
+(per-query paired bootstrap; the three seeds share entities, so the effective $N$
+is $\approx 3\times$ smaller than the $2{,}250$ pooled rows).
+Source: \texttt{reports/confirmatory/agentic\_fraud\_elliptic.csv}.}
+\end{flushleft}
+\label{tab:ed5_elliptic}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 6 — Benchmark datasheet (Gebru-style) for the memory-swap benchmark
+% Sources: sma/eval/agentic/arms/*.py, harness.py, attack.py,
+%          reports/confirmatory/agentic_{domain}.csv
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\caption*{\textbf{Extended Data Table~6 $|$ Datasheet for the memory-swap
+    benchmark} (Gebru-style). Per-arm data source, licence, eligibility band, and
+  pooled query counts; the shared query generator, indexing, and fairness
+  protocol are stated in the notes. Sources are version-pinned; all counts are
+  from \texttt{reports/confirmatory/agentic\_\{domain\}.csv} and the arm loaders
+  in \texttt{sma/eval/agentic/arms/}.}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lllccccc}
+\toprule
+\textbf{Arm} & \textbf{Entity $\to$ gold} & \textbf{Source} & \textbf{Licence} &
+  \textbf{Band} & \textbf{$n_\text{all}$} & \textbf{$n_\text{rare}$} & \textbf{$n_\text{novel}$} \\
+\midrule
+Medicine & disease $\to$ HPO phenotypes      & \texttt{phenotype.hpoa} (HPO/OMIM/Orphanet) & CC BY 4.0$^{\ddagger}$ & 7--30  & 324 & 274 & 36 \\
+Genomics & protein $\to$ GO processes         & \texttt{goa\_human.gaf} (GOA)              & CC BY 4.0              & 7--30  & 324 & 192 & 36 \\
+Finance  & filing $\to$ US-GAAP concepts      & SEC FSDS \texttt{num.txt} (2024Q1)         & Public domain          & 10--40 & 324 & 208 & 36 \\
+Cyber    & threat group $\to$ ATT\&CK TTPs    & ATT\&CK STIX \texttt{enterprise-attack.json} & Apache-2.0           & 7--30  & 222 & 175 & 24 \\
+Legal/IP & patent $\to$ CPC subgroups         & USPTO grant XML \texttt{ipg161011.xml}     & Public domain          & 7--30  & 324 & \textit{n/a}$^{\dagger}$ & 36 \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+{\footnotesize
+\textbf{Eligibility.} An entity is eligible only if its gold term-set falls in the
+arm's band (\texttt{MIN\_TERMS}--\texttt{MAX\_TERMS}): 7--30 for
+medicine/genomics/cyber/legal, 10--40 for finance. Below the floor a case is
+trivial; above the ceiling SME kernel enumeration becomes intractable (excluding
+e.g.\ the most-documented threat groups). Bands are applied identically to all
+memories.
+
+\textbf{Query generator} (\texttt{harness.py:make\_qspec}, shared by every arm and
+every memory). From an entity's eligible term-set: (i) sample at most $5$ gold
+terms (\texttt{rng.sample(terms, min(5, len(terms)))}); (ii) for each kept term,
+climb $0$--$2$ is-a levels by \texttt{rng.choice([0,0,1,1,2])} (replacing the term
+with a random asserted parent at each step) to model imprecise observation;
+(iii) append $3$ in-vocabulary noise terms drawn from the indexed pool
+(\texttt{rng.sample(noise\_pool, 3)}). The resulting query carries no gold-entity
+identifier --- only term ids, rendered to text via the identical term-name lookup
+used at indexing.
+
+\textbf{Indexing, splits, and seeds.} Per seed, the eligible pool is shuffled and
+truncated to \texttt{n\_index}$=2000$; a \texttt{holdout\_frac}$=0.1$ slice is
+reserved as held-out (NOVEL) entities (their true key is never indexed and feeds
+the abstain/novelty metrics), the remainder is indexed. The rare/long-tail slice
+is defined by information content (rarest gold term above the corpus median),
+computed over the \emph{indexed} records only (no test-on-train leak). Counts are
+pooled over $3$ seeds $\{7,17,23\}$ with $120$ queries per seed; reported
+$n_\text{all}/n_\text{rare}/n_\text{novel}$ are these pooled totals (cyber is
+smaller because few intrusion-sets meet the 7--30 band).
+
+\textbf{Fairness (identical-record protocol).} Every memory --- SMA, BM25,
+BGE-dense, hybrid-RRF, hybrid$+$rerank, HippoRAG --- indexes the \emph{byte-identical}
+flattened term-name record built once per entity
+(\texttt{IndexItem.text = " ".join(term\_name(t))}); only the retrieval mechanism
+differs. Crucially, is-a ancestors are \emph{deliberately withheld} from the
+baseline documents and queries: SMA reaches ancestors at match time through
+bounded lattice ascension, whereas adding the ancestor closure to the baseline
+text was tested directly and \emph{hurts} the baselines (common ancestors dilute
+IDF and cosine; Extended Data Table~4), so withholding them
+is the fair, not the favourable, choice.
+
+\textbf{Cyber alias guard.} The mounted ATT\&CK graph contains \emph{only}
+technique terms (keyed by external id, e.g.\ \texttt{T1059.001}) and tactic terms;
+\texttt{intrusion-set} objects (threat-group names) and their
+\texttt{x\_mitre\_aliases} are never materialized as terms
+(\texttt{sma/ontology/attack.py}). Group names are used solely as gold entity
+keys, so no threat-group name or alias can enter any indexed document or query
+text --- the attribution task cannot be solved by name leakage.
+
+$^{\dagger}$Legal: CPC's near-uniform information content yields no rare split
+($n_\text{rare}=0$ of $324$); legal is scored on the all-query slice.
+$^{\ddagger}$We redistribute derived gold labels (disease ids and phenotype
+sets), not OMIM source records.}
+\end{flushleft}
+\label{tab:ed6_datasheet}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 7 — Source licensing for mounted ontologies and benchmark gold
+% Source: release/model_card.md, data/manifests/datasets.json
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\caption*{\textbf{Extended Data Table~7 $|$ Licensing of mounted ontologies and
+    benchmark gold sources.}
+  Every mounted ontology and every derived gold-label source is openly licensed
+  and version-pinned. We redistribute only \emph{derived} gold (disease
+  identifiers and phenotype/annotation sets) and never source records from any
+  vocabulary that does not permit it; the OMIM caveat is noted below. Ontology
+  release versions and file \texttt{md5} checksums are recorded in
+  \texttt{data/manifests/datasets.json}.}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lllc}
+\toprule
+\textbf{Source} & \textbf{Role} & \textbf{License} & \textbf{Redistributed} \\
+\midrule
+HPO~\cite{kohler2021hpo}            & Ontology (medicine)        & CC BY 4.0      & ontology \\
+GO~\cite{ashburner2000go}           & Ontology (genomics)        & CC BY 4.0      & ontology \\
+MONDO~\cite{vasilevsky2022mondo}    & Ontology (disease)         & CC BY 4.0      & ontology \\
+Uberon                              & Ontology (anatomy)         & CC BY 4.0      & ontology \\
+ChEBI                               & Ontology (chemistry)       & CC BY 4.0      & ontology \\
+Orphanet                            & Gold annotations (medicine)& CC BY 4.0      & derived gold \\
+GO Annotation File (GOA)            & Gold annotations (genomics)& CC BY 4.0      & derived gold \\
+MITRE ATT\&CK~\cite{strom2018attack}& Ontology + gold (cyber)    & Apache-2.0     & ontology + gold \\
+MITRE CAPEC / CWE                   & Ontology (cyber)           & public terms of use & ontology \\
+CPC                                 & Ontology + gold (legal/IP) & public domain  & ontology + gold \\
+US-GAAP                             & Ontology (finance)         & public domain  & ontology \\
+FIBO                                & Ontology (finance)         & MIT            & ontology \\
+LKIF-core                           & Ontology (legal)           & open (LGPL-compatible) & ontology \\
+SEC EDGAR filings                   & Gold (finance)             & public domain  & derived gold \\
+USPTO patent CPC assignments        & Gold (legal/IP)            & public domain  & derived gold \\
+OMIM                                & Gold annotations (medicine)& restricted     & \textbf{derived only}$^\dagger$ \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+{\footnotesize
+$^\dagger$\textbf{OMIM caveat.} We do not redistribute OMIM source records. For the
+medicine arm we release only \emph{derived} gold labels --- disease identifiers
+paired with their phenotype (HPO term) sets, obtained through the openly licensed
+HPO disease--phenotype annotation file --- not OMIM clinical-synopsis text or any
+OMIM source field. Users requiring OMIM source records must obtain them directly
+from OMIM under its own terms.
+SNOMED CT and UMLS are deliberately excluded in favour of fully open
+reproducibility (see Limitations).}
+\end{flushleft}
+\label{tab:ed7_licenses}
+\end{table}
+
+
+% ============================================================
+% STATISTICAL-RIGOR ED SUBSECTIONS + ED TABLE 8 (vs-all-baselines)
+% Source: reports/confirmatory/agentic_vs_all_baselines.csv
+% ============================================================
+
+\subsection*{Leakage regime: out-of-index, in-ontology}
+
+Held-out cases are \emph{out-of-index} (the entity's case record is removed
+from the indexed pool) but \emph{in-ontology} (its term classes remain in the
+mounted lattice). Unknown and known cases therefore draw from the same
+vocabulary---the harder, more realistic regime---rather than the trivial
+setting in which novelty coincides with unseen terms. Novelty is detected from
+\emph{expectation violation} against the indexed cases (the structural
+grounding score has no analogue to align to), not from term absence. The
+rare-by-information-content threshold (rarest-term IC above the corpus median)
+is computed over the \emph{indexed pool only}, so the slice definition never
+consults held-out cases and no test-on-train leakage can inflate the rare-slice
+contrast.
+
+\subsection*{Statistical rigor: multiplicity, resampling units, and selection}
+
+\textit{Two Holm families.} We apply Holm--Bonferroni correction within two
+pre-registered families: the \emph{retrieval-suite} family (across the five
+evaluated domains: medicine, genomics, finance, cyber, legal) and the
+\emph{end-to-end} family (across the five trustworthy-QA axes: accuracy,
+abstain-recall, novelty-recall, selective-accuracy, grounding-AUROC).
+
+\textit{Resampling unit.} The retrieval-suite paired bootstrap ($10^4$
+resamples, seed 12345) is \emph{per-query, not per-entity}: the three seeds
+share the same underlying entities, so the effective number of independent
+entities is roughly one-third of the resampled query count. We disclose this
+because per-query resampling treats correlated queries over a shared entity as
+independent and therefore yields anti-conservative confidence intervals; the
+end-to-end design avoids this (its $120$ answerable and $120$ held-out cases are
+distinct diseases, one query each, and the bootstrap resamples entities, with
+the grounding-AUROC bootstrap resampling the positive and negative pools
+separately).
+
+\textit{Selection correction (D5).} The headline comparator ``best RAG'' is
+\emph{data-selected}: the strongest baseline is chosen by all-query top-5 and
+then tested on the same statistic, which double-dips. To address this directly
+we compare SMA against \emph{every} one of the five baselines in \emph{every}
+domain (\texttt{agentic\_vs\_all\_baselines.csv}). SMA's tail top-5 advantage is
+strictly positive against all five baselines in all five domains, so the
+``best-RAG'' win is not a selection artifact. Applying a conservative
+Bonferroni-over-baselines correction ($\times 5$) to the vs-best $p$-value,
+\emph{four of five domains survive}: medicine, genomics and finance at
+$p_\text{Bonf}=0.0010$ and legal at $p_\text{Bonf}=0.0110$. Cyber does not
+survive the selection correction ($p=0.035 \to p_\text{Bonf}=0.17$) and we
+report it as \emph{directional}, consistent with threat groups' distinctive
+technique vocabularies, which lexical and dense retrieval partly capture.
+
+\begin{table}[htbp]
+\centering
+\caption*{\textbf{Extended Data Table~8 $|$ SMA versus \emph{every} retrieval
+    baseline, with selection-corrected significance.}
+  Tail top-5 (rare slice; legal on the all-query slice) advantage
+  $\Delta=\text{SMA}-\text{baseline}$ for each of the five baselines in each
+  domain; all $\Delta>0$. The right block reports the data-selected ``best RAG''
+  comparator (chosen by all-query top-5), its raw paired-bootstrap $p$, and the
+  Bonferroni-over-baselines ($\times 5$) corrected $p_\text{Bonf}$.
+  Source: \texttt{reports/confirmatory/agentic\_vs\_all\_baselines.csv}.}
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lccccc cc c}
+\toprule
+ & \multicolumn{5}{c}{\textbf{$\Delta$ tail top-5 vs.\ each baseline}}
+   & \multicolumn{3}{c}{\textbf{vs.\ best (selected)}} \\
+\cmidrule(lr){2-6}\cmidrule(lr){7-9}
+\textbf{Domain} & BM25 & Dense & Hyb-RRF & Hyb+Rr & HippoRAG
+  & $p_\text{raw}$ & $p_\text{Bonf}$ & Survives \\
+\midrule
+Medicine & $+0.49$ & $+0.47$ & $+0.45$ & $+0.37$ & $+0.60$ & $0.0002$ & $0.0010$ & yes \\
+Genomics & $+0.36$ & $+0.17$ & $+0.18$ & $+0.26$ & $+0.52$ & $0.0002$ & $0.0010$ & yes \\
+Finance  & $+0.19$ & $+0.21$ & $+0.19$ & $+0.20$ & $+0.30$ & $0.0002$ & $0.0010$ & yes \\
+Legal$^\dagger$ & $+0.27$ & $+0.07$ & $+0.15$ & $+0.15$ & $+0.52$ & $0.0022$ & $0.0110$ & yes \\
+Cyber    & $+0.17$ & $+0.18$ & $+0.08$ & $+0.15$ & $+0.39$ & $0.0346$ & $0.1730$ & \textbf{no} \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+{\footnotesize
+$\Delta$ values are SMA tail top-5 (rare slice) minus each baseline's tail
+top-5; legal$^\dagger$ uses the all-query slice (CPC has no rare split). The
+``vs.\ best'' columns correct the data-selected comparator by Bonferroni over
+the five baselines. Four of five domains survive ($p_\text{Bonf}\le 0.011$);
+cyber is directional ($p=0.035$, $p_\text{Bonf}=0.17$). $p_\text{raw}=0.0002$ is
+the paired-bootstrap floor ($1/(R{+}1)$, $R=10^4$). The bootstrap is per-query,
+not per-entity (three seeds share entities), so reported $p$-values are
+anti-conservative at the entity level.}
+\end{flushleft}
+\label{tab:ed8_vs_all_baselines}
+\end{table}
+
+
+% ============================================================
 % ED FIGURE 1 — Per-domain AURC + novelty-F1 across all 6 memories
 % ============================================================
 

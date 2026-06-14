@@ -1,0 +1,53 @@
+Experiment D2: ancestor-expanded RAG + IC-similarity baseline fairness
+Same tasks/splits as reports/confirmatory/ontology_suite.csv (seeds 7/17/23, n_index=2000, n_query=120).
+Primary metric: tail (rare) top-5; paired bootstrap of SMA-minus-baseline; Holm across the baseline family per arm.
+Ancestor-expanded arms fold the FULL is-a ancestor closure (term names) into BOTH document and query text before ranking.
+
+########## A1-hpo-rare-disease ##########
+  pooled queries: n_all=360  n_rare(tail)=312  seeds=3
+  per-seed SMA top-5 (sanity vs committed ontology_suite.csv): 7=0.900, 17=0.925, 23=0.908
+
+  method                t5_rare   t5_all    Δ_vs_SMA   95% CI                p        p_holm   cliffs
+  SMA                   0.9167    0.9111    +0.0000    [+0.000,+0.000]       1.0000   1.0000   +0.000
+  Phenomizer(IC-BMA)    0.9519    0.9444    -0.0353    [-0.071,-0.003]       0.0466   0.0466   -0.035
+  Jaccard               0.7083    0.7111    +0.2083    [+0.151,+0.266]       0.0002   0.0012   +0.208
+  Dense-RAG(TF-IDF)     0.6218    0.6167    +0.2949    [+0.237,+0.353]       0.0002   0.0012   +0.295
+  Dense-RAG+ancestors   0.5609    0.5472    +0.3558    [+0.298,+0.417]       0.0002   0.0012   +0.356
+  BM25                  0.7308    0.7083    +0.1859    [+0.131,+0.244]       0.0002   0.0012   +0.186
+  BM25+ancestors        0.7147    0.6944    +0.2019    [+0.147,+0.260]       0.0002   0.0012   +0.202
+
+  --- VERDICT [A1-hpo-rare-disease] (rare/tail top-5) ---
+    SMA vs BM25                   Δ=+0.1859 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+    SMA vs BM25+ancestors         Δ=+0.2019 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+    SMA vs Dense-RAG(TF-IDF)      Δ=+0.2949 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+    SMA vs Dense-RAG+ancestors    Δ=+0.3558 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+    SMA vs Phenomizer(IC-BMA)     Δ=-0.0353 p_holm=0.0466  ->  BASELINE BEATS SMA (Holm-sig)
+    SMA vs Jaccard                Δ=+0.2083 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+
+    ancestor-expansion lift  : BM25 0.731->0.715 (Δ-0.016); Dense 0.622->0.561 (Δ-0.061)
+    best ancestor-RAG = BM25+ancestors t5_rare=0.715; SMA=0.917; residual gap=+0.202; Holm-sig gap remains? YES (SMA still ahead)
+
+########## A2-go-gene-function ##########
+  pooled queries: n_all=360  n_rare(tail)=228  seeds=3
+  per-seed SMA top-5 (sanity vs committed ontology_suite.csv): 7=0.767, 17=0.792, 23=0.767
+
+  method                t5_rare   t5_all    Δ_vs_SMA   95% CI                p        p_holm   cliffs
+  SMA                   0.8465    0.7750    +0.0000    [+0.000,+0.000]       1.0000   1.0000   +0.000
+  Phenomizer(IC-BMA)    0.8596    0.7861    -0.0132    [-0.066,+0.039]       0.6773   0.6773   -0.013
+  Jaccard               0.7368    0.6972    +0.1096    [+0.048,+0.171]       0.0004   0.0012   +0.110
+  Dense-RAG(TF-IDF)     0.7193    0.6722    +0.1272    [+0.061,+0.193]       0.0002   0.0012   +0.127
+  Dense-RAG+ancestors   0.4649    0.4528    +0.3816    [+0.311,+0.452]       0.0002   0.0012   +0.382
+  BM25                  0.7763    0.7000    +0.0702    [+0.009,+0.132]       0.0382   0.0764   +0.070
+  BM25+ancestors        0.5044    0.4389    +0.3421    [+0.272,+0.417]       0.0002   0.0012   +0.342
+
+  --- VERDICT [A2-go-gene-function] (rare/tail top-5) ---
+    SMA vs BM25                   Δ=+0.0702 p_holm=0.0764  ->  PARITY (no Holm-sig gap)
+    SMA vs BM25+ancestors         Δ=+0.3421 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+    SMA vs Dense-RAG(TF-IDF)      Δ=+0.1272 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+    SMA vs Dense-RAG+ancestors    Δ=+0.3816 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+    SMA vs Phenomizer(IC-BMA)     Δ=-0.0132 p_holm=0.6773  ->  PARITY (no Holm-sig gap)
+    SMA vs Jaccard                Δ=+0.1096 p_holm=0.0012  ->  SMA WINS (Holm-sig)
+
+    ancestor-expansion lift  : BM25 0.776->0.504 (Δ-0.272); Dense 0.719->0.465 (Δ-0.254)
+    best ancestor-RAG = BM25+ancestors t5_rare=0.504; SMA=0.846; residual gap=+0.342; Holm-sig gap remains? YES (SMA still ahead)
+

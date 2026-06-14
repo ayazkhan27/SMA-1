@@ -541,3 +541,122 @@
   note      = {arXiv:2212.10511}
   % Verified: ACL Anthology 2023.acl-long.546
 }
+
+% ============================================================================
+% ADDED BY AGENT C (related-work block, 2026-06-14) — all web-verified.
+% gutierrez2025hipporag2 and edge2024graphrag already exist above (cite, do not
+% duplicate). The 8 entries below are genuinely missing keys.
+% ============================================================================
+
+% ---- IC-based semantic-similarity classics (code implements Resnik IC) -------
+
+@inproceedings{resnik1995,
+  author    = {Resnik, Philip},
+  title     = {Using Information Content to Evaluate Semantic Similarity in a
+               Taxonomy},
+  booktitle = {Proceedings of the 14th International Joint Conference on
+               Artificial Intelligence ({IJCAI})},
+  volume    = {1},
+  pages     = {448--453},
+  year      = {1995},
+  note      = {arXiv:cmp-lg/9511007}
+  % Verified: IJCAI-95 vol.1 pp.448-453; arXiv cmp-lg/9511007; ACM DL 5555/1625855.1625914
+}
+
+@inproceedings{lin1998,
+  author    = {Lin, Dekang},
+  title     = {An Information-Theoretic Definition of Similarity},
+  booktitle = {Proceedings of the Fifteenth International Conference on Machine
+               Learning ({ICML})},
+  pages     = {296--304},
+  year      = {1998},
+  publisher = {Morgan Kaufmann},
+  note      = {DBLP conf/icml/Lin98}
+  % Verified: ICML 1998 (Madison, WI) pp.296-304; DBLP/Google Scholar doi:10.5555/645527.657297
+}
+
+@inproceedings{jiang1997,
+  author    = {Jiang, Jay J. and Conrath, David W.},
+  title     = {Semantic Similarity Based on Corpus Statistics and Lexical
+               Taxonomy},
+  booktitle = {Proceedings of the 10th Research on Computational Linguistics
+               International Conference ({ROCLING~X})},
+  pages     = {19--33},
+  address   = {Taipei, Taiwan},
+  year      = {1997},
+  note      = {arXiv:cmp-lg/9709008}
+  % Verified: ROCLING X (1997) pp.19-33; ACL Anthology O97-1002; arXiv cmp-lg/9709008
+}
+
+% ---- ontology-aware RAG (flatten ontology into retrievable text/graph) -------
+
+@article{ograg2024,
+  author  = {Sharma, Kartik and Kumar, Peeyush and Li, Yunqing},
+  title   = {{OG-RAG}: Ontology-Grounded Retrieval-Augmented Generation for
+             Large Language Models},
+  journal = {arXiv preprint},
+  year    = {2024},
+  note    = {arXiv:2412.15235}
+  % Verified: arXiv:2412.15235 (2024-12-19); Microsoft Research publication page
+}
+
+@article{ontologyrag2025,
+  author  = {Feng, Hui and Yin, Yuntzu and Reynares, Emiliano and Nanavati, Jay},
+  title   = {{OntologyRAG}: Better and Faster Biomedical Code Mapping with
+             Retrieval-Augmented Generation Leveraging Ontology Knowledge Graphs
+             and Large Language Models},
+  journal = {arXiv preprint},
+  year    = {2025},
+  note    = {arXiv:2502.18992}
+  % Verified: arXiv:2502.18992 (2025-02-26)
+}
+
+% ---- case-based reasoning with LLMs (retrieval = surface feature similarity) -
+
+@inproceedings{cbrrag2024,
+  author    = {Wiratunga, Nirmalie and Abeyratne, Ramitha and Jayawardena, Lasal
+               and Martin, Kyle and Massie, Stewart and Nkisi-Orji, Ikechukwu
+               and Weerasinghe, Ruvan and Liret, Anne and Fleisch, Bruno},
+  title     = {{CBR-RAG}: Case-Based Reasoning for Retrieval Augmented Generation
+               in {LLMs} for Legal Question Answering},
+  booktitle = {Case-Based Reasoning Research and Development ({ICCBR} 2024)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {14775},
+  pages     = {445--460},
+  year      = {2024},
+  publisher = {Springer},
+  doi       = {10.1007/978-3-031-63646-2_29},
+  note      = {arXiv:2404.04302}
+  % Verified: ICCBR 2024, Springer LNCS 14775 doi:10.1007/978-3-031-63646-2_29; arXiv:2404.04302
+}
+
+% ---- ontology tooling / biomedical similarity baselines ----------------------
+
+@software{oak,
+  author    = {Mungall, Christopher J. and Overton, James A. and Joachimiak,
+               Marcin P. and Caufield, J. Harry and others},
+  title     = {Ontology Access Kit ({OAK})},
+  publisher = {Zenodo},
+  year      = {2022},
+  doi       = {10.5281/zenodo.6456239},
+  url       = {https://github.com/INCATools/ontology-access-kit}
+  % Verified: INCATools/ontology-access-kit; Zenodo concept DOI 10.5281/zenodo.6456239
+  % (software; no peer-reviewed paper — Zenodo is the canonical citation)
+}
+
+@article{exomiser,
+  author  = {Smedley, Damian and Jacobsen, Julius O. B. and J{\"a}ger, Marten
+             and K{\"o}hler, Sebastian and Holtgrewe, Manuel and Schubach, Max
+             and Siragusa, Enrico and Zemojtel, Tomasz and Buske, Orion J.
+             and Washington, Nicole L. and Bone, William P.
+             and Haendel, Melissa A. and Robinson, Peter N.},
+  title   = {Next-Generation Diagnostics and Disease-Gene Discovery with the
+             {Exomiser}},
+  journal = {Nature Protocols},
+  volume  = {10},
+  number  = {12},
+  pages   = {2004--2015},
+  year    = {2015},
+  doi     = {10.1038/nprot.2015.124}
+  % Verified: Nat. Protoc. 10:2004-2015 (2015); doi:10.1038/nprot.2015.124; PubMed PMID 26562621
+}
