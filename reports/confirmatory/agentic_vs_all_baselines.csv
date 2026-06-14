@@ -1,0 +1,26 @@
+domain,baseline,primary_col,sma_t5_all,sma_t5_primary,base_t5_all,base_t5_primary,delta_t5all,delta_primary,is_committed_best,p_raw,p_raw_note,ci_95,p_bonferroni_vs_best,n_baselines,survives_bonferroni
+medicine,bm25,t5_rare,0.9537,0.9489,0.4630,0.4854,0.4907,0.4635,no,0.0002,<=best_p (conservative),,,,
+medicine,dense,t5_rare,0.9537,0.9489,0.4815,0.4964,0.4722,0.4525,no,0.0002,<=best_p (conservative),,,,
+medicine,hybrid_rrf,t5_rare,0.9537,0.9489,0.5062,0.5109,0.4475,0.4380,no,0.0002,<=best_p (conservative),,,,
+medicine,hybrid_rerank,t5_rare,0.9537,0.9489,0.5833,0.6058,0.3704,0.3431,yes,0.0002,committed,"[0.2806, 0.3889]",0.0010,5,yes
+medicine,hipporag,t5_rare,0.9537,0.9489,0.3580,0.3613,0.5957,0.5876,no,0.0002,<=best_p (conservative),,,,
+discovery,bm25,t5_rare,0.7963,0.8490,0.4352,0.5521,0.3611,0.2969,no,0.0002,<=best_p (conservative),,,,
+discovery,dense,t5_rare,0.7963,0.8490,0.6235,0.6823,0.1728,0.1667,yes,0.0002,committed,"[0.1000, 0.2111]",0.0010,5,yes
+discovery,hybrid_rrf,t5_rare,0.7963,0.8490,0.6204,0.7031,0.1759,0.1459,no,0.0002,<=best_p (conservative),,,,
+discovery,hybrid_rerank,t5_rare,0.7963,0.8490,0.5401,0.6510,0.2562,0.1980,no,0.0002,<=best_p (conservative),,,,
+discovery,hipporag,t5_rare,0.7963,0.8490,0.2778,0.3177,0.5185,0.5313,no,0.0002,<=best_p (conservative),,,,
+finance,bm25,t5_rare,0.3765,0.4183,0.1821,0.2500,0.1944,0.1683,no,0.0002,<=best_p (conservative),,,,
+finance,dense,t5_rare,0.3765,0.4183,0.1698,0.1875,0.2067,0.2308,no,0.0002,<=best_p (conservative),,,,
+finance,hybrid_rrf,t5_rare,0.3765,0.4183,0.1914,0.2308,0.1851,0.1875,yes,0.0002,committed,"[0.1111, 0.2250]",0.0010,5,yes
+finance,hybrid_rerank,t5_rare,0.3765,0.4183,0.1728,0.2019,0.2037,0.2164,no,0.0002,<=best_p (conservative),,,,
+finance,hipporag,t5_rare,0.3765,0.4183,0.0741,0.1010,0.3024,0.3173,no,0.0002,<=best_p (conservative),,,,
+cyber,bm25,t5_rare,0.8108,0.7657,0.6441,0.7029,0.1667,0.0628,no,0.0346,<=best_p (conservative),,,,
+cyber,dense,t5_rare,0.8108,0.7657,0.6306,0.6286,0.1802,0.1371,no,0.0346,<=best_p (conservative),,,,
+cyber,hybrid_rrf,t5_rare,0.8108,0.7657,0.7297,0.7486,0.0811,0.0171,yes,0.0346,committed,"[0.0081, 0.1423]",0.1730,5,no
+cyber,hybrid_rerank,t5_rare,0.8108,0.7657,0.6622,0.6514,0.1486,0.1143,no,0.0346,<=best_p (conservative),,,,
+cyber,hipporag,t5_rare,0.8108,0.7657,0.4189,0.3771,0.3919,0.3886,no,0.0346,<=best_p (conservative),,,,
+legal,bm25,t5_all,0.9414,0.9414,0.6698,0.6698,0.2716,0.2716,no,0.0022,<=best_p (conservative),,,,
+legal,dense,t5_all,0.9414,0.9414,0.8704,0.8704,0.0710,0.0710,yes,0.0022,committed,"[0.0250, 0.1028]",0.0110,5,yes
+legal,hybrid_rrf,t5_all,0.9414,0.9414,0.7932,0.7932,0.1482,0.1482,no,0.0022,<=best_p (conservative),,,,
+legal,hybrid_rerank,t5_all,0.9414,0.9414,0.7932,0.7932,0.1482,0.1482,no,0.0022,<=best_p (conservative),,,,
+legal,hipporag,t5_all,0.9414,0.9414,0.4167,0.4167,0.5247,0.5247,no,0.0022,<=best_p (conservative),,,,
