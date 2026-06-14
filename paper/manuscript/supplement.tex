@@ -111,8 +111,8 @@ top-5 (all) in 5/5 domains.}
 Accuracy             & 0.017 & 0.100 & 0.342 & $+0.242\;[+0.167,+0.325]$ & $<0.001^{***}$ \\
 Citation faithfulness & n/a  & 0.480 & 0.621 & — & — \\
 Abstain recall       & 0.475 & 0.900 & 0.908 & $+0.008\;[-0.058,+0.075]$ & 0.917 (n.s.) \\
-Grounding AUROC      & n/a   & 0.547 & 0.794 & $+0.246\;[+0.159,+0.333]$ & $<0.001^{***}$ \\
-Novelty-F1           & 0.000 & 0.553 & 0.790 & $+0.308\;[+0.200,+0.408]$ & $<0.001^{***}$ \\
+Grounding AUROC      & n/a   & 0.547 & 0.793 & $+0.246\;[+0.159,+0.333]$ & $<0.001^{***}$ \\
+Novelty-F1           & 0.000 & 0.553 & 0.789 & $+0.308\;[+0.200,+0.408]$ & $<0.001^{***}$ \\
 Selective accuracy   & 0.246 & 0.500 & 0.625 & $+0.125\;[+0.071,+0.179]$ & $<0.001^{***}$ \\
 \midrule
 Score threshold      & n/a   & 0.821 & 59.58 & — & — \\
@@ -490,17 +490,20 @@ technique vocabularies, which lexical and dense retrieval partly capture.
 \textbf{Domain} & BM25 & Dense & Hyb-RRF & Hyb+Rr & HippoRAG
   & $p_\text{raw}$ & $p_\text{Bonf}$ & Survives \\
 \midrule
-Medicine & $+0.49$ & $+0.47$ & $+0.45$ & $+0.37$ & $+0.60$ & $0.0002$ & $0.0010$ & yes \\
-Genomics & $+0.36$ & $+0.17$ & $+0.18$ & $+0.26$ & $+0.52$ & $0.0002$ & $0.0010$ & yes \\
-Finance  & $+0.19$ & $+0.21$ & $+0.19$ & $+0.20$ & $+0.30$ & $0.0002$ & $0.0010$ & yes \\
+Medicine & $+0.46$ & $+0.45$ & $+0.44$ & $+0.34$ & $+0.59$ & $0.0002$ & $0.0010$ & yes \\
+Genomics & $+0.30$ & $+0.17$ & $+0.15$ & $+0.20$ & $+0.53$ & $0.0002$ & $0.0010$ & yes \\
+Finance  & $+0.17$ & $+0.23$ & $+0.19$ & $+0.22$ & $+0.32$ & $0.0002$ & $0.0010$ & yes \\
 Legal$^\dagger$ & $+0.27$ & $+0.07$ & $+0.15$ & $+0.15$ & $+0.52$ & $0.0022$ & $0.0110$ & yes \\
-Cyber    & $+0.17$ & $+0.18$ & $+0.08$ & $+0.15$ & $+0.39$ & $0.0346$ & $0.1730$ & \textbf{no} \\
+Cyber    & $+0.06$ & $+0.14$ & $+0.02$ & $+0.11$ & $+0.39$ & $0.0346$ & $0.1730$ & \textbf{no} \\
 \bottomrule
 \end{tabular}
 \begin{flushleft}
 {\footnotesize
-$\Delta$ values are SMA tail top-5 (rare slice) minus each baseline's tail
-top-5; legal$^\dagger$ uses the all-query slice (CPC has no rare split). The
+$\Delta$ values are the marginal SMA tail top-5 (rare slice) minus each
+baseline's tail top-5; legal$^\dagger$ uses the all-query slice (CPC has no rare
+split). These per-baseline marginal differences are distinct from---and for the
+narrow cyber margin smaller than---the per-query paired-bootstrap mean $\Delta$
+reported against the committed best baseline in Table~2. The
 ``vs.\ best'' columns correct the data-selected comparator by Bonferroni over
 the five baselines. Four of five domains survive ($p_\text{Bonf}\le 0.011$);
 cyber is directional ($p=0.035$, $p_\text{Bonf}=0.17$). $p_\text{raw}=0.0002$ is
@@ -509,6 +512,65 @@ not per-entity (three seeds share entities), so reported $p$-values are
 anti-conservative at the entity level.}
 \end{flushleft}
 \label{tab:ed8_vs_all_baselines}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 9 — Mechanism ablation: lexical -> +is-a -> +IC -> +typed
+% Source: reports/confirmatory/ablation_mechanism.csv
+% 3 seeds, n_index=400, n_query=90, rare-slice tail top-5,
+% paired bootstrap of adjacent rungs.
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\caption*{\textbf{Extended Data Table~9 $|$ Mechanism ablation: what
+    structure-mapping adds, one component at a time.}
+  Starting from a lexical-only (BM25) base, we add the is-a ascension lattice,
+  then information-content (surprisal) weighting, then higher-order typed
+  relations, and report rare-slice tail top-5 accuracy at each rung.
+  $\Delta$ is the paired-bootstrap difference against the immediately preceding
+  rung (3 seeds, $n_\text{index}{=}400$, $n_\text{query}{=}90$). Medicine (HPO)
+  is a pure-is-a control with no typed relations to add; genomics (GO) carries
+  typed relations. The is-a rung is the dominant lever (HPO $+0.368$,
+  GO $+0.080$); IC weighting adds a significant second increment; typed
+  higher-order relations add no measurable top-5 accuracy.
+  All numbers from \texttt{reports/confirmatory/ablation\_mechanism.csv}.}
+\small
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Domain} & \textbf{Rung (cumulative mechanism)} & \textbf{Top-5 (rare)} &
+    \textbf{$\Delta$ vs.\ prev} & \textbf{95\% CI} & \textbf{$p$} \\
+\midrule
+\multirow{4}{*}{Genomics (GO)}
+  & lexical-only (BM25)              & 0.750 & ---        & ---                  & ---     \\
+  & $+$ is-a ascension              & 0.830 & $+0.080$   & $[-0.005,+0.160]$    & 0.066   \\
+  & $+$ IC weighting                & 0.910 & $+0.080$   & $[+0.047,+0.118]$    & $2{\times}10^{-4}$ \\
+  & $+$ higher-order / typed        & 0.915 & $+0.005$   & $[+0.000,+0.014]$    & 0.72 (n.s.) \\
+\midrule
+\multirow{4}{*}{\shortstack[l]{Medicine (HPO,\\pure-is-a control)}}
+  & lexical-only (BM25)              & 0.587 & ---        & ---                  & ---     \\
+  & $+$ is-a ascension              & 0.955 & $+0.368$   & $[+0.296,+0.440]$    & $2{\times}10^{-4}$ \\
+  & $+$ IC weighting                & 0.982 & $+0.027$   & $[+0.009,+0.049]$    & 0.003   \\
+  & $+$ higher-order / typed        & 0.982 & $+0.000$   & $[+0.000,+0.000]$    & ---     \\
+\bottomrule
+\end{tabular}
+\begin{flushleft}
+{\footnotesize
+Rungs are cumulative: each row adds one mechanism to the row above. $\Delta$ is
+the paired-bootstrap difference of adjacent rungs (rare-slice tail top-5, top-5
+tail). HPO is a pure-is-a ontology, so its $+$higher-order rung adds no typed
+relations and yields $\Delta{=}{+}0.000$ by construction. The advantage
+decomposes into is-a subsumption (the dominant lever) plus information-content
+weighting (a significant second increment); typed higher-order relations add no
+measurable top-5 accuracy (GO $+0.005$, n.s.), consistent with the Phenomizer IC
+parity (Extended Data Table~4) and the SSB structure-only control (Extended Data
+Table~3). The ablation runs at a reduced index scale ($n_\text{index}{=}400$; the
+full-scale run is compute-bound), so the robust quantity is the \emph{relative}
+contribution of each rung rather than the absolute accuracies.}
+\end{flushleft}
+\label{tab:ed9_mechanism_ablation}
 \end{table}
 
 

@@ -19,8 +19,7 @@
 \definecolor{tg}{HTML}{5F6B78}
 \newcommand{\msec}[1]{\medskip\noindent{\bfseries\color{tg} #1}\par}
 
-\title{\bfseries A Curated-Ontology Structure-Mapping Memory Turns a Generalist
-LLM into a Verifiable Specialist}
+\title{\bfseries Align, Don't Retrieve: Structure-Mapping Memory Grounds Language Models in Curated Ontologies}
 \author{Ayaz Khan\\\small Columbia University \quad\texttt{aak2259@columbia.edu}}
 \date{2026-06-13 --- working draft for \emph{Nature Machine Intelligence}}
 
@@ -110,7 +109,7 @@ retriever, evaluated against a strong RAG/KG baseline suite. Third, an
 characterization} of when structure-mapping helps and when it does not.
 
 \begin{figure}[t]\centering
-\includegraphics[width=\linewidth]{svg/fig1_overview_v2.pdf}
+\includegraphics[width=\linewidth]{design/fig1_overview_crop.pdf}
 \caption{\textbf{The universal-adapter system.} (a) Any open ontology is mounted
 as retrieval geometry: an artifact is encoded as functors over a subject, the
 is-a tree becomes the ascension lattice, and typed relations become higher-order
@@ -197,6 +196,31 @@ $p_{\mathrm{Holm}}{=}0.076$, n.s.); on HPO and on every expanded arm SMA's lead
 is significant. Structure-mapping over the ascension lattice, not raw ancestor
 expansion of the retrievable text, is therefore what produces the advantage.
 
+\textit{A mechanism ablation isolates what structure-mapping adds.} To attribute
+SMA's edge to its individual components, we added one mechanism at a time over a
+lexical-only base, on a rare-slice top-5 task (3 seeds, $n_\text{index}{=}400$,
+$n_\text{query}{=}90$, paired bootstrap of adjacent rungs; Extended Data
+Table~9). The advantage decomposes cleanly. On \textbf{medicine} (HPO, a pure-is-a
+ontology with no typed relations) is-a subsumption is the dominant lever:
+lexical-only $0.587 \to {+}\text{is-a}$ $0.955$ ($\Delta{=}{+}0.368$,
+$p{=}2{\times}10^{-4}$), then information-content weighting adds a significant
+second increment ($\to 0.982$, $\Delta{=}{+}0.027$, $p{=}0.003$). On
+\textbf{genomics} (GO, which does carry typed relations) the same ordering holds
+on a smaller scale: lexical $0.750 \to {+}\text{is-a}$ $0.830$
+($\Delta{=}{+}0.080$, $p{=}0.066$) $\to {+}\text{IC}$ $0.910$
+($\Delta{=}{+}0.080$, $p{=}2{\times}10^{-4}$). Critically, adding higher-order
+typed relations on top of is-a$+$IC yields \emph{no} measurable top-5 gain (GO
+$0.910 \to 0.915$, $\Delta{=}{+}0.005$, $p{=}0.72$, n.s.; HPO has no typed
+relations to add, $\Delta{=}{+}0.000$). The advantage is thus carried by is-a
+subsumption (the dominant lever; HPO $+0.368$, GO $+0.080$) plus information
+content (a significant but smaller second increment), with typed higher-order
+relations adding nothing detectable at top-5---consistent with the Phenomizer IC
+parity and with the SSB control, where structural alignment is load-bearing
+precisely because no lexical or information-content signal is available. We note
+the ablation runs at a reduced index scale ($n_\text{index}{=}400$; full scale is
+compute-bound), so the robust quantity is the \emph{relative} contribution of
+each rung, not the absolute accuracies (Extended Data Table~9).
+
 \textit{Across the baseline retrieval suite, SMA wins on the tail across fields}
 (Fig.~2, Table~2). On \textbf{medicine} (rare-disease diagnosis over the Human
 Phenotype Ontology~\cite{kohler2021hpo} and MONDO~\cite{vasilevsky2022mondo}) SMA
@@ -236,7 +260,7 @@ Table~2(b) and Extended Data Fig.~1.}
 
 \textit{Cite-or-abstain and structural novelty.} SMA has the lowest
 risk-coverage area-under-the-risk-coverage-curve (AURC) in every one of the five
-arms ($0.017$--$0.530$ versus best-RAG $0.261$--$0.857$): a structural match
+arms ($0.017$--$0.530$ versus best-RAG $0.059$--$0.795$): a structural match
 either exists or it does not, whereas cosine similarity is always moderately
 high, so a pure-RAG retriever cannot tell when to abstain. On held-out unknown
 entities SMA's expectation-violation flag yields a structural-novelty F1 of
@@ -362,7 +386,7 @@ prompt are held fixed throughout and only the memory is swapped.
 \textbf{(vii)}~In our mechanism ablation, higher-order typed relations did not
 add measurable tail top-5 accuracy beyond is-a subsumption combined with
 information content; the gain we report is attributable to subsumption and
-IC weighting, not to relations over relations.
+IC weighting, not to relations over relations (Extended Data Table~9).
 
 \textit{Relation to prior work.} Grounding LLM memory in ontologies is an active
 2024--2026 area; our contribution is not ontology-grounding per se but the
@@ -396,7 +420,10 @@ certified admissible content bound for tractable first-stage retrieval and
 best-first alignment for the second~\cite{forbus1995macfac}. Cross-vocabulary
 matching ascends the ontology lattice with penalty $\rho^{\mathrm{dist}}$ (frozen
 $\rho{=}0.95$, ascension depth $\delta{=}2$). The surprisal scorer weights a
-matched functor by its information content $-\log_2 p$.
+matched functor by its information content $-\log_2 p$. End to end, the universal
+adapter and matcher pipeline (Fig.~4) ingests any open ontology into a normalized
+graph, mounts it as match geometry, and registers the resulting cases behind a
+per-query domain router.
 
 \textit{Cases as functored statements.} The loader encodes each subject (an
 entity record) as a \emph{case}: a set of logical statements. Each present
@@ -467,6 +494,18 @@ where $\mathrm{fit}_{\mathrm{norm}}\in[0,1]$ is the normalized structural-match
 score of the case against learned generalization $g$; $\mathrm{ev}=1$ when no
 generalization yet exists (nothing is expected). Novelty is thus detected from
 structural mismatch, not from term absence.
+
+\begin{figure}[t]\centering
+\includegraphics[width=\linewidth]{design/figM_architecture_crop.pdf}
+\caption{\textbf{SMA architecture.} A universal loader ingests any open
+ontology (OBO/OWL/STIX/CPC) into a normalized graph, mounts the is-a hierarchy
+and typed relations as match geometry, builds higher-order cases, and registers
+them behind a per-query domain router. At query time a case (functors over a
+subject) is screened by a certified admissible-content (MAC) bound, aligned by
+best-first structure-mapping (FAC/SME), scored by rarity-weighted information
+content, and resolved to a structural citation, a calibrated abstention, or a
+novelty flag.}
+\end{figure}
 
 \textit{Citation faithfulness.} Citation faithfulness is computed automatically as
 an exact structural identifier match: among answerable items that the agent
@@ -548,7 +587,10 @@ Finance & FIBO & 2{,}948 & 3{,}819 & 1{,}335 \\
 \caption{Agentic memory-swap results across five domains. (a) Tail top-5 (rare
 slice; legal on the all-query slice $\dagger$---CPC's near-uniform information
 content yields no rare split). (b) Capability axes (AURC lower is better; novelty
-F1). Bold $=$ best per column.}
+F1). Bold $=$ best per column. $\Delta$ and $p$ are the per-query
+paired-bootstrap mean and Holm-adjusted significance versus the committed best
+baseline, so $\Delta$ need not equal the difference of the marginal accuracies
+shown (most visibly for cyber).}
 \begin{tabular}{lccccc}
 \toprule
 \multicolumn{6}{l}{\textit{(a) Tail top-5 accuracy (rare slice)}}\\

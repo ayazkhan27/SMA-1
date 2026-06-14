@@ -1,0 +1,26 @@
+# D1 mechanism-stack ablation  (rare-slice tail top-5)
+# seeds=(7, 17, 23) n_index=400 n_query=90 holdout_frac=0.1
+# rung-3 config: scorer=surprisal norm=max gamma=0.25 rho=0.95 delta=2
+
+========== DOMAIN genomics ==========
+terms=48321 is_a_edges=57803 typed_relations=14076 records=5345
+n_all=243 n_rare=212 n_novel=27
+  rare-slice recording self-check: PASS (matches run_oneshot to 1e-9)
+  rung 0 [lexical-only(bm25)]  t5_rare=0.7500  t5_all=0.7284  (floor)
+  rung 1 [isa-ascension delta2 scorer=ses IC-off (isa-only)]  t5_rare=0.8302  t5_all=0.8477  delta_vs_prev=+0.0802  CI=[-0.0047,+0.1604]  p=0.06619  cliffs=+0.080
+  rung 2 [+IC scorer=surprisal delta2 (isa-only)]  t5_rare=0.9104  t5_all=0.9177  delta_vs_prev=+0.0802  CI=[+0.0472,+0.1179]  p=0.0002  cliffs=+0.080
+  rung 3 [+typed-relations surprisal/max/g0.25/r0.95/d2 (full)]  t5_rare=0.9151  t5_all=0.9177  delta_vs_prev=+0.0047  CI=[+0.0000,+0.0142]  p=0.7217  cliffs=+0.005
+
+========== DOMAIN medicine ==========
+terms=20384 is_a_edges=24329 typed_relations=0 records=6801
+n_all=243 n_rare=223 n_novel=27
+  rare-slice recording self-check: PASS (matches run_oneshot to 1e-9)
+  rung 0 [lexical-only(bm25)]  t5_rare=0.5874  t5_all=0.5720  (floor)
+  rung 1 [isa-ascension delta2 scorer=ses IC-off (isa-only)]  t5_rare=0.9552  t5_all=0.9588  delta_vs_prev=+0.3677  CI=[+0.2960,+0.4395]  p=0.0002  cliffs=+0.368
+  rung 2 [+IC scorer=surprisal delta2 (isa-only)]  t5_rare=0.9821  t5_all=0.9835  delta_vs_prev=+0.0269  CI=[+0.0090,+0.0493]  p=0.0034  cliffs=+0.027
+  rung 3 [+typed-relations surprisal/max/g0.25/r0.95/d2 (full)]  t5_rare=0.9821  t5_all=0.9835  delta_vs_prev=+0.0000  CI=[+0.0000,+0.0000]  p=1  cliffs=+0.000
+
+
+# ----- decomposition / verdict -----
+genomics: rung0=0.750 -> r1=0.830 (+isa +0.080) -> r2=0.910 (+IC +0.080) -> r3=0.915 (+typed +0.005)
+medicine: rung0=0.587 -> r1=0.955 (+isa +0.368) -> r2=0.982 (+IC +0.027) -> r3=0.982 (+typed +0.000)
