@@ -75,3 +75,5 @@ paper/manuscript/*.synctex.gz
 
 # Internal design blueprint (not for public release)
 structure_mapping_agentic_memory_blueprint.md
+
+paper/figures/tikz/*-visual-qa.json
