@@ -1,6 +1,7 @@
 # SMA-1: Structure-Mapping Agentic Memory
 
 [![CI](https://github.com/ayazkhan27/SMA-1/actions/workflows/ci.yml/badge.svg)](https://github.com/ayazkhan27/SMA-1/actions/workflows/ci.yml)
+[![PyPI](https://img.shields.io/pypi/v/structuremappingmemory)](https://pypi.org/project/structuremappingmemory/)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![HF Space](https://img.shields.io/badge/%F0%9F%A4%97%20Demo-Space-orange)](https://huggingface.co/spaces/zephyr27/SMA-1-demo)
 
@@ -87,6 +88,12 @@ logistic-regression baseline wins. The advantage is specific to structure.
    abstention**, or a **novelty flag** (SAGE expectation violation).
 
 ## Quick start
+
+```bash
+pip install structuremappingmemory        # from PyPI (import name: sma)
+```
+
+Or for development, with the evaluation/encoder extras:
 
 ```bash
 python -m venv .venv && . .venv/bin/activate
