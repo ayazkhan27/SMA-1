@@ -1,9 +1,13 @@
 # SMA-1: Structure-Mapping Agentic Memory
 
-**Align, don't retrieve.** SMA is a retrieval *memory* that grounds a generalist
-LLM in a **curated, expert-maintained ontology**, retrieving by **logical
-structure** — subsumption (is-a) and higher-order relations — that vector RAG and
-knowledge graphs discard. Holding the language model and prompt fixed and swapping
+[![CI](https://github.com/ayazkhan27/SMA-1/actions/workflows/ci.yml/badge.svg)](https://github.com/ayazkhan27/SMA-1/actions/workflows/ci.yml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![HF Space](https://img.shields.io/badge/%F0%9F%A4%97%20Demo-Space-orange)](https://huggingface.co/spaces/zephyr27/SMA-1-demo)
+
+**Structure-mapping memory grounds language models in curated ontologies.** SMA is
+a retrieval *memory* that grounds a generalist LLM in a **curated,
+expert-maintained ontology**, retrieving by **logical structure** — subsumption
+(is-a) and higher-order relations — that vector RAG and knowledge graphs discard. Holding the language model and prompt fixed and swapping
 only the memory, the SMA-grounded agent becomes **more accurate, more selective,
 and more structurally attributable** than vector RAG: it cites its evidence
 structurally, abstains when nothing grounds the case, and flags novelty —
