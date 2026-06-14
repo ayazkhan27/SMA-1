@@ -15,4 +15,7 @@ _EVAL_DEPS = ("networkx", "rank_bm25", "sentence_transformers")
 
 collect_ignore_glob = []
 if any(importlib.util.find_spec(_m) is None for _m in _EVAL_DEPS):
-    collect_ignore_glob += ["agentic/*", "agentic/**", "agentic_qa/*", "agentic_qa/**"]
+    collect_ignore_glob += [
+        "agentic/*", "agentic/**", "agentic_qa/*", "agentic_qa/**",
+        "test_hipporag.py",  # imports sma.eval.baselines.hipporag -> networkx
+    ]
