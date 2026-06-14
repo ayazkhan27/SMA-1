@@ -1,0 +1,53 @@
+\documentclass[10pt]{article}
+\usepackage[a4paper,margin=0.6in]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\definecolor{tg}{HTML}{5F6B78}
+\definecolor{sma}{HTML}{2E8AA6}
+\graphicspath{{svg/}}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+% one figure per page: title, usage line, then the figure fit to the page
+\newcommand{\figpage}[3]{%
+  {\Large\bfseries\color{sma} #1}\par
+  \smallskip{\color{tg}\small #2}\par
+  \vspace{4pt}\hrule\vspace{10pt}
+  \begin{center}\includegraphics[width=\textwidth,height=0.80\textheight,keepaspectratio]{#3}\end{center}
+  \clearpage}
+
+\begin{document}
+
+% ---- cover ----
+\vspace*{2.5in}
+\begin{center}
+{\Huge\bfseries SMA-1 --- All Paper Figures}\\[10pt]
+{\large\color{tg} Contact sheet for inspection --- one figure per page}\\[6pt]
+{\color{tg} Main = in the compiled manuscript \quad ED = Extended Data / supplement \quad Alt = produced, not currently placed}\\[18pt]
+{\color{tg}\small \today}
+\end{center}
+\clearpage
+
+\figpage{Graphical Abstract}{Alt --- single-panel one-shot story (cover candidate; not in manuscript body)}{fig_graphical_abstract.pdf}
+
+\figpage{Figure 1 --- Universal-adapter system overview}{MAIN (in manuscript) --- (a) mount ontology as geometry (b) what each retriever keeps/discards (c) MAC$\to$FAC$\to$cite + abstain/novelty (d) router + tail-top5 radar}{fig1_overview_v2.pdf}
+
+\figpage{Figure 2 --- Five-domain agentic results}{MAIN (in manuscript) --- tail top-5 by domain vs the enterprise RAG/KG gauntlet + effect-size forest}{figure2_results.pdf}
+
+\figpage{Figure 4 --- Structural boundary}{Alt --- de-risk (ties the ontology oracle, beats RAG/KG) + the honest flat-tabular null}{figure4_boundary_data.pdf}
+
+\figpage{Figure 5 --- Trustworthy-QA (verifiable specialist)}{MAIN (in manuscript) --- (a) trustworthy axes none/dense/SMA (b) grounding-score separation, known vs unknown}{figure5_trustworthy.pdf}
+
+\figpage{Figure 3 --- Three capabilities (conceptual)}{Alt --- citation / grounding-AUROC / novelty-F1, SMA vs dense (manuscript currently uses Fig 5 for this)}{fig3_capabilities.pdf}
+
+\figpage{Extended Data Fig 1 --- Per-domain AURC + novelty}{ED (in supplement) --- risk-coverage AURC and novelty-F1 across all six memories, five domains}{ed_domain_aurc.pdf}
+
+\figpage{Extended Data Fig 2 --- Phase 5 risk--coverage}{ED (in supplement) --- selective-prediction curve, SMA vs dense}{ed_risk_coverage.pdf}
+
+\figpage{Extended Data Fig 3 --- Paired cross-system transfer}{ED (in supplement) --- per-leg paired comparison (not leg-averaged)}{ed_transfer.pdf}
+
+\figpage{Extended Data --- SSB (structure vs surface)}{ED (supplementary) --- zero-lexical-overlap structural retrieval; lexical/dense baselines score 0}{ed1_ssb.pdf}
+
+\figpage{Extended Data --- Frozen-dials ablation}{ED (supplementary) --- chosen config vs knocked-out knobs on the validation grid}{ed3_ablation.pdf}
+
+\end{document}

@@ -24,8 +24,20 @@ import numpy as np
 import scienceplots  # noqa: F401  (registers the 'nature' style)
 
 plt.style.use(["nature", "no-latex"])
-plt.rcParams.update({"svg.fonttype": "none", "font.family": "sans-serif",
-                     "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"]})
+# Match figures_paper.py: bump the type ramp so labels are legible at print size.
+plt.rcParams.update({
+    "svg.fonttype": "none",
+    "font.family": "sans-serif",
+    "font.sans-serif": ["Arial", "Helvetica", "DejaVu Sans"],
+    "font.size": 8.5,
+    "axes.titlesize": 9.5,
+    "axes.labelsize": 9.0,
+    "xtick.labelsize": 8.0,
+    "ytick.labelsize": 8.0,
+    "legend.fontsize": 8.0,
+    "axes.linewidth": 0.8,
+    "lines.linewidth": 1.4,
+})
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 CONF = ROOT / "reports/confirmatory"
@@ -65,6 +77,12 @@ def _save(fig, name):
     return OUT / f"{name}.svg"
 
 
+def _panel(ax, letter, *, x=-0.13, y=1.08):
+    """Cowplot/patchwork-style bold panel tag in the axes' top-left corner."""
+    ax.text(x, y, letter, transform=ax.transAxes, fontsize=11,
+            fontweight="bold", va="top", ha="left", color="#1A1F24")
+
+
 # -------------------------------------------------------- ED fig A -----------
 def ed_domain_aurc():
     """Per-domain AURC + novelty-F1 across all 6 memories.
@@ -78,11 +96,11 @@ def ed_domain_aurc():
         print("ed_domain_aurc: no data, skipped")
         return None
 
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 2.9))
+    fig, axes = plt.subplots(1, 2, figsize=(7.6, 3.4))
 
     for ax_idx, (metric_key, ylabel, title_label) in enumerate([
-        ("aurc", "AURC (↓ better)", "a   AURC per domain × memory"),
-        ("novelty_f1", "Novelty-F1 (↑ better)", "b   Novelty-F1 per domain × memory"),
+        ("aurc", "AURC (↓ better)", "AURC per domain × memory"),
+        ("novelty_f1", "Novelty-F1 (↑ better)", "Novelty-F1 per domain × memory"),
     ]):
         ax = axes[ax_idx]
         mems = MEM_ORDER
@@ -98,20 +116,22 @@ def ed_domain_aurc():
                    label=(MEM_LABEL[m] if ax_idx == 0 else None),
                    edgecolor="white", linewidth=0.3)
         ax.set_xticks(range(len(present)))
-        ax.set_xticklabels([lab for _, lab in present], fontsize=6)
-        ax.set_ylabel(ylabel, fontsize=7)
-        ax.set_title(title_label, loc="left", fontsize=8)
+        ax.set_xticklabels([lab for _, lab in present])
+        ax.set_ylabel(ylabel)
+        ax.set_title(title_label, loc="left", fontsize=9.5, pad=8)
+        _panel(ax, "ab"[ax_idx])
         if metric_key == "aurc":
-            ax.text(0.5, -0.22, "lower AURC = SMA abstains on hard cases (better risk coverage)",
-                    transform=ax.transAxes, fontsize=4.6, ha="center",
+            ax.text(0.5, -0.26, "lower AURC = SMA abstains on hard cases (better risk coverage)",
+                    transform=ax.transAxes, fontsize=7, ha="center",
                     style="italic", color="#5F6B78")
 
     # shared legend below both panels
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, fontsize=5, ncol=6, frameon=False,
-               loc="lower center", bbox_to_anchor=(0.5, -0.08))
+    fig.legend(handles, labels, fontsize=7.5, ncol=6, frameon=False,
+               loc="lower center", bbox_to_anchor=(0.5, -0.04),
+               columnspacing=1.0, handlelength=1.2)
     fig.tight_layout(w_pad=1.8)
-    fig.subplots_adjust(bottom=0.18)
+    fig.subplots_adjust(bottom=0.22)
     return _save(fig, "ed_domain_aurc")
 
 
@@ -217,9 +237,9 @@ def ed_risk_coverage():
     thr = float(summ[0]["score_threshold"]) if summ and summ[0].get("score_threshold", "NA") not in ("NA", "") else None
     sma_aurc = float(summ[0]["aurc"]) if summ and summ[0].get("aurc", "") not in ("", "NA") else None
 
-    fig, ax = plt.subplots(figsize=(4.4, 3.2))
+    fig, ax = plt.subplots(figsize=(5.0, 3.4))
 
-    ax.plot(sma_cov, sma_acc, color=SMA_C, lw=1.6, label="SMA (grounding score)")
+    ax.plot(sma_cov, sma_acc, color=SMA_C, lw=1.8, label="SMA (grounding score)")
     if den_cov:
         ax.plot(den_cov, den_acc, color="#A7AFB6", lw=1.2, ls="--", label="Dense-RAG (confidence)")
 
@@ -237,10 +257,10 @@ def ed_risk_coverage():
     ax.set_xlim(0, 1); ax.set_ylim(0, 1.05)
 
     if sma_aurc is not None:
-        ax.text(0.97, 0.12, f"SMA AURC={sma_aurc:.4f}", transform=ax.transAxes,
-                ha="right", fontsize=6, color=SMA_C)
-    ax.legend(fontsize=5.5, frameon=False, loc="upper right")
-    ax.set_title("ED   Phase 5 risk-coverage (selective prediction)", loc="left", fontsize=8)
+        ax.text(0.97, 0.12, f"SMA AURC = {sma_aurc:.3f}", transform=ax.transAxes,
+                ha="right", fontsize=8.5, color=SMA_C, fontweight="bold")
+    ax.legend(fontsize=7.5, frameon=False, loc="upper right")
+    ax.set_title("Phase 5 risk-coverage (selective prediction)", loc="left", fontsize=9.5, pad=8)
     fig.tight_layout()
     return _save(fig, "ed_risk_coverage")
 
@@ -290,7 +310,7 @@ def ed_transfer():
         print("ed_transfer: no legs found, skipped")
         return None
 
-    fig, ax = plt.subplots(figsize=(7.2, 3.2))
+    fig, ax = plt.subplots(figsize=(7.8, 3.7))
     nb = len(methods_present)
     w = 0.8 / nb
     leg_labels = [l.replace("->", " → ").replace("_first20M", "") for l in legs]
@@ -302,18 +322,20 @@ def ed_transfer():
                label=m, edgecolor="white", linewidth=0.3)
 
     ax.set_xticks(range(n_legs))
-    ax.set_xticklabels(leg_labels, fontsize=6, rotation=15, ha="right")
+    ax.set_xticklabels(leg_labels, rotation=15, ha="right")
     ax.set_ylabel("macro-F1 (seed 201)")
     ax.set_ylim(0, 1.05)
-    ax.axhline(0.333, color="#E3E7EA", lw=0.5, ls="--", zorder=0)
-    ax.text(n_legs - 0.5, 0.345, "random baseline (3-class)", fontsize=4.6,
+    ax.axhline(0.333, color="#E3E7EA", lw=0.6, ls="--", zorder=0)
+    ax.text(n_legs - 0.5, 0.35, "random baseline (3-class)", fontsize=7,
             color="#9AA3AB", ha="right")
-    ax.legend(fontsize=5, ncol=4, frameon=False, loc="upper center",
-              bbox_to_anchor=(0.5, -0.26))
-    ax.set_title("ED   Paired cross-system transfer, per leg (seed 201)", loc="left", fontsize=8)
-    ax.text(0.01, 0.03,
-            "HDFS→OpenStack: all methods collapse (retrieval degenerate — honest null reported)",
-            transform=ax.transAxes, fontsize=4.8, style="italic", color="#5F6B78")
+    ax.legend(fontsize=7, ncol=4, frameon=False, loc="upper center",
+              bbox_to_anchor=(0.5, -0.30), columnspacing=1.0, handlelength=1.2)
+    ax.set_title("Paired cross-system transfer, per leg (seed 201)", loc="left", fontsize=9.5, pad=8)
+    # annotate the collapsed leg in the empty zone above its (short) bars
+    ax.text(0.985, 0.66,
+            "HDFS→OpenStack:\nall methods collapse\n(retrieval degenerate;\nhonest null)",
+            transform=ax.transAxes, fontsize=6.5, style="italic", color="#9AA3AB",
+            ha="right", va="top")
     fig.tight_layout()
     fig.subplots_adjust(bottom=0.28)
     return _save(fig, "ed_transfer")

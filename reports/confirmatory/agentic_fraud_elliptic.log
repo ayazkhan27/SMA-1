@@ -1,0 +1,46 @@
+========================================================================
+STRUCTURAL-FRAUD ARM — Elliptic Bitcoin transaction graph
+generated: 2026-06-13T22:00:59
+========================================================================
+
+MECHANISM
+------------------------------------------------------------------------
+Each transaction is encoded NOT as its 166 flat features but as a case
+of graph-neighbourhood typology terms over a licit/illicit lattice:
+  - fanIn_* / fanOut_*  : predecessor / successor degree class
+  - inVal_* / outVal_*  : incoming / outgoing value tier
+  - temp_*              : temporal-step bucket (49 steps -> early/mid/late)
+  - nbrIllicit_* / nbrLicit_* : neighbour LABEL context (leak-guarded:
+      train-visible labels only; a node's OWN class is never emitted)
+Higher-order relations flowsFrom(fanIn, nbrCtx) and flowsTo(fanOut, nbrCtx)
+wire the node's own topology to its neighbour context — the cross-record
+structure flat-tabular encodings discard. SMA mounts the lattice and
+retrieves illicit analogs by structural match; dense/BM25 see the same
+term text; logreg sees the raw 166 features (the flat-tabular control).
+Evaluation: retrieval-by-analogy kNN (k=15) — vote retrieved analogs'
+known labels into an illicit score; metric = macro-F1 + ROC-AUC.
+
+RESULTS (pooled over seeds [7, 17, 23])
+------------------------------------------------------------------------
+method      macro_f1  illicit_f1   roc_auc  cal_thr
+sma           0.5810      0.2431    0.6220    0.089
+dense         0.5859      0.2618    0.7272    0.333
+bm25          0.6021      0.2887    0.7093    0.223
+logreg        0.7870      0.6210    0.9194    0.817
+
+n_test_pooled=2250  n_illicit=219  k=15  (per-method thresholds calibrated on a train slice)
+
+PRIMARY — SMA vs best retrieval baseline (bm25), paired bootstrap on
+per-node thresholded accuracy:
+  delta_acc = +0.0044  95% CI [-0.0098, +0.0191]  p = 0.5551
+  macro-F1: sma=0.5810  bm25=0.6021  delta_F1=-0.0211
+
+VERDICT
+------------------------------------------------------------------------
+  NULL
+  No significant SMA edge over the best retrieval baseline on this
+  encoding (CI includes zero or p >= 0.05). Reported honestly: the
+  graph neighbourhood as encoded did not yield a structure-mapping
+  advantage here. See macro-F1 / ROC-AUC above for where each method
+  lands; the paper's flat-vs-graph boundary claim stands either way.
+

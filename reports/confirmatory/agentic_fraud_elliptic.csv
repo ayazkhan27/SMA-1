@@ -1,0 +1,7 @@
+arm,method,macro_f1,illicit_f1,roc_auc,calib_threshold,n_pred,n_test_pooled,n_illicit,k,seeds
+fraud_elliptic,sma,0.5810,0.2431,0.6220,0.0889,2250,2250,219,15,7|17|23
+fraud_elliptic,dense,0.5859,0.2618,0.7272,0.3330,2250,2250,219,15,7|17|23
+fraud_elliptic,bm25,0.6021,0.2887,0.7093,0.2231,2250,2250,219,15,7|17|23
+fraud_elliptic,logreg,0.7870,0.6210,0.9194,0.8169,2250,2250,219,15,7|17|23
+
+primary,sma_vs_bm25,delta_acc,0.0044,ci_low,-0.0098,ci_high,0.0191,p_value,0.5551

@@ -249,15 +249,22 @@ not raw size, appears to drive SMA's edge over the information-content oracle:
 pure-is-a ontologies (HPO, CPC) yield parity, whereas relation-rich ones should
 let higher-order structure-mapping pull ahead---an open, testable prediction.
 
-The boundary we draw points to the natural next domain. SMA's null on
-flat-tabular fraud is a property of single-record encoding, not of the domain:
+The boundary we draw points to a natural test, which we ran. SMA's null on
+flat-tabular fraud might reflect single-record encoding rather than the domain:
 real fraud structure is cross-transaction (rings of cards and devices across many
-records). Encoding each transaction's graph neighbourhood---predecessor and
-successor flows on a public ledger such as Elliptic~\cite{weber2019elliptic}---as
-higher-order relations, with a licit/illicit typology as the lattice, supplies
-exactly the cross-record structure that flat-tabular retrieval lacks and that
-graph neural networks~\cite{kipf2017gcn} exploit; whether SMA's structural
-retrieval converts that into a win is the test that closes this boundary.
+records). We therefore encoded each transaction's graph neighbourhood on the
+public Elliptic Bitcoin ledger~\cite{weber2019elliptic}---predecessor and
+successor flows---as higher-order relations over a licit/illicit typology
+lattice, with strict label-leak guards, supplying the cross-record structure that
+flat-tabular retrieval lacks and that graph neural networks~\cite{kipf2017gcn}
+exploit. The outcome is an honest null: SMA shows no significant edge over dense
+or lexical retrieval ($\Delta$ accuracy $+0.004$, 95\% CI $[-0.010, +0.019]$),
+and all retrieval methods trail a flat logistic-regression baseline. The lesson
+sharpens the thesis: graph topology alone is not enough---SMA's advantage
+requires a \emph{discriminative subsumption ontology}. A coarse typology
+vocabulary yields too few distinct structural signatures for analogical alignment
+to beat vector similarity; structure helps SMA only when the structure is itself
+richly differentiated, as in the curated golden ontologies.
 
 Limitations. The retrieval-suite novelty threshold is fixed and untuned (the
 end-to-end agent calibrates it per memory on a disjoint split). HippoRAG is
