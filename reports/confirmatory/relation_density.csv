@@ -1,0 +1,4 @@
+domain,n_cases,typed_relations_in_ontology,mean_terms_per_case,mean_higher_order_per_case,frac_cases_with_any_higher_order
+genomics,5345,14076,12.44,0.5676,0.3394
+cyber,82,872,16.2,0,0.0
+finance,313,0,30.83,0,0.0

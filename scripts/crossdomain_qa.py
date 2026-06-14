@@ -41,7 +41,8 @@ from sma.eval.agentic_qa.metrics import (
 ARMS = {"genomics": "sma.eval.agentic.arms.discovery",
         "finance": "sma.eval.agentic.arms.finance",
         "cyber": "sma.eval.agentic.arms.cyber",
-        "legal": "sma.eval.agentic.arms.legal"}
+        "legal": "sma.eval.agentic.arms.legal",
+        "medicine": "sma.eval.agentic.arms.medicine"}
 
 # ---- domain-neutral prompts (the ONLY substantive change vs the medicine agent) --
 NEUTRAL_SYSTEM = (
@@ -132,7 +133,11 @@ def build_pools(mounted, records, *, seed=7, n_index=1500, n_answerable=120,
     known = {e: ts for e, ts in known.items() if ts}
     eligible = sorted(known)
     rng = random.Random(seed); rng.shuffle(eligible)
-    indexed_ids, held_ids = eligible[:n_index], eligible[n_index:]
+    # Adaptive split: cap the index at 65% of the eligible pool so EVERY domain
+    # (including small ones like cyber, ~82 entities) keeps a held-out slice for
+    # novelty + a disjoint calibration pool.
+    n_idx = min(n_index, max(1, int(len(eligible) * 0.65)))
+    indexed_ids, held_ids = eligible[:n_idx], eligible[n_idx:]
     index_items = [IndexItem(key=e, term_ids=frozenset(known[e]),
                              text=" ".join(tname(t) for t in known[e]), meta={"name": e})
                    for e in indexed_ids]
@@ -160,11 +165,16 @@ def build_pools(mounted, records, *, seed=7, n_index=1500, n_answerable=120,
                               answerable=answerable, novel=not answerable))
         return out
 
-    answerable = qitems(indexed_ids, n_answerable, answerable=True)
-    novel = qitems(held_ids, n_held, answerable=False)
+    # Reserve a disjoint calibration tail from each pool; cap test draws so the
+    # calibration tail survives in small domains.
+    ncal = min(n_calib, len(indexed_ids) // 4, len(held_ids) // 4)
+    n_ans = min(n_answerable, len(indexed_ids) - ncal)
+    n_hld = min(n_held, len(held_ids) - ncal)
+    answerable = qitems(indexed_ids[:n_ans], n_ans, answerable=True)
+    novel = qitems(held_ids[:n_hld], n_hld, answerable=False)
     return {"index_items": index_items, "answerable": answerable, "novel": novel,
-            "calib_answerable": qitems(indexed_ids[n_answerable:], n_calib, answerable=True),
-            "calib_ook": qitems(held_ids[n_held:], n_calib, answerable=False)}
+            "calib_answerable": qitems(indexed_ids[n_ans:n_ans + ncal], ncal, answerable=True),
+            "calib_ook": qitems(held_ids[n_hld:n_hld + ncal], ncal, answerable=False)}
 
 
 def calibrate_threshold(memory, calib_items, k):

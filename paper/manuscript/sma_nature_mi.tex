@@ -252,9 +252,10 @@ available. One caveat: the ablation runs at a reduced index scale
 quantity is the \emph{relative} contribution of each rung, not the absolute
 accuracies (Extended Data Table~9).
 
-\subsection{Across the baseline retrieval suite, SMA wins on the rare tail}
+\subsection{Tail-accuracy gains hold in four of five domains}
 
-SMA leads on the rare/long-tail slice in every field we tested (Fig.~2,
+SMA leads on the rare/long-tail slice in four of the five fields at full
+statistical strength, with cyber a weaker directional fifth (Fig.~2,
 Table~2). On \textbf{medicine} (rare-disease diagnosis over the Human
 Phenotype Ontology~\cite{kohler2021hpo} and MONDO~\cite{vasilevsky2022mondo}) SMA
 attains tail top-5 of $0.949$ versus $0.606$ for the best baseline
@@ -400,9 +401,21 @@ is-a subsumption over the ontology lattice together with information-content
 weighting; the higher-order typed relations are implemented and are necessary for
 the synthetic structure-only control, but they do not measurably improve the
 current real-domain top-5 results (GO $+0.005$, n.s.; HPO and CPC carry no typed
-relations to add). Whether relation-rich ontologies would let higher-order
-structure-mapping pull ahead on tasks designed to require it is an open, untested
-prediction, not a result we claim here.
+relations to add). The reason is measurable and specific: a case acquires a
+higher-order statement only when \emph{both} endpoints of a typed relation are
+co-present on the same entity, and in the real records this is rare. Across the
+indexed GO cases (mean $12.4$ terms each, over an ontology with $14{,}076$ typed
+relations) only $34\%$ carry \emph{any} higher-order statement and the mean is
+$0.57$ per case; in cyber it is $0$ of $82$ cases, because ATT\&CK's typed
+relations connect a technique to tactics and sub-techniques that a single threat
+group's technique set does not contain (Extended Data Table~12). The higher-order
+aligner therefore has almost nothing to operate on, which is why it neither helps
+nor hurts at scale, even though it is decisive on the synthetic control where every
+case is relation-dense by construction. This points to where the mechanism would
+pay off: tasks over ontologies whose typed relations hold \emph{within} an entity's
+own attribute set, rather than across the global hierarchy. Whether such
+relation-dense real tasks exist and would let higher-order structure-mapping pull
+ahead is an open, untested prediction, not a result we claim here.
 
 Several limitations bound these claims. The retrieval-suite novelty threshold is
 fixed and untuned, whereas the end-to-end agent calibrates it per memory on a
@@ -411,6 +424,20 @@ representation that suits its phrase-graph poorly. The interactive end-to-end
 study is a single-domain (medicine) case study. Finally, we restrict to fully open
 ontologies and exclude licensed sources (SNOMED, UMLS) in favour of
 reproducibility.
+
+\textit{Deployment trade-off.} The cost profile is a genuine trade-off, not a free
+lunch (Extended Data Table~11). SMA needs no learned embeddings, no GPU and no
+vector store, and its resident memory is $\approx 5.5\times$ smaller than dense
+retrieval; against that, its CPU-bound per-query latency ($p_{50}\approx 240$\,ms)
+is an order of magnitude above lexical BM25 ($\approx 23$\,ms) and above dense
+retrieval ($\approx 150$\,ms), and its index build is a slower one-time CPU pass.
+SMA is therefore suited to the high-stakes, lower-throughput, infrastructure-light
+settings its trustworthy behaviour targets, such as clinical decision support,
+expert triage, or offline analysis where a confident wrong answer is costly and
+correctness outweighs millisecond latency; it is not the right tool for
+latency-critical, high-QPS retrieval, where a tuned lexical or dense index
+dominates. The build cost is amortised over the lifetime of a fixed ontology
+snapshot.
 
 \subsection{What we do not claim}
  We state the boundaries of the thesis
@@ -441,6 +468,11 @@ model and prompt are held fixed throughout and only the memory is swapped.
 add measurable tail top-5 accuracy beyond is-a subsumption combined with
 information content; the gain we report is attributable to subsumption and
 IC weighting, not to relations over relations (Extended Data Table~9).
+\textbf{(viii)}~Citation faithfulness is a structural-attribution \emph{proxy}: it
+checks that the cited candidate's identifier exactly matches the gold case, not
+that a retrieved passage entails the answer the way NLI-based ALCE support
+does~\cite{gao2023alce}. It measures whether the agent points at the right record,
+a necessary but not a sufficient condition for full answer faithfulness.
 
 \subsection{Relation to prior work}
  Grounding LLM memory in ontologies is an active
@@ -1405,6 +1437,46 @@ Dense (BGE-small)                 & \texttt{bge-small} & optional & yes & $33$  
 \end{tabular}
 \end{adjustbox}
 \label{tab:ed11_cost}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 12 — Higher-order statement density per case (why the ablation is null)
+% Source: reports/confirmatory/relation_density.csv
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\edcaption{\textbf{Extended Data Table~12 $|$ Why higher-order relations are inert
+    on the real benchmarks: co-present typed-relation pairs are rare.}
+  A case acquires a higher-order statement only when \emph{both} endpoints of a
+  typed relation are present on the same entity. For each relation-bearing domain
+  we report the number of typed relations in the mounted ontology, the mean number
+  of terms per indexed case, the mean number of higher-order statements per case,
+  and the fraction of cases carrying any. Even GO, the most relation-rich evaluated
+  ontology, yields a higher-order statement in only a third of cases; in cyber none
+  of the cases do, because ATT\&CK's typed relations link a technique to tactics
+  and sub-techniques that a single threat group's technique set does not contain.
+  HPO and CPC carry no typed relations at all (Table~1). The higher-order aligner
+  therefore has almost nothing to operate on at scale, explaining the ablation null
+  (Extended Data Table~9) despite its decisiveness on the relation-dense synthetic
+  control (Extended Data Table~3).
+  Source: \texttt{reports/confirmatory/relation\_density.csv}.}
+\small
+\setlength{\tabcolsep}{6pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llrrrr}
+\toprule
+\textbf{Domain} & \textbf{Ontology} & \textbf{Typed rel.} & \textbf{Terms/case} &
+    \textbf{Higher-order/case} & \textbf{Cases with any} \\
+\midrule
+Genomics & GO            & $14{,}076$ & $12.4$ & $0.57$ & $34\%$ \\
+Cyber    & ATT\&CK       & $872$      & $16.2$ & $0.00$ & $0\%$ \\
+Finance  & US-GAAP arm   & $0$        & $30.8$ & $0.00$ & $0\%$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\label{tab:ed12_relation_density}
 \end{table}
 
 
