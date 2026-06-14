@@ -380,10 +380,14 @@ two. The trustworthy behaviour, answering, citing, abstaining, and flagging
 novelty, is therefore not a medicine artifact; it tracks how richly the mounted
 ontology discriminates, strongest where structure is rich (legal, genomics) and
 weakest where it is flat (finance). A natural-language router completes the
-end-to-end agentic picture: a query carries no domain label, yet a dense or
-LLM router maps it to the right ontology with high accuracy across these
-distinct-vocabulary domains (Extended Data Table~14), so the universal adapter's
-``one core, route across domains'' claim holds in practice.
+end-to-end agentic picture. The shipped domain router is deterministic (it routes
+by term-id prefix); the realistic setting gives a query no domain label, so we ask
+how well an unlabeled case routes to the right ontology. A lightweight dense
+classifier does this at $0.95$ accuracy across these distinct-vocabulary domains;
+an LLM router is weaker ($0.74$), mostly through legal's generic patent vocabulary
+(Extended Data Table~14). Routing across well-separated domains is thus the easy
+part, served best by a simple classifier rather than agentic choice, so the
+universal adapter's ``one core, route across domains'' claim holds in practice.
 
 \subsection{Negative results and boundary}
  We pre-registered a parity-reporting
@@ -1555,6 +1559,44 @@ are weakly discriminative, is the exception on grounding and novelty (bold $=$
 better of dense / SMA per axis).}
 \end{flushleft}
 \label{tab:ed13_crossdomain_qa}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 14 — Agentic ontology routing (exploratory)
+% Source: reports/confirmatory/crossdomain_routing.csv
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\edcaption{\textbf{Extended Data Table~14 $|$ Routing an unlabelled case to the
+    right ontology (exploratory).}
+  The shipped \texttt{DomainRouter} routes deterministically by term-id prefix; in
+  the realistic setting a query arrives as natural-language feature names with no
+  domain label. We pose a mixed query set ($40$ cases per domain, $173$ total, the
+  domain hidden) and route each to one of the five ontologies three ways: an LLM
+  (DeepSeek) asked to pick the domain; a dense classifier (nearest domain prototype
+  by BGE-small cosine); and a majority-class floor. Routing accuracy is the
+  fraction mapped to the gold domain. A simple dense classifier routes best
+  ($0.95$); the LLM is weaker ($0.74$), mainly on legal, whose generic patent
+  vocabulary (``device'', ``method'', ``apparatus'') it scatters across domains.
+  Routing across these well-separated vocabularies is the easy part of the
+  pipeline. Source: \texttt{reports/confirmatory/crossdomain\_routing.csv}.}
+\small
+\setlength{\tabcolsep}{6pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Router} & \textbf{Overall} & \textbf{Medicine} & \textbf{Genomics} &
+    \textbf{Finance} & \textbf{Cyber} & \textbf{Legal} \\
+\midrule
+\rowcolor{smarow}Dense (BGE prototype) & \textbf{0.95} & $1.00$ & $1.00$ & $1.00$ & $1.00$ & $0.80$ \\
+LLM (DeepSeek)        & $0.74$ & $1.00$ & $0.68$ & $1.00$ & $1.00$ & $0.20$ \\
+Majority (floor)      & $0.23$ & $1.00$ & $0.00$ & $0.00$ & $0.00$ & $0.00$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\label{tab:ed14_routing}
 \end{table}
 
 

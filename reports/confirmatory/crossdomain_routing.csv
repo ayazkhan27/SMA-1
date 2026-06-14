@@ -1,0 +1,4 @@
+method,n,routing_accuracy,acc_medicine,acc_genomics,acc_finance,acc_cyber,acc_legal
+llm,173,0.7514,1.0,0.725,1.0,1.0,0.2
+dense,173,0.9538,1.0,1.0,1.0,1.0,0.8
+majority,173,0.2312,1.0,0.0,0.0,0.0,0.0
