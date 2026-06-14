@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1180" viewBox="0 0 1600 1180" font-family="Arial, 'Liberation Sans', sans-serif">
+  <defs>
+    <!-- palette -->
+    <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2E6B86"/>
+    </marker>
+    <marker id="arrV" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#9B86C4"/>
+    </marker>
+    <marker id="arrA" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#D98A3D"/>
+    </marker>
+    <marker id="arrg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7E8893"/>
+    </marker>
+    <linearGradient id="smaFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EAF4F8"/><stop offset="1" stop-color="#D3E8EF"/>
+    </linearGradient>
+    <linearGradient id="latFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F0ECF7"/><stop offset="1" stop-color="#E2DAF1"/>
+    </linearGradient>
+    <linearGradient id="amberFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FBF0E3"/><stop offset="1" stop-color="#F4DEC2"/>
+    </linearGradient>
+    <style>
+      .ttl   { font-size:25px; font-weight:700; fill:#23323B; }
+      .pl    { font-size:23px; font-weight:700; fill:#2E8AA6; }
+      .sub   { font-size:15.5px; font-weight:700; fill:#2E6B86; }
+      .lab   { font-size:14px; fill:#3B4750; }
+      .labi  { font-size:13.5px; fill:#5F6B78; font-style:italic; }
+      .sm    { font-size:12.5px; fill:#5F6B78; }
+      .tag   { font-size:12px; font-weight:700; }
+      .kw    { font-size:14px; font-weight:700; }
+      .mono  { font-family:'DejaVu Sans Mono', monospace; font-size:12.5px; }
+      .panelbg { fill:#FFFFFF; stroke:#D8DDE2; stroke-width:1.4; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="1180" fill="#FFFFFF"/>
+
+  <!-- =================================================================== -->
+  <!-- PANEL A : mount a golden ontology as retrieval geometry             -->
+  <!-- =================================================================== -->
+  <g id="panelA">
+    <rect x="22" y="22" width="770" height="540" rx="10" class="panelbg"/>
+    <text x="46" y="58" class="pl">a</text>
+    <text x="74" y="58" class="ttl">Mount a golden ontology as retrieval geometry</text>
+
+    <!-- STAGE 1: raw artifact -->
+    <g id="rawArtifact" transform="translate(48,96)">
+      <rect x="0" y="0" width="190" height="240" rx="9" fill="#F6F8FA" stroke="#C7CCD1" stroke-width="1.4"/>
+      <text x="95" y="26" text-anchor="middle" class="sub">Raw clinical artifact</text>
+      <!-- patient silhouette icon -->
+      <g transform="translate(95,78)" fill="#7E8893">
+        <circle cx="0" cy="-18" r="15"/>
+        <path d="M-26 36 C-26 4 -14 -4 0 -4 C14 -4 26 4 26 36 Z"/>
+      </g>
+      <!-- phenotype list -->
+      <g font-size="13" fill="#3B4750">
+        <rect x="16" y="128" width="158" height="92" rx="6" fill="#FFFFFF" stroke="#D8DDE2"/>
+        <circle cx="30" cy="148" r="3.4" fill="#C0504D"/><text x="42" y="152">seizures</text>
+        <circle cx="30" cy="170" r="3.4" fill="#C0504D"/><text x="42" y="174">intellectual disability</text>
+        <circle cx="30" cy="192" r="3.4" fill="#C0504D"/><text x="42" y="196">long philtrum</text>
+        <circle cx="30" cy="212" r="3.4" fill="#C0504D"/><text x="42" y="216" font-weight="700" fill="#C0504D">2q23.1 deletion</text>
+      </g>
+    </g>
+    <!-- encode arrow -->
+    <g>
+      <line x1="244" y1="216" x2="300" y2="216" stroke="#2E6B86" stroke-width="2.4" marker-end="url(#arr)"/>
+      <text x="272" y="206" text-anchor="middle" class="sm" font-weight="700" fill="#2E6B86">encode</text>
+    </g>
+
+    <!-- STAGE 2: ontology is-a tree with typed relations -->
+    <g id="ontologyTree" transform="translate(308,96)">
+      <rect x="0" y="0" width="262" height="240" rx="9" fill="url(#latFill)" stroke="#9B86C4" stroke-width="1.6"/>
+      <text x="131" y="26" text-anchor="middle" class="sub" fill="#5B4A86">Golden ontology = lattice</text>
+      <text x="131" y="44" text-anchor="middle" class="sm" fill="#7A5DA8" font-weight="700">HPO &#183; GO &#183; ATT&amp;CK</text>
+      <!-- is-a tree -->
+      <g stroke="#9B86C4" stroke-width="1.8" fill="none">
+        <path d="M131 70 L70 116"/><path d="M131 70 L192 116"/>
+        <path d="M70 116 L44 166"/><path d="M70 116 L100 166"/>
+        <path d="M192 116 L166 166"/><path d="M192 116 L222 166"/>
+      </g>
+      <!-- typed relation (dashed, higher-order) -->
+      <path d="M100 166 C140 150 150 150 166 166" stroke="#D98A3D" stroke-width="1.8" stroke-dasharray="4 3" fill="none"/>
+      <text x="133" y="148" text-anchor="middle" class="sm" fill="#C68A2E" font-weight="700">part-of</text>
+      <!-- nodes -->
+      <g>
+        <circle cx="131" cy="70" r="13" fill="#9B86C4"/><text x="131" y="74" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">root</text>
+        <circle cx="70" cy="116" r="11" fill="#B3A2D4"/><circle cx="192" cy="116" r="11" fill="#B3A2D4"/>
+        <circle cx="44" cy="166" r="10" fill="#CBC0E4"/><circle cx="100" cy="166" r="10" fill="#CBC0E4"/>
+        <circle cx="166" cy="166" r="10" fill="#CBC0E4"/><circle cx="222" cy="166" r="10" fill="#CBC0E4"/>
+      </g>
+      <!-- ascension annotation -->
+      <g>
+        <path d="M44 200 L44 178" stroke="#2E8AA6" stroke-width="2" marker-end="url(#arr)"/>
+        <text x="131" y="218" text-anchor="middle" class="sm" fill="#2E6B86">ascend: specific&#8594;general, penalty &#961;<tspan dy="-6" font-size="10">dist</tspan></text>
+      </g>
+    </g>
+    <!-- mount arrow -->
+    <g>
+      <line x1="576" y1="216" x2="630" y2="216" stroke="#2E6B86" stroke-width="2.4" marker-end="url(#arr)"/>
+      <text x="603" y="206" text-anchor="middle" class="sm" font-weight="700" fill="#2E6B86">mount</text>
+    </g>
+
+    <!-- STAGE 3: analogical case = functor over subject -->
+    <g id="analogCase" transform="translate(638,96)">
+      <rect x="0" y="0" width="128" height="240" rx="9" fill="url(#smaFill)" stroke="#2E8AA6" stroke-width="1.6"/>
+      <text x="64" y="26" text-anchor="middle" class="sub">Analogical case</text>
+      <!-- subject node -->
+      <circle cx="64" cy="78" r="20" fill="#2E8AA6"/>
+      <text x="64" y="82" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">subject</text>
+      <!-- functor predicate nodes binding args -->
+      <g>
+        <rect x="14" y="128" width="100" height="26" rx="5" fill="#5AA9C4"/>
+        <text x="64" y="146" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">has(seizure)</text>
+        <rect x="14" y="162" width="100" height="26" rx="5" fill="#5AA9C4"/>
+        <text x="64" y="180" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">has(2q23.1&#8211;)</text>
+        <rect x="14" y="196" width="100" height="26" rx="5" fill="#9B86C4"/>
+        <text x="64" y="214" text-anchor="middle" font-size="11.5" fill="#fff" font-weight="700">causes(has,has)</text>
+      </g>
+      <!-- bind lines -->
+      <g stroke="#2E6B86" stroke-width="1.3">
+        <line x1="64" y1="98" x2="64" y2="126"/>
+      </g>
+    </g>
+
+    <!-- IC scorer callout -->
+    <g transform="translate(48,360)">
+      <rect x="0" y="0" width="718" height="180" rx="9" fill="#FAFBFC" stroke="#D8DDE2" stroke-width="1.2"/>
+      <text x="20" y="30" class="sub">Information-content scorer: the rare term dominates by construction</text>
+      <!-- bars showing surprisal -log2 p -->
+      <g transform="translate(28,52)">
+        <text x="0" y="14" class="lab">common term</text>
+        <rect x="150" y="2" width="60" height="16" rx="3" fill="#C7CCD1"/>
+        <text x="220" y="15" class="sm">low surprisal &#8594; low weight</text>
+        <text x="0" y="48" class="lab" font-weight="700" fill="#C0504D">rare term (2q23.1 del)</text>
+        <rect x="150" y="36" width="300" height="16" rx="3" fill="#C0504D"/>
+        <text x="460" y="49" class="sm" font-weight="700" fill="#C0504D">high surprisal &#8594; high weight</text>
+      </g>
+      <g transform="translate(28,128)">
+        <text x="0" y="6" class="labi">Vector RAG averages this rarity away; SMA makes the decisive rare term the loudest.</text>
+        <text x="0" y="30" class="sm" fill="#2E6B86">weight w = &#8722;log<tspan dy="3" font-size="10">2</tspan><tspan dy="-3"> p(term)    &#183;    ascension penalty</tspan> &#961;<tspan dy="-6" font-size="10">dist</tspan><tspan dy="6"> (&#961;=0.95, &#948;=2, frozen)</tspan></text>
+      </g>
+    </g>
+  </g>
+
+  <!-- =================================================================== -->
+  <!-- PANEL B : what each retriever indexes - and discards                -->
+  <!-- =================================================================== -->
+  <g id="panelB">
+    <rect x="808" y="22" width="770" height="540" rx="10" class="panelbg"/>
+    <text x="832" y="58" class="pl">b</text>
+    <text x="860" y="58" class="ttl">What each retriever indexes &#8212; and discards</text>
+
+    <!-- column 1: Vector RAG -->
+    <g id="colVector" transform="translate(832,86)">
+      <rect x="0" y="0" width="232" height="450" rx="9" fill="#F6F8FA" stroke="#C7CCD1" stroke-width="1.6"/>
+      <text x="116" y="30" text-anchor="middle" class="sub" fill="#7E8893">Vector RAG</text>
+      <text x="116" y="50" text-anchor="middle" class="sm">embedding similarity</text>
+      <!-- token cloud -->
+      <g font-size="12" fill="#7E8893" text-anchor="middle">
+        <text x="58" y="92" font-size="15">seizure</text>
+        <text x="150" y="84" font-size="11">patient</text>
+        <text x="180" y="110" font-size="13">disability</text>
+        <text x="70" y="120" font-size="11">long</text>
+        <text x="120" y="106" font-size="16">philtrum</text>
+        <text x="160" y="138" font-size="10">deletion</text>
+        <text x="64" y="146" font-size="9" fill="#C7CCD1">2q23.1</text>
+        <text x="120" y="160" font-size="11">clinical</text>
+      </g>
+      <text x="116" y="190" text-anchor="middle" class="sm">flat token bag, no hierarchy</text>
+      <!-- keeps / loses -->
+      <g transform="translate(16,210)">
+        <rect x="0" y="0" width="200" height="100" rx="6" fill="#FFFFFF" stroke="#D8DDE2"/>
+        <text x="14" y="22" class="kw" fill="#3E8E5A"><tspan font-family="DejaVu Sans">&#10003;</tspan> keeps</text>
+        <text x="14" y="42" class="sm">surface lexical / dense form</text>
+        <text x="14" y="68" class="kw" fill="#C0504D"><tspan font-family="DejaVu Sans">&#10007;</tspan> discards</text>
+        <text x="14" y="88" class="sm" font-weight="700" fill="#C0504D">rarity (averaged away)</text>
+      </g>
+      <g transform="translate(16,322)">
+        <rect x="0" y="0" width="200" height="56" rx="6" fill="#FBE9E7" stroke="#E2A9A4"/>
+        <text x="100" y="24" text-anchor="middle" class="sm" fill="#C0504D" font-weight="700">no provenance</text>
+        <text x="100" y="44" text-anchor="middle" class="sm" fill="#C0504D">no abstain &#183; no novelty</text>
+      </g>
+    </g>
+
+    <!-- column 2: Knowledge graph -->
+    <g id="colKG" transform="translate(1080,86)">
+      <rect x="0" y="0" width="232" height="450" rx="9" fill="#FCF6E9" stroke="#E7B15A" stroke-width="1.6"/>
+      <text x="116" y="30" text-anchor="middle" class="sub" fill="#A77A21">Knowledge graph</text>
+      <text x="116" y="50" text-anchor="middle" class="sm">entity adjacency</text>
+      <!-- node-edge adjacency -->
+      <g transform="translate(0,78)">
+        <g stroke="#E7B15A" stroke-width="1.8">
+          <line x1="60" y1="20" x2="116" y2="60"/><line x1="116" y1="60" x2="172" y2="24"/>
+          <line x1="60" y1="20" x2="56" y2="84"/><line x1="172" y1="24" x2="176" y2="84"/>
+          <line x1="56" y1="84" x2="116" y2="60"/><line x1="176" y1="84" x2="116" y2="60"/>
+        </g>
+        <g fill="#E7B15A">
+          <circle cx="60" cy="20" r="11"/><circle cx="172" cy="24" r="11"/>
+          <circle cx="116" cy="60" r="13"/><circle cx="56" cy="84" r="11"/><circle cx="176" cy="84" r="11"/>
+        </g>
+        <text x="116" y="64" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">e</text>
+      </g>
+      <text x="116" y="190" text-anchor="middle" class="sm">traverses by path, flat edges</text>
+      <g transform="translate(16,210)">
+        <rect x="0" y="0" width="200" height="100" rx="6" fill="#FFFFFF" stroke="#E7D3A6"/>
+        <text x="14" y="22" class="kw" fill="#3E8E5A"><tspan font-family="DejaVu Sans">&#10003;</tspan> keeps</text>
+        <text x="14" y="42" class="sm">typed entity edges</text>
+        <text x="14" y="68" class="kw" fill="#C0504D"><tspan font-family="DejaVu Sans">&#10007;</tspan> discards</text>
+        <text x="14" y="88" class="sm" font-weight="700" fill="#C0504D">subsumption (is-a lattice)</text>
+      </g>
+      <g transform="translate(16,322)">
+        <rect x="0" y="0" width="200" height="56" rx="6" fill="#FBF1DC" stroke="#E7B15A"/>
+        <text x="100" y="24" text-anchor="middle" class="sm" fill="#A77A21" font-weight="700">no &#8220;what generalizes&#8221;</text>
+        <text x="100" y="44" text-anchor="middle" class="sm" fill="#A77A21">no higher-order relations</text>
+      </g>
+    </g>
+
+    <!-- column 3: SMA (ours) -->
+    <g id="colSMA" transform="translate(1328,86)">
+      <rect x="0" y="0" width="232" height="450" rx="9" fill="url(#smaFill)" stroke="#2E8AA6" stroke-width="2.2"/>
+      <text x="116" y="30" text-anchor="middle" class="sub">SMA (ours)</text>
+      <text x="116" y="50" text-anchor="middle" class="sm" fill="#2E6B86">functors + lattice</text>
+      <!-- functors over lattice glyph -->
+      <g transform="translate(0,70)">
+        <g stroke="#2E8AA6" stroke-width="1.7" fill="none">
+          <path d="M116 8 L74 44"/><path d="M116 8 L158 44"/>
+          <path d="M74 44 L52 84"/><path d="M74 44 L96 84"/><path d="M158 44 L138 84"/>
+        </g>
+        <g fill="#2E8AA6">
+          <circle cx="116" cy="8" r="10"/><circle cx="74" cy="44" r="9"/><circle cx="158" cy="44" r="9"/>
+          <circle cx="52" cy="84" r="8"/><circle cx="96" cy="84" r="8"/><circle cx="138" cy="84" r="8"/>
+        </g>
+        <!-- functor box bound to a node -->
+        <rect x="22" y="98" width="76" height="20" rx="4" fill="#5AA9C4"/>
+        <text x="60" y="112" text-anchor="middle" font-size="10.5" fill="#fff" font-weight="700">f(subj)</text>
+        <rect x="120" y="98" width="84" height="20" rx="4" fill="#9B86C4"/>
+        <text x="162" y="112" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">R(f,g)</text>
+        <line x1="60" y1="98" x2="60" y2="92" stroke="#2E6B86" stroke-width="1.2"/>
+      </g>
+      <text x="116" y="208" text-anchor="middle" class="sm" fill="#2E6B86" font-weight="700">rarity-weighted structure</text>
+      <g transform="translate(16,222)">
+        <rect x="0" y="0" width="200" height="100" rx="6" fill="#FFFFFF" stroke="#A9D3E0"/>
+        <text x="14" y="22" class="kw" fill="#3E8E5A"><tspan font-family="DejaVu Sans">&#10003;</tspan> keeps</text>
+        <text x="14" y="42" class="sm">subsumption + higher-order +</text>
+        <text x="14" y="58" class="sm" font-weight="700" fill="#2E6B86">rarity (&#8722;log<tspan dy="3" font-size="10">2</tspan><tspan dy="-3">p weighted)</tspan></text>
+        <text x="14" y="84" class="sm" fill="#2E6B86" font-weight="700">&#8594; the expert signal RAG drops</text>
+      </g>
+      <g transform="translate(16,334)">
+        <rect x="0" y="0" width="200" height="44" rx="6" fill="#E1F0F5" stroke="#2E8AA6"/>
+        <text x="100" y="20" text-anchor="middle" class="sm" fill="#2E6B86" font-weight="700">cite &#183; abstain &#183; flag novelty</text>
+        <text x="100" y="37" text-anchor="middle" class="sm" fill="#2E6B86">(structurally available)</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- =================================================================== -->
+  <!-- PANEL C : structure-mapping retrieval with verifiable agency        -->
+  <!-- =================================================================== -->
+  <g id="panelC">
+    <rect x="22" y="586" width="770" height="572" rx="10" class="panelbg"/>
+    <text x="46" y="622" class="pl">c</text>
+    <text x="74" y="622" class="ttl">Structure-mapping retrieval with verifiable agency</text>
+
+    <!-- STAGE 1 MAC -->
+    <g id="macBox" transform="translate(48,656)">
+      <rect x="0" y="0" width="150" height="120" rx="9" fill="url(#smaFill)" stroke="#2E8AA6" stroke-width="1.6"/>
+      <text x="75" y="28" text-anchor="middle" class="sub">MAC</text>
+      <text x="75" y="48" text-anchor="middle" class="sm">admissible-content</text>
+      <text x="75" y="64" text-anchor="middle" class="sm">bound (cheap)</text>
+      <!-- funnel icon -->
+      <g transform="translate(75,92)" fill="none" stroke="#2E8AA6" stroke-width="2">
+        <path d="M-30 -10 L30 -10 L8 14 L8 24 L-8 24 L-8 14 Z" fill="#D3E8EF"/>
+      </g>
+    </g>
+    <line x1="202" y1="716" x2="240" y2="716" stroke="#2E6B86" stroke-width="2.4" marker-end="url(#arr)"/>
+
+    <!-- STAGE 2 FAC best-first SME alignment with two structures + alignment lines -->
+    <g id="facBox" transform="translate(244,656)">
+      <rect x="0" y="0" width="290" height="200" rx="9" fill="url(#smaFill)" stroke="#2E8AA6" stroke-width="1.8"/>
+      <text x="145" y="26" text-anchor="middle" class="sub">FAC: best-first SME alignment</text>
+      <!-- query structure -->
+      <text x="62" y="52" text-anchor="middle" class="sm" font-weight="700" fill="#2E6B86">query case</text>
+      <g transform="translate(20,60)">
+        <g stroke="#5AA9C4" stroke-width="1.7" fill="none"><path d="M42 8 L18 52"/><path d="M42 8 L66 52"/></g>
+        <circle cx="42" cy="8" r="11" fill="#2E8AA6"/>
+        <circle cx="18" cy="52" r="10" fill="#5AA9C4"/><circle cx="66" cy="52" r="10" fill="#5AA9C4"/>
+        <text x="42" y="100" text-anchor="middle" font-size="10.5" fill="#5F6B78">f(s), g(s)</text>
+      </g>
+      <!-- memory structure -->
+      <text x="228" y="52" text-anchor="middle" class="sm" font-weight="700" fill="#2E6B86">memory case</text>
+      <g transform="translate(186,60)">
+        <g stroke="#9B86C4" stroke-width="1.7" fill="none"><path d="M42 8 L18 52"/><path d="M42 8 L66 52"/></g>
+        <circle cx="42" cy="8" r="11" fill="#9B86C4"/>
+        <circle cx="18" cy="52" r="10" fill="#B3A2D4"/><circle cx="66" cy="52" r="10" fill="#B3A2D4"/>
+        <text x="42" y="100" text-anchor="middle" font-size="10.5" fill="#5F6B78">f'(s'), g'(s')</text>
+      </g>
+      <!-- alignment correspondence lines -->
+      <g stroke="#D98A3D" stroke-width="1.8" stroke-dasharray="5 3">
+        <line x1="62" y1="68" x2="228" y2="68"/>
+        <line x1="38" y1="112" x2="204" y2="112"/>
+        <line x1="86" y1="112" x2="252" y2="112"/>
+      </g>
+      <text x="145" y="182" text-anchor="middle" class="sm" fill="#C68A2E" font-weight="700">consistent kernel mapping (systematicity)</text>
+    </g>
+    <line x1="538" y1="716" x2="576" y2="716" stroke="#2E6B86" stroke-width="2.4" marker-end="url(#arr)"/>
+
+    <!-- STAGE 3 cite : structural receipt -->
+    <g id="citeBox" transform="translate(580,656)">
+      <rect x="0" y="0" width="180" height="200" rx="9" fill="#EAF6EF" stroke="#3E8E5A" stroke-width="1.8"/>
+      <text x="90" y="26" text-anchor="middle" class="sub" fill="#2E7A48">Cite: structural receipt</text>
+      <!-- receipt icon -->
+      <g transform="translate(28,42)">
+        <path d="M0 0 H124 V120 L112 110 L100 120 L88 110 L76 120 L64 110 L52 120 L40 110 L28 120 L16 110 L0 120 Z" fill="#FFFFFF" stroke="#3E8E5A" stroke-width="1.6"/>
+        <line x1="14" y1="22" x2="110" y2="22" stroke="#9DBFA9" stroke-width="2"/>
+        <text x="14" y="44" class="mono" fill="#2E7A48">HP:0001250</text>
+        <text x="14" y="62" class="mono" fill="#2E7A48">via is-a&#8593; (&#961;&#178;)</text>
+        <text x="14" y="80" class="mono" fill="#2E7A48">w = &#8722;log2 p (high)</text>
+        <text x="14" y="98" class="mono" fill="#2E7A48" font-weight="700">aligned <tspan font-family="DejaVu Sans">&#10003;</tspan></text>
+      </g>
+      <text x="90" y="186" text-anchor="middle" class="sm" fill="#2E7A48">verifiable provenance</text>
+    </g>
+
+    <!-- STAGE 4 abstain / novelty gauge -->
+    <g id="abstainBox" transform="translate(48,890)">
+      <rect x="0" y="0" width="712" height="244" rx="9" fill="url(#amberFill)" stroke="#D98A3D" stroke-width="1.8"/>
+      <text x="24" y="32" class="sub" fill="#B5722B">Abstain / flag novelty: an expectation-violation gauge</text>
+
+      <!-- semicircle gauge -->
+      <g transform="translate(150,160)">
+        <path d="M-110 0 A110 110 0 0 1 110 0" fill="none" stroke="#EBD9C2" stroke-width="20"/>
+        <!-- known zone (green) -->
+        <path d="M-110 0 A110 110 0 0 1 -10 -109.5" fill="none" stroke="#3E8E5A" stroke-width="20"/>
+        <!-- gray middle -->
+        <path d="M-10 -109.5 A110 110 0 0 1 38 -103.2" fill="none" stroke="#C7CCD1" stroke-width="20"/>
+        <!-- unknown zone (red) -->
+        <path d="M38 -103.2 A110 110 0 0 1 110 0" fill="none" stroke="#C0504D" stroke-width="20"/>
+        <!-- needle pointing to known -->
+        <line x1="0" y1="0" x2="-72" y2="-78" stroke="#23323B" stroke-width="3.4"/>
+        <circle cx="0" cy="0" r="7" fill="#23323B"/>
+        <text x="-104" y="22" text-anchor="middle" class="sm" fill="#2E7A48" font-weight="700">known</text>
+        <text x="104" y="22" text-anchor="middle" class="sm" fill="#C0504D" font-weight="700">novel</text>
+      </g>
+
+      <!-- threshold logic -->
+      <g transform="translate(310,64)">
+        <text x="0" y="0" class="lab" font-weight="700" fill="#B5722B">raw structural grounding score</text>
+        <text x="0" y="22" class="sm">gated at a threshold calibrated</text>
+        <text x="0" y="40" class="sm">per memory on a disjoint split</text>
+        <text x="0" y="58" class="sm">(Youden&#8217;s J, retrieval-only).</text>
+        <!-- decision branches -->
+        <g transform="translate(0,78)">
+          <rect x="0" y="0" width="178" height="40" rx="6" fill="#EAF6EF" stroke="#3E8E5A"/>
+          <text x="89" y="18" text-anchor="middle" class="sm" fill="#2E7A48" font-weight="700">above &#8594; answer + cite</text>
+          <text x="89" y="34" text-anchor="middle" class="sm" fill="#2E7A48">structural match exists</text>
+          <rect x="0" y="50" width="178" height="40" rx="6" fill="#FBE9E7" stroke="#C0504D"/>
+          <text x="89" y="68" text-anchor="middle" class="sm" fill="#C0504D" font-weight="700">below &#8594; abstain + flag</text>
+          <text x="89" y="84" text-anchor="middle" class="sm" fill="#C0504D">expectation violated = novel</text>
+          <rect x="222" y="0" width="160" height="90" rx="6" fill="#FFFFFF" stroke="#D98A3D"/>
+          <text x="302" y="20" text-anchor="middle" class="sm" font-weight="700" fill="#B5722B">grounding AUROC</text>
+          <text x="302" y="48" text-anchor="middle" font-size="22" font-weight="700" fill="#2E8AA6">0.79</text>
+          <text x="302" y="68" text-anchor="middle" class="sm" fill="#7E8893">vs dense RAG 0.55</text>
+          <text x="302" y="84" text-anchor="middle" class="sm" fill="#7E8893">(near chance)</text>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- =================================================================== -->
+  <!-- PANEL D : one universal loader; route across domains                -->
+  <!-- =================================================================== -->
+  <g id="panelD">
+    <rect x="808" y="586" width="770" height="572" rx="10" class="panelbg"/>
+    <text x="832" y="622" class="pl">d</text>
+    <text x="860" y="622" class="ttl">One universal loader; route across domains</text>
+
+    <!-- central router hub -->
+    <g id="routerHub" transform="translate(1193,792)">
+      <circle cx="0" cy="0" r="58" fill="#2E6B86"/>
+      <circle cx="0" cy="0" r="58" fill="none" stroke="#2E8AA6" stroke-width="3"/>
+      <text x="0" y="-8" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">domain</text>
+      <text x="0" y="12" text-anchor="middle" font-size="14" fill="#fff" font-weight="700">router</text>
+      <text x="0" y="32" text-anchor="middle" font-size="11" fill="#BFE0EC">11 ontologies</text>
+    </g>
+
+    <!-- spokes -->
+    <g stroke="#A7AFB6" stroke-width="2">
+      <line x1="1193" y1="734" x2="1193" y2="690" marker-end="url(#arrg)"/>            <!-- top: medicine -->
+      <line x1="1244" y1="763" x2="1320" y2="720" marker-end="url(#arrg)"/>            <!-- upper-right: genomics -->
+      <line x1="1244" y1="821" x2="1320" y2="864" marker-end="url(#arrg)"/>            <!-- lower-right: cyber -->
+      <line x1="1142" y1="821" x2="1066" y2="864" marker-end="url(#arrg)"/>            <!-- lower-left: legal -->
+      <line x1="1142" y1="763" x2="1066" y2="720" marker-end="url(#arrg)"/>            <!-- upper-left: finance -->
+    </g>
+
+    <!-- domain glyph: MEDICINE (top) -->
+    <g transform="translate(1124,628)">
+      <rect x="0" y="0" width="138" height="62" rx="8" fill="#F7E9E9" stroke="#C0504D" stroke-width="1.8"/>
+      <!-- cross icon -->
+      <g transform="translate(20,31)" fill="#C0504D"><rect x="-5" y="-13" width="10" height="26" rx="2"/><rect x="-13" y="-5" width="26" height="10" rx="2"/></g>
+      <text x="44" y="22" class="kw" fill="#C0504D">Medicine</text>
+      <text x="44" y="40" class="sm" fill="#8A3936">HPO &#183; MONDO</text>
+      <text x="44" y="55" class="sm" fill="#8A3936">76k terms</text>
+    </g>
+
+    <!-- GENOMICS (upper-right) -->
+    <g transform="translate(1326,672)">
+      <rect x="0" y="0" width="142" height="62" rx="8" fill="#E8F2EC" stroke="#3E8E5A" stroke-width="1.8"/>
+      <!-- DNA helix icon -->
+      <g transform="translate(20,31)" stroke="#3E8E5A" stroke-width="2" fill="none">
+        <path d="M-8 -16 C8 -8 -8 8 8 16"/><path d="M8 -16 C-8 -8 8 8 -8 16"/>
+        <line x1="-6" y1="-10" x2="6" y2="-10"/><line x1="-6" y1="0" x2="6" y2="0"/><line x1="-6" y1="10" x2="6" y2="10"/>
+      </g>
+      <text x="40" y="22" class="kw" fill="#3E8E5A">Genomics</text>
+      <text x="40" y="40" class="sm" fill="#2E6A43">GO &#183; Uberon</text>
+      <text x="40" y="55" class="sm" fill="#2E6A43">53k terms</text>
+    </g>
+
+    <!-- CYBER (lower-right) -->
+    <g transform="translate(1326,852)">
+      <rect x="0" y="0" width="142" height="62" rx="8" fill="#E7EDF2" stroke="#4A6F8A" stroke-width="1.8"/>
+      <!-- shield icon -->
+      <g transform="translate(20,31)" fill="#4A6F8A">
+        <path d="M0 -16 L13 -10 V4 C13 14 0 18 0 18 C0 18 -13 14 -13 4 V-10 Z"/>
+        <path d="M-5 0 L-1 5 L7 -6" stroke="#fff" stroke-width="2.4" fill="none"/>
+      </g>
+      <text x="40" y="22" class="kw" fill="#4A6F8A">Cyber</text>
+      <text x="40" y="40" class="sm" fill="#36546B">ATT&amp;CK &#183; CAPEC &#183; CWE</text>
+      <text x="40" y="55" class="sm" fill="#36546B">2.2k terms</text>
+    </g>
+
+    <!-- LEGAL (lower-left) -->
+    <g transform="translate(916,852)">
+      <rect x="0" y="0" width="142" height="62" rx="8" fill="#EFEAF6" stroke="#7A5DA8" stroke-width="1.8"/>
+      <!-- gavel icon -->
+      <g transform="translate(20,31)" stroke="#7A5DA8" stroke-width="2.4" fill="#7A5DA8">
+        <rect x="-12" y="-12" width="16" height="9" rx="2" transform="rotate(-40 -4 -8)"/>
+        <line x1="-2" y1="-2" x2="10" y2="12" stroke-linecap="round"/>
+        <line x1="-12" y1="16" x2="4" y2="16" stroke-linecap="round"/>
+      </g>
+      <text x="40" y="22" class="kw" fill="#7A5DA8">Legal / IP</text>
+      <text x="40" y="40" class="sm" fill="#5B4486">CPC &#183; LKIF-core</text>
+      <text x="40" y="55" class="sm" fill="#5B4486">254k terms</text>
+    </g>
+
+    <!-- FINANCE (upper-left) -->
+    <g transform="translate(916,672)">
+      <rect x="0" y="0" width="142" height="62" rx="8" fill="#F8EFDD" stroke="#C68A2E" stroke-width="1.8"/>
+      <!-- coin icon -->
+      <g transform="translate(20,31)" fill="#C68A2E">
+        <circle cx="0" cy="0" r="15"/><circle cx="0" cy="0" r="15" fill="none" stroke="#A06F1E" stroke-width="1.5"/>
+        <text x="0" y="6" text-anchor="middle" font-size="17" fill="#fff" font-weight="700">$</text>
+      </g>
+      <text x="40" y="22" class="kw" fill="#C68A2E">Finance</text>
+      <text x="40" y="40" class="sm" fill="#9A6B21">FIBO</text>
+      <text x="40" y="55" class="sm" fill="#9A6B21">2.9k terms</text>
+    </g>
+
+    <text x="1193" y="940" text-anchor="middle" class="sm" fill="#7E8893">load_obo / load_owl / load_attack_stix / load_cpc &#8594; mount()  &#183;  &#8776;594k concepts, no per-domain code</text>
+
+    <!-- radar / spider inset: SMA vs best-RAG tail top-5 across 5 domains -->
+    <g id="radarInset" transform="translate(1193,1055)">
+      <text x="0" y="-58" text-anchor="middle" class="sub">Tail top-5: SMA vs best RAG</text>
+      <!-- axes (5) at angles -90, -18, 54, 126, 198 deg; radius scale: value*72 -->
+      <!-- grid rings -->
+      <g fill="none" stroke="#E4E8EC" stroke-width="1">
+        <polygon points="0,-72.0 68.5,-22.2 42.3,58.2 -42.3,58.2 -68.5,-22.2"/>
+        <polygon points="0,-48.0 45.7,-14.8 28.2,38.8 -28.2,38.8 -45.7,-14.8"/>
+        <polygon points="0,-24.0 22.8,-7.4 14.1,19.4 -14.1,19.4 -22.8,-7.4"/>
+      </g>
+      <g stroke="#CBD2D8" stroke-width="1">
+        <line x1="0" y1="0" x2="0" y2="-72"/>
+        <line x1="0" y1="0" x2="68.5" y2="-22.2"/>
+        <line x1="0" y1="0" x2="42.3" y2="58.3"/>
+        <line x1="0" y1="0" x2="-42.3" y2="58.3"/>
+        <line x1="0" y1="0" x2="-68.5" y2="-22.2"/>
+      </g>
+      <!-- SMA polygon: medicine .949 genomics .849 finance .418 cyber .766 legal .941 -->
+      <!-- order axes: top=medicine(.949), UR=genomics(.849), LR=finance(.418), LL=cyber(.766), UL=legal(.941) -->
+      <polygon points="0,-68.3 58.1,-18.9 17.7,24.3 -32.4,44.6 -64.4,-20.9"
+               fill="#2E8AA6" fill-opacity="0.28" stroke="#2E8AA6" stroke-width="2.2"/>
+      <!-- best RAG: medicine .606 genomics .682 finance .231 cyber .749 legal .870 -->
+      <polygon points="0,-43.6 46.7,-15.2 9.8,13.5 -31.7,43.6 -59.6,-19.4"
+               fill="#A7AFB6" fill-opacity="0.22" stroke="#7E8893" stroke-width="1.8" stroke-dasharray="5 3"/>
+      <!-- axis labels -->
+      <g font-size="11" fill="#3B4750" text-anchor="middle">
+        <text x="0" y="-82">Medicine .95</text>
+        <text x="92" y="-26">Genomics .85</text>
+        <text x="60" y="80">Finance .42</text>
+        <text x="-60" y="80">Cyber .77</text>
+        <text x="-92" y="-26">Legal .94</text>
+      </g>
+      <!-- legend -->
+      <g transform="translate(-78,98)" font-size="11">
+        <rect x="0" y="0" width="14" height="10" fill="#2E8AA6" fill-opacity="0.6" stroke="#2E8AA6"/>
+        <text x="20" y="9" fill="#2E6B86" font-weight="700">SMA</text>
+        <rect x="80" y="0" width="14" height="10" fill="#A7AFB6" fill-opacity="0.5" stroke="#7E8893"/>
+        <text x="100" y="9" fill="#5F6B78">best RAG</text>
+      </g>
+    </g>
+  </g>
+</svg>

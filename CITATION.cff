@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+type: software
+title: "SMA-1: Structure-Mapping Agentic Memory"
+authors:
+  - family-names: Khan
+    given-names: Ayaz
+license: Apache-2.0
+repository-code: "https://github.com/khanayaz2727/SMA-1"  # TODO confirm repo URL
+version: 1.0.0
+date-released: TODO
+
+preferred-citation:
+  type: article
+  title: "Structure-Mapping Agentic Memory for Trustworthy Specialist Reasoning"
+  authors:
+    - family-names: Khan
+      given-names: Ayaz
+  year: 2026
+  journal: "Nature Machine Intelligence"  # intended venue, not yet published

@@ -1,0 +1,22 @@
+{
+  "title": "SMA-1: Structure-Mapping Agentic Memory",
+  "description": "A retrieval-augmented system that grounds a generalist LLM in a golden-domain ontology, using structure-mapping analogical retrieval to turn it into a verifiable specialist. SMA beats vector RAG and knowledge graphs on rare/cross-vocabulary/high-stakes reasoning, providing provenance, abstention, and novelty detection that traditional RAG cannot offer. Demonstrated on five domains (medicine, genomics, finance, cyber, legal) with trustworthy-AI metrics.",
+  "upload_type": "software",
+  "creators": [
+    {
+      "name": "Khan, Ayaz"
+    }
+  ],
+  "license": "Apache-2.0",
+  "access_right": "open",
+  "keywords": [
+    "structure mapping",
+    "analogical retrieval",
+    "ontology",
+    "retrieval-augmented generation",
+    "abstention",
+    "novelty detection",
+    "trustworthy AI",
+    "knowledge graph"
+  ]
+}

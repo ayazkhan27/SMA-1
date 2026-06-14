@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="560" viewBox="0 0 1080 560" font-family="Arial, 'Liberation Sans', sans-serif">
+  <defs>
+    <style>
+      .ct  { font-size:22px; font-weight:700; fill:#23323B; }
+      .cs  { font-size:16px; font-weight:700; fill:#2E6B86; }
+      .cl  { font-size:13.5px; fill:#3B4750; }
+      .csm { font-size:12px; fill:#5F6B78; }
+      .cnS { font-size:26px; font-weight:700; fill:#2E8AA6; }
+      .cnR { font-size:26px; font-weight:700; fill:#7E8893; }
+      .axt { font-size:15px; font-weight:700; }
+    </style>
+  </defs>
+  <rect width="1080" height="560" fill="#FFFFFF"/>
+  <text x="40" y="46" class="ct">Three capability axes vector RAG and knowledge graphs structurally lack</text>
+  <text x="40" y="72" class="csm" fill="#7E8893">Medicine LLM-QA (n = 120 answerable + 120 held-out); LLM and prompt fixed, memory swapped. SMA (teal) vs dense RAG (gray).</text>
+
+  <!-- legend -->
+  <g transform="translate(820,40)">
+    <rect x="0" y="-14" width="18" height="12" fill="#2E8AA6"/><text x="24" y="-3" class="csm" fill="#2E6B86" font-weight="700">SMA</text>
+    <rect x="92" y="-14" width="18" height="12" fill="#A7AFB6"/><text x="116" y="-3" class="csm" fill="#5F6B78">dense RAG</text>
+  </g>
+
+  <!-- ===== AXIS 1: CITATION ===== -->
+  <g id="cap_cite" transform="translate(40,108)">
+    <rect x="0" y="0" width="320" height="412" rx="12" fill="#EAF6EF" stroke="#3E8E5A" stroke-width="1.8"/>
+    <!-- receipt icon -->
+    <g transform="translate(28,28)">
+      <path d="M0 0 H56 V70 L47 63 L38 70 L29 63 L20 70 L11 63 L0 70 Z" fill="#fff" stroke="#3E8E5A" stroke-width="1.8"/>
+      <line x1="9" y1="16" x2="47" y2="16" stroke="#9DBFA9" stroke-width="2.4"/>
+      <line x1="9" y1="30" x2="40" y2="30" stroke="#9DBFA9" stroke-width="2.4"/>
+      <line x1="9" y1="44" x2="44" y2="44" stroke="#9DBFA9" stroke-width="2.4"/>
+    </g>
+    <text x="100" y="44" class="cs" fill="#2E7A48">Citation</text>
+    <text x="100" y="66" class="csm">faithful, verifiable provenance</text>
+    <text x="100" y="84" class="csm">(ALCE-style support)</text>
+
+    <!-- bar comparison -->
+    <g transform="translate(28,128)">
+      <text x="0" y="0" class="cl">cite-support score (higher = better)</text>
+      <!-- SMA -->
+      <text x="0" y="34" class="axt" fill="#2E6B86">SMA</text>
+      <rect x="58" y="20" width="214" height="22" rx="4" fill="#E1F0F5"/>
+      <rect x="58" y="20" width="180" height="22" rx="4" fill="#2E8AA6"/>
+      <text x="246" y="37" class="cl" font-weight="700" fill="#2E6B86">0.62</text>
+      <!-- RAG -->
+      <text x="0" y="78" class="axt" fill="#5F6B78">RAG</text>
+      <rect x="58" y="64" width="214" height="22" rx="4" fill="#EDEFF1"/>
+      <rect x="58" y="64" width="139" height="22" rx="4" fill="#A7AFB6"/>
+      <text x="205" y="81" class="cl" fill="#5F6B78">0.48</text>
+    </g>
+    <g transform="translate(28,256)">
+      <rect x="0" y="0" width="264" height="124" rx="8" fill="#FFFFFF" stroke="#BFD9C8"/>
+      <text x="16" y="26" class="cl" font-weight="700" fill="#2E7A48">Why RAG can't:</text>
+      <text x="16" y="48" class="csm">retrieved chunks support an answer</text>
+      <text x="16" y="64" class="csm">only lexically; SMA returns the exact</text>
+      <text x="16" y="80" class="csm">ontology term + ascension path used</text>
+      <text x="16" y="104" class="csm" font-weight="700" fill="#2E7A48">&#8594; a structural receipt, not a snippet</text>
+    </g>
+  </g>
+
+  <!-- ===== AXIS 2: ABSTENTION ===== -->
+  <g id="cap_abstain" transform="translate(380,108)">
+    <rect x="0" y="0" width="320" height="412" rx="12" fill="#FBF0E3" stroke="#D98A3D" stroke-width="1.8"/>
+    <!-- gauge icon -->
+    <g transform="translate(56,58)">
+      <path d="M-30 0 A30 30 0 0 1 30 0" fill="none" stroke="#3E8E5A" stroke-width="9"/>
+      <path d="M2 -29.9 A30 30 0 0 1 30 0" fill="none" stroke="#C0504D" stroke-width="9"/>
+      <line x1="0" y1="0" x2="-19" y2="-21" stroke="#23323B" stroke-width="3"/>
+      <circle cx="0" cy="0" r="4.5" fill="#23323B"/>
+    </g>
+    <text x="100" y="44" class="cs" fill="#B5722B">Calibrated abstention</text>
+    <text x="100" y="66" class="csm">knows when it does not know</text>
+    <text x="100" y="84" class="csm">(grounding AUROC)</text>
+
+    <g transform="translate(28,128)">
+      <text x="0" y="0" class="cl">known-vs-unknown discrimination</text>
+      <text x="0" y="34" class="axt" fill="#2E6B86">SMA</text>
+      <rect x="58" y="20" width="214" height="22" rx="4" fill="#FBE7CF"/>
+      <rect x="58" y="20" width="169" height="22" rx="4" fill="#2E8AA6"/>
+      <text x="235" y="37" class="cl" font-weight="700" fill="#2E6B86">0.79</text>
+      <text x="0" y="78" class="axt" fill="#5F6B78">RAG</text>
+      <rect x="58" y="64" width="214" height="22" rx="4" fill="#FBE7CF"/>
+      <rect x="58" y="64" width="100" height="22" rx="4" fill="#A7AFB6"/>
+      <text x="166" y="81" class="cl" fill="#5F6B78">0.55</text>
+      <!-- chance line -->
+      <line x1="158" y1="14" x2="158" y2="92" stroke="#C0504D" stroke-width="1.4" stroke-dasharray="4 3"/>
+      <text x="162" y="106" class="csm" fill="#C0504D">chance 0.50</text>
+    </g>
+    <g transform="translate(28,256)">
+      <rect x="0" y="0" width="264" height="124" rx="8" fill="#FFFFFF" stroke="#EAC79B"/>
+      <text x="16" y="26" class="cl" font-weight="700" fill="#B5722B">Why RAG can't:</text>
+      <text x="16" y="48" class="csm">cosine similarity stays high even for</text>
+      <text x="16" y="64" class="csm">unseen diseases, so its gate must</text>
+      <text x="16" y="80" class="csm">over-abstain (refuses 79% of</text>
+      <text x="16" y="96" class="csm">answerable to reach recall 0.90).</text>
+      <text x="16" y="118" class="csm" font-weight="700" fill="#B5722B">SMA: recall 0.91 refusing only 45%</text>
+    </g>
+  </g>
+
+  <!-- ===== AXIS 3: NOVELTY ===== -->
+  <g id="cap_novelty" transform="translate(720,108)">
+    <rect x="0" y="0" width="320" height="412" rx="12" fill="#F7E9E9" stroke="#C0504D" stroke-width="1.8"/>
+    <!-- starburst icon -->
+    <g transform="translate(56,56)" stroke="#C0504D" stroke-width="3" fill="none">
+      <line x1="0" y1="-28" x2="0" y2="28"/><line x1="-28" y1="0" x2="28" y2="0"/>
+      <line x1="-20" y1="-20" x2="20" y2="20"/><line x1="20" y1="-20" x2="-20" y2="20"/>
+      <circle cx="0" cy="0" r="7" fill="#C0504D"/>
+    </g>
+    <text x="100" y="44" class="cs" fill="#A83F3C">Novelty detection</text>
+    <text x="100" y="66" class="csm">flags out-of-ontology cases</text>
+    <text x="100" y="84" class="csm">(structural novelty F1)</text>
+
+    <g transform="translate(28,128)">
+      <text x="0" y="0" class="cl">novelty F1 (higher = better)</text>
+      <text x="0" y="34" class="axt" fill="#2E6B86">SMA</text>
+      <rect x="58" y="20" width="214" height="22" rx="4" fill="#F7DCDB"/>
+      <rect x="58" y="20" width="169" height="22" rx="4" fill="#2E8AA6"/>
+      <text x="235" y="37" class="cl" font-weight="700" fill="#2E6B86">0.79</text>
+      <text x="0" y="78" class="axt" fill="#5F6B78">RAG</text>
+      <rect x="58" y="64" width="214" height="22" rx="4" fill="#F7DCDB"/>
+      <rect x="58" y="64" width="118" height="22" rx="4" fill="#A7AFB6"/>
+      <text x="184" y="81" class="cl" fill="#5F6B78">0.55</text>
+    </g>
+    <g transform="translate(28,256)">
+      <rect x="0" y="0" width="264" height="124" rx="8" fill="#FFFFFF" stroke="#E2A9A4"/>
+      <text x="16" y="26" class="cl" font-weight="700" fill="#A83F3C">Why RAG falls short:</text>
+      <text x="16" y="48" class="csm">cosine novelty barely beats chance;</text>
+      <text x="16" y="64" class="csm">in the pure retrieval suite every</text>
+      <text x="16" y="80" class="csm">vector baseline scores F1 exactly 0.</text>
+      <text x="16" y="104" class="csm" font-weight="700" fill="#A83F3C">SMA: expectation violation = novel</text>
+    </g>
+  </g>
+</svg>

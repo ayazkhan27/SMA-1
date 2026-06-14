@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="540" viewBox="0 0 720 540" font-family="Arial, 'Liberation Sans', sans-serif">
+  <defs>
+    <marker id="ga_arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2E6B86"/>
+    </marker>
+    <linearGradient id="ga_sma" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EAF4F8"/><stop offset="1" stop-color="#D3E8EF"/>
+    </linearGradient>
+    <linearGradient id="ga_lat" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F0ECF7"/><stop offset="1" stop-color="#E2DAF1"/>
+    </linearGradient>
+    <style>
+      .gt  { font-size:21px; font-weight:700; fill:#23323B; }
+      .gs  { font-size:14px; font-weight:700; fill:#2E6B86; }
+      .gl  { font-size:13px; fill:#3B4750; }
+      .gsm { font-size:12px; fill:#5F6B78; }
+      .gn  { font-size:23px; font-weight:700; fill:#2E8AA6; }
+    </style>
+  </defs>
+  <rect width="720" height="540" fill="#FFFFFF"/>
+  <rect x="6" y="6" width="708" height="528" rx="12" fill="none" stroke="#D8DDE2" stroke-width="1.4"/>
+
+  <text x="360" y="44" text-anchor="middle" class="gt">A golden-ontology structure-mapping memory</text>
+  <text x="360" y="70" text-anchor="middle" class="gt" fill="#2E8AA6">turns a generalist LLM into a verifiable specialist</text>
+
+  <!-- STAGE 1: generalist LLM -->
+  <g id="ga_llm" transform="translate(40,140)">
+    <rect x="0" y="0" width="170" height="160" rx="12" fill="#F6F8FA" stroke="#C7CCD1" stroke-width="1.6"/>
+    <text x="85" y="28" text-anchor="middle" class="gs" fill="#7E8893">Generalist LLM</text>
+    <!-- chat / brain glyph -->
+    <g transform="translate(85,86)">
+      <rect x="-46" y="-26" width="92" height="58" rx="12" fill="#FFFFFF" stroke="#A7AFB6" stroke-width="1.8"/>
+      <path d="M-16 32 L0 50 L16 32 Z" fill="#FFFFFF" stroke="#A7AFB6" stroke-width="1.8"/>
+      <line x1="-30" y1="-8" x2="30" y2="-8" stroke="#C7CCD1" stroke-width="3"/>
+      <line x1="-30" y1="6" x2="18" y2="6" stroke="#C7CCD1" stroke-width="3"/>
+      <line x1="-30" y1="20" x2="24" y2="20" stroke="#C7CCD1" stroke-width="3"/>
+    </g>
+    <text x="85" y="148" text-anchor="middle" class="gsm">fluent, but unreliable on the tail</text>
+  </g>
+
+  <!-- plus -->
+  <text x="238" y="228" text-anchor="middle" font-size="30" font-weight="700" fill="#7E8893">+</text>
+
+  <!-- STAGE 2: SMA structure-mapping memory -->
+  <g id="ga_mem" transform="translate(266,140)">
+    <rect x="0" y="0" width="190" height="160" rx="12" fill="url(#ga_sma)" stroke="#2E8AA6" stroke-width="2"/>
+    <text x="95" y="26" text-anchor="middle" class="gs">SMA memory</text>
+    <text x="95" y="44" text-anchor="middle" class="gsm" fill="#2E6B86">structure-mapping over a golden ontology</text>
+    <!-- lattice + functor glyph -->
+    <g transform="translate(95,92)">
+      <g stroke="#9B86C4" stroke-width="1.8" fill="none">
+        <path d="M0 -28 L-34 2"/><path d="M0 -28 L34 2"/>
+        <path d="M-34 2 L-50 34"/><path d="M-34 2 L-18 34"/><path d="M34 2 L18 34"/><path d="M34 2 L50 34"/>
+      </g>
+      <g fill="#9B86C4">
+        <circle cx="0" cy="-28" r="9"/><circle cx="-34" cy="2" r="8"/><circle cx="34" cy="2" r="8"/>
+        <circle cx="-50" cy="34" r="7"/><circle cx="-18" cy="34" r="7"/><circle cx="18" cy="34" r="7"/><circle cx="50" cy="34" r="7"/>
+      </g>
+    </g>
+    <text x="95" y="150" text-anchor="middle" class="gsm" fill="#2E6B86">MAC/FAC retrieval &#183; rarity-weighted</text>
+  </g>
+
+  <!-- arrow -->
+  <g>
+    <line x1="468" y1="220" x2="516" y2="220" stroke="#2E6B86" stroke-width="3" marker-end="url(#ga_arr)"/>
+  </g>
+
+  <!-- STAGE 3: verifiable specialist -->
+  <g id="ga_spec" transform="translate(524,140)">
+    <rect x="0" y="0" width="160" height="160" rx="12" fill="url(#ga_lat)" stroke="#7A5DA8" stroke-width="2"/>
+    <text x="80" y="26" text-anchor="middle" class="gs" fill="#5B4A86">Verifiable</text>
+    <text x="80" y="46" text-anchor="middle" class="gs" fill="#5B4A86">specialist</text>
+    <!-- shield + check icon -->
+    <g transform="translate(80,104)">
+      <path d="M0 -34 L30 -22 V4 C30 30 0 42 0 42 C0 42 -30 30 -30 4 V-22 Z" fill="#2E8AA6"/>
+      <path d="M-13 2 L-3 14 L17 -12" stroke="#fff" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- THREE CAPABILITIES row -->
+  <g id="ga_caps" transform="translate(40,344)">
+    <!-- cite -->
+    <g transform="translate(0,0)">
+      <rect x="0" y="0" width="206" height="118" rx="10" fill="#EAF6EF" stroke="#3E8E5A" stroke-width="1.8"/>
+      <!-- receipt icon -->
+      <g transform="translate(22,22)">
+        <path d="M0 0 H40 V52 L33 47 L26 52 L19 47 L12 52 L5 47 L0 52 Z" fill="#fff" stroke="#3E8E5A" stroke-width="1.6"/>
+        <line x1="6" y1="12" x2="34" y2="12" stroke="#9DBFA9" stroke-width="2"/>
+        <line x1="6" y1="22" x2="30" y2="22" stroke="#9DBFA9" stroke-width="2"/>
+        <line x1="6" y1="32" x2="32" y2="32" stroke="#9DBFA9" stroke-width="2"/>
+      </g>
+      <text x="74" y="30" class="gs" fill="#2E7A48">Cites</text>
+      <text x="74" y="52" class="gsm">structural receipt,</text>
+      <text x="74" y="68" class="gsm">verifiable provenance</text>
+      <text x="120" y="104" text-anchor="middle" class="gn">0.62<tspan font-size="12" font-weight="400" fill="#5F6B78"> support vs 0.48</tspan></text>
+    </g>
+    <!-- abstain -->
+    <g transform="translate(217,0)">
+      <rect x="0" y="0" width="206" height="118" rx="10" fill="#FBF0E3" stroke="#D98A3D" stroke-width="1.8"/>
+      <!-- gauge mini -->
+      <g transform="translate(36,58)">
+        <path d="M-26 0 A26 26 0 0 1 26 0" fill="none" stroke="#3E8E5A" stroke-width="7"/>
+        <path d="M2 -25.9 A26 26 0 0 1 26 0" fill="none" stroke="#C0504D" stroke-width="7"/>
+        <line x1="0" y1="0" x2="-16" y2="-18" stroke="#23323B" stroke-width="2.6"/>
+        <circle cx="0" cy="0" r="3.5" fill="#23323B"/>
+      </g>
+      <text x="78" y="30" class="gs" fill="#B5722B">Abstains</text>
+      <text x="78" y="52" class="gsm">knows when it does</text>
+      <text x="78" y="68" class="gsm">not know (calibrated)</text>
+      <text x="120" y="104" text-anchor="middle" class="gn">0.79<tspan font-size="12" font-weight="400" fill="#5F6B78"> AUROC vs 0.55</tspan></text>
+    </g>
+    <!-- novelty -->
+    <g transform="translate(434,0)">
+      <rect x="0" y="0" width="206" height="118" rx="10" fill="#F7E9E9" stroke="#C0504D" stroke-width="1.8"/>
+      <!-- starburst / novelty icon -->
+      <g transform="translate(36,58)" stroke="#C0504D" stroke-width="2.4" fill="none">
+        <line x1="0" y1="-24" x2="0" y2="24"/><line x1="-24" y1="0" x2="24" y2="0"/>
+        <line x1="-17" y1="-17" x2="17" y2="17"/><line x1="17" y1="-17" x2="-17" y2="17"/>
+        <circle cx="0" cy="0" r="6" fill="#C0504D"/>
+      </g>
+      <text x="78" y="30" class="gs" fill="#A83F3C">Flags novelty</text>
+      <text x="78" y="52" class="gsm">expectation violation</text>
+      <text x="78" y="68" class="gsm">on out-of-ontology cases</text>
+      <text x="120" y="104" text-anchor="middle" class="gn">0.79<tspan font-size="12" font-weight="400" fill="#5F6B78"> F1 vs 0.55</tspan></text>
+    </g>
+  </g>
+
+  <!-- footer metric strip -->
+  <g transform="translate(40,484)">
+    <text x="0" y="14" class="gsm" fill="#5F6B78">Medicine LLM-QA, LLM &amp; prompt fixed, memory swapped &#8212; SMA vs dense RAG:</text>
+    <text x="442" y="14" class="gsm" fill="#2E6B86" font-weight="700">accuracy 0.342 vs 0.100</text>
+    <text x="0" y="32" class="gsm" fill="#7E8893">Generalizes across 5 domains: tail top-5 wins (med +0.33, gen +0.16, fin +0.17, cyber +0.07, legal +0.06; all Holm-sig.)</text>
+  </g>
+  <!-- caption above caps -->
+  <text x="360" y="332" text-anchor="middle" class="gsm" fill="#7E8893">Three capabilities vector RAG and knowledge graphs structurally lack</text>
+</svg>

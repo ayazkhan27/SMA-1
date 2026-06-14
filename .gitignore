@@ -54,3 +54,16 @@ paper/figures/individual/*.log
 reports/confirmatory/*_downloads.log
 reports/confirmatory/drift_run.log
 reports/macfac_examined.txt
+
+# Additional LaTeX/Python build artifacts (Phase 6 cleanup)
+*.xdv
+*.bcf
+*.run.xml
+*.synctex.gz
+*.pyo
+*.bak
+*.tmp
+
+# Local design-reference material (third-party exemplars; not for public repo)
+/References/
+/ClaudeDesignBadFigures/

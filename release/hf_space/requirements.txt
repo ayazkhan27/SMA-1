@@ -1,0 +1,3 @@
+# Hugging Face Space dependencies for SMA-1 (illustrative demo mode)
+# No GPU required; no external model downloads in illustrative mode.
+gradio>=5.9.1
