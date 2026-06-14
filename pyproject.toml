@@ -42,7 +42,8 @@ eval = [
   "ranx>=0.3.20",
   "sentence-transformers>=3",
   "statsmodels>=0.14",
-  "kuzu>=0.6"
+  "kuzu>=0.6",
+  "networkx>=3"
 ]
 local-llm = [
   "huggingface-hub>=0.23",
