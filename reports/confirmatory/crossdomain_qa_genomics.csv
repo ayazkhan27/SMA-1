@@ -1,0 +1,4 @@
+arm,memory,n,score_threshold,accuracy,citation_faithfulness,abstain_recall,false_abstain,selective_accuracy,aurc,grounding_auroc,novelty_recall,novelty_f1
+genomics,none,50,,0.0,,0.92,0.88,0.46,1.0,,0.0,0.0
+genomics,dense,50,0.8567265272140503,0.12,0.2727272727272727,0.88,0.56,0.5,0.8692381558907105,0.6528,0.8,0.7142857142857142
+genomics,sma,50,66.21415369072903,0.36,0.9,0.96,0.6,0.66,0.5759366898943543,0.84,0.92,0.7419354838709677
