@@ -17,6 +17,11 @@
 % render the legend as a small justified paragraph instead.
 \newcommand{\edcaption}[1]{\par{\small #1}\par\smallskip}
 
+% Natural vertical spacing: let short pages be ragged at the bottom rather than
+% stretching glue to fill the column (which opened gaps under top floats). This
+% matches the official sn-article.tex template.
+\raggedbottom
+
 \begin{document}
 
 \title[Structure-Mapping Memory]{Structure-Mapping Memory Grounds Language Models in Curated Ontologies}
