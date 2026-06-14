@@ -70,7 +70,7 @@ main_body = main_body.replace(
 
 # ---- 4. transform DATA-AVAILABILITY tail (back matter; keep run-ins) ----
 da_body = da_body.replace("https://github.com/ayazkhan27/sma-1",
-                          "https://github.com/khanayaz2727/SMA-1")
+                          "https://github.com/ayazkhan27/SMA-1")
 
 # ---- 5. transform SUPPLEMENT -> appendix fragment ----
 supp = supp[supp.index("\\clearpage"):] if "\\clearpage" in supp else supp
