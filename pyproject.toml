@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 # PyPI distribution name (the import name stays `sma`); `sma` is taken on PyPI.
 name = "structuremappingmemory"
-version = "1.1.0"
+version = "1.1.1"
 description = "SMA-1: Structure-Mapping Agentic Memory — a structure-mapping retrieval memory that grounds language models in curated ontologies"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -35,7 +35,8 @@ dependencies = [
   "regex>=2024.5.15",
   "scikit-learn>=1.5",
   "typer>=0.12",
-  "zstandard>=0.22"
+  "zstandard>=0.22",
+  "mcp>=1.0"
 ]
 
 [project.optional-dependencies]
@@ -72,6 +73,7 @@ Issues = "https://github.com/ayazkhan27/SMA-1/issues"
 [project.scripts]
 sma = "sma.cli:main"
 sma-mcp = "sma.mcp:main"
+structuremappingmemory = "sma.mcp:main"
 
 [tool.setuptools.packages.find]
 include = ["sma*"]

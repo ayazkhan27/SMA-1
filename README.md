@@ -93,6 +93,20 @@ logistic-regression baseline wins. The advantage is specific to structure.
 pip install structuremappingmemory        # from PyPI (import name: sma)
 ```
 
+### Use as an MCP server (Codex, Claude Code, Claude Desktop)
+
+SMA ships a Model Context Protocol server so an agentic LLM can mount your ontologies and
+retrieve **structural analogs + cite-or-abstain + novelty** as tools. One command, zero
+install (via [`uv`](https://docs.astral.sh/uv/)):
+
+```bash
+codex mcp add sma -- uvx structuremappingmemory     # Codex CLI
+claude mcp add sma -- uvx structuremappingmemory    # Claude Code
+```
+
+`/mcp` to confirm, then ask it to `mount_ontology` / `retrieve` / `novelty`. Full guide,
+manifest config, and alternatives (pipx / pip): [`docs/MCP.md`](docs/MCP.md).
+
 Or for development, with the evaluation/encoder extras:
 
 ```bash

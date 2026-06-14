@@ -9,25 +9,43 @@ This is the analogical-memory layer for a discovery loop: the LLM generates and
 verifies; SMA grounds each step in real precedent and flags the genuinely never-seen —
 which vector RAG structurally cannot do.
 
-## Install & run
+## One-command setup (recommended: `uvx`, zero install)
+
+The `mcp` SDK ships in the base install (no extra), and the package exposes an eponymous
+launcher, so any MCP client can run the server with `uvx` — no `pip`, no PATH, no venv:
+
+**Codex CLI**
+```bash
+codex mcp add sma -- uvx structuremappingmemory
+```
+
+**Claude Code**
+```bash
+claude mcp add sma -- uvx structuremappingmemory
+```
+
+**Claude Desktop** — add to `claude_desktop_config.json`:
+```json
+{ "mcpServers": { "sma": { "command": "uvx", "args": ["structuremappingmemory"] } } }
+```
+
+(`uvx` comes with [uv](https://docs.astral.sh/uv/); install once: `curl -LsSf https://astral.sh/uv/install.sh | sh`.)
+
+Preload ontologies by adding `--env SMA_MANIFEST=/abs/manifest.json` (Codex/Claude Code)
+or an `"env"` block (Desktop).
+
+### Alternatives
 
 ```bash
-pip install -e ".[mcp]"          # adds the `mcp` SDK + the `sma-mcp` console script
-python -m sma.mcp                 # starts a stdio MCP server (or: sma-mcp)
+pipx install structuremappingmemory        # installs once, puts `sma-mcp` on PATH
+codex mcp add sma -- sma-mcp                # (or: claude mcp add sma -- sma-mcp)
+
+pip install structuremappingmemory         # then, if the script isn't on PATH:
+codex mcp add sma -- python -m sma.mcp
 ```
 
-## Wire into Codex CLI
-
-Add an MCP server block to `~/.codex/config.toml` (see `examples/codex_config.toml`):
-
-```toml
-[mcp_servers.sma]
-command = "python"
-args = ["-m", "sma.mcp"]
-env = { SMA_MANIFEST = "/abs/path/to/sma_manifest.json" }
-```
-
-or `codex mcp add sma -- python -m sma.mcp`. Confirm with `/mcp` in the Codex TUI.
+Confirm with `/mcp` in the client. If a server shows **no tools**, the launch command
+failed — `uvx structuremappingmemory` is the most reliable fix.
 (Refs: [Codex MCP docs](https://developers.openai.com/codex/mcp); the same slot Harvard's
 Zitnik Lab uses to wire Codex into an [AI scientist via ToolUniverse](https://zitniklab.hms.harvard.edu/ToolUniverse/guide/building_ai_scientists/codex_cli.html).)
 
