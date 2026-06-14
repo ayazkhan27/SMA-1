@@ -3,7 +3,8 @@ requires = ["setuptools>=69", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sma"
+# PyPI distribution name (the import name stays `sma`); `sma` is taken on PyPI.
+name = "structure-mapping-memory"
 version = "1.0.0"
 description = "SMA-1: Structure-Mapping Agentic Memory — a structure-mapping retrieval memory that grounds language models in curated ontologies"
 readme = "README.md"
