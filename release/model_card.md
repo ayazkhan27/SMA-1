@@ -125,11 +125,11 @@ Legal arm reported on all-queries (rare slice degenerate for CPC — see limitat
 
 | Domain | SMA tail top-5 | Best RAG | Δ | 95% CI | p_Holm | Cliff's δ |
 |---|---|---|---|---|---|---|
-| Medicine (HPO) | 0.949 | 0.606 (hybrid+rerank) | **+0.333** | [0.281, 0.389] | 0.0006 | 0.333 |
-| Genomics (GO) | 0.849 | 0.682 (dense BGE) | **+0.156** | [0.100, 0.211] | 0.0004 | 0.156 |
-| Finance (US-GAAP) | 0.418 | 0.231 (hybrid-RRF) | **+0.167** | [0.111, 0.225] | 0.0002 | 0.167 |
-| Cybersecurity (ATT&CK) | 0.766 | 0.749 (hybrid-RRF) | **+0.073** | [0.008, 0.142] | 0.0346 | 0.073 |
-| Legal (CPC) | 0.941 (all) | 0.870 (dense BGE, all) | **+0.064** | [0.025, 0.103] | 0.0022 | 0.064 |
+| Medicine (HPO) | 0.949 | 0.606 (hybrid+rerank) | **+0.343** | [0.281, 0.389] | 0.0006 | 0.333 |
+| Genomics (GO) | 0.849 | 0.682 (dense BGE) | **+0.167** | [0.100, 0.211] | 0.0004 | 0.156 |
+| Finance (US-GAAP) | 0.418 | 0.231 (hybrid-RRF) | **+0.187** | [0.111, 0.225] | 0.0002 | 0.167 |
+| Cybersecurity (ATT&CK) | 0.766 | 0.749 (hybrid-RRF) | **+0.017** | [0.008, 0.142] | 0.0346 | 0.073 |
+| Legal (CPC) | 0.941 (all) | 0.870 (dense BGE, all) | **+0.071** | [0.025, 0.103] | 0.0022 | 0.064 |
 
 Four domains survive conservative correction; cyber is directional.  RAG/KG baseline gauntlet: BM25, BGE dense, Hybrid-RRF,
 Hybrid+Rerank (cross-encoder reranker), HippoRAG (phrase-graph + PageRank).

@@ -267,19 +267,19 @@ statistical strength, with cyber a weaker directional fifth (Fig.~2,
 Table~2). On \textbf{medicine} (rare-disease diagnosis over the Human
 Phenotype Ontology~\cite{kohler2021hpo} and MONDO~\cite{vasilevsky2022mondo}) SMA
 attains tail top-5 of $0.949$ versus $0.606$ for the best baseline
-configuration (hybrid $+$ cross-encoder rerank), $\Delta{=}{+}0.333$, 95\% CI
-$[0.281,0.389]$, $p{<}2{\times}10^{-4}$. On \textbf{genomics} (Gene
+configuration (hybrid $+$ cross-encoder rerank), $\Delta{=}{+}0.343$ (95\% CI
+$[0.281,0.389]$; Cliff's $\delta{=}0.333$), $p{<}2{\times}10^{-4}$. On \textbf{genomics} (Gene
 Ontology~\cite{ashburner2000go,geneontology2021} gene-function assignment) SMA
-reaches $0.849$ versus $0.682$, $\Delta{=}{+}0.156$, $p{<}2{\times}10^{-4}$. On
+reaches $0.849$ versus $0.682$, $\Delta{=}{+}0.167$ (Cliff's $\delta{=}0.156$), $p{<}2{\times}10^{-4}$. On
 \textbf{finance} (SEC filing to US-GAAP concept) SMA attains $0.418$ versus
-$0.231$, $\Delta{=}{+}0.167$, $p{<}2{\times}10^{-4}$, roughly double the best
+$0.231$, $\Delta{=}{+}0.187$ (Cliff's $\delta{=}0.167$), $p{<}2{\times}10^{-4}$, roughly double the best
 RAG, though all methods score low here because US-GAAP concepts are weakly
 discriminative. On \textbf{legal} (patent to CPC classification, all-query slice)
-SMA reaches $0.941$ versus $0.870$, $\Delta{=}{+}0.064$, $p{=}0.002$. These four
+SMA reaches $0.941$ versus $0.870$, $\Delta{=}{+}0.071$ (Cliff's $\delta{=}0.064$), $p{=}0.002$. These four
 domains are the load-bearing results: each survives Holm correction across fields
 and the conservative checks below. The same trend appears in \textbf{cyber}
 (MITRE ATT\&CK~\cite{strom2018attack} threat-group attribution), where SMA leads
-$0.766$ versus $0.749$ ($\Delta{=}{+}0.073$), but this is the weakest arm and we do
+$0.766$ versus $0.749$ ($\Delta{=}{+}0.017$, Cliff's $\delta{=}0.073$), but this is the weakest arm and we do
 not treat it as a pillar: the margin is small, threat groups have distinctive
 technique vocabularies that lexical and dense retrieval partly capture, and as
 shown next the contrast does not survive conservative correction. Because ``best
@@ -303,7 +303,7 @@ the all-query slice and flagged as such.
 \includegraphics[width=\textwidth]{svg/figure2_results.pdf}
 \caption{\textbf{Agentic memory-swap results.} (a) Tail top-5 accuracy (rare
 slice; legal on the all-query slice) by domain: SMA versus the RAG/KG baseline
-suite. (b) Headline effect size $\Delta$(SMA $-$ best RAG) tail top-5 per domain
+suite. (b) Headline tail top-5 advantage $\Delta$(SMA $-$ best RAG) per domain
 with 95\% CI; all above zero. AURC and structural-novelty F1 per domain are in
 Table~2(b) and Extended Data Fig.~1.}
 \end{figure}
@@ -805,10 +805,12 @@ Finance & FIBO & 2{,}948 & 3{,}819 & 1{,}335 \\
 \caption{Agentic memory-swap results across five domains. (a) Tail top-5 (rare
 slice; legal on the all-query slice $\dagger$, since CPC's near-uniform information
 content yields no rare split). (b) Capability axes (AURC lower is better; novelty
-F1). Bold $=$ best per column. $\Delta$ and $p$ are the per-query
-paired-bootstrap mean and Holm-adjusted significance versus the committed best
-baseline, so $\Delta$ need not equal the difference of the marginal accuracies
-shown (most visibly for cyber).}
+F1). Bold $=$ best per column. $\Delta$ is the tail top-5 difference of SMA minus
+the committed-best baseline; Cliff's $\delta$ is the rank-based effect size
+(probability of superiority), which need not track the marginal difference (most
+visibly for cyber, where $\Delta{=}{+}0.017$ coexists with $\delta{=}0.073$). $p$ is
+the per-query paired-bootstrap, Holm-adjusted significance versus the committed-best
+baseline.}
 \begin{tabular}{lccccc}
 \toprule
 \multicolumn{6}{l}{\textit{(a) Tail top-5 accuracy (rare slice)}}\\
@@ -820,7 +822,8 @@ BGE dense & 0.496 & 0.682 & 0.188 & 0.629 & 0.870 \\
 Hybrid-RRF & 0.511 & 0.703 & 0.231 & 0.749 & 0.793 \\
 Hybrid + rerank & 0.606 & 0.651 & 0.202 & 0.651 & 0.793 \\
 HippoRAG (KG) & 0.361 & 0.318 & 0.101 & 0.377 & 0.417 \\
-$\Delta$ SMA $-$ best RAG & $+0.333$ & $+0.156$ & $+0.167$ & $+0.073$ & $+0.064$ \\
+$\Delta$ SMA $-$ best RAG & $+0.343$ & $+0.167$ & $+0.187$ & $+0.017$ & $+0.071$ \\
+Cliff's $\delta$ & $0.333$ & $0.156$ & $0.167$ & $0.073$ & $0.064$ \\
 ($p$, Holm) & $<6{\times}10^{-4}$ & $<4{\times}10^{-4}$ & $<2{\times}10^{-4}$ & $0.035$ & $0.002$ \\
 \midrule
 \multicolumn{6}{l}{\textit{(b) Risk-coverage AURC / novelty F1}}\\

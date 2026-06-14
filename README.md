@@ -50,13 +50,13 @@ adapters.
 On a **memory-swap benchmark** where only the retriever varies, SMA beats a strong
 RAG + KG baseline suite on the rare/long-tail slice across five domains:
 
-| Domain | SMA tail top-5 | best RAG | Δ | Holm-significant |
-|---|:--:|:--:|:--:|:--:|
-| Medicine (HPO/MONDO) | 0.949 | 0.606 | **+0.333** | yes |
-| Finance (US-GAAP) | 0.418 | 0.231 | **+0.167** | yes |
-| Genomics (GO) | 0.849 | 0.682 | **+0.156** | yes |
-| Legal (CPC, all-query) | 0.941 | 0.870 | **+0.064** | yes |
-| Cyber (ATT&CK) | 0.766 | 0.749 | +0.073 | directional* |
+| Domain | SMA tail top-5 | best RAG | Δ tail top-5 | Cliff's δ | Holm-significant |
+|---|:--:|:--:|:--:|:--:|:--:|
+| Medicine (HPO/MONDO) | 0.949 | 0.606 | **+0.343** | 0.333 | yes |
+| Finance (US-GAAP) | 0.418 | 0.231 | **+0.187** | 0.167 | yes |
+| Genomics (GO) | 0.849 | 0.682 | **+0.167** | 0.156 | yes |
+| Legal (CPC, all-query) | 0.941 | 0.870 | **+0.071** | 0.064 | yes |
+| Cyber (ATT&CK) | 0.766 | 0.749 | +0.017 | 0.073 | directional* |
 
 \* Cyber survives Holm across domains but not a conservative
 Bonferroni-over-baselines selection correction (p=0.035 → 0.17); reported as
