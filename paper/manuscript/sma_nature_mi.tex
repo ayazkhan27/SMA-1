@@ -50,9 +50,10 @@ synthetic structure-only control, yet adds no measurable top-5 gain on the prese
 real-domain benchmarks. Against a hand-built ontology information-content tool, SMA
 draws even. End to end, holding the language model and prompt fixed and swapping
 only the memory, the SMA-grounded agent is more accurate, more selective, and more
-structurally attributable than dense RAG in a medicine case study, separating
-known from unknown entities (grounding AUROC $0.79$ versus vector RAG's near-chance
-$0.55$) so that it abstains and flags novelty. We delimit the thesis honestly: the
+structurally attributable than dense RAG in a pre-registered medicine case study,
+separating known from unknown entities (grounding AUROC $0.79$ versus vector RAG's
+near-chance $0.55$) so that it abstains and flags novelty; an exploratory extension
+replicates the accuracy advantage across all five domains. We delimit the thesis honestly: the
 advantage is specific to ontology structure and vanishes on flat-tabular
 prediction.}
 
@@ -359,6 +360,31 @@ threshold calibrated on a disjoint split. Dense cosine similarity barely
 separates the two (AUROC $0.55$), forcing its gate to over-abstain.}
 \end{figure}
 
+\subsection{The trustworthy-specialist advantage replicates across domains}
+The pre-registered end-to-end study above is medicine-only. To test whether the
+SMA-grounded agent's advantage generalises, we ran the identical paradigm, fixed
+language model (DeepSeek, temperature $0$), a single \emph{domain-neutral} prompt,
+swapping only the memory, with the cite-or-abstain gate calibrated per memory on a
+disjoint split, on all five domains (exploratory, not part of pre-registration~v2;
+per-domain counts in Extended Data Table~13). The pattern holds. The SMA-grounded
+agent is more accurate than dense RAG in \emph{all five} domains (medicine $0.30$
+versus $0.01$, genomics $0.52$ versus $0.13$, legal $0.58$ versus $0.39$, cyber
+$0.35$ versus $0.22$, finance $0.10$ versus $0.03$; the closed-book agent scores
+$0$ everywhere, as it cannot name an entity from features alone), and it separates
+known from unknown entities better, by grounding AUROC, in four of the five
+(medicine $0.79$ versus $0.55$, genomics $0.87$ versus $0.69$, legal $0.98$ versus
+$0.72$, cyber $0.82$ versus $0.62$). Finance is the honest exception: its weakly
+discriminative US-GAAP concepts leave both memories near chance on known-versus
+-unknown ($0.58$ versus $0.62$), even though SMA stays the more accurate of the
+two. The trustworthy behaviour, answering, citing, abstaining, and flagging
+novelty, is therefore not a medicine artifact; it tracks how richly the mounted
+ontology discriminates, strongest where structure is rich (legal, genomics) and
+weakest where it is flat (finance). A natural-language router completes the
+end-to-end agentic picture: a query carries no domain label, yet a dense or
+LLM router maps it to the right ontology with high accuracy across these
+distinct-vocabulary domains (Extended Data Table~14), so the universal adapter's
+``one core, route across domains'' claim holds in practice.
+
 \subsection{Negative results and boundary}
  We pre-registered a parity-reporting
 rule: where a task carries no discriminative subsumption ontology to mount, we
@@ -453,8 +479,11 @@ Phenomizer~\cite{kohler2009phenomizer}: on pure-subsumption ranking SMA
 reaches parity only (HPO $\Delta{=}{-}0.033$, GO $\Delta{=}{-}0.011$; Holm
 n.s.), matching but not exceeding a hand-built information-content tool. The
 headline win is over ontology-agnostic RAG/KG, not over the oracle.
-\textbf{(iii)}~The end-to-end LLM-in-the-loop study is medicine-only; the
-broader memory-swap results are retrieval-only.
+\textbf{(iii)}~The \emph{pre-registered} end-to-end LLM-in-the-loop study is
+medicine-only; we additionally replicate it across the other four domains with a
+domain-neutral prompt as an exploratory (not pre-registered) extension, where the
+accuracy advantage over dense RAG holds in all five domains and the grounding-AUROC
+advantage in four of five (Extended Data Table~13).
 \textbf{(iv)}~The retrieval-suite structural-novelty threshold is fixed and
 untuned, so its absolute novelty F1 is not a tuned operating point (only the
 end-to-end agent calibrates the threshold per memory).
@@ -1477,6 +1506,55 @@ Finance  & US-GAAP arm   & $0$        & $30.8$ & $0.00$ & $0\%$ \\
 \end{tabular}
 \end{adjustbox}
 \label{tab:ed12_relation_density}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 13 — Cross-domain trustworthy-QA replication (exploratory)
+% Source: reports/confirmatory/crossdomain_qa_all.csv
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\edcaption{\textbf{Extended Data Table~13 $|$ Cross-domain replication of the
+    trustworthy-specialist result (exploratory).}
+  The pre-registered end-to-end study (Fig.~3) is medicine-only. Here we run the
+  identical paradigm on all five domains, holding the language model (DeepSeek,
+  temperature~0) and a single \emph{domain-neutral} prompt fixed and swapping only
+  the memory (closed-book / dense-RAG / SMA), with the cite-or-abstain gate
+  calibrated per memory on a disjoint split. This is exploratory, not part of
+  pre-registration~v2, and uses a neutral prompt (``choose the candidate entity
+  whose features best match the case'') rather than the medicine-specific wording,
+  so the medicine numbers differ slightly from Fig.~3. $n$ is the answerable
+  ${+}$ held-out pool; closed-book accuracy is $0$ in every domain because the model
+  cannot name an entity from features alone.
+  Source: \texttt{reports/confirmatory/crossdomain\_qa\_all.csv}.}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lr ll ll ll}
+\toprule
+ & & \multicolumn{2}{c}{\textbf{Accuracy}} & \multicolumn{2}{c}{\textbf{Grounding AUROC}}
+   & \multicolumn{2}{c}{\textbf{Novelty F1}} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-6}\cmidrule(lr){7-8}
+\textbf{Domain} & \textbf{$n$} & Dense & \textbf{SMA} & Dense & \textbf{SMA}
+   & Dense & \textbf{SMA} \\
+\midrule
+Medicine & $240$ & $0.01$ & \textbf{0.30} & $0.55$ & \textbf{0.79} & $0.65$ & \textbf{0.79} \\
+Genomics & $240$ & $0.13$ & \textbf{0.52} & $0.69$ & \textbf{0.87} & $0.66$ & \textbf{0.83} \\
+Legal    & $240$ & $0.39$ & \textbf{0.58} & $0.72$ & \textbf{0.98} & $0.69$ & \textbf{0.95} \\
+Cyber    & $68$  & $0.22$ & \textbf{0.35} & $0.62$ & \textbf{0.82} & $0.57$ & \textbf{0.73} \\
+Finance  & $203$ & $0.03$ & \textbf{0.10} & \textbf{0.62} & $0.58$ & \textbf{0.57} & $0.39$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{flushleft}{\footnotesize
+SMA is the more accurate memory in all five domains and the better known-versus
+-unknown discriminator (grounding AUROC) in four; finance, whose US-GAAP concepts
+are weakly discriminative, is the exception on grounding and novelty (bold $=$
+better of dense / SMA per axis).}
+\end{flushleft}
+\label{tab:ed13_crossdomain_qa}
 \end{table}
 
 
