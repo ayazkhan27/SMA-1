@@ -164,9 +164,10 @@ A retriever that consumes the same ontology should be near-optimal on
 pure-subsumption ranking, and one is. Against Phenomizer~\cite{kohler2009phenomizer},
 a hand-built ontology-aware information-content tool that scores the same
 Resnik~\cite{resnik1995} information content SMA uses, SMA reaches statistical
-parity on top-5 (HPO $\Delta{=}{-}0.033$, $p{=}0.037$, Holm $p{=}0.073$;
-GO $\Delta{=}{-}0.011$, $p{=}0.71$); it matches the bespoke oracle without beating
-it. Parity here does not license the stronger claim that higher-order structural
+parity on top-5 on the all-query slice (HPO $\Delta{=}{-}0.033$, $p{=}0.037$, Holm
+$p{=}0.073$; GO $\Delta{=}{-}0.011$, $p{=}0.71$); the rare-slice contrast in
+Extended Data Table~4 is materially identical (HPO $\Delta{=}{-}0.035$). It matches
+the bespoke oracle without beating it. Parity here does not license the stronger claim that higher-order structural
 alignment is what separates SMA from RAG; if anything, drawing even with an
 information-content oracle makes the opposite reading more plausible. The honest
 interpretation is that ontology-aware subsumption and information-content weighting
@@ -226,7 +227,8 @@ is significant. This rules out the simplest text-side route to the same
 information, \emph{naive} full-closure ancestor expansion, rather than every
 possible one: depth-limited or information-content-weighted expansion, parent-path
 encodings, separate ancestor fields, or learned sparse retrieval could narrow the
-gap and we have not tested them. What we can say is that bounded ascension over the
+gap and we have not tested these on the ontology benchmarks (a SPLADE arm appears
+only in a separate log-retrieval ladder). What we can say is that bounded ascension over the
 mounted lattice captures the subsumption signal without the dilution that sinks
 naive expansion, and that the advantage is not an artifact of simply handing the
 ancestors to a bag-of-terms retriever.
@@ -378,7 +380,7 @@ $0.35$ versus $0.22$, finance $0.10$ versus $0.03$; the closed-book agent scores
 $0$ everywhere, as it cannot name an entity from features alone), and it separates
 known from unknown entities better, by grounding AUROC, in four of the five
 (medicine $0.79$ versus $0.55$, genomics $0.87$ versus $0.69$, legal $0.98$ versus
-$0.72$, cyber $0.82$ versus $0.62$). Finance is the honest exception: its weakly
+$0.72$, cyber $0.82$ versus $0.70$). Finance is the honest exception: its weakly
 discriminative US-GAAP concepts leave both memories near chance on known-versus
 -unknown ($0.58$ versus $0.62$), even though SMA stays the more accurate of the
 two. The trustworthy behaviour, answering, citing, abstaining, and flagging
@@ -402,8 +404,11 @@ condition. The first is \textbf{flat single-record tabular prediction}. On
 hospital readmission and credit-card fraud, each record is encoded independently
 and the discriminative structure is cross-record, so SMA reaches parity with
 value-based retrieval and goes no further. We verified the mechanism directly: an
-LLM-drafted higher-order adapter mechanically raised relation density from $0$,
-yet lifted SMA only to parity with dense retrieval, not past it. The second family
+LLM-drafted higher-order adapter mechanically raised relation density from $0$ to
+$0.45$ statements per case on readmission and $0.75$ on credit-card fraud, yet
+lifted SMA only to parity with dense retrieval (macro-F1 $0.547$ versus dense
+$0.565$ on readmission, $0.710$ versus $0.727$ on credit-card; at or below dense
+in both), not past it. The second family
 arose from a follow-up boundary probe, in which we asked whether \emph{graph}
 structure alone suffices when single-record structure does not. On the public
 Elliptic Bitcoin ledger~\cite{weber2019elliptic} we encoded each transaction's
@@ -543,9 +548,20 @@ mechanism across all of them.
 
 \subsection{Representation and matching}
  Statements are functors over entities; SME
-builds consistent kernel mappings~\cite{falkenhainer1989sme}; MAC/FAC provides a
-certified admissible content bound for tractable first-stage retrieval and
-best-first alignment for the second~\cite{forbus1995macfac}. Cross-vocabulary
+builds consistent kernel mappings~\cite{falkenhainer1989sme}. Local
+correspondences are grown by support closure (a root correspondence is legal only
+if every argument pair is itself a legal correspondence; a single incompatible
+argument invalidates the kernel, with entities typed as constants matching by
+identical name and variables by structure), and the globally consistent set of
+kernels is selected by reducing kernel merge to a maximum-weight independent set on
+the conflict graph of pairwise-incompatible correspondences, solved exactly by a
+CP-SAT solver (OR-Tools; $\le 60$ kernels, $\approx 20$\,ms) with an
+$O(n^2\log n)$ greedy fallback and a logged optimality gap. On Gentner's canonical
+analogies (a $25$-pair oracle battery including the solar-system/atom mapping) the
+matcher reproduces the reference correspondences, validating it as a faithful SME
+implementation. MAC/FAC then supplies a certified admissible content bound for
+tractable first-stage retrieval and best-first alignment for the
+second~\cite{forbus1995macfac}. Cross-vocabulary
 matching ascends the ontology lattice with penalty $\rho^{\mathrm{dist}}$ (frozen
 $\rho{=}0.95$, ascension depth $\delta{=}2$). The surprisal scorer weights a
 matched functor by its information content $-\log_2 p$. End to end, the universal
@@ -590,7 +606,17 @@ where $\mathrm{count}(c)$ accumulates every annotation of $c$ and of its is-a
 descendants and $n$ is the corpus total; the surprisal scorer sets a matched
 functor's base weight to its surprisal $\sigma_0(m)=-\log_2 p(m)$ (and to $1$
 when the functor is uncosted), so the rare-but-decisive term dominates by
-construction.
+construction. The probability is the per-functor corpus frequency with
+Krichevsky--Trofimov smoothing, $p=(\mathrm{count}+0.5)/(n+0.5\,|V|)$, which keeps
+the surprisal finite for unseen functors and bounds its maximum (so the admissible
+ceiling $\bar s$ below stays valid). The matcher implements three scorers, frozen
+to surprisal (\texttt{score-v2}): a structural-evaluation score (SES) with unit
+weights $\sigma_0\equiv1$; a parameter-free minimum-description-length variant; and
+the surprisal scorer above. SES weighs a common and a decisive term equally and is
+thus blind to rare templates; surprisal was selected because corpus-frequency
+weighting, with no hand-tuned weights, is what makes the rare term dominate. The
+Resnik information content defines the rare slice; the per-functor corpus surprisal
+weights the structural score.
 
 \subsection{Trickle-down structural score}
  The structural support of a case is the
@@ -614,8 +640,15 @@ U(q,c)=\bar s\sum_{f}\mathrm{cost}(f)\,\min\!\bigl(q_f,c_f\bigr),
 \end{equation}
 where $q_f$ and $c_f$ are the functor-$f$ counts of the query and candidate
 content vectors and $\bar s{=}4.0$ is the per-match-hypothesis score ceiling in
-production. Only the bounded shortlist is passed to the FAC alignment
-stage~\cite{forbus1995macfac}.
+production. Admissibility follows by a counting argument: $\min(q_f,c_f)$ caps the
+number of functor-$f$ correspondences any alignment can realise, and each
+contributes at most $\mathrm{cost}(f)\,\bar s$ to the trickle-down score, so
+$U(q,c)\ge S^\star(q,c)$ for the true optimal alignment score $S^\star$ and no true
+match is pruned; we additionally check the bound against a brute-force oracle in
+continuous integration rather than relying on the analytic argument alone. Only the
+bounded shortlist is passed to the FAC alignment stage~\cite{forbus1995macfac},
+where best-first search returns the exact top alignment, so the two-stage pipeline
+is tractable without ranking regret.
 
 \subsection{Novelty by expectation violation}
  A held-out case is flagged as novel by
@@ -623,10 +656,15 @@ its expectation violation against the indexed schemas,
 \begin{equation}
 \mathrm{ev}(\mathrm{case})=1-\max_{g}\;\mathrm{fit}_{\mathrm{norm}}\!\bigl(\mathrm{case},\mathrm{schema}_g\bigr),
 \end{equation}
-where $\mathrm{fit}_{\mathrm{norm}}\in[0,1]$ is the normalized structural-match
-score of the case against learned generalization $g$; $\mathrm{ev}=1$ when no
+where the generalizations $g$ are the schemas of the SAGE consolidation pool
+(indexed cases assimilated into frequency-weighted generalizations), and
+$\mathrm{fit}_{\mathrm{norm}}\in[0,1]$ is the trickle-down match score of the case
+against $g$ normalized by the geometric mean of the two cases' self-match scores
+(self-score normalization, frozen as the default); $\mathrm{ev}=1$ when no
 generalization yet exists (nothing is expected). Novelty is thus detected from
-structural mismatch, not from term absence.
+structural mismatch, not from term absence. Continual consolidation and concept
+drift over the generalization pool are implemented but out of scope here; we
+evaluate novelty at a fixed index.
 
 \begin{figure}[t]\centering
 \includegraphics[width=\textwidth]{tikz/figM_architecture.pdf}
@@ -639,6 +677,23 @@ best-first structure-mapping (FAC/SME), scored by rarity-weighted information
 content, and resolved to a structural citation, a calibrated abstention, or a
 novelty flag.}
 \end{figure}
+
+\subsection{Frozen matcher configuration and calibration}
+A single matcher configuration is used unchanged across every domain: surprisal
+scoring, self-score normalization, $\gamma{=}0.25$, $\rho{=}0.95$, $\delta{=}2$ and
+the admissible ceiling $\bar s{=}4.0$. These dials were fixed once, before the
+confirmatory runs, by a calibration grid that swept scorer $\times$ normalization
+$\times\,\gamma\,\times\,\rho$ over held-out development probes (the synthetic
+structure-only control, an HDFS log-family transfer task, and a
+needle-in-a-haystack retrieval probe) and then frozen (\texttt{score-v2}; Extended
+Data Table~15). Within the grid, $\gamma$ is essentially inert; for the frozen
+surprisal scorer $\rho{=}0.95$ holds the structure-only control at $r@1{=}1.000$
+against $0.79$ at $\rho{=}0.90$; max-normalization wins the transfer and haystack
+probes; and surprisal edges SES on the development tasks, with the decisive
+real-domain separation coming from the mechanism ablation (Extended Data Table~9).
+We set $\delta$ per adapter and swept $\rho$ only over $\{0.90,0.95\}$, so we make
+no claim of an exhaustive sweep; no dial is tuned per evaluation domain or on any
+test split.
 
 \subsection{Citation faithfulness}
  Citation faithfulness is computed automatically as
@@ -662,8 +717,18 @@ malformed completion is never scored as an answer.
 
 \subsection{Universal adapter}
  The loader (\texttt{sma/ontology}) provides
-\texttt{load\_obo}, \texttt{load\_owl}, \texttt{load\_owl\_dir}, \texttt{load\_rdflib}, \texttt{load\_attack\_stix}, \texttt{load\_cpc} and \texttt{load\_mitre\_xml}; \texttt{mount()} builds the lattice and the
-case builder; a registry and a domain router select the ontology per query.
+\texttt{load\_obo}, \texttt{load\_owl}, \texttt{load\_owl\_dir},
+\texttt{load\_rdflib}, \texttt{load\_attack\_stix}, \texttt{load\_cpc},
+\texttt{load\_mitre\_xml} (CAPEC/CWE schema XML) and \texttt{load\_usgaap} (XBRL
+presentation linkbase), so the supported inputs span OBO/OWL, STIX, CPC,
+schema-XML and XBRL; \texttt{mount()} builds the lattice and the case builder; a
+registry and a domain router select the ontology per query. Crucially, no language
+model sits in the extraction path: records come from deterministic, byte-for-byte
+reproducible Tier-0 encoders (for ontology term-sets, and in the agentic setting
+for logs, traces, code, structured data and agent observations), enforced by
+golden-file tests. Where a new domain needs an adapter, a language model may draft
+\emph{rules} (never facts); drafts are content-addressed and marked unreviewed
+until promoted, so curated and machine-proposed structure never silently mix.
 Ontologies are version-pinned, and \texttt{PYTHONHASHSEED=0} with sorted
 set$\to$list conversion ensures process-independent reproducibility.
 
@@ -1552,7 +1617,7 @@ Finance  & US-GAAP arm   & $0$        & $30.8$ & $0.00$ & $0\%$ \\
 Medicine & $240$ & $0.01$ & \textbf{0.30} & $0.55$ & \textbf{0.79} & $0.65$ & \textbf{0.79} \\
 Genomics & $240$ & $0.13$ & \textbf{0.52} & $0.69$ & \textbf{0.87} & $0.66$ & \textbf{0.83} \\
 Legal    & $240$ & $0.39$ & \textbf{0.58} & $0.72$ & \textbf{0.98} & $0.69$ & \textbf{0.95} \\
-Cyber    & $68$  & $0.22$ & \textbf{0.35} & $0.62$ & \textbf{0.82} & $0.57$ & \textbf{0.73} \\
+Cyber    & $68$  & $0.22$ & \textbf{0.35} & $0.70$ & \textbf{0.82} & $0.57$ & \textbf{0.73} \\
 Finance  & $203$ & $0.03$ & \textbf{0.10} & \textbf{0.62} & $0.58$ & \textbf{0.57} & $0.39$ \\
 \bottomrule
 \end{tabular}
@@ -1602,6 +1667,56 @@ Majority (floor)      & $0.23$ & $1.00$ & $0.00$ & $0.00$ & $0.00$ & $0.00$ \\
 \end{tabular}
 \end{adjustbox}
 \label{tab:ed14_routing}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 15 — Calibration grid that froze the matcher dials
+% Source: reports/calibration_grid.csv
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\edcaption{\textbf{Extended Data Table~15 $|$ Calibration grid that froze the
+    matcher configuration.}
+  Before the confirmatory runs we swept the matcher dials -- scorer
+  $\in\{$SES, surprisal$\}$, normalization $\in\{$max (self-score), target$\}$,
+  $\gamma\in\{0.125,0.25,0.5\}$, $\rho\in\{0.90,0.95\}$ -- over three held-out
+  development probes: SSB (structure-only control, rank-1), HDFS log-family
+  transfer (family hit@5), and a needle-in-a-haystack retrieval probe. The frozen
+  configuration (shaded) is surprisal / max / $\gamma{=}0.25$ / $\rho{=}0.95$;
+  $\delta{=}2$ was set per adapter and is not swept here. $\gamma$ is essentially
+  inert; for surprisal, $\rho{=}0.95$ recovers SSB $r@1{=}1.000$ versus $0.79$ at
+  $\rho{=}0.90$; max-normalization wins the transfer and haystack probes. No dial
+  is tuned per evaluation domain or on any test split.
+  Source: \texttt{reports/calibration\_grid.csv}.}
+\scriptsize
+\setlength{\tabcolsep}{5pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Scorer} & \textbf{Norm.} & \textbf{$\gamma$} & \textbf{$\rho$} &
+    \textbf{SSB $r@1$} & \textbf{HDFS-family} & \textbf{Haystack} \\
+\midrule
+SES       & max    & $0.125$ & $0.90$ & $1.000$ & $0.842$ & $0.920$ \\
+SES       & max    & $0.25$  & $0.95$ & $1.000$ & $0.842$ & $0.920$ \\
+SES       & max    & $0.50$  & $0.95$ & $1.000$ & $0.838$ & $0.920$ \\
+SES       & target & $0.25$  & $0.95$ & $1.000$ & $0.800$ & $0.900$ \\
+surprisal & max    & $0.25$  & $0.90$ & $0.792$ & $0.849$ & $0.920$ \\
+\rowcolor{smarow}surprisal & max & $0.25$ & $0.95$ & $\mathbf{1.000}$ & $\mathbf{0.849}$ & $\mathbf{0.920}$ \\
+surprisal & max    & $0.50$  & $0.95$ & $1.000$ & $0.849$ & $0.920$ \\
+surprisal & target & $0.25$  & $0.95$ & $1.000$ & $0.796$ & $0.900$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\begin{flushleft}{\footnotesize
+Representative rows from the $24$-row grid (\texttt{reports/calibration\_grid.csv});
+the shaded row is the frozen configuration. The full grid shows the same pattern:
+$\gamma$ inert across $\{0.125,0.25,0.5\}$, and for the surprisal scorer the
+structure-only control collapses to $r@1{=}0.792$ at $\rho{=}0.90$ but holds at
+$1.000$ for $\rho{=}0.95$.}
+\end{flushleft}
+\label{tab:ed15_calibration}
 \end{table}
 
 
