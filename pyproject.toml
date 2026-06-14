@@ -4,12 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "sma"
-version = "0.1.0"
-description = "SMA-1: Structure-Mapping Agentic Memory MVP"
+version = "1.0.0"
+description = "SMA-1: Structure-Mapping Agentic Memory — a structure-mapping retrieval memory that grounds language models in curated ontologies"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "Apache-2.0"}
-authors = [{name = "SMA-1 contributors"}]
+authors = [{name = "Ayaz Khan", email = "aak2259@columbia.edu"}]
+keywords = ["structure-mapping", "analogical-retrieval", "ontology", "retrieval-augmented-generation", "abstention", "novelty-detection", "trustworthy-ai", "knowledge-graph"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = [
   "blake3>=0.4",
   "fastapi>=0.110",
@@ -50,6 +59,11 @@ local-llm = [
   "huggingface-hub>=0.23",
   "llama-cpp-python>=0.2.90"
 ]
+
+[project.urls]
+Homepage = "https://github.com/ayazkhan27/SMA-1"
+Repository = "https://github.com/ayazkhan27/SMA-1"
+Issues = "https://github.com/ayazkhan27/SMA-1/issues"
 
 [project.scripts]
 sma = "sma.cli:main"
