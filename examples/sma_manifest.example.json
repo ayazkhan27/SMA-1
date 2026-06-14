@@ -1,0 +1,17 @@
+{
+  "_comment": "Ontologies SMA-1 auto-registers on startup (set SMA_MANIFEST to this file's path). Ontologies mount lazily on first use, so listing ~100 here is cheap. 'cases' is optional eager indexing; usually you index incrementally via the index_cases tool. ground_threshold=null => no cite-or-abstain gate until calibrated.",
+  "ontologies": [
+    { "name": "go",     "path": "/data/ontologies/go.obo",                 "format": "obo",       "ground_threshold": null, "novelty_threshold": 0.5 },
+    { "name": "chebi",  "path": "/data/ontologies/chebi.owl",              "format": "owl" },
+    { "name": "hpo",    "path": "/data/ontologies/hp.obo",                 "format": "obo" },
+    { "name": "mondo",  "path": "/data/ontologies/mondo.owl",              "format": "owl" },
+    { "name": "attack", "path": "/data/ontologies/enterprise-attack.json", "format": "stix" },
+    { "name": "cwe",    "path": "/data/ontologies/cwec.xml",               "format": "cwe" },
+    { "name": "cpc",    "path": "/data/ontologies/cpc.xml",                "format": "cpc" }
+  ],
+  "cases": {
+    "go": [
+      { "key": "PAPER:2021-0042", "term_ids": ["GO:0006281", "GO:0006974"], "text": "DNA damage response coordinating repair and checkpoint arrest" }
+    ]
+  }
+}
