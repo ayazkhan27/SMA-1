@@ -4,9 +4,13 @@
 LLM in a **curated, expert-maintained ontology**, retrieving by **logical
 structure** — subsumption (is-a) and higher-order relations — that vector RAG and
 knowledge graphs discard. Holding the language model and prompt fixed and swapping
-only the memory, the SMA-grounded agent becomes a **verifiable specialist**: it
-cites its evidence structurally, abstains when nothing grounds the case, and flags
-novelty — capabilities flat retrievers structurally lack.
+only the memory, the SMA-grounded agent becomes **more accurate, more selective,
+and more structurally attributable** than vector RAG: it cites its evidence
+structurally, abstains when nothing grounds the case, and flags novelty —
+capabilities flat retrievers structurally lack. On the real-domain benchmarks the
+measured advantage is carried by bounded is-a subsumption plus information-content
+weighting (the higher-order relational machinery is decisive only on a synthetic
+structure-only control), and it vanishes where no discriminative ontology applies.
 
 ![SMA process tour](docs/assets/sma_tour.gif)
 

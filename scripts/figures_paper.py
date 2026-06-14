@@ -103,7 +103,7 @@ def figure2():
     if daggers:
         ax[0].text(0.0, -0.30, "† all-query slice (rare slice undefined for CPC's uniform IC)",
                    transform=ax[0].transAxes, fontsize=6.5, color="#5F6B78", style="italic")
-    ax[0].set_title("SMA vs enterprise RAG/KG, by domain", loc="left", fontsize=9.5, pad=8)
+    ax[0].set_title("SMA vs RAG/KG baselines, by domain", loc="left", fontsize=9.5, pad=8)
     _panel(ax[0], "a")
 
     # (b) effect-size forest: delta(SMA - best RAG) per domain with 95% CI

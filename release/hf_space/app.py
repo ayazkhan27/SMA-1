@@ -223,14 +223,14 @@ PRECOMPUTED_RESULTS: dict[str, dict] = {
 # ---------------------------------------------------------------------------
 
 HEADLINE_METRICS = {
-    "5-domain agentic suite (SMA vs best enterprise RAG, tail top-5)": {
+    "5-domain agentic suite (SMA vs best RAG baseline, tail top-5)": {
         "Medicine (HPO)": "+0.333 (p=0.0002, Holm)",
         "Genomics (GO)": "+0.156 (p=0.0002, Holm)",
         "Finance (US-GAAP)": "+0.167 (p=0.0002, Holm)",
         "Cyber (ATT&CK)": "+0.073 (p=0.035, Holm)",
         "Legal (CPC)": "+0.064 (p=0.0022, Holm)",
     },
-    "Phase 5 verifiable specialist (LLM-QA, medicine, SMA vs dense)": {
+    "Phase 5 trustworthy QA (LLM-QA, medicine, SMA vs dense)": {
         "Accuracy": "0.342 vs 0.100 (+0.242, Holm-sig)",
         "Grounding AUROC": "0.793 vs 0.547 (+0.246, Holm-sig)",
         "Novelty F1": "0.789 vs 0.553 (+0.236, Holm-sig)",
@@ -304,8 +304,8 @@ def build_demo() -> gr.Blocks:
             """
 # SMA-1 — Structure-Mapping Agentic Memory
 
-**One universal structure-mapping memory that beats enterprise RAG/KG across five
-golden-ontology domains — with calibrated abstention and novelty detection that
+**One universal structure-mapping memory that beats RAG/KG baselines across five
+curated-ontology domains — with calibrated abstention and novelty detection that
 vector RAG structurally cannot provide.**
 
 This demo shows SMA structure-mapping retrieval vs dense vector-RAG side by side
@@ -408,7 +408,7 @@ This enables capabilities that vector RAG structurally cannot provide:
 Query (phenotype set / term ids)
         │
         ▼
-   Ontology encoder          ← golden ontology (HPO/GO/ATT&CK/CPC/US-GAAP)
+   Ontology encoder          ← curated ontology (HPO/GO/ATT&CK/CPC/US-GAAP)
    (term → functor stmts     mounted as predicate lattice)
         │
         ▼
@@ -426,7 +426,7 @@ Query (phenotype set / term ids)
 
 ## Frozen adapter (adapter-v1)
 
-The universal adapter (tag `adapter-v1`) mounts five golden ontologies:
+The universal adapter (tag `adapter-v1`) mounts five curated ontologies:
 
 | Domain | Ontology | Terms |
 |---|---|---|

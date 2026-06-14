@@ -21,7 +21,7 @@ pipeline_tag: feature-extraction
 # SMA-1 Universal Adapter — adapter-v1
 
 **Structure-Mapping Agentic Memory: a universal structure-mapping retrieval
-adapter that beats enterprise RAG/KG across five unrelated golden-ontology
+adapter that beats RAG/KG baselines across five unrelated curated-ontology
 domains — with calibrated abstention and novelty detection that vector RAG
 structurally cannot provide.**
 
@@ -38,7 +38,7 @@ structurally cannot provide.**
 `adapter-v1` is the **universal ontology adapter** for SMA-1.  It is not a
 neural network weight file — it is a frozen configuration that specifies:
 
-1. **Five mounted golden ontologies** (one per evaluation domain) — each parsed
+1. **Five mounted curated ontologies** (one per evaluation domain) — each parsed
    from its canonical OBO/OWL/STIX/XML source, mounted onto a predicate lattice,
    and indexed via the SMA MAC/FAC retrieval engine.
 2. **Frozen matcher dials** (see below) — calibrated on held-out validation data
@@ -52,7 +52,7 @@ matcher dials, encoder rules) changes after the tag.  New domains may be
 
 ---
 
-## Mounted golden ontologies
+## Mounted curated ontologies
 
 | Domain | Ontology | Source format | Approx. active terms |
 |---|---|---|---|
@@ -103,7 +103,7 @@ function annotation set, threat-group technique set, patent claims, SEC filing)
 and must retrieve the top-k matching indexed entities.  The gold answer is the
 correct entity (disease, protein, threat group, CPC code, GAAP concept).
 
-**Phase 5 LLM-QA (verifiable specialist):** the agent is given a clinical
+**Phase 5 LLM-QA (trustworthy specialist QA):** the agent is given a clinical
 diagnosis question and must answer it from retrieved evidence, cite its sources,
 or abstain if the evidence is insufficient.  The LLM (DeepSeek, temperature 0)
 and prompt are fixed; only the retrieval memory varies (none / dense / SMA).
@@ -118,12 +118,12 @@ leakage).
 All numbers from committed `reports/confirmatory/` CSVs (paired bootstrap
 10 000 resamples, Holm-Bonferroni step-down correction).
 
-### 5-domain agentic suite — SMA vs best enterprise RAG (tail top-5)
+### 5-domain agentic suite — SMA vs best RAG baseline (tail top-5)
 
 "Tail" = rare slice (entity's rarest-term IC > corpus median).
 Legal arm reported on all-queries (rare slice degenerate for CPC — see limitations).
 
-| Domain | SMA tail top-5 | Best enterprise RAG | Δ | 95% CI | p_Holm | Cliff's δ |
+| Domain | SMA tail top-5 | Best RAG | Δ | 95% CI | p_Holm | Cliff's δ |
 |---|---|---|---|---|---|---|
 | Medicine (HPO) | 0.949 | 0.606 (hybrid+rerank) | **+0.333** | [0.281, 0.389] | 0.0006 | 0.333 |
 | Genomics (GO) | 0.849 | 0.682 (dense BGE) | **+0.156** | [0.100, 0.211] | 0.0004 | 0.156 |
@@ -131,7 +131,7 @@ Legal arm reported on all-queries (rare slice degenerate for CPC — see limitat
 | Cybersecurity (ATT&CK) | 0.766 | 0.749 (hybrid-RRF) | **+0.073** | [0.008, 0.142] | 0.0346 | 0.073 |
 | Legal (CPC) | 0.941 (all) | 0.870 (dense BGE, all) | **+0.064** | [0.025, 0.103] | 0.0022 | 0.064 |
 
-All five Holm-significant.  Enterprise RAG gauntlet: BM25, BGE dense, Hybrid-RRF,
+Four domains survive conservative correction; cyber is directional.  RAG/KG baseline gauntlet: BM25, BGE dense, Hybrid-RRF,
 Hybrid+Rerank (cross-encoder reranker), HippoRAG (phrase-graph + PageRank).
 
 **Capability axes (all domains):** SMA achieves lowest AURC (best calibrated
@@ -188,7 +188,7 @@ Cliff's δ = 0.895, p_Holm = 0.0004.
 
 - Production clinical decision support (not a medical device; not validated for
   clinical use).
-- Domains without a golden ontology (the structural advantage requires a
+- Domains without a curated ontology (the structural advantage requires a
   predicate lattice; flat-tabular data yields parity or null — confirmed on
   UCI Diabetes-130 and IEEE fraud without adapter drafting).
 - Tasks where surface-retrieval baselines already achieve near-perfect performance
@@ -238,7 +238,7 @@ Cliff's δ = 0.895, p_Holm = 0.0004.
 ```python
 from sma.ontology import OntologyRegistry, DomainRouter
 
-# Register a golden ontology
+# Register a curated ontology
 reg = OntologyRegistry()
 reg.register("hpo", "data/hp.obo")          # OBO format inferred from extension
 mounted = reg.get("hpo")                     # lazily loads, mounts, caches

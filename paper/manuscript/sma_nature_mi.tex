@@ -19,7 +19,7 @@
 
 \begin{document}
 
-\title[Align, Don't Retrieve]{Align, Don't Retrieve: Structure-Mapping Memory Grounds Language Models in Curated Ontologies}
+\title[Structure-Mapping Memory]{Structure-Mapping Memory Grounds Language Models in Curated Ontologies}
 
 \author*[1]{\fnm{Ayaz} \sur{Khan}}\email{aak2259@columbia.edu}
 
@@ -27,30 +27,33 @@
 
 \abstract{Retrieval-augmented generation (RAG) grounds large language models in
 external text, yet vector and knowledge-graph retrievers index surface similarity
-and entity adjacency, discarding the very logical structure that defines
-expertise: subsumption and higher-order relations. We present Structure-Mapping
-Agentic Memory (SMA), a retrieval memory that encodes each observation as a
-functor over a subject and retrieves by analogical structure-mapping against a
-curated domain ontology mounted as its ascension lattice. A single universal
-loader ingests any open OBO/OWL ontology (the is-a hierarchy plus
-\texttt{someValuesFrom}/\texttt{allValuesFrom} and OBO relationships, with no OWL
-reasoning); with it we mount eleven ontologies spanning seven knowledge areas
-($\approx$594{,}000 concepts) and evaluate the memory-swap benchmark on five, all
-served by one shared retrieval core plus thin per-domain data adapters. On a
-memory-swap benchmark where only the retriever varies, SMA outperforms a strong
-RAG and knowledge-graph baseline suite on the rare, long-tail slice across four
-unrelated domains (medicine $+33$, finance $+17$, genomics $+16$, cyber $+7$
-percentage points top-5) and on patent classification (legal $+6$, all-query
-slice, as CPC has no rare split). All five gains are Holm-significant across
-domains, and four of them (medicine, genomics, finance, legal) additionally
-survive a conservative selection correction for the data-chosen best baseline,
-while cyber remains directional ($p_\text{Bonf}=0.17$); against a hand-built
-ontology tool, SMA draws even. End to end, holding the language model and prompt
-fixed and swapping only the memory, the SMA-grounded agent becomes a verifiable
-specialist: most accurate, most faithful in citation, and able to separate known
-from unknown entities (grounding AUROC $0.79$ versus vector RAG's near-chance
-$0.55$), so that it abstains and flags novelty. We delimit the thesis honestly,
-because the advantage is specific to structure and vanishes on flat-tabular
+and entity adjacency, discarding two things experts reason with: the subsumption
+(is-a) hierarchy and higher-order relations. We present Structure-Mapping Agentic
+Memory (SMA), a retrieval memory that encodes each observation as a functor over a
+subject and retrieves by analogical structure-mapping against a curated,
+expert-maintained domain ontology mounted as its ascension lattice. A single
+universal loader ingests a broad class of open OBO/OWL ontologies (the is-a
+hierarchy plus \texttt{someValuesFrom}/\texttt{allValuesFrom} and OBO
+relationships, with no OWL reasoning); with it we mount eleven ontologies spanning
+seven knowledge areas ($\approx$594{,}000 concepts) and evaluate a memory-swap
+benchmark on five, all served by one shared retrieval core plus thin per-domain
+data adapters. With the retriever as the only moving part, SMA outperforms a
+strong RAG and knowledge-graph baseline suite on the rare, long-tail slice in
+medicine ($+33$), genomics ($+16$) and finance ($+17$ percentage points top-5) and
+on patent classification (legal $+6$, all-query slice, as CPC has no rare split);
+all four are Holm-significant across domains and survive a conservative selection
+correction for the data-chosen best baseline. The same trend appears in cyber
+($+7$) but is weaker and does not survive that correction. Ablations attribute this
+measured advantage to bounded is-a subsumption together with information-content
+weighting; higher-order relational structure is implemented and is decisive on a
+synthetic structure-only control, yet adds no measurable top-5 gain on the present
+real-domain benchmarks. Against a hand-built ontology information-content tool, SMA
+draws even. End to end, holding the language model and prompt fixed and swapping
+only the memory, the SMA-grounded agent is more accurate, more selective, and more
+structurally attributable than dense RAG in a medicine case study, separating
+known from unknown entities (grounding AUROC $0.79$ versus vector RAG's near-chance
+$0.55$) so that it abstains and flags novelty. We delimit the thesis honestly: the
+advantage is specific to ontology structure and vanishes on flat-tabular
 prediction.}
 
 \keywords{structure mapping, analogical retrieval, ontology, retrieval-augmented generation, abstention, novelty detection}
@@ -96,11 +99,16 @@ penalty $\rho^{\mathrm{dist}}$); its typed relations become higher-order
 statements; and an information-content scorer ($-\log_2 p$) makes the
 rare-but-decisive term dominate by construction. Our thesis is that \emph{a
 structure-mapping memory grounded in a curated (expert-maintained) domain ontology
-turns a generalist LLM into a verifiable specialist}, beating vector RAG and
-knowledge graphs on rare, cross-vocabulary, high-stakes reasoning while supplying
-the provenance, calibrated abstention, and novelty detection that those retrievers
-structurally lack. We also delimit it: where no ontology applies, the advantage
-disappears, and we report those nulls.
+makes a generalist LLM a more reliable and attributable specialist}, beating
+vector RAG and knowledge graphs on rare, cross-vocabulary, high-stakes reasoning
+while supplying the provenance, calibrated abstention, and novelty detection that
+those retrievers structurally lack. We are careful about \emph{which} part of the
+mechanism is load-bearing: on the real-domain benchmarks the measured advantage is
+carried by bounded is-a subsumption together with information-content weighting,
+whereas the higher-order relational machinery, though implemented and decisive on a
+synthetic structure-only control, adds no measurable top-5 accuracy on the present
+real-domain tasks. We also delimit the thesis: where no discriminative subsumption
+ontology applies, the advantage disappears, and we report those nulls.
 
 We make three contributions. First, a \textbf{universal ontology adapter} (loader
 + registry + router), demonstrated on eleven ontologies spanning seven knowledge
@@ -152,14 +160,18 @@ a hand-built ontology-aware information-content tool that scores the same
 Resnik~\cite{resnik1995} information content SMA uses, SMA reaches statistical
 parity on top-5 (HPO $\Delta{=}{-}0.033$, $p{=}0.037$, Holm $p{=}0.073$;
 GO $\Delta{=}{-}0.011$, $p{=}0.71$); it matches the bespoke oracle without beating
-it. That parity is the direct rebuttal to the charge that ``SMA merely optimises
-information content.'' Phenomizer is an IC-similarity oracle built on the identical
-$\mathrm{IC}=-\log_2(c/n)$ weighting, yet SMA only ties it while decisively
-outperforming the IC-agnostic BM25/dense/hybrid suite (Fig.~2, Table~2). IC
-weighting is therefore necessary but is not what separates SMA from RAG; the
-ascension lattice and higher-order structural alignment are. We frame the oracle
-as a ceiling reference rather than an opponent, and state the headline claim as
-\textbf{SMA $>$ RAG/KG}.
+it. Parity here does not license the stronger claim that higher-order structural
+alignment is what separates SMA from RAG; if anything, drawing even with an
+information-content oracle makes the opposite reading more plausible. The honest
+interpretation is that ontology-aware subsumption and information-content weighting
+do the heavy lifting (the mechanism ablation below confirms this directly): SMA
+beats the IC-agnostic BM25/dense/hybrid suite (Fig.~2, Table~2) because it mounts
+those signals as match geometry, and it merely ties the IC oracle that already has
+them. What makes SMA more than a domain-specific Phenomizer clone is therefore not
+superiority over information-content similarity but \emph{generality}: the same
+retrieval core mounts multiple ontology formats and domains, whereas Phenomizer is
+a specialised biomedical oracle. We frame the oracle as a ceiling reference rather
+than an opponent, and state the headline claim as \textbf{SMA $>$ RAG/KG}.
 
 \subsection{A structure-only control isolates the mechanism from lexical and information-content similarity}
  One concern is that SMA's advantage merely reflects information-content weighting
@@ -177,12 +189,17 @@ baseline. In the forced-choice variant, where each query is paired against a sin
 distractor, SMA reaches rank-1 $1.000$. The control is also de-circularized: we removed the
 earlier \texttt{far\_}-prefix bijection and the $(i, i{+}2)$ rewiring, so no shortcut maps
 queries to entries by surface convention. Because SSB carries no information-content gradient
-for either retriever to exploit and is lexically orthogonal by construction, the result
-cleanly separates SMA's structure-mapping mechanism from both lexical overlap and
-information-content similarity. The win is structural, not lexical, and not an artifact of
-information-content weighting alone (Extended Data Table~3).
+for either retriever to exploit and is lexically orthogonal by construction, it serves as a
+\emph{capability control}: it shows that, when relational alignment is the only usable signal,
+SMA's implemented higher-order structure-mapping solves the task while lexical and dense
+retrieval fail by construction. SSB is synthetic and adversarially constructed in SMA's
+favour, so we use it to establish that the machinery \emph{can} exploit pure structure, not as
+evidence for the mechanism behind the real-domain benchmark gains; that attribution comes
+separately from the mechanism ablation below, which finds the real-domain advantage is carried
+by is-a subsumption and information content rather than higher-order relations (Extended Data
+Table~3).
 
-\subsection{The edge is structure-mapping, not ancestor expansion}
+\subsection{Naive ancestor expansion does not explain the gain}
  A natural
 objection is that SMA wins merely because it sees each term's is-a ancestors,
 which the baseline retrievers do not. We tested this directly by giving BM25 and
@@ -199,8 +216,14 @@ BM25$+$ancestors and $+0.36$ versus dense$+$ancestors; GO $+0.34$ and $+0.38$;
 all $p_{\mathrm{Holm}}{=}0.0012$). The one honest nuance is on GO, where
 \emph{unexpanded} BM25 reaches parity with SMA ($\Delta{=}{+}0.070$,
 $p_{\mathrm{Holm}}{=}0.076$, n.s.); on HPO, and on every expanded arm, SMA's lead
-is significant. What produces the advantage is therefore structure-mapping over
-the ascension lattice, not raw ancestor expansion of the retrievable text.
+is significant. This rules out the simplest text-side route to the same
+information, \emph{naive} full-closure ancestor expansion, rather than every
+possible one: depth-limited or information-content-weighted expansion, parent-path
+encodings, separate ancestor fields, or learned sparse retrieval could narrow the
+gap and we have not tested them. What we can say is that bounded ascension over the
+mounted lattice captures the subsumption signal without the dilution that sinks
+naive expansion, and that the advantage is not an artifact of simply handing the
+ancestors to a bag-of-terms retriever.
 
 \subsection{A mechanism ablation isolates what structure-mapping adds}
  To attribute
@@ -229,9 +252,10 @@ available. One caveat: the ablation runs at a reduced index scale
 quantity is the \emph{relative} contribution of each rung, not the absolute
 accuracies (Extended Data Table~9).
 
-\subsection{Across the baseline retrieval suite, SMA wins on the tail across fields}
+\subsection{Across the baseline retrieval suite, SMA wins on the rare tail}
 
-(Fig.~2, Table~2). On \textbf{medicine} (rare-disease diagnosis over the Human
+SMA leads on the rare/long-tail slice in every field we tested (Fig.~2,
+Table~2). On \textbf{medicine} (rare-disease diagnosis over the Human
 Phenotype Ontology~\cite{kohler2021hpo} and MONDO~\cite{vasilevsky2022mondo}) SMA
 attains tail top-5 of $0.949$ versus $0.606$ for the best baseline
 configuration (hybrid $+$ cross-encoder rerank), $\Delta{=}{+}0.333$, 95\% CI
@@ -242,22 +266,29 @@ reaches $0.849$ versus $0.682$, $\Delta{=}{+}0.156$, $p{<}2{\times}10^{-4}$. On
 $0.231$, $\Delta{=}{+}0.167$, $p{<}2{\times}10^{-4}$, roughly double the best
 RAG, though all methods score low here because US-GAAP concepts are weakly
 discriminative. On \textbf{legal} (patent to CPC classification, all-query slice)
-SMA reaches $0.941$ versus $0.870$, $\Delta{=}{+}0.064$, $p{=}0.002$. On
-\textbf{cyber} (MITRE ATT\&CK~\cite{strom2018attack} threat-group attribution)
-SMA leads $0.766$ versus $0.749$, $\Delta{=}{+}0.073$, $p{=}0.035$, a smaller
-margin that is honestly attributable to threat groups' distinctive technique
-vocabularies, which lexical and dense retrieval partly capture. All \textbf{five}
-unrelated domains survive Holm correction across fields,
-confirming the pre-registered across-fields criterion. Because ``best RAG'' is
-data-selected (chosen by top-5, then tested on top-5), we additionally compare
-SMA against \emph{every} baseline in \emph{every} domain. The advantage is
+SMA reaches $0.941$ versus $0.870$, $\Delta{=}{+}0.064$, $p{=}0.002$. These four
+domains are the load-bearing results: each survives Holm correction across fields
+and the conservative checks below. The same trend appears in \textbf{cyber}
+(MITRE ATT\&CK~\cite{strom2018attack} threat-group attribution), where SMA leads
+$0.766$ versus $0.749$ ($\Delta{=}{+}0.073$), but this is the weakest arm and we do
+not treat it as a pillar: the margin is small, threat groups have distinctive
+technique vocabularies that lexical and dense retrieval partly capture, and as
+shown next the contrast does not survive conservative correction. Because ``best
+RAG'' is data-selected (chosen by top-5, then tested on top-5), we additionally
+compare SMA against \emph{every} baseline in \emph{every} domain. The advantage is
 strictly positive in all cases, and under a conservative
 Bonferroni-over-baselines correction four of five domains survive (medicine,
 genomics, finance at $p_\text{Bonf}{=}0.0010$, legal at $0.0110$) while cyber is
-directional ($p{=}0.035$, $p_\text{Bonf}{=}0.17$; Extended Data Table~8).
-Legal's rare slice is undefined, because CPC's near-uniform information content
-yields no rare split, so legal is reported on the all-query slice and flagged as
-such.
+directional ($p{=}0.035$, $p_\text{Bonf}{=}0.17$; Extended Data Table~8). A second
+robustness check addresses the resampling unit. The headline bootstrap is
+per-query, but the three seeds share target entities, so we re-ran it as a
+\emph{cluster bootstrap that resamples entities} (Methods; Extended Data
+Table~10). The four strong domains remain significant, whereas cyber weakens
+further: its delta is unchanged but the entity-clustered $95\%$ CI now includes
+zero ($p$ rises from $0.035$ to $0.088$). We therefore report cyber as a
+directional trend under both corrections. Legal's rare slice is undefined, because
+CPC's near-uniform information content yields no rare split, so legal is reported on
+the all-query slice and flagged as such.
 
 \begin{figure}[t]\centering
 \includegraphics[width=\textwidth]{svg/figure2_results.pdf}
@@ -281,7 +312,7 @@ honestly: the retrieval-suite threshold is fixed and untuned, so the contrast th
 matters is non-zero versus structurally zero rather than the absolute level (the
 end-to-end agent below calibrates the threshold per memory).
 
-\subsection{The end-to-end agent is a verifiable specialist}
+\subsection{The end-to-end agent is more accurate, selective, and attributable than dense RAG}
  The retrieval suite
 isolates the retriever; we next place a real language model in the loop and
 measure what matters in deployment, where a confident wrong answer is
@@ -304,17 +335,20 @@ itself is therefore a \emph{tie} ($\Delta{=}{+}0.008$, $p{=}0.92$), and we repor
 it as such. Net selective accuracy is $0.625$ versus $0.500$ ($\Delta{=}{+}0.125$,
 $[0.071,0.179]$), and structural-novelty F1 is $0.789$ versus $0.553$
 (novelty-recall $\Delta{=}{+}0.308$, $[0.200,0.408]$); closed-book scores $0$ on
-novelty and cannot cite at all. In sum, four of five pre-registered axes are
-Holm-significant wins, abstain-recall is a tie, and the accuracy floor holds, with
-SMA above rather than below RAG. Equipped with structure-mapping memory, a
-generalist LLM answers, cites, abstains, and flags novelty; equipped with vector
-RAG, it answers less accurately and cannot tell when it does not know.
+novelty and cannot cite at all. In sum, on this single-domain (medicine) case
+study four of five pre-registered axes are Holm-significant wins, abstain-recall is
+a tie, and the accuracy floor holds with SMA above rather than below RAG. At
+$0.342$ top-1 exact-match accuracy the agent is a promising retrieval-grounded
+specialist rather than a finished one; but equipped with structure-mapping memory a
+generalist LLM answers more accurately, cites a checkable structural identifier,
+abstains discriminatively, and flags novelty, whereas equipped with vector RAG it
+answers less accurately and cannot tell when it does not know.
 
 \begin{figure}[t]\centering
 \includegraphics[width=\textwidth]{svg/figure5_trustworthy.pdf}
-\caption{\textbf{The SMA-grounded LLM agent is a verifiable specialist}
-(medicine; $n{=}120$ answerable ${+}\,120$ held-out; language model and prompt
-fixed, memory swapped). (a) Trustworthy-QA axes for closed-book / dense-RAG /
+\caption{\textbf{The SMA-grounded LLM agent is more accurate, more selective, and
+more structurally attributable than dense RAG} (medicine case study; $n{=}120$
+answerable ${+}\,120$ held-out; language model and prompt fixed, memory swapped). (a) Trustworthy-QA axes for closed-book / dense-RAG /
 SMA: accuracy, citation-faithfulness, abstain-recall, known-versus-unknown
 discrimination (grounding AUROC), and novelty F1; closed-book has no retrieval,
 so its citation and grounding cells are N/A (marked), not zero. (b) Mechanism:
@@ -359,11 +393,16 @@ shared retrieval core plus thin per-domain data adapters and no per-domain
 retrieval logic, a generality the bespoke ontology tools (one per domain) cannot
 match. The defensible asset is a registry of curated (expert-maintained)
 ontologies mounted as retrieval geometry; a language model can draft adapter rules
-but does not reproduce the expert curation encoded in the ontology. What appears
-to drive SMA's edge over the information-content oracle is relational richness
-rather than raw size: pure-is-a ontologies (HPO, CPC) yield parity, whereas
-relation-rich ones should let higher-order structure-mapping pull ahead. That is
-an open, testable prediction.
+but does not reproduce the expert curation encoded in the ontology. We are
+deliberately precise about which part of that geometry is load-bearing. Across the
+real ontology benchmarks, SMA's measured advantage is driven primarily by bounded
+is-a subsumption over the ontology lattice together with information-content
+weighting; the higher-order typed relations are implemented and are necessary for
+the synthetic structure-only control, but they do not measurably improve the
+current real-domain top-5 results (GO $+0.005$, n.s.; HPO and CPC carry no typed
+relations to add). Whether relation-rich ontologies would let higher-order
+structure-mapping pull ahead on tasks designed to require it is an open, untested
+prediction, not a result we claim here.
 
 Several limitations bound these claims. The retrieval-suite novelty threshold is
 fixed and untuned, whereas the end-to-end agent calibrates it per memory on a
@@ -406,15 +445,17 @@ IC weighting, not to relations over relations (Extended Data Table~9).
 \subsection{Relation to prior work}
  Grounding LLM memory in ontologies is an active
 2024--2026 area; our contribution is not ontology-grounding per se but the
-structure-mapping mechanism and the universal adapter that mounts any curated
-ontology as match geometry. Information-content semantic-similarity measures
+structure-mapping mechanism and the universal adapter that mounts a broad class of
+curated ontologies as match geometry. Information-content semantic-similarity measures
 (Resnik~\cite{resnik1995}; Lin~\cite{lin1998}; Jiang--Conrath~\cite{jiang1997})
 score term-set overlap weighted by corpus frequency, whereas SMA aligns
-relational statements $r(f_s(x),f_o(x))$ over the ascension lattice. Tellingly,
-the IC oracle Phenomizer~\cite{kohler2009phenomizer} uses this same information
-content, yet SMA only \emph{matches} it (HPO $\Delta{=}{-}0.033$,
-GO $\Delta{=}{-}0.011$; parity after Holm) while still beating the IC-agnostic
-retrieval suite, so IC weighting is not what produces SMA's advantage. The
+relational statements $r(f_s(x),f_o(x))$ over the ascension lattice. The IC oracle
+Phenomizer~\cite{kohler2009phenomizer} uses this same information content; that SMA
+ties it (HPO $\Delta{=}{-}0.033$, GO $\Delta{=}{-}0.011$; parity after Holm) while
+beating the IC-agnostic retrieval suite indicates that ontology-aware subsumption
+and information content, mounted as match geometry, are what separate SMA from
+general-purpose RAG, rather than superiority over information-content similarity
+itself. The
 ontology- and knowledge-graph-aware retrievers, namely OG-RAG~\cite{ograg2024} and
 OntologyRAG~\cite{ontologyrag2025} together with the KG-RAG line of
 GraphRAG~\cite{edge2024graphrag} and HippoRAG-2~\cite{gutierrez2025hipporag2},
@@ -438,9 +479,9 @@ best-first alignment for the second~\cite{forbus1995macfac}. Cross-vocabulary
 matching ascends the ontology lattice with penalty $\rho^{\mathrm{dist}}$ (frozen
 $\rho{=}0.95$, ascension depth $\delta{=}2$). The surprisal scorer weights a
 matched functor by its information content $-\log_2 p$. End to end, the universal
-adapter and matcher pipeline (Fig.~4) ingests any open ontology into a normalized
-graph, mounts it as match geometry, and registers the resulting cases behind a
-per-query domain router.
+adapter and matcher pipeline (Fig.~4) ingests a broad class of open ontologies into
+a normalized graph, mounts each as match geometry, and registers the resulting
+cases behind a per-query domain router.
 
 \subsection{Cases as functored statements}
  The loader encodes each subject (an
@@ -566,6 +607,22 @@ AURC, and structural-novelty F1, with a paired bootstrap ($10^4$ resamples, seed
 BGE-small neural dense~\cite{karpukhin2020dpr}; hybrid reciprocal-rank fusion;
 hybrid $+$ \texttt{bge-reranker-base}; and HippoRAG-2~\cite{gutierrez2024hipporag}.
 
+\subsection{Entity-clustered robustness and computational cost}
+The headline paired bootstrap resamples per query, but each target entity
+contributes up to three correlated queries (one per seed), so per-query resampling
+is anti-conservative at the entity level. As a robustness check we re-ran the
+identical evaluation with a \emph{cluster bootstrap} that resamples target entities
+with replacement, taking all of a resampled entity's queries together
+(\texttt{scripts/cluster\_bootstrap\_suite.py}; the per-query point estimate is
+reproduced exactly, then re-aggregated by entity). We report the entity-clustered
+$\Delta$, $95\%$ CI and $p$ alongside the per-query values in Extended Data
+Table~10. Separately, we measured computational cost on the same hardware
+(\texttt{scripts/cost\_latency.py}): index-build time, per-query latency
+($p_{50}/p_{95}$) and peak resident memory for SMA, BM25 and dense retrieval, with
+each arm timed in its own process (Extended Data Table~11). SMA uses no learned
+embeddings, no GPU and no vector store; the trade-off it pays is a slower,
+CPU-bound build and a higher per-query latency than lexical BM25.
+
 \subsection{End-to-end LLM-QA agent}
  The agent (\texttt{sma/eval/agentic\_qa},
 pre-registration~v2) holds DeepSeek (temperature $0$) and the prompt fixed, swaps
@@ -645,9 +702,10 @@ HippoRAG & 0.628/0.19 & 0.721/0.19 & 0.925/0.18 & 0.560/0.18 & 0.462/0.18 \\
 \textit{Code.} The universal ontology adapter, the memory-swap retrieval harness,
 the end-to-end LLM-QA agent, and all analysis and figure scripts are released
 under the Apache-2.0 licence at
-\url{https://github.com/ayazkhan27/SMA-1}. The version supporting this paper is a
-frozen release tag (\textit{pending}; the submission commit will be archived under
-that tag). Frozen sub-artifacts are additionally tagged \texttt{adapter-v1},
+\url{https://github.com/ayazkhan27/SMA-1}. The version supporting this paper is the
+\texttt{v1.0.0} release tag of that repository; the exact commit is recorded at the
+tag and snapshotted at Zenodo through the repository's GitHub integration. Frozen
+sub-artifacts are additionally tagged \texttt{adapter-v1},
 \texttt{ontology-v1}, \texttt{score-v2} and \texttt{prereg-v1}; the end-to-end
 LLM-QA study is registered in \texttt{configs/preregistration\_v2\_llmqa.md} and
 all pre-registrations are committed before the corresponding runs.
@@ -669,22 +727,25 @@ outputs, and the calibration grid are committed as comma-separated files under
 
 \textit{Reproducibility.} Runs are deterministic: \texttt{PYTHONHASHSEED=0} with
 sorted set$\to$list conversion, the paired bootstrap seeded at 12345, and frozen
-ontology snapshots. The reference environment is Python~3.10 with the pinned
-dependencies in \texttt{pyproject.toml} (NumPy $\geq$1.26, scikit-learn $\geq$1.5,
-sentence-transformers $\geq$3, OR-Tools $\geq$9.10; full pins in the lockfile);
-exact library versions and the hardware configuration are recorded in the release
-manifest (\textit{pending final pinning}). The end-to-end agent additionally calls
-DeepSeek (\texttt{deepseek-chat}, temperature~0); retrieval-only results require no
-LLM access.
+ontology snapshots. The reference environment recorded with the release is
+Python~3.10.12 with NumPy~2.0.2, scikit-learn~1.5.2, sentence-transformers~5.2.2
+and Google OR-Tools (full pins in \texttt{pyproject.toml} and the lockfile). All
+retrieval-only experiments, including the cost/latency benchmark, ran CPU-only on
+an AMD~Ryzen~7~6800H (16~threads, 14~GiB RAM, Linux); no GPU is required. The
+end-to-end agent additionally calls DeepSeek (\texttt{deepseek-chat},
+temperature~0); retrieval-only results require no LLM access.
 
-\textit{Figure reproducibility.} Each main and Extended Data figure is regenerated
-by a committed script from the confirmatory CSVs: Fig.~1 (overview) by
-\texttt{scripts/figure1\_tikz.py}; Fig.~2 (memory-swap results) and Fig.~3
-(trustworthy-QA) by \texttt{scripts/figures\_paper.py}; Extended Data Figs.~1--3 by
-\texttt{scripts/figures\_ed.py}.
+\textit{Figure reproducibility.} The conceptual figures Fig.~1 (overview) and
+Fig.~4 (architecture) are vector TikZ sources under \texttt{paper/figures/tikz/};
+the data figures Fig.~2 (memory-swap results) and Fig.~3 (trustworthy-QA) are
+regenerated from the confirmatory CSVs by \texttt{scripts/figures\_paper.py} and
+Extended Data Figs.~1--3 by \texttt{scripts/figures\_ed.py}. The cost/latency and
+entity-clustered statistics are produced by \texttt{scripts/cost\_latency.py} and
+\texttt{scripts/cluster\_bootstrap\_suite.py}.
 
-\textit{Archival DOI.} A Zenodo DOI will be minted from the frozen release tag on
-publication and added here (\textit{pending}; no DOI is asserted at submission).
+\textit{Archival DOI.} A snapshot of the \texttt{v1.0.0} commit is archived at
+Zenodo through the repository's GitHub integration; the DOI will be added on
+acceptance, and no DOI is asserted at submission time.
 
 Extended per-domain metrics, the cross-system transfer study, and risk-coverage
 curves appear in the Supplementary Information.
@@ -1261,6 +1322,82 @@ full-scale run is compute-bound), so the robust quantity is the \emph{relative}
 contribution of each rung rather than the absolute accuracies.}
 \end{flushleft}
 \label{tab:ed9_mechanism_ablation}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 10 — Entity-clustered robustness (per-query vs cluster bootstrap)
+% Source: reports/confirmatory/cluster_bootstrap.csv (n_index=400)
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\edcaption{\textbf{Extended Data Table~10 $|$ Entity-clustered robustness of the
+    memory-swap result.}
+  The committed headline bootstrap resamples per query, but each target entity
+  contributes up to three correlated queries (one per seed). We re-ran the
+  identical evaluation with a \emph{cluster bootstrap} that resamples entities with
+  replacement (taking all of an entity's queries together); the per-query point
+  estimate is reproduced exactly and then re-aggregated by entity. Shown are the
+  per-query $\Delta$ and $p$ and the entity-clustered $\Delta$, $95\%$ CI and $p$,
+  for SMA versus the committed best baseline. Like the mechanism ablation, this
+  re-analysis runs at the reduced index scale ($n_\text{index}{=}400$); the robust
+  quantity is whether the entity-clustered interval excludes zero. The four strong
+  domains remain significant; cyber's clustered interval includes zero. Cyber was
+  additionally verified at full scale ($n_\text{index}{=}2{,}000$): the clustered
+  $95\%$ CI is $[-0.008,+0.155]$, $p{=}0.088$, versus per-query $p{=}0.035$.
+  Source: \texttt{reports/confirmatory/cluster\_bootstrap.csv}.}
+\small
+\setlength{\tabcolsep}{6pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{llcccc}
+\toprule
+\textbf{Domain} & \textbf{Best baseline} & \textbf{$\Delta$ (per-query)} &
+    \textbf{$p$ (per-query)} & \textbf{$\Delta$ (clustered)} &
+    \textbf{$p$ (clustered, 95\% CI)} \\
+\midrule
+\rowcolor{smarow}Cyber & Hybrid-RRF & $+0.073$ & $0.035$ & $+0.073$ & $0.088$ \,$[-0.008,+0.155]$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\label{tab:ed10_cluster}
+\end{table}
+
+
+% ============================================================
+% ED TABLE 11 — Computational cost / latency (SMA vs BM25 vs dense)
+% Source: reports/confirmatory/cost_latency.csv (medicine, n_index=2000)
+% ============================================================
+
+\begin{table}[htbp]
+\centering
+\edcaption{\textbf{Extended Data Table~11 $|$ Computational cost: no embeddings, no
+    GPU, no vector store.}
+  Index-build time, per-query latency ($p_{50}/p_{95}$) and peak resident memory
+  for SMA, lexical BM25, and BGE-small dense retrieval, measured on the medicine
+  arm ($n_\text{index}{=}2{,}000$; $200$ queries) on a single CPU (AMD~Ryzen~7
+  6800H, $16$ threads), each arm timed in its own process. SMA requires no learned
+  embedding model, no GPU and no vector store, and its memory footprint is
+  $\approx 5.5\times$ smaller than dense retrieval; the trade-off it pays is a
+  slower CPU-bound build and a higher per-query latency than BM25. We therefore
+  claim zero neural-indexing cost, not lower latency.
+  Source: \texttt{reports/confirmatory/cost\_latency.csv}.}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{adjustbox}{max width=\textwidth}
+\begin{tabular}{lcccrrrr}
+\toprule
+\textbf{System} & \textbf{Embed.\ model} & \textbf{GPU} & \textbf{Vector store} &
+    \textbf{Build (s)} & \textbf{$p_{50}$ (ms)} & \textbf{$p_{95}$ (ms)} &
+    \textbf{RAM (MB)} \\
+\midrule
+\rowcolor{smarow}SMA              & none           & no       & no  & $566$    & $241$ & $360$ & $250$ \\
+BM25                              & none           & no       & no  & $<\!0.01$ & $23$  & $33$  & $187$ \\
+Dense (BGE-small)                 & \texttt{bge-small} & optional & yes & $33$     & $151$ & $167$ & $1{,}378$ \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\label{tab:ed11_cost}
 \end{table}
 
 

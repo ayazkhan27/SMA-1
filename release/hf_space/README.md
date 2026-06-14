@@ -1,20 +1,20 @@
 ---
 title: SMA-1 Structure-Mapping Agentic Memory
 emoji: 🧩
-colorFrom: teal
+colorFrom: green
 colorTo: indigo
 sdk: gradio
 sdk_version: 5.9.1
 app_file: app.py
 pinned: false
 license: apache-2.0
-short_description: Retrieval by relational structure — cite, abstain, detect novelty.
+short_description: "Structure-mapping retrieval: cite, abstain, flag novelty"
 ---
 
 # SMA-1 — Structure-Mapping Agentic Memory (demo Space)
 
-**One universal structure-mapping memory beats enterprise RAG/KG across five
-golden-ontology domains — with calibrated abstention and novelty detection
+**One universal structure-mapping memory beats RAG/KG baselines across five
+curated-ontology domains — with calibrated abstention and novelty detection
 that vector RAG structurally cannot provide.**
 
 This Space demonstrates the SMA-1 system from the paper
@@ -37,9 +37,9 @@ retrieval vs dense vector-RAG** side by side:
 
 ## Verified headline numbers
 
-Five unrelated domains, all Holm-significant wins vs best enterprise RAG (tail top-5):
+Five unrelated domains, Holm-significant across domains (cyber is directional under conservative correction) (tail top-5):
 
-| Domain | Ontology | SMA Δ vs best enterprise RAG |
+| Domain | Ontology | SMA Δ vs best RAG baseline |
 |---|---|---|
 | Medicine | HPO | **+0.333** (p = 0.0002) |
 | Genomics | GO | **+0.156** (p = 0.0002) |
