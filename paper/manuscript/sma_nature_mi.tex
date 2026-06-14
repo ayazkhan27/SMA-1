@@ -1341,11 +1341,14 @@ contribution of each rung rather than the absolute accuracies.}
   estimate is reproduced exactly and then re-aggregated by entity. Shown are the
   per-query $\Delta$ and $p$ and the entity-clustered $\Delta$, $95\%$ CI and $p$,
   for SMA versus the committed best baseline. Like the mechanism ablation, this
-  re-analysis runs at the reduced index scale ($n_\text{index}{=}400$); the robust
-  quantity is whether the entity-clustered interval excludes zero. The four strong
-  domains remain significant; cyber's clustered interval includes zero. Cyber was
-  additionally verified at full scale ($n_\text{index}{=}2{,}000$): the clustered
-  $95\%$ CI is $[-0.008,+0.155]$, $p{=}0.088$, versus per-query $p{=}0.035$.
+  re-analysis runs at a reduced index scale ($n_\text{index}{=}250$), so the
+  $\Delta$ values here are smaller than the full-scale marginals in Table~2 and are
+  not directly comparable to them; the robustness question is whether resampling by
+  entity rather than by query changes the significance verdict. It does not for the
+  strong domains, whose entity-clustered intervals exclude zero, but it does for
+  cyber, whose clustered interval includes zero. Cyber was additionally verified at
+  full scale ($n_\text{index}{=}2{,}000$): the clustered $95\%$ CI is
+  $[-0.008,+0.155]$, $p{=}0.088$, versus per-query $p{=}0.035$.
   Source: \texttt{reports/confirmatory/cluster\_bootstrap.csv}.}
 \small
 \setlength{\tabcolsep}{6pt}
@@ -1356,6 +1359,10 @@ contribution of each rung rather than the absolute accuracies.}
     \textbf{$p$ (per-query)} & \textbf{$\Delta$ (clustered)} &
     \textbf{$p$ (clustered, 95\% CI)} \\
 \midrule
+Medicine & Hybrid$+$rerank & $+0.178$ & $2{\times}10^{-4}$ & $+0.178$ & $2{\times}10^{-4}$ \,$[+0.137,+0.220]$ \\
+Genomics & Dense        & $+0.053$ & $0.007$           & $+0.053$ & $0.009$ \,$[+0.014,+0.092]$ \\
+Finance  & Hybrid-RRF    & $+0.225$ & $2{\times}10^{-4}$ & $+0.225$ & $2{\times}10^{-4}$ \,$[+0.153,+0.300]$ \\
+Legal    & Dense         & $+0.050$ & $2{\times}10^{-4}$ & $+0.050$ & $2{\times}10^{-4}$ \,$[+0.028,+0.075]$ \\
 \rowcolor{smarow}Cyber & Hybrid-RRF & $+0.073$ & $0.035$ & $+0.073$ & $0.088$ \,$[-0.008,+0.155]$ \\
 \bottomrule
 \end{tabular}
