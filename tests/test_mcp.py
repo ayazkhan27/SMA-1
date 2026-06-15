@@ -129,10 +129,93 @@ def test_load_manifest_registers_and_indexes(obo, tmp_path):
     assert any(c["id"] == "K1" for c in r["citations"])
 
 
+def test_retrieve_with_no_indexed_cases_abstains(obo):
+    e = SmaEngine()
+    e.mount_ontology("toy", obo, "obo")  # mounted but NO cases indexed
+    r = e.retrieve("toy", term_ids=["T:002"], k=3)
+    assert r["abstain"] is True
+    assert r["citations"] == []
+    assert r["reason"] == "no cases indexed"
+    assert r["novelty"] is None          # cannot be scored (no index) != "novel"
+    assert r["novelty_flag"] is False
+
+
+def test_encode_text_no_matches_returns_empty(engine):
+    enc = engine.encode_text("toy", "this text contains no ontology terms at all")
+    assert enc["term_ids"] == []
+    assert enc["matched_names"] == []
+
+
+def test_encode_text_respects_max_terms(engine):
+    enc = engine.encode_text("toy", "alpha mechanism and beta mechanism", max_terms=1)
+    assert len(enc["term_ids"]) == 1  # longest/most-specific name kept after sort
+
+
+def test_encode_text_matches_across_punctuation(engine):
+    # token-boundary (regex) match: name adjacent to punctuation still matches
+    enc = engine.encode_text("toy", "findings: alpha mechanism, confirmed.")
+    assert "T:002" in enc["term_ids"]
+
+
+def test_novelty_is_none_when_unscoreable(obo):
+    e = SmaEngine()
+    e.mount_ontology("toy", obo, "obo")  # no cases indexed -> novelty unscoreable
+    n = e.novelty("toy", term_ids=["T:002"])
+    assert n["novelty"] is None
+    assert n["novelty_flag"] is False
+
+
+# -- catalog of public ontologies ------------------------------------------
+
+def test_catalog_browse_and_search():
+    e = SmaEngine()
+    lc = e.list_catalog()
+    assert lc["count"] >= 100            # the bundled catalog ships hundreds of ontologies
+    assert len(lc["categories"]) >= 5
+    assert e.search_catalog("phenotype")["count"] >= 1
+    assert any(o["id"] == "chebi" for o in e.search_catalog("chebi")["ontologies"])
+
+
+def test_list_catalog_filters_by_category():
+    e = SmaEngine()
+    cat = e.list_catalog()["categories"][0]
+    filtered = e.list_catalog(category=cat)
+    assert filtered["count"] >= 1
+    assert all(cat.lower() in o["category"].lower() for o in filtered["ontologies"])
+
+
+def test_mount_from_catalog_offline(obo, tmp_path, monkeypatch):
+    # exercise catalog -> fetch -> mount end to end via a file:// URL (no network)
+    monkeypatch.setenv("SMA_CACHE_DIR", str(tmp_path / "cache"))
+    e = SmaEngine()
+    monkeypatch.setattr(
+        e, "load_catalog",
+        lambda: [{"id": "toy", "name": "Toy", "category": "Test",
+                  "format": "obo", "url": f"file://{obo}", "license": "CC0"}],
+    )
+    r = e.mount_from_catalog("toy")
+    assert r["ontology"] == "toy"
+    assert r["concepts"] == 4
+    e.index_cases("toy", [{"key": "C1", "term_ids": ["T:002"], "text": "alpha"}])
+    assert any(c["id"] == "C1" for c in e.retrieve("toy", term_ids=["T:002"], k=1)["citations"])
+
+
+def test_mount_from_catalog_unknown_id_raises():
+    e = SmaEngine()
+    with pytest.raises(KeyError):
+        e.mount_from_catalog("definitely-not-an-ontology-id")
+
+
 def test_build_server_registers_tools():
     pytest.importorskip("mcp")
+    import asyncio
+
     from sma.mcp import build_server
 
     server, engine = build_server()
-    assert engine is not None
-    assert server is not None  # FastMCP instance; tools registered via decorators
+    assert engine is not None and server is not None
+    names = {t.name for t in asyncio.run(server.list_tools())}
+    assert {
+        "list_ontologies", "mount_ontology", "index_cases", "encode_text",
+        "retrieve", "novelty", "list_catalog", "search_catalog", "mount_from_catalog",
+    } <= names
